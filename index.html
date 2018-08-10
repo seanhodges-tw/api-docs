@@ -256,23 +256,9 @@
             <a href="#simulation" class="toc-h1 toc-link" data-title="Simulation">Simulation</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#simulate-processing" class="toc-h2 toc-link" data-title="Simulate Processing">Simulate Processing</a>
+                    <a href="#simulate-transfer-status-changes" class="toc-h2 toc-link" data-title="Simulate Transfer Status Changes">Simulate Transfer Status Changes</a>
                   </li>
               </ul>
-          </li>
-          <li>
-            <a href="#kittens-and-dogs" class="toc-h1 toc-link" data-title="Kittens and dogs">Kittens and dogs</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
-                  </li>
-                  <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#authentication-2" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
             <a href="#other-stuff" class="toc-h1 toc-link" data-title="Other Stuff">Other Stuff</a>
@@ -557,7 +543,7 @@ If the matter is top urgent and it happened during a weekend then please contact
 
 <p>Once you run into an issue in TEST environment then please take a look at the FAQ section below. 
 If this does not solve nor explain the issue you are having then please report this to <a href="mailto:api@transferwise.com">api@transferwise.com</a>.</p>
-<h1 id='simulation'>Simulation</h1><h2 id='simulate-processing'>Simulate Processing</h2>
+<h1 id='simulation'>Simulation</h1><h2 id='simulate-transfer-status-changes'>Simulate Transfer Status Changes</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -589,26 +575,25 @@ If this does not solve nor explain the issue you are having then please report t
   </span><span class="s2">"targetCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GPB"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Changes transfer status from <code>incoming_payment_waiting</code> to <code>processing</code>.
-Limited to sandbox environment.</p>
+<p>Changes transfer status so you can simulate payment processing in sandbox environment.
+All transfer status change simulations are limited to sandbox environment only.</p>
 <h3 id='request'>Request</h3>
-<p><code>GET http://sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/processing</code></p>
+<p>Changes transfer status from incoming_payment_waiting to processing.<br/>
+<code>GET http://sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/processing</code></p>
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>transferId</td>
-<td>Unique ID of transfer</td>
-<td>Integer</td>
-</tr>
-</tbody></table>
+<p>Changes transfer status from processing to funds_converted.<br/>
+<code>GET http://sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/funds_converted</code></p>
+
+<p>Changes transfer status from funds_converted to outgoing_payment_sent.<br/>
+<code>GET http://sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/outgoing_payment_sent</code></p>
+
+<p>Changes transfer status from outgoing_payment_sent to bounced_back.<br/>
+<code>GET http://sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/bounced_back</code></p>
+
+<p>Changes transfer status from bounced_back to funds_refunded.<br/>
+<code>GET http://sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/funds_refunded</code></p>
 <h3 id='response'>Response</h3>
-<p>TODO - reference to &quot;transfer&quot;</p>
+<p>Transfer entity with new status. </p>
 
 <table><thead>
 <tr>
@@ -619,7 +604,7 @@ Limited to sandbox environment.</p>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>Unique Transfer Id, assigned by TransferWise</td>
+<td>Unique Transfer ID, assigned by TransferWise</td>
 <td>Integer</td>
 </tr>
 <tr>
@@ -629,12 +614,12 @@ Limited to sandbox environment.</p>
 </tr>
 <tr>
 <td>targetAccount</td>
-<td>Target recipient account id. Person who is receiving the funds.</td>
+<td>Target recipient account ID. Person who is receiving the funds.</td>
 <td>Integer</td>
 </tr>
 <tr>
 <td>sourceAccount</td>
-<td>Refund recipient account id. Used only for refund purposes.</td>
+<td>Refund recipient account ID. Used only for refund purposes.</td>
 <td>Integer</td>
 </tr>
 <tr>
@@ -660,7 +645,7 @@ Limited to sandbox environment.</p>
 <tr>
 <td>created</td>
 <td>Timestamp when transfer was created.</td>
-<td>String TODO !!!</td>
+<td>yyyy-mm-dd hh:mm:ss</td>
 </tr>
 <tr>
 <td>business</td>
@@ -669,7 +654,7 @@ Limited to sandbox environment.</p>
 </tr>
 <tr>
 <td>transferRequest</td>
-<td>Link to &#39;Request money&#39; transfer id. Deprecated.</td>
+<td>Link to &#39;Request money&#39; transfer ID. Deprecated.</td>
 <td>Integer</td>
 </tr>
 <tr>
@@ -708,73 +693,6 @@ Limited to sandbox environment.</p>
 <td>UUID</td>
 </tr>
 </tbody></table>
-<h1 id='kittens-and-dogs'>Kittens and dogs</h1><h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
-<h1 id='authentication-2'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.
-This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
 <h1 id='other-stuff'>Other Stuff</h1><h2 id='changelog'>Changelog</h2><h3 id='released-changes'>Released Changes</h3>
 <table><thead>
 <tr>
@@ -784,11 +702,11 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </thead><tbody>
 <tr>
 <td>16/05/2018</td>
-<td>GET /v1/borderless-accounts/{borderlessAccountId}/statement.json <p> New borderless account statement endpoint launched. This includes a lot of extra information useful for reconciliation purposes.</td>
+<td>GET /v1/borderless-accounts/{borderlessAccountId}/statement.json <br/> New borderless account statement endpoint launched. This includes a lot of extra information useful for reconciliation purposes.</td>
 </tr>
 <tr>
 <td>16/04/2018</td>
-<td>Transfer status simulation endpoints in sandbox added. <p><li>GET /v1/simulation/transfers/{transferId}/processing<li>GET /v1/simulation/transfers/{transferId}/funds_converted<li>GET /v1/simulation/transfers/{transferId}/outgoing_payment_sent<li>GET /v1/simulation/transfers/{transferId}/bounced_back<li>GET /v1/simulation/transfers/{transferId}/funds_refunded</td>
+<td>Transfer status simulation endpoints in sandbox added. <br/><li>GET /v1/simulation/transfers/{transferId}/processing<li>GET /v1/simulation/transfers/{transferId}/funds_converted<li>GET /v1/simulation/transfers/{transferId}/outgoing_payment_sent<li>GET /v1/simulation/transfers/{transferId}/bounced_back<li>GET /v1/simulation/transfers/{transferId}/funds_refunded</td>
 </tr>
 <tr>
 <td>25/10/2017</td>
@@ -809,6 +727,14 @@ We dont have these yet.  Working on it ...</p>
 
 <p>Request feature !!!
 Give feedback on the API !</p>
+
+<aside class="notice">
+You must replace <code>meowmeowmeow</code> with your personal API key.
+</aside>
+
+<aside class="warning">
+Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.
+</aside>
 
       </div>
       <div class="dark-box">
