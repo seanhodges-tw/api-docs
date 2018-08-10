@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,15 +212,26 @@
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#access-to-sandbox" class="toc-h2 toc-link" data-title="Access to Sandbox">Access to Sandbox</a>
+                  </li>
+                  <li>
+                    <a href="#before-you-start-integration" class="toc-h2 toc-link" data-title="Before you start integration">Before you start integration</a>
+                  </li>
+                  <li>
+                    <a href="#going-live-checklist" class="toc-h2 toc-link" data-title="Going live checklist">Going live checklist</a>
+                  </li>
+              </ul>
+          </li>
           <li>
             <a href="#common-topics" class="toc-h1 toc-link" data-title="Common Topics">Common Topics</a>
               <ul class="toc-list-h2">
@@ -233,17 +244,25 @@
                   <li>
                     <a href="#helpful" class="toc-h2 toc-link" data-title="Helpful">Helpful</a>
                   </li>
+                  <li>
+                    <a href="#sandbox" class="toc-h2 toc-link" data-title="Sandbox">Sandbox</a>
+                  </li>
+                  <li>
+                    <a href="#contact-us" class="toc-h2 toc-link" data-title="Contact Us">Contact Us</a>
+                  </li>
               </ul>
           </li>
           <li>
-            <a href="#authentication-2" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#simulation" class="toc-h1 toc-link" data-title="Simulation">Simulation</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#simulate-processing" class="toc-h2 toc-link" data-title="Simulate Processing">Simulate Processing</a>
                   </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#kittens-and-dogs" class="toc-h1 toc-link" data-title="Kittens and dogs">Kittens and dogs</a>
+              <ul class="toc-list-h2">
                   <li>
                     <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
                   </li>
@@ -251,6 +270,9 @@
                     <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
                   </li>
               </ul>
+          </li>
+          <li>
+            <a href="#authentication-2" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
             <a href="#other-stuff" class="toc-h1 toc-link" data-title="Other Stuff">Other Stuff</a>
@@ -265,13 +287,114 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://sandbox.transferwise.tech/register'>Sign Up for a Developer Key</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='common-topics'>Common Topics</h1>
+        <h1 id='introduction'>Introduction</h1><h2 id='access-to-sandbox'>Access to Sandbox</h2><h3 id='how-to-get-access'>How to get access</h3>
+<p><a href="https://sandbox.transferwise.tech/register">Signup for developer account</a> and you will get API key for sandbox immediately.<br>
+Upon signup we will configure fully verified Transferwise multi-currency borderless account for you with some test money available so you can test creating and funding payments in same manner as in LIVE environment with real money.</p>
+
+<p>TODO - mention that you can access your account, and not build stuff using other accounts...</p>
+<h3 id='basic-technical-information'>Basic Technical Information</h3>
+<ul>
+<li>TransferWise API uses HTTP methods and <strong>RESTful</strong> endpoints</li>
+<li>API security framework is <strong>OAuth 2.0.</strong></li>
+<li>Request and response messages are in <strong>JSON</strong> format</li>
+</ul>
+<h3 id='design-and-test-your-integration'>Design and test your integration</h3>
+<ul>
+<li>To setup security please look at TODO - is this relevant any more ? </li>
+<li>To create transfers please look at TODO - is this relevant here ? </li>
+<li>Test your integration in our sandbox.</li>
+<li>Check our [TODO - FAQ] section to find answers to common questions.</li>
+<li>Send us an email to <a href="mailto:api@transferwise.com">api@transferwise.com</a> in case you got stuck with something.</li>
+</ul>
+<h3 id='going-live'>Going live</h3>
+<ul>
+<li>Done with testing? Create yourself API token from live </li>
+<li>Please review <a href="#">TODO - go live checklist</a>  to ensure smooth launch.</li>
+<li>Time to start saving on bank fees by using the TransferWise payment platform.</li>
+</ul>
+<h2 id='before-you-start-integration'>Before you start integration</h2><h3 id='have-you-tried-sending-money-with-transferwise'>Have you tried sending money with TransferWise?</h3>
+<p>Before starting with API integration, we recommend that you make a transfer using TransferWise website or mobile apps at least once. This will help you understand how the transfer creation flow works. It&#39;s easy to sign up and make your first transfer:
+1) Register your personal or business profile at TransferWise.com
+2) Make a transfer — check <a href="https://transferwise.com/help/article/1779442/creating-a-transfer/video-guide-make-a-transfer">our video guide</a> for a step-by-step guide.</p>
+
+<p>There is also the <a href="https://transferwise.com/help">TransferWise support centre</a> to help you find answers for general questions about onboarding, pricing, speed and coverage.</p>
+<h3 id='is-a-borderless-account-a-good-fit-for-your-business'>Is a borderless account a good fit for your business?</h3>
+<ul>
+<li>TransferWise borderless account is a multi-currency account that comes with UK, Eurozone, US and Australian  bank details, and gives you the option to hold money in up to 28 currencies. </li>
+<li>It comes with the benefit of allowing you to convert funds between different currencies using real mid-market exchange rate. </li>
+<li>Your business can collect receivables from customers directly into a borderless account, and then immediately use the funds to create payments. </li>
+<li>For depositing funds to TransferWise, all you need to do is to send a local bank transfer to your borderless account details.</li>
+</ul>
+<h3 id='api-integration-or-batch-payments-file-upload'>API integration or batch payments file upload?</h3>
+<p>There are two ways for your business to execute large amount of payouts:</p>
+
+<ul>
+<li><p><strong>Batch payments.</strong> You can upload multiple payments using a single batch file. Log into your TransferWise account and use the upload tool to create up to 1,000 transfers with a single batch file. This use case is perfect if you’re interested in repeated payouts, for example paying out salaries.</p></li>
+<li><p><strong>API integration.</strong> You can integrate TransferWise platform directly into your website or workflow. We have detailed documentation, sandbox environment and dedicated support team ready to get you started.</p></li>
+</ul>
+<h3 id='does-transferwise-support-all-currencies'>Does Transferwise support all currencies?</h3>
+<p>We‘re continuously growing our coverage and features.
+Please visit <a href="https://transferwise.com/help/article/1570071/basic-information/supported-countries">supported currencies list</a> for latest info.</p>
+<h3 id='send-payments-to-email-recipients'>Send payments to email recipients.</h3>
+<p>TransferWise will email your recipient and collect their bank account details to complete your payment.
+This way all you need to know is recipient name and email address to send funds.</p>
+<h2 id='going-live-checklist'>Going live checklist</h2><h3 id='what-to-do-before-your-account-is-live'>What to do before your account is live</h3>
+<ul>
+<li>My business profile is created and fully verified. I can access a borderless account for my business on <a href="https://transferwise.com">www.transferwise.com</a></li>
+<li>I have signed TransferWise API terms of usage contract.</li>
+<li>I have received and successfully decrypted the Live API credentials.</li>
+<li>I have implemented #docTextSection:vj2LttYwGieNLFj7a properly and obtained my access/refresh tokens for LIVE.</li>
+<li>I have completed first LIVE payment as a smoke test of the integration.</li>
+</ul>
+<h3 id='how-to-complete-api-integration'>How to complete API integration</h3>
+<ul>
+<li><strong>Security</strong>
+
+<ul>
+<li>Ensure access tokens and refresh tokens are stored securely and only exposed to authorized persons. </li>
+<li>Implement a mechanism to obtain new access token upon expiration.</li>
+<li>Make sure your server has TLS version 1.2 or higher.</li>
+</ul></li>
+<li><strong>Retry and duplicate detection</strong>
+
+<ul>
+<li>Implement basic retry mechanism to handle potential network interruptions </li>
+<li>Implement duplicate prevention mechanism to avoid double payments. UUID is uniquely generated for each individual transfer and value is kept same in case of retrying.</li>
+</ul></li>
+<li><strong>Logging</strong>
+
+<ul>
+<li>Implement basic logging to help out in debugging and problem solving, if needed.</li>
+</ul></li>
+<li><strong>Transfer lifecycle support</strong>
+
+<ul>
+<li>Implement creating and funding transfers.</li>
+<li>Implementation can handle all possible transfer states during polling of transfer information.</li>
+</ul></li>
+<li><strong>Pro-active balance check</strong>
+
+<ul>
+<li>Automatically verify available balance before submitting requests to fund transfers, to avoid rejections due to insufficient balance.</li>
+</ul></li>
+<li><strong>Creating recipients for different currencies</strong>
+
+<ul>
+<li>Required data fields for recipients vary for different currencies. Please look at #docTextSection:HnJc3YxGw4mWveZgg.</li>
+</ul></li>
+<li><strong>Account statement has all required information</strong>
+
+<ul>
+<li>Verify that fetching account statement provides you all information you need to perform reconciliation for your accounting purposes.</li>
+</ul></li>
+</ul>
+<h1 id='common-topics'>Common Topics</h1>
 <p>TODO - this is TransferWise API, which has xxx parts .  </p>
 <h2 id='authentication'>Authentication</h2><h2 id='errors'>Errors</h2><h3 id='http-response-codes'>HTTP Response Codes</h3>
 <blockquote>
@@ -352,19 +475,7 @@
 <td>TransferWise server error.</td>
 </tr>
 </tbody></table>
-<h2 id='helpful'>Helpful</h2><h3 id='versioning'>Versioning</h3>
-<p>At present v1 is the current and only version of TransferWise API.</p>
-<h3 id='test-and-live-environments'>TEST and LIVE environments</h3>
-<p><br/>API TEST – Sandbox is located at https://api.sandbox.transferwise.tech
-<br/>API LIVE – Production environment is located at https://api.transferwise.com
-<br/>Please test your integration in API Sandbox environment before going LIVE.</p>
-<h3 id='report-a-bug-send-us-feedback'>Report a Bug / Send Us Feedback</h3>
-<p>Once you run into an issue in LIVE environment please don&#39;t hesitate to escalate this immediately to <a href="mailto:api@transferwise.com">api@transferwise.com</a>. We will do our best to get back to you as soon as possible.
-If the matter is top urgent and it happened during a weekend then please contact our awesome customer support via this <a href="https://transferwise.com/contact">support page</a>.</p>
-
-<p>Once you run into an issue in TEST environment then please take a look at the FAQ section below. 
-If this does not solve nor explain the issue you are having then please report this to <a href="mailto:api@transferwise.com">api@transferwise.com</a>.</p>
-<h3 id='faq'>FAQ</h3>
+<h2 id='helpful'>Helpful</h2><h3 id='faq'>FAQ</h3>
 <p><br/><b>Which currency routes are supported?</b>
 <br/>The list of currency routes supported by TransferWise is constantly growing. Check <a href="https://transferwise.com/help/article/1569835/basic-information/supported-currencies">Supported Currencies</a> for up-to-date list.
 <br/>
@@ -388,7 +499,7 @@ The exceptions for this are major currencies like USD, EUR and GBP -  see more a
 <br/>There is  more info at <a href="https://transferwise.com/help">TransferWise Support Centre</a>. 
 And you can ping us directly at  <a href="mailto:api@transferwise.com">api@transferwise.com</a>.</p>
 <h3 id='useful-articles'>Useful Articles</h3>
-<p>If you have questions on TransferWise product during API itegration, please check TransferWise <a href="https://transferwise.com/help/">Support Center</a>. Below we gathered most common product questions that arrise during inegration, more available at <a href="https://transferwise.com/help/">Support Center</a>
+<p>If you have questions on TransferWise product during API itegration, please check TransferWise <a href="https://transferwise.com/help/">Support Center</a>. Below we gathered most common product questions that arrise during integration.
 <br/><a href="https://transferwise.com/help/article/1779442/basic-information/video-guide-make-a-transfer">Signing up and making your first transfer</a>
 <br/><a href="https://transferwise.com/help/article/1662889/business/how-do-i-use-transferwise-for-business-payments">How do I use TransferWise for business payments?</a>
 <br/><a href="https://transferwise.com/help/article/1662919/verification/verify-your-business">Verify your business</a>
@@ -401,22 +512,254 @@ And you can ping us directly at  <a href="mailto:api@transferwise.com">api@trans
 <br/><a href="https://transferwise.com/help/article/1663573/euro-transfers/eur-transfers">EUR transfers</a>
 <br/><a href="https://transferwise.com/help/article/1663571/british-pound-transfers/gbp-transfers">GBP transfers</a>
 <br/><a href="https://transferwise.com/help/article/1667423/us-dollar-transfers/usd-transfers">USD transfers</a></p>
+<h2 id='sandbox'>Sandbox</h2><h3 id='test-and-live-environments'>TEST and LIVE environments</h3>
+<p><br/>API TEST – Sandbox is located at https://api.sandbox.transferwise.tech
+<br/>API LIVE – Production environment is located at https://api.transferwise.com
+<br/>Please test your integration in API Sandbox environment before going LIVE.</p>
+<h3 id='testing-in-sandbox'>Testing in Sandbox</h3>
+<p><br/><b>Is there a test website (portal)?</b>
+<br/>Yes, there is <a href="https://sandbox.transferwise.tech/">https://sandbox.transferwise.tech/</a> where you can view and manipulate your transfers.
+<br/>To do API calls use <a href="https://api.sandbox.transferwise.tech">https://api.sandbox.transferwise.tech/</a> as a hostname.
+<br/>
+<br/><b>How do I login to https://sandbox.transferwise.tech ?</b>
+<br/>You can create yourself test account by clicking signup form. Two factor authentication code for sandbox environment is 111111.
+<br/>
+<br/><b>Are there any differences between TEST and LIVE environments?</b>
+<br/>API interface is the same for LIVE and TEST environments of course. There are however few limitations in test environment:
+<br/>We don&#39;t simulate payment processing in test environment which means that  created payments remain in their first state. You can trigger these changes via simulation endpoints.
+<br/>We don&#39;t send payment status change related email notifications in test environment. 
+<br/>
+<br/><b>How can I top up my borderless account balance?</b>
+<br/>We are usually generous with &quot;test money&quot;, so you will have large starting balance after signup. But if you are running low on your initial setup balance then please contact api@transferwise.com and we can top it up for you once again.
+<br/>
+<br/><b>How can I add new currency to my borderless account?</b>
+<br/>Login to our sandbox website and navigate to Balances menu. You can now add another currency and top it up by converting funds from your existing balances in other currencies.
+<br/>
+<br/><b>Why are there no transactions in my statement?</b>
+<br/>As we don&#39;t simulate processing of your payments in sandbox then these payments don&#39;t appear in your statement. 
+<br/>There is one nice exception to this - we do simulate processing currency conversion transactions between different currency balances. So as a workaround you can execute few currency conversion between your currency balances via test website and then check your statement via API. You should see these conversion transactions in your statement then.
+<br/>
+<br/><b>Why did not my transfer state change after funding?</b>
+<br/>We don&#39;t process payments in sandbox environment. 
+<br/>You can use simulation endpoints to trigger transfers status changes in sandbox. See TODO - link here.
+<br/>
+<br/><b>Why did I received &quot;balance-account-not-found&quot; when trying to fund my transfer?</b>
+<br/>Received error from POST /v1/transfers/{transferId}/payments {&quot;type&quot;:&quot;BALANCE&quot;,&quot;status&quot;:&quot;REJECTED&quot;,&quot;errorCode&quot;:&quot;balance.account-not-found&quot;}. 
+<br/>Please double check that you you are funding from borderless account which belongs to the correct profile (business / personal). Each transfer belongs to one profile (either business or personal) and so do borderless accounts. You cannot fund business profile transfers from personal borderless account and vice versa. 
+<br/>
+<br/><b>Why did I get Internal Server Error (500) response when creating  a quote, recipient or transfer?</b>
+<br/>Unfortunately we don&#39;t have full redundancy  available in our sandbox environment yet. 
+There could be short downtimes during deployments of new releases of our platform.<br>
+If you experience a failed response in calling any endpoint in sandbox then please retry in few minutes. Should the issue persist for more than 15 minutes then please <a href="mailto:api@transferwise.com">let us know</a>.</p>
+<h2 id='contact-us'>Contact Us</h2><h3 id='report-a-bug-send-us-feedback'>Report a Bug / Send Us Feedback</h3>
+<p>Once you run into an issue in LIVE environment please don&#39;t hesitate to escalate this immediately to <a href="mailto:api@transferwise.com">api@transferwise.com</a>. We will do our best to get back to you as soon as possible.
+If the matter is top urgent and it happened during a weekend then please contact our awesome customer support via this <a href="https://transferwise.com/contact">support page</a>.</p>
+
+<p>Once you run into an issue in TEST environment then please take a look at the FAQ section below. 
+If this does not solve nor explain the issue you are having then please report this to <a href="mailto:api@transferwise.com">api@transferwise.com</a>.</p>
+<h1 id='simulation'>Simulation</h1><h2 id='simulate-processing'>Simulate Processing</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://sandbox.transferwise.tech//v1/simulation/transfers/{transferId}/processing"</span>
+  -H <span class="s2">"Authorization: &lt;your api token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15574445</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">294205</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetAccount"</span><span class="p">:</span><span class="w"> </span><span class="mi">7993919</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceAccount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"quote"</span><span class="p">:</span><span class="w"> </span><span class="mi">113379</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processing"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good times"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2151</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-14 15:25:51"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"transferRequest"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good times"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"hasActiveIssues"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">895.32</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GPB"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Changes transfer status from <code>incoming_payment_waiting</code> to <code>processing</code>.
+Limited to sandbox environment.</p>
+<h3 id='request'>Request</h3>
+<p><code>GET http://sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/processing</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>transferId</td>
+<td>Unique ID of transfer</td>
+<td>Integer</td>
+</tr>
+</tbody></table>
+<h3 id='response'>Response</h3>
+<p>TODO - reference to &quot;transfer&quot;</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Unique Transfer Id, assigned by TransferWise</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>user</td>
+<td>User Id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>targetAccount</td>
+<td>Target recipient account id. Person who is receiving the funds.</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>sourceAccount</td>
+<td>Refund recipient account id. Used only for refund purposes.</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>quote</td>
+<td>Quote ID</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Transfer current status.</td>
+<td><code>incoming_payment_waiting</code></br><code>incoming_payment_initiated</code></br><code>waiting_recipient_input_to_proceed</code></br><code>processing</code></br><code>funds_converted</code></br><code>outgoing_payment_sent</code></br><code>charged_back</code></br><code>cancelled</code></br><code>cancelled_refund_processing</code></br><code>funds_refunded</code></br><code>bounced_back</code></td>
+</tr>
+<tr>
+<td>reference</td>
+<td>End to end reference text. Deprecated. Use details.reference field.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>Exchange rate used for transfer.</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>created</td>
+<td>Timestamp when transfer was created.</td>
+<td>String TODO !!!</td>
+</tr>
+<tr>
+<td>business</td>
+<td>User porfile id - only in case of businesses. Deprecated.</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>transferRequest</td>
+<td>Link to &#39;Request money&#39; transfer id. Deprecated.</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>details.reference</td>
+<td>End to end reference text.</td>
+<td></td>
+</tr>
+<tr>
+<td>hasActiveIssues</td>
+<td>Are there any pending issues which stop executing the transfer.</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>sourceValue</td>
+<td>Transfer amount in source currency.</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>sourceCurrency</td>
+<td>Source currency code of the transfer.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>targetValue</td>
+<td>Transfer amount in target currency.</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>targetCurrency</td>
+<td>Target currency code of the transfer.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>customerTransactionId</td>
+<td>UUID format unique identifier assinged by customer. Used for idempotency check purposes.</td>
+<td>UUID</td>
+</tr>
+</tbody></table>
+<h1 id='kittens-and-dogs'>Kittens and dogs</h1><h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2>
+<p>This endpoint retrieves a specific kitten.</p>
+
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the kitten to retrieve</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
+  -X DELETE
+  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint deletes a specific kitten.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the kitten to delete</td>
+</tr>
+</tbody></table>
 <h1 id='authentication-2'>Authentication</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 curl <span class="s2">"api_endpoint_here"</span>
   -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
 </code></pre>
 <blockquote>
 <p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
@@ -432,149 +775,6 @@ This example API documentation page was created with <a href="https://github.com
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
 <h1 id='other-stuff'>Other Stuff</h1><h2 id='changelog'>Changelog</h2><h3 id='released-changes'>Released Changes</h3>
 <table><thead>
 <tr>
@@ -614,9 +814,6 @@ Give feedback on the API !</p>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
