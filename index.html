@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>TransferWise API</title>
+    <title>TransferWise Payouts API</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -219,381 +219,283 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+            <a href="#payouts-api" class="toc-h1 toc-link" data-title="Payouts API">Payouts API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#access-to-sandbox" class="toc-h2 toc-link" data-title="Access to Sandbox">Access to Sandbox</a>
+                    <a href="#before-you-start" class="toc-h2 toc-link" data-title="Before you start">Before you start</a>
                   </li>
                   <li>
-                    <a href="#before-you-start-integration" class="toc-h2 toc-link" data-title="Before you start integration">Before you start integration</a>
+                    <a href="#api-access" class="toc-h2 toc-link" data-title="API access">API access</a>
                   </li>
                   <li>
-                    <a href="#going-live-checklist" class="toc-h2 toc-link" data-title="Going live checklist">Going live checklist</a>
+                    <a href="#find-your-profile-id" class="toc-h2 toc-link" data-title="Find your profile id">Find your profile id</a>
+                  </li>
+                  <li>
+                    <a href="#create-quote" class="toc-h2 toc-link" data-title="Create quote">Create quote</a>
+                  </li>
+                  <li>
+                    <a href="#create-recipient" class="toc-h2 toc-link" data-title="Create recipient">Create recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-transfer" class="toc-h2 toc-link" data-title="Create transfer">Create transfer</a>
+                  </li>
+                  <li>
+                    <a href="#fund-transfer" class="toc-h2 toc-link" data-title="Fund transfer">Fund transfer</a>
+                  </li>
+                  <li>
+                    <a href="#get-transfer-delivery-time" class="toc-h2 toc-link" data-title="Get transfer delivery time">Get transfer delivery time</a>
+                  </li>
+                  <li>
+                    <a href="#get-transfer-status" class="toc-h2 toc-link" data-title="Get transfer status">Get transfer status</a>
+                  </li>
+                  <li>
+                    <a href="#check-account-balance" class="toc-h2 toc-link" data-title="Check account balance">Check account balance</a>
+                  </li>
+                  <li>
+                    <a href="#download-account-statement" class="toc-h2 toc-link" data-title="Download account statement">Download account statement</a>
+                  </li>
+                  <li>
+                    <a href="#go-live" class="toc-h2 toc-link" data-title="Go Live">Go Live</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#common-topics" class="toc-h1 toc-link" data-title="Common Topics">Common Topics</a>
+            <a href="#recipients-api" class="toc-h1 toc-link" data-title="Recipients API">Recipients API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                    <a href="#create-aed-recipient" class="toc-h2 toc-link" data-title="Create AED recipient">Create AED recipient</a>
                   </li>
                   <li>
-                    <a href="#errors" class="toc-h2 toc-link" data-title="Errors">Errors</a>
+                    <a href="#create-ars-recipient" class="toc-h2 toc-link" data-title="Create ARS recipient">Create ARS recipient</a>
                   </li>
                   <li>
-                    <a href="#helpful" class="toc-h2 toc-link" data-title="Helpful">Helpful</a>
+                    <a href="#create-aud-recipient" class="toc-h2 toc-link" data-title="Create AUD recipient">Create AUD recipient</a>
                   </li>
                   <li>
-                    <a href="#sandbox" class="toc-h2 toc-link" data-title="Sandbox">Sandbox</a>
+                    <a href="#create-bdt-recipient" class="toc-h2 toc-link" data-title="Create BDT recipient">Create BDT recipient</a>
                   </li>
                   <li>
-                    <a href="#contact-us" class="toc-h2 toc-link" data-title="Contact Us">Contact Us</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#simulation" class="toc-h1 toc-link" data-title="Simulation">Simulation</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#simulate-transfer-status-changes" class="toc-h2 toc-link" data-title="Simulate Transfer Status Changes">Simulate Transfer Status Changes</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#other-stuff" class="toc-h1 toc-link" data-title="Other Stuff">Other Stuff</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#changelog" class="toc-h2 toc-link" data-title="Changelog">Changelog</a>
+                    <a href="#create-bgn-recipient" class="toc-h2 toc-link" data-title="Create BGN recipient">Create BGN recipient</a>
                   </li>
                   <li>
-                    <a href="#webhooks" class="toc-h2 toc-link" data-title="Webhooks">Webhooks</a>
+                    <a href="#create-brl-recipient" class="toc-h2 toc-link" data-title="Create BRL recipient">Create BRL recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-cad-recipient" class="toc-h2 toc-link" data-title="Create CAD recipient">Create CAD recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-chf-recipient" class="toc-h2 toc-link" data-title="Create CHF recipient">Create CHF recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-clp-recipient" class="toc-h2 toc-link" data-title="Create CLP recipient">Create CLP recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-cny-recipient" class="toc-h2 toc-link" data-title="Create CNY recipient">Create CNY recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-czk-recipient" class="toc-h2 toc-link" data-title="Create CZK recipient">Create CZK recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-dkk-recipient" class="toc-h2 toc-link" data-title="Create DKK recipient">Create DKK recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-egp-recipient" class="toc-h2 toc-link" data-title="Create EGP recipient">Create EGP recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-eur-recipient" class="toc-h2 toc-link" data-title="Create EUR recipient">Create EUR recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-gbp-recipient" class="toc-h2 toc-link" data-title="Create GBP recipient">Create GBP recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-gel-recipient" class="toc-h2 toc-link" data-title="Create GEL recipient">Create GEL recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-ghs-recipient" class="toc-h2 toc-link" data-title="Create GHS recipient">Create GHS recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-hkd-recipient" class="toc-h2 toc-link" data-title="Create HKD recipient">Create HKD recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-hrk-recipient" class="toc-h2 toc-link" data-title="Create HRK recipient">Create HRK recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-huf-recipient" class="toc-h2 toc-link" data-title="Create HUF recipient">Create HUF recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-idr-recipient" class="toc-h2 toc-link" data-title="Create IDR recipient">Create IDR recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-ils-recipient" class="toc-h2 toc-link" data-title="Create ILS recipient">Create ILS recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-inr-recipient" class="toc-h2 toc-link" data-title="Create INR recipient">Create INR recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-jpy-recipient" class="toc-h2 toc-link" data-title="Create JPY recipient">Create JPY recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-kes-recipient" class="toc-h2 toc-link" data-title="Create KES recipient">Create KES recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-lkr-recipient" class="toc-h2 toc-link" data-title="Create LKR recipient">Create LKR recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-mad-recipient" class="toc-h2 toc-link" data-title="Create MAD recipient">Create MAD recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-mxn-recipient" class="toc-h2 toc-link" data-title="Create MXN recipient">Create MXN recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-myr-recipient" class="toc-h2 toc-link" data-title="Create MYR recipient">Create MYR recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-ngn-recipient" class="toc-h2 toc-link" data-title="Create NGN recipient">Create NGN recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-nok-recipient" class="toc-h2 toc-link" data-title="Create NOK recipient">Create NOK recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-npr-recipient" class="toc-h2 toc-link" data-title="Create NPR recipient">Create NPR recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-nzd-recipient" class="toc-h2 toc-link" data-title="Create NZD recipient">Create NZD recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-pen-recipient" class="toc-h2 toc-link" data-title="Create PEN recipient">Create PEN recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-php-recipient" class="toc-h2 toc-link" data-title="Create PHP recipient">Create PHP recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-pkr-recipient" class="toc-h2 toc-link" data-title="Create PKR recipient">Create PKR recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-pln-recipient" class="toc-h2 toc-link" data-title="Create PLN recipient">Create PLN recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-ron-recipient" class="toc-h2 toc-link" data-title="Create RON recipient">Create RON recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-rub-recipient" class="toc-h2 toc-link" data-title="Create RUB recipient">Create RUB recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-sek-recipient" class="toc-h2 toc-link" data-title="Create SEK recipient">Create SEK recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-sgd-recipient" class="toc-h2 toc-link" data-title="Create SGD recipient">Create SGD recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-thb-recipient" class="toc-h2 toc-link" data-title="Create THB recipient">Create THB recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-try-recipient" class="toc-h2 toc-link" data-title="Create TRY recipient">Create TRY recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-uah-recipient" class="toc-h2 toc-link" data-title="Create UAH recipient">Create UAH recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-usd-recipient" class="toc-h2 toc-link" data-title="Create USD recipient">Create USD recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-vnd-recipient" class="toc-h2 toc-link" data-title="Create VND recipient">Create VND recipient</a>
+                  </li>
+                  <li>
+                    <a href="#create-zar-recipient" class="toc-h2 toc-link" data-title="Create ZAR recipient">Create ZAR recipient</a>
                   </li>
               </ul>
           </li>
       </ul>
-        <ul class="toc-footer">
-            <li><a href='https://sandbox.transferwise.tech/register'>Sign Up for a Developer Key</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1><h2 id='access-to-sandbox'>Access to Sandbox</h2><h3 id='how-to-get-access'>How to get access</h3>
-<p><a href="https://sandbox.transferwise.tech/register">Signup for developer account</a> and you will get API key for sandbox immediately.<br>
-Upon signup we will configure fully verified Transferwise multi-currency borderless account for you with some test money available so you can test creating and funding payments in same manner as in LIVE environment with real money.</p>
+        <h1 id='payouts-api'>Payouts API</h1><h2 id='before-you-start'>Before you start</h2><h3 id='1-learn-about-transferwise-borderless-account'>1. Learn about TransferWise borderless account.</h3>
+<p>Borderless account features and pricing are best explained here</p>
 
-<p>TODO - mention that you can access your account, and not build stuff using other accounts...</p>
-<h3 id='basic-technical-information'>Basic Technical Information</h3>
+<p><a href="https://transferwise.com/gb/borderless/pricing">https://transferwise.com/gb/borderless/pricing</a></p>
+<h3 id='2-signup-for-transferwise-borderless-account'>2. Signup for TransferWise borderless account</h3>
+<p>Get hands-on experience before you start with API integration as it will help you understand how our payment flow works. 
+Just follow these three simple steps. </p>
+
 <ul>
-<li>TransferWise API uses HTTP methods and <strong>RESTful</strong> endpoints</li>
-<li>API security framework is <strong>OAuth 2.0.</strong></li>
-<li>Request and response messages are in <strong>JSON</strong> format</li>
+<li><p>Sign up for TransferWise borderless account. <a href="https://transferwise.com/gb/borderless">https://transferwise.com/gb/borderless</a></p></li>
+<li><p>Make a transfer — check <a href="https://transferwise.com/help/article/1779442/creating-a-transfer/video-guide-make-a-transfer">our video guide</a> for a step-by-step guide.</p></li>
+<li><p>Verify that our coverage includes your currency route(s).</p></li>
 </ul>
-<h3 id='design-and-test-your-integration'>Design and test your integration</h3>
+<h3 id='3-choose-the-best-tool-for-you'>3. Choose the best tool for you</h3>
+<p>There are two ways you can execute large number of payouts:</p>
+
 <ul>
-<li>To setup security please look at TODO - is this relevant any more ? </li>
-<li>To create transfers please look at TODO - is this relevant here ? </li>
-<li>Test your integration in our sandbox.</li>
-<li>Check our [TODO - FAQ] section to find answers to common questions.</li>
-<li>Send us an email to <a href="mailto:api@transferwise.com">api@transferwise.com</a> in case you got stuck with something.</li>
+<li><p><em>Batch payments.</em> Prepare CSV file and upload this using our Batch Payments tool: <a href="https://transferwise.com/batch">https://transferwise.com/batch</a></p></li>
+<li><p><em>API integration.</em> Automate your payment process fully by sending payment orders via TransferWise API. </p></li>
 </ul>
-<h3 id='going-live'>Going live</h3>
+<h2 id='api-access'>API access</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sandbox.transferwise.tech/v1/profiles"</span>
+  -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+</code></pre><h3 id='authentication'>Authentication</h3>
+<p>Signup for developer account to get API token for sandbox. <a href="https://sandbox.transferwise.tech/register">https://sandbox.transferwise.tech/register</a></p>
+
+<p>Your developer account will have some test money so you can start making payments in same way as in LIVE environment.  You will find your API tokens in the Settings page. </p>
+
+<p>Add token as header parameter to every API call like this:</p>
+
+<p><em>Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx</em></p>
+<h3 id='test-and-live-environments'>TEST and LIVE environments</h3>
 <ul>
-<li>Done with testing? Create yourself API token from live </li>
-<li>Please review <a href="#">TODO - go live checklist</a>  to ensure smooth launch.</li>
-<li>Time to start saving on bank fees by using the TransferWise payment platform.</li>
+<li>Sandbox API is located at https://api.sandbox.transferwise.tech</li>
+<li>LIVE API is located at https://api.transferwise.com</li>
 </ul>
-<h2 id='before-you-start-integration'>Before you start integration</h2><h3 id='have-you-tried-sending-money-with-transferwise'>Have you tried sending money with TransferWise?</h3>
-<p>Before starting with API integration, we recommend that you make a transfer using TransferWise website or mobile apps at least once. This will help you understand how the transfer creation flow works. It&#39;s easy to sign up and make your first transfer:
-1) Register your personal or business profile at TransferWise.com
-2) Make a transfer — check <a href="https://transferwise.com/help/article/1779442/creating-a-transfer/video-guide-make-a-transfer">our video guide</a> for a step-by-step guide.</p>
-
-<p>There is also the <a href="https://transferwise.com/help">TransferWise support centre</a> to help you find answers for general questions about onboarding, pricing, speed and coverage.</p>
-<h3 id='is-a-borderless-account-a-good-fit-for-your-business'>Is a borderless account a good fit for your business?</h3>
-<ul>
-<li>TransferWise borderless account is a multi-currency account that comes with UK, Eurozone, US and Australian  bank details, and gives you the option to hold money in up to 28 currencies. </li>
-<li>It comes with the benefit of allowing you to convert funds between different currencies using real mid-market exchange rate. </li>
-<li>Your business can collect receivables from customers directly into a borderless account, and then immediately use the funds to create payments. </li>
-<li>For depositing funds to TransferWise, all you need to do is to send a local bank transfer to your borderless account details.</li>
-</ul>
-<h3 id='api-integration-or-batch-payments-file-upload'>API integration or batch payments file upload?</h3>
-<p>There are two ways for your business to execute large amount of payouts:</p>
-
-<ul>
-<li><p><strong>Batch payments.</strong> You can upload multiple payments using a single batch file. Log into your TransferWise account and use the upload tool to create up to 1,000 transfers with a single batch file. This use case is perfect if you’re interested in repeated payouts, for example paying out salaries.</p></li>
-<li><p><strong>API integration.</strong> You can integrate TransferWise platform directly into your website or workflow. We have detailed documentation, sandbox environment and dedicated support team ready to get you started.</p></li>
-</ul>
-<h3 id='does-transferwise-support-all-currencies'>Does Transferwise support all currencies?</h3>
-<p>We‘re continuously growing our coverage and features.
-Please visit <a href="https://transferwise.com/help/article/1570071/basic-information/supported-countries">supported currencies list</a> for latest info.</p>
-<h3 id='send-payments-to-email-recipients'>Send payments to email recipients.</h3>
-<p>TransferWise will email your recipient and collect their bank account details to complete your payment.
-This way all you need to know is recipient name and email address to send funds.</p>
-<h2 id='going-live-checklist'>Going live checklist</h2><h3 id='what-to-do-before-your-account-is-live'>What to do before your account is live</h3>
-<ul>
-<li>My business profile is created and fully verified. I can access a borderless account for my business on <a href="https://transferwise.com">www.transferwise.com</a></li>
-<li>I have signed TransferWise API terms of usage contract.</li>
-<li>I have received and successfully decrypted the Live API credentials.</li>
-<li>I have implemented #docTextSection:vj2LttYwGieNLFj7a properly and obtained my access/refresh tokens for LIVE.</li>
-<li>I have completed first LIVE payment as a smoke test of the integration.</li>
-</ul>
-<h3 id='how-to-complete-api-integration'>How to complete API integration</h3>
-<ul>
-<li><strong>Security</strong>
-
-<ul>
-<li>Ensure access tokens and refresh tokens are stored securely and only exposed to authorized persons. </li>
-<li>Implement a mechanism to obtain new access token upon expiration.</li>
-<li>Make sure your server has TLS version 1.2 or higher.</li>
-</ul></li>
-<li><strong>Retry and duplicate detection</strong>
-
-<ul>
-<li>Implement basic retry mechanism to handle potential network interruptions </li>
-<li>Implement duplicate prevention mechanism to avoid double payments. UUID is uniquely generated for each individual transfer and value is kept same in case of retrying.</li>
-</ul></li>
-<li><strong>Logging</strong>
-
-<ul>
-<li>Implement basic logging to help out in debugging and problem solving, if needed.</li>
-</ul></li>
-<li><strong>Transfer lifecycle support</strong>
-
-<ul>
-<li>Implement creating and funding transfers.</li>
-<li>Implementation can handle all possible transfer states during polling of transfer information.</li>
-</ul></li>
-<li><strong>Pro-active balance check</strong>
-
-<ul>
-<li>Automatically verify available balance before submitting requests to fund transfers, to avoid rejections due to insufficient balance.</li>
-</ul></li>
-<li><strong>Creating recipients for different currencies</strong>
-
-<ul>
-<li>Required data fields for recipients vary for different currencies. Please look at #docTextSection:HnJc3YxGw4mWveZgg.</li>
-</ul></li>
-<li><strong>Account statement has all required information</strong>
-
-<ul>
-<li>Verify that fetching account statement provides you all information you need to perform reconciliation for your accounting purposes.</li>
-</ul></li>
-</ul>
-<h1 id='common-topics'>Common Topics</h1>
-<p>TODO - this is TransferWise API, which has xxx parts .  </p>
-<h2 id='authentication'>Authentication</h2><h2 id='errors'>Errors</h2><h3 id='http-response-codes'>HTTP Response Codes</h3>
-<blockquote>
-<p>Validation Error</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error.route.not.supported"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This route is not supported"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"CNY-EUR"</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<blockquote>
-<p>Authentication Error</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unauthorized"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"error_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Full authentication is required to access this resource"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<blockquote>
-<p>System Error</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-02T13:07:39.644+0000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Internal Server Error"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"exception"</span><span class="p">:</span><span class="w"> </span><span class="s2">"java.lang.NullPointerException"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No message available"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/quotes/106031/account-requirements"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>HTTP response codes indicate the success or failure of an API request. 
- <code>2xx codes</code> indicates success.  <code>4xx codes</code> indicate client side error, for example invalid data was submitted or some field is missing.
- <code>5xx codes</code> indicate server side error, meaning problem is in TransferWise side.</p>
-
-<table><thead>
-<tr>
-<th><strong>Code</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead><tbody>
-<tr>
-<td><strong>200</strong></td>
-<td>OK. Successful request.</td>
-</tr>
-<tr>
-<td><strong>400</strong></td>
-<td>Bad request. Request message data did not pass validation.</td>
-</tr>
-<tr>
-<td><strong>401</strong></td>
-<td>Unauthorised. Not authorised to access requested data.</td>
-</tr>
-<tr>
-<td><strong>403</strong></td>
-<td>Forbidden. Access to requested data is forbidden.</td>
-</tr>
-<tr>
-<td><strong>404</strong></td>
-<td>Not Found. Requested resource does not exist.</td>
-</tr>
-<tr>
-<td><strong>408</strong></td>
-<td>Timeout. Operation timed out.</td>
-</tr>
-<tr>
-<td><strong>422</strong></td>
-<td>Unprocessable entity. Request message data did not pass validation.</td>
-</tr>
-<tr>
-<td><strong>500</strong></td>
-<td>TransferWise server error.</td>
-</tr>
-</tbody></table>
-<h2 id='helpful'>Helpful</h2><h3 id='faq'>FAQ</h3>
-<p><br/><b>Which currency routes are supported?</b>
-<br/>The list of currency routes supported by TransferWise is constantly growing. Check <a href="https://transferwise.com/help/article/1569835/basic-information/supported-currencies">Supported Currencies</a> for up-to-date list.
-<br/>
-<br/><b>Which currency routes are supported for sending money to email recipients?</b>
-<br/>Sending money to email recipients is available for almost all currency routes. Currencies which are excluded are listed <a href="https://transferwise.com/help/article/1740912/creating-a-transfer/transfers-to-an-email-address-transferwise-users">here</a>.
-<br/>
-<br/><b>Can I send any supported currency to any country? </b>
-<br/>TransferWise currently supports sending national currencies to target countries. For example you can send JPY to Japan but we don&#39;t yet support sending JPY to United States. 
-The exceptions for this are major currencies like USD, EUR and GBP -  see more about our <a href="https://transferwise.com/help/article/2049199/us-dollar-transfers/transfers-from-usd-swift">global USD transfers</a>.
-<br/>
-<br/><b>Can I change my phone number registered for two factor authentication?</b>
-<br/>Yes you can. Changing the phone number does not invalidate your API tokens. 
-<br/>
-<br/><b>Why are transfer statuses in your website different than in API?</b>
-<br/>We are exposing more details about transfer lifecycle via our API, so hopefully this will not be a big issue. We have transformed our API transfer statuses to more human readable texts in our website. For example &quot;Completed&quot; in our website corresponds to &quot;outgoing_payment_sent&quot; in API. See TODO !!! #docTextSection:vj2LttYwGieNLFj7a article about all possible statuses in payment lifecycle.
-<br/>
-<br/><b>Do you provide SDKs for Java, Ruby, Python, PHP, etc?</b>
-<br/>Not at the moment. We hope to have that in the future!
-<br/>
-<br/><b>Did not find what you are looking for?</b>
-<br/>There is  more info at <a href="https://transferwise.com/help">TransferWise Support Centre</a>. 
-And you can ping us directly at  <a href="mailto:api@transferwise.com">api@transferwise.com</a>.</p>
-<h3 id='useful-articles'>Useful Articles</h3>
-<p>If you have questions on TransferWise product during API itegration, please check TransferWise <a href="https://transferwise.com/help/">Support Center</a>. Below we gathered most common product questions that arrise during integration.
-<br/><a href="https://transferwise.com/help/article/1779442/basic-information/video-guide-make-a-transfer">Signing up and making your first transfer</a>
-<br/><a href="https://transferwise.com/help/article/1662889/business/how-do-i-use-transferwise-for-business-payments">How do I use TransferWise for business payments?</a>
-<br/><a href="https://transferwise.com/help/article/1662919/verification/verify-your-business">Verify your business</a>
-<br/><a href="https://transferwise.com/help/article/2348295/business/business-payment-tips">Business payment tips</a>
-<br/><a href="https://transferwise.com/help/article/2140394/basic-information/will-my-transfer-be-instant">Will my transfer be instant?</a>
-<br/><a href="https://transferwise.com/help/article/1570099/security/how-safe-is-transferwise">How safe is TransferWise?</a>
-<br/><a href="https://transferwise.com/currency-converter/">Currency converter</a>
-<br/><a href="https://transferwise.com/help/article/1870699/good-to-know/transferwise-bank-details">TransferWise bank details</a>
-<br/><a href="https://transferwise.com/help/article/1716080/euro-transfers/sepa-countries-and-ibans">SEPA countries and IBANs</a>
-<br/><a href="https://transferwise.com/help/article/1663573/euro-transfers/eur-transfers">EUR transfers</a>
-<br/><a href="https://transferwise.com/help/article/1663571/british-pound-transfers/gbp-transfers">GBP transfers</a>
-<br/><a href="https://transferwise.com/help/article/1667423/us-dollar-transfers/usd-transfers">USD transfers</a></p>
-<h2 id='sandbox'>Sandbox</h2><h3 id='test-and-live-environments'>TEST and LIVE environments</h3>
-<p><br/>API TEST – Sandbox is located at https://api.sandbox.transferwise.tech
-<br/>API LIVE – Production environment is located at https://api.transferwise.com
-<br/>Please test your integration in API Sandbox environment before going LIVE.</p>
-<h3 id='testing-in-sandbox'>Testing in Sandbox</h3>
-<p><br/><b>Is there a test website (portal)?</b>
-<br/>Yes, there is <a href="https://sandbox.transferwise.tech/">https://sandbox.transferwise.tech/</a> where you can view and manipulate your transfers.
-<br/>To do API calls use <a href="https://api.sandbox.transferwise.tech">https://api.sandbox.transferwise.tech/</a> as a hostname.
-<br/>
-<br/><b>How do I login to https://sandbox.transferwise.tech ?</b>
-<br/>You can create yourself test account by clicking signup form. Two factor authentication code for sandbox environment is 111111.
-<br/>
-<br/><b>Are there any differences between TEST and LIVE environments?</b>
-<br/>API interface is the same for LIVE and TEST environments of course. There are however few limitations in test environment:
-<br/>We don&#39;t simulate payment processing in test environment which means that  created payments remain in their first state. You can trigger these changes via simulation endpoints.
-<br/>We don&#39;t send payment status change related email notifications in test environment. 
-<br/>
-<br/><b>How can I top up my borderless account balance?</b>
-<br/>We are usually generous with &quot;test money&quot;, so you will have large starting balance after signup. But if you are running low on your initial setup balance then please contact api@transferwise.com and we can top it up for you once again.
-<br/>
-<br/><b>How can I add new currency to my borderless account?</b>
-<br/>Login to our sandbox website and navigate to Balances menu. You can now add another currency and top it up by converting funds from your existing balances in other currencies.
-<br/>
-<br/><b>Why are there no transactions in my statement?</b>
-<br/>As we don&#39;t simulate processing of your payments in sandbox then these payments don&#39;t appear in your statement. 
-<br/>There is one nice exception to this - we do simulate processing currency conversion transactions between different currency balances. So as a workaround you can execute few currency conversion between your currency balances via test website and then check your statement via API. You should see these conversion transactions in your statement then.
-<br/>
-<br/><b>Why did not my transfer state change after funding?</b>
-<br/>We don&#39;t process payments in sandbox environment. 
-<br/>You can use simulation endpoints to trigger transfers status changes in sandbox. See TODO - link here.
-<br/>
-<br/><b>Why did I received &quot;balance-account-not-found&quot; when trying to fund my transfer?</b>
-<br/>Received error from POST /v1/transfers/{transferId}/payments {&quot;type&quot;:&quot;BALANCE&quot;,&quot;status&quot;:&quot;REJECTED&quot;,&quot;errorCode&quot;:&quot;balance.account-not-found&quot;}. 
-<br/>Please double check that you you are funding from borderless account which belongs to the correct profile (business / personal). Each transfer belongs to one profile (either business or personal) and so do borderless accounts. You cannot fund business profile transfers from personal borderless account and vice versa. 
-<br/>
-<br/><b>Why did I get Internal Server Error (500) response when creating  a quote, recipient or transfer?</b>
-<br/>Unfortunately we don&#39;t have full redundancy  available in our sandbox environment yet. 
-There could be short downtimes during deployments of new releases of our platform.<br>
-If you experience a failed response in calling any endpoint in sandbox then please retry in few minutes. Should the issue persist for more than 15 minutes then please <a href="mailto:api@transferwise.com">let us know</a>.</p>
-<h2 id='contact-us'>Contact Us</h2><h3 id='report-a-bug-send-us-feedback'>Report a Bug / Send Us Feedback</h3>
-<p>Once you run into an issue in LIVE environment please don&#39;t hesitate to escalate this immediately to <a href="mailto:api@transferwise.com">api@transferwise.com</a>. We will do our best to get back to you as soon as possible.
-If the matter is top urgent and it happened during a weekend then please contact our awesome customer support via this <a href="https://transferwise.com/contact">support page</a>.</p>
-
-<p>Once you run into an issue in TEST environment then please take a look at the FAQ section below. 
-If this does not solve nor explain the issue you are having then please report this to <a href="mailto:api@transferwise.com">api@transferwise.com</a>.</p>
-<h1 id='simulation'>Simulation</h1><h2 id='simulate-transfer-status-changes'>Simulate Transfer Status Changes</h2>
+<h2 id='find-your-profile-id'>Find your profile id</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://sandbox.transferwise.tech//v1/simulation/transfers/{transferId}/processing"</span>
-  -H <span class="s2">"Authorization: &lt;your api token&gt;"</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sandbox.transferwise.tech/v1/profiles"</span>
+  -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15574445</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">294205</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"targetAccount"</span><span class="p">:</span><span class="w"> </span><span class="mi">7993919</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sourceAccount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"quote"</span><span class="p">:</span><span class="w"> </span><span class="mi">113379</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processing"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good times"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2151</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-14 15:25:51"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"transferRequest"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good times"</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">217896</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oliver"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wilson"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"dateOfBirth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1977-07-01"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+3725064992"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://lh6.googleusercontent.com/-XzeFZ2PJE1A/AAAAAAAI/AAAAAAAAAAA/RvuvhXFsqs0/photo.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"occupation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"primaryAddress"</span><span class="p">:</span><span class="w"> </span><span class="mi">236532</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"hasActiveIssues"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sourceValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sourceCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">895.32</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"targetCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GPB"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">220192</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"business"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC Logistics Ltd"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"registrationNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12144939"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"acn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"arbn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"companyType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMITED"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"companyRole"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OWNER"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"descriptionOfBusiness"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Information and communication"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"primaryAddress"</span><span class="p">:</span><span class="w"> </span><span class="mi">240402</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"webpage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://abc-logistics.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+
 </span></code></pre>
-<p>Changes transfer status so you can simulate payment processing in sandbox environment.
-All transfer status change simulations are limited to sandbox environment only.</p>
+<p>You only need to call this endpoint once to obtain your user profile id.
+Your personal and business profiles have different IDs. You would need to use appropriate profile.id value when submitting further calls. </p>
 <h3 id='request'>Request</h3>
-<p>Changes transfer status from incoming_payment_waiting to processing.<br/>
-<code>GET http://sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/processing</code></p>
-
-<p>Changes transfer status from processing to funds_converted.<br/>
-<code>GET http://sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/funds_converted</code></p>
-
-<p>Changes transfer status from funds_converted to outgoing_payment_sent.<br/>
-<code>GET http://sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/outgoing_payment_sent</code></p>
-
-<p>Changes transfer status from outgoing_payment_sent to bounced_back.<br/>
-<code>GET http://sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/bounced_back</code></p>
-
-<p>Changes transfer status from bounced_back to funds_refunded.<br/>
-<code>GET http://sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/funds_refunded</code></p>
+<p><code>GET https://api.sandbox.transferwise.tech/v1/profiles</code></p>
 <h3 id='response'>Response</h3>
-<p>Transfer entity with new status. </p>
+<p>Personal Profile Fields</p>
 
 <table><thead>
 <tr>
@@ -604,137 +506,1613 @@ All transfer status change simulations are limited to sandbox environment only.<
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>Unique Transfer ID, assigned by TransferWise</td>
+<td>Personal profile id</td>
 <td>Integer</td>
 </tr>
 <tr>
-<td>user</td>
-<td>User Id</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>targetAccount</td>
-<td>Target recipient account ID. Person who is receiving the funds.</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>sourceAccount</td>
-<td>Refund recipient account ID. Used only for refund purposes.</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>quote</td>
-<td>Quote ID</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>status</td>
-<td>Transfer current status.</td>
-<td><code>incoming_payment_waiting</code></br><code>incoming_payment_initiated</code></br><code>waiting_recipient_input_to_proceed</code></br><code>processing</code></br><code>funds_converted</code></br><code>outgoing_payment_sent</code></br><code>charged_back</code></br><code>cancelled</code></br><code>cancelled_refund_processing</code></br><code>funds_refunded</code></br><code>bounced_back</code></td>
-</tr>
-<tr>
-<td>reference</td>
-<td>End to end reference text. Deprecated. Use details.reference field.</td>
+<td>type</td>
+<td>Profile type</td>
 <td>Text</td>
 </tr>
 <tr>
-<td>rate</td>
-<td>Exchange rate used for transfer.</td>
-<td>Decimal</td>
-</tr>
-<tr>
-<td>created</td>
-<td>Timestamp when transfer was created.</td>
-<td>yyyy-mm-dd hh:mm:ss</td>
-</tr>
-<tr>
-<td>business</td>
-<td>User porfile id - only in case of businesses. Deprecated.</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>transferRequest</td>
-<td>Link to &#39;Request money&#39; transfer ID. Deprecated.</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>details.reference</td>
-<td>End to end reference text.</td>
-<td></td>
-</tr>
-<tr>
-<td>hasActiveIssues</td>
-<td>Are there any pending issues which stop executing the transfer.</td>
-<td>Boolean</td>
-</tr>
-<tr>
-<td>sourceValue</td>
-<td>Transfer amount in source currency.</td>
-<td>Decimal</td>
-</tr>
-<tr>
-<td>sourceCurrency</td>
-<td>Source currency code of the transfer.</td>
+<td>details.firstName</td>
+<td>Person first name</td>
 <td>Text</td>
 </tr>
 <tr>
-<td>targetValue</td>
-<td>Transfer amount in target currency.</td>
-<td>Decimal</td>
-</tr>
-<tr>
-<td>targetCurrency</td>
-<td>Target currency code of the transfer.</td>
+<td>details.lastName</td>
+<td>Person last name</td>
 <td>Text</td>
 </tr>
 <tr>
-<td>customerTransactionId</td>
-<td>UUID format unique identifier assinged by customer. Used for idempotency check purposes.</td>
-<td>UUID</td>
+<td>details.dateOfBirth</td>
+<td>Date of birth</td>
+<td>&quot;yyyy-mm-dd&quot;</td>
+</tr>
+<tr>
+<td>details.phoneNumber</td>
+<td>Phone number</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.avatar</td>
+<td>Link to avatar image</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.occupation</td>
+<td>Occupation</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.primaryAddress</td>
+<td>Address object id</td>
+<td>Integer</td>
 </tr>
 </tbody></table>
-<h1 id='other-stuff'>Other Stuff</h1><h2 id='changelog'>Changelog</h2><h3 id='released-changes'>Released Changes</h3>
+
+<p>Business Profile Fields</p>
+
 <table><thead>
 <tr>
-<th><strong>Date</strong></th>
-<th><strong>Description</strong></th>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>16/05/2018</td>
-<td>GET /v1/borderless-accounts/{borderlessAccountId}/statement.json <br/> New borderless account statement endpoint launched. This includes a lot of extra information useful for reconciliation purposes.</td>
+<td>id</td>
+<td>Business profile id</td>
+<td>Integer</td>
 </tr>
 <tr>
-<td>16/04/2018</td>
-<td>Transfer status simulation endpoints in sandbox added. <br/><li>GET /v1/simulation/transfers/{transferId}/processing<li>GET /v1/simulation/transfers/{transferId}/funds_converted<li>GET /v1/simulation/transfers/{transferId}/outgoing_payment_sent<li>GET /v1/simulation/transfers/{transferId}/bounced_back<li>GET /v1/simulation/transfers/{transferId}/funds_refunded</td>
+<td>type</td>
+<td>Profile type</td>
+<td>Text</td>
 </tr>
 <tr>
-<td>25/10/2017</td>
-<td>POST /v1/accounts has now dateOfBirth field. This field is optional  but sending this will eliminate false positives during compliance checks.</td>
+<td>details.name</td>
+<td>Business name</td>
+<td>Text</td>
 </tr>
 <tr>
-<td>11/10/2017</td>
-<td>GET /v1/transfers/{transferId} has now additional fields: sourceValue, sourceCurrency, targetValue, targetCurrency.</td>
+<td>details.registrationNumber</td>
+<td>Business registration number</td>
+<td>Text</td>
 </tr>
 <tr>
-<td>10/10/2017</td>
-<td>GET /v1/transfers supports additional query parameters: profile, createdDateStart, createdDateEnd and status.</td>
+<td>details.acn</td>
+<td>ACN (only applicable for Australian business)</td>
+<td>&quot;yyyy-mm-dd&quot;</td>
+</tr>
+<tr>
+<td>details.abn</td>
+<td>ABN (only applicable for Australian business)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.arbn</td>
+<td>ARBN (only applicable for Australian business)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.companyType</td>
+<td>Company legal type</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.companyRole</td>
+<td>Person&#39;s role in the company</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.descriptionOfBusiness</td>
+<td>Business description</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.primaryAddress</td>
+<td>Address object id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>details.webpage</td>
+<td>Webpage URL</td>
+<td>Text</td>
 </tr>
 </tbody></table>
-<h2 id='webhooks'>Webhooks</h2>
-<p>Deliverying you notifications about transfer status changes.
-We dont have these yet.  Working on it ...</p>
+<h2 id='create-quote'>Create quote</h2>
+<p>V2 version of quote !?</p>
+<h2 id='create-recipient'>Create recipient</h2><h3 id='send-payments-to-email-recipients'>Send payments to email recipients.</h3>
+<p>TransferWise will email your recipient and collect their bank account details to complete your payment.
+This way all you need to know is recipient name and email address to send funds.</p>
+<h2 id='create-transfer'>Create transfer</h2><h2 id='fund-transfer'>Fund transfer</h2><h2 id='get-transfer-delivery-time'>Get transfer delivery time</h2><h2 id='get-transfer-status'>Get transfer status</h2><h2 id='check-account-balance'>Check account balance</h2><h2 id='download-account-statement'>Download account statement</h2><h2 id='go-live'>Go Live</h2><h1 id='recipients-api'>Recipients API</h1><h2 id='create-aed-recipient'>Create AED recipient</h2>
+<blockquote>
+<p>Example Request (AED):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"AED"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"emirates"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"AE070331234567890123456"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to United Arab Emirates. </p>
 
-<p>Request feature !!!
-Give feedback on the API !</p>
+<p>Private and business recipients are supported. </p>
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+<p>Recipient type = <em>&#39;emirates&#39;</em></p>
 
+<p>Required details: IBAN</p>
+<h2 id='create-ars-recipient'>Create ARS recipient</h2>
+<blockquote>
+<p>Example Request (ARS):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"ARS"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"argentina"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"taxId"</span>: <span class="s2">"20-34149938-1"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"0110482420048200036238"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Argentina. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;argentina&#39;</em></p>
+
+<p>Required details: taxId, accountNumber</p>
+<h2 id='create-aud-recipient'>Create AUD recipient</h2>
+<blockquote>
+<p>Example Request (AUD):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"AUD"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"australian"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bsbCode"</span>: <span class="s2">"023604"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"123456789"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Australia. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;australia&#39;</em></p>
+
+<p>Required details: bsbCode, accountNumber</p>
+<h2 id='create-bdt-recipient'>Create BDT recipient</h2>
+<blockquote>
+<p>Example Request (BDT):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"BDT"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"bangladesh"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"015"</span>,
+       <span class="s2">"branchCode"</span>: <span class="s2">"015270362"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"5060011118"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
 <aside class="warning">
-Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.
+We only support private customers sending payments to private recipients. Businesses customers are not supported yet.
 </aside>
+
+<p>Send payments to Bangladesh. </p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: bankCode, branchCode, accountNumber</p>
+
+<p>You can get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-bgn-recipient'>Create BGN recipient</h2>
+<blockquote>
+<p>Example Request (BGN):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"BGN"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"BG89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Bulgaria. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-brl-recipient'>Create BRL recipient</h2>
+<blockquote>
+<p>Example Request (BRL):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"BRL"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"brazil"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"218"</span>,
+       <span class="s2">"branchCode"</span>: <span class="s2">"1234"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"12345678-9"</span>,
+       <span class="s2">"accountType"</span>: <span class="s2">"CHECKING"</span>,
+       <span class="s2">"cpf"</span>: <span class="s2">"123.456.789-12"</span>,
+       <span class="s2">"phoneNumber"</span>: <span class="s2">"+55 21 5555 5555"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Brazil. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;brazil&#39;</em></p>
+
+<p>Required details: bankCode, branchCode, accountNumber, accountType (CHECKING or SAVINGS), cpf (tax reg no), recipient phone number</p>
+
+<p>You can get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-cad-recipient'>Create CAD recipient</h2>
+<blockquote>
+<p>Example Request (CAD):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"CAD"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"canadian"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"institutionNumber"</span>: <span class="s2">"006"</span>,
+       <span class="s2">"transitNumber"</span>: <span class="s2">"04841"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"1234567"</span>,
+       <span class="s2">"accountType"</span>: <span class="s2">"Checking"</span>,
+
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Canada. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;canadian&#39;</em></p>
+
+<p>Required details: institutionNumber, transitNumber, accountNumber, accountType (Checking or Saving)</p>
+
+<p>You can get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-chf-recipient'>Create CHF recipient</h2>
+<blockquote>
+<p>Example Request (CHF):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"CHF"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"CH89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Switzerland. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-clp-recipient'>Create CLP recipient</h2>
+<blockquote>
+<p>Example Request (CLP):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"CLP"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"chile"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"504"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"12345678901234567890"</span>,
+       <span class="s2">"rut"</span>: <span class="s2">"760864285"</span>,
+       <span class="s2">"accountType"</span>: <span class="s2">"CHECKING"</span>,
+       <span class="s2">"phoneNumber"</span>: <span class="s2">"+56 33 555 5555"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Chile. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;chile&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber, rut (Rol Único Tributario), accountType (CHECKING, SAVINGS, CUENTA_VISTA), recipient phone number</p>
+<h2 id='create-cny-recipient'>Create CNY recipient</h2>
+<blockquote>
+<p>Example Request (CNY):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"CNY"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"chinese_card"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"cardNumber"</span>: <span class="s2">"6240008631401148"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to China Unionpay cardholder. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;chinese_card&#39;</em></p>
+
+<p>Required details: cardNumber</p>
+<h2 id='create-czk-recipient'>Create CZK recipient</h2>
+<blockquote>
+<p>Example Request (CZK Local):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"CZK"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"czech"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"prefix"</span>: <span class="s2">"000000"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"5060011118"</span>,
+       <span class="s2">"bankCode"</span>: <span class="s2">"5500"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Example Request (CZK IBAN):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"CZK"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"CZ89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Czech Republic. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;czech&#39;</em></p>
+
+<p>Required details: prefix, accountNumber, bankCode</p>
+
+<p><br/></p>
+
+<p>OR </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-dkk-recipient'>Create DKK recipient</h2>
+<blockquote>
+<p>Example Request (DKK):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"DKK"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"DK89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Denmark. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-egp-recipient'>Create EGP recipient</h2>
+<blockquote>
+<p>Example Request (EGP):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"EGP"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"egypt_local"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"ECBAEGCA"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"123456789"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Egypt. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;egypt_local&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber (Swift code)</p>
+
+<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-eur-recipient'>Create EUR recipient</h2>
+<blockquote>
+<p>Example Request (EUR):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"EUR"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"DE89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Eurozone countries: Austria, Belgium, Cyprus, Estonia, Finland, France, Germany, Greece, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Portugal, Slovakia, Slovenia, Spain.</p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-gbp-recipient'>Create GBP recipient</h2>
+<blockquote>
+<p>Example Request (GBP Sort Code):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"GBP"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"sort_code"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"sortCode"</span>: <span class="s2">"40-30-20"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"12345678"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Example Request (GBP IBAN):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"GBP"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"GB89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to United Kingdom. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;sort_code&#39;</em></p>
+
+<p>Required details: sortCode, accountNumber</p>
+
+<p><br/></p>
+
+<p>OR </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-gel-recipient'>Create GEL recipient</h2>
+<blockquote>
+<p>Example Request (GEL):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"GEL"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"GE89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Georgia.</p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-ghs-recipient'>Create GHS recipient</h2>
+<blockquote>
+<p>Example Request (GHS):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"GHS"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"ghana"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"030100"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"0011XXXXXXXXXX"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Ghana.</p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;ghana&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber</p>
+
+<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-hkd-recipient'>Create HKD recipient</h2>
+<blockquote>
+<p>Example Request (HKD):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"HKD"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"hongkong"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"307"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"005-231289-112"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Hong Kong.</p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;hongkong&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber</p>
+
+<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-hrk-recipient'>Create HRK recipient</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"HRK"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"HR89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Croatia.</p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-huf-recipient'>Create HUF recipient</h2>
+<blockquote>
+<p>Example Request (HUF Local):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"HUF"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"hungarian"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"accountNumber"</span>: <span class="s2">"12000000-12345678-00000000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Example Request (HUF IBAN):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"HUF"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"HU89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Hungary. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;hungarian&#39;</em></p>
+
+<p>Required details: accountNumber</p>
+
+<p><br/></p>
+
+<p>OR </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-idr-recipient'>Create IDR recipient</h2>
+<blockquote>
+<p>Example Request (IDR):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"IDR"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"indonesian"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"610306"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"6789112345678"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Indonesia.</p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;indonesian&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber</p>
+
+<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-ils-recipient'>Create ILS recipient</h2>
+<blockquote>
+<p>Example Request (ILS IBAN):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"ILS"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"israeli_local"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"IL620108000000099999999"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Example Request (ILS Local Bank Code):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"ILS"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"israeli_bank_code"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"054"</span>,
+       <span class="s2">"branchCode"</span>: <span class="s2">"001"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"123456789"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Israel. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;israeli_local&#39;</em></p>
+
+<p>Required details: IBAN</p>
+
+<p><br/></p>
+
+<p>OR </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;israeli_bank_code&#39;</em></p>
+
+<p>Required details: bankCode, branchCode, accountNumber</p>
+
+<p>You can get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-inr-recipient'>Create INR recipient</h2>
+<blockquote>
+<p>Example Request (INR):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"INR"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"indian"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"ifscCode"</span>: <span class="s2">"YESB0236041"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"678911234567891"</span>,
+
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to India.</p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;indian&#39;</em></p>
+
+<p>Required details: ifscCode, accountNumber</p>
+<h2 id='create-jpy-recipient'>Create JPY recipient</h2>
+<blockquote>
+<p>Example Request (JPY):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"JPY"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"japanese"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"6470"</span>,
+       <span class="s2">"branchCode"</span>: <span class="s2">"100"</span>,
+       <span class="s2">"accountType"</span>: <span class="s2">"CURRENT"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"1234567"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Japan.</p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;japanese&#39;</em></p>
+
+<p>Required details: bankCode, branchCode accountNumber, accountType (CURRENT, SAVINGS, CHECKING), </p>
+
+<p>You can get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-kes-recipient'>Create KES recipient</h2>
+<blockquote>
+<p>Example Request (KES Bank Account):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"KES"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"kenya_local"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"35"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"0023183991919"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Example Request (KES Mobile MPESA):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"KES"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"kenya_mobile"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"accountNumber"</span>: <span class="s2">"2547XXXXXXXX"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Kenya. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;kenya_local&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber</p>
+
+<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+
+<p><br/></p>
+
+<p>OR </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;kenya_mobile&#39;</em></p>
+
+<p>Required details: accountNumber - mobile number</p>
+<h2 id='create-lkr-recipient'>Create LKR recipient</h2>
+<blockquote>
+<p>Example Request (LKR):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"LKR"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"srilanka"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"7214"</span>,
+       <span class="s2">"branchCode"</span>: <span class="s2">"100"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"5060011118"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Sri Lanka. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;srilanka&#39;</em></p>
+
+<p>Required details: bankCode, branchCode, accountNumber</p>
+
+<p>You can get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-mad-recipient'>Create MAD recipient</h2>
+<blockquote>
+<p>Example Request (MAD):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"MAD"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"morocco"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"BCMAMAMC"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"123456789012345678901234"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Morocco. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;morocco&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber</p>
+
+<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-mxn-recipient'>Create MXN recipient</h2>
+<blockquote>
+<p>Example Request (MXN):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"MXN"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"mexican"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"clabe"</span>: <span class="s2">"032180000118359719"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Mexico. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;mexican&#39;</em></p>
+
+<p>Required details: clabe</p>
+<h2 id='create-myr-recipient'>Create MYR recipient</h2>
+<blockquote>
+<p>Example Request (MYR):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"MYR"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"malaysian"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"swiftCode"</span>: <span class="s2">"ABNAMYKL"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"159012938613"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Malaysia. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;malaysian&#39;</em></p>
+
+<p>Required details: swiftCode, accountNumber</p>
+
+<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-ngn-recipient'>Create NGN recipient</h2>
+<blockquote>
+<p>Example Request (NGN):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"NGN"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"nigeria"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"044"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"0584412903"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Nigeria. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;nigeria&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber</p>
+
+<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-nok-recipient'>Create NOK recipient</h2>
+<blockquote>
+<p>Example Request (NOK):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"NOK"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"DE89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Norway. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-npr-recipient'>Create NPR recipient</h2>
+<blockquote>
+<p>Example Request (NPR):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"NPR"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"nepal"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"977056"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"1234567890"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Nepal. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;nepal&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber</p>
+
+<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-nzd-recipient'>Create NZD recipient</h2>
+<blockquote>
+<p>Example Request (NZD):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"NZD"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"newzealand"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"accountNumber"</span>: <span class="s2">"03-1587-0050000-00"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to New Zealand. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;newzealand&#39;</em></p>
+
+<p>Required details: accountNumber</p>
+<h2 id='create-pen-recipient'>Create PEN recipient</h2>
+<blockquote>
+<p>Example Request (PEN):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"PEN"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"peru"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"BCON"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"12345678901234567890"</span>,
+       <span class="s2">"accountType"</span>: <span class="s2">"CHECKING"</span>,
+       <span class="s2">"idDocumentType"</span>: <span class="s2">"DNI"</span>,
+       <span class="s2">"idDocumentNumber"</span>: <span class="s2">"09740475"</span>,
+       <span class="s2">"phoneNumber"</span>: <span class="s2">"+51 987654321"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Peru. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;peru&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber, accountType (CHECKING, SAVINGS), ID document type (DNI, RUC, C_EXT, PASSP), ID document number, recipient phone number</p>
+
+<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-php-recipient'>Create PHP recipient</h2>
+<blockquote>
+<p>Example Request (PHP):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"PHP"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"philippines"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"AMA"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"0044XXXXXXXX"</span>,
+       <span class="s2">"address"</span> : <span class="o">{</span>
+          <span class="s2">"country"</span>: <span class="s2">"GB"</span>,
+          <span class="s2">"city"</span>: <span class="s2">"London"</span>,
+          <span class="s2">"postCode"</span>: <span class="s2">"10025"</span>,
+          <span class="s2">"firstLine"</span>: <span class="s2">"50 Branson Ave"</span>
+       <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Philippines. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;philippines&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber, recipient address</p>
+
+<p>You can get list of bank and country codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-pkr-recipient'>Create PKR recipient</h2>
+<blockquote>
+<p>Example Request (PKR):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"PKR"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"PK89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Pakistan. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-pln-recipient'>Create PLN recipient</h2>
+<blockquote>
+<p>Example Request (PLN IBAN):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"PLN"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"PL89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Example Request (PLN Local):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"PLN"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"polish"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"accountNumber"</span>: <span class="s2">"109010140000071219812874"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Poland. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+
+<p><br/></p>
+
+<p>OR </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;polish&#39;</em></p>
+
+<p>Required details: accountNumber</p>
+<h2 id='create-ron-recipient'>Create RON recipient</h2>
+<blockquote>
+<p>Example Request (RON):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"RON"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"RO89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Romania. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-rub-recipient'>Create RUB recipient</h2>
+<blockquote>
+<p>Example Request (RUB):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"RUB"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"russiarapida"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+     <span class="s2">"bankCode"</span>: <span class="s2">"041234567"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"40820810999999999999"</span>,
+       <span class="s2">"russiaRegion"</span>: <span class="s2">"ALTAIKRAI"</span>,
+       <span class="s2">"address"</span> : <span class="o">{</span>
+          <span class="s2">"country"</span>: <span class="s2">"GB"</span>,
+          <span class="s2">"city"</span>: <span class="s2">"London"</span>,
+          <span class="s2">"postCode"</span>: <span class="s2">"10025"</span>,
+          <span class="s2">"firstLine"</span>: <span class="s2">"50 Branson Ave"</span>
+       <span class="o">}</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Russia. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;russiarapida&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber, region, recipient address</p>
+
+<p>You can get list of bank, region and country codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-sek-recipient'>Create SEK recipient</h2>
+<blockquote>
+<p>Example Request (SEK IBAN):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"SEK"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"SE89370400440532013000"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Example Request (SEK Local):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"SEK"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"sweden_local"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"clearingNumber"</span>: <span class="s2">"1234"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"1234567"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<blockquote>
+<p>Example Request (SEK BankGiro):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"SEK"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"bankgiro"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankgiroNumber"</span>: <span class="s2">"1234-5678"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Sweden. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;iban&#39;</em></p>
+
+<p>Required details: IBAN</p>
+
+<p><br/></p>
+
+<p>OR </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;sweden_local&#39;</em></p>
+
+<p>Required details: clearingNumber, accountNumber</p>
+
+<p><br/></p>
+
+<p>OR </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;bankgiro&#39;</em></p>
+
+<p>Required details: bankgiroNumber</p>
+<h2 id='create-sgd-recipient'>Create SGD recipient</h2>
+<blockquote>
+<p>Example Request (SGD):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"SGD"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"singapore"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"7418"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"1238827822"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Singapore. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;singapore&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber</p>
+
+<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-thb-recipient'>Create THB recipient</h2>
+<blockquote>
+<p>Example Request (THB):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"THB"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"thailand"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"bankCode"</span>: <span class="s2">"002"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"9517384260"</span>
+       <span class="s2">"address"</span> : <span class="o">{</span>
+          <span class="s2">"country"</span>: <span class="s2">"GB"</span>,
+          <span class="s2">"city"</span>: <span class="s2">"London"</span>,
+          <span class="s2">"postCode"</span>: <span class="s2">"10025"</span>,
+          <span class="s2">"firstLine"</span>: <span class="s2">"50 Branson Ave"</span>
+       <span class="o">}</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Thailand. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;thailand&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber</p>
+
+<p>You can get list of bank and country codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-try-recipient'>Create TRY recipient</h2>
+<blockquote>
+<p>Example Request (TRY):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"TRY"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"turkish_earthport"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"IBAN"</span>: <span class="s2">"TR330006100519786457841326"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Turkey. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;turkish_earthport&#39;</em></p>
+
+<p>Required details: IBAN</p>
+<h2 id='create-uah-recipient'>Create UAH recipient</h2>
+<blockquote>
+<p>Example Request (UAH):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"UAH"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"privatbank"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"phoneNumber"</span>: <span class="s2">"777210012"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"2662"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Ukraine. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;privatbank&#39;</em></p>
+
+<p>Required details: </p>
+
+<ul>
+<li>phoneNumber   = Use phone number registered in Privat Bank</li>
+<li>accountNumber = Last 4 digits of UAH PrivatBank card</li>
+</ul>
+<h2 id='create-usd-recipient'>Create USD recipient</h2>
+<blockquote>
+<p>Example Request (USD):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"USD"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"aba"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"abartn"</span>: <span class="s2">"111000025"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"12345678"</span>,
+       <span class="s2">"accountType"</span>: <span class="s2">"CHECKING"</span>,
+       <span class="s2">"address"</span> : <span class="o">{</span>
+          <span class="s2">"country"</span>: <span class="s2">"GB"</span>,
+          <span class="s2">"city"</span>: <span class="s2">"London"</span>,
+          <span class="s2">"postCode"</span>: <span class="s2">"10025"</span>,
+          <span class="s2">"firstLine"</span>: <span class="s2">"50 Branson Ave"</span>
+       <span class="o">}</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to USA. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;aba&#39;</em></p>
+
+<p>Required details: </p>
+
+<ul>
+<li>abartn        = ACH Routing number</li>
+<li>accountNumber = Recipient bank account number</li>
+<li>accountType   = CHECKING or SAVINGS</li>
+<li>address       = Recipient address</li>
+</ul>
+<h2 id='create-vnd-recipient'>Create VND recipient</h2>
+<blockquote>
+<p>Example Request (VND):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"VND"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"vietname_earthport"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"swiftCode"</span>: <span class="s2">"ABBKVNVX"</span>,
+       <span class="s2">"branchCode"</span>: <span class="s2">"001"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"1234567890"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to Vietnam. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;vietname_earthport&#39;</em></p>
+
+<p>Required details: swiftCode, branchCode, accountNumber</p>
+
+<p>You can get list of bank  and branc codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<h2 id='create-zar-recipient'>Create ZAR recipient</h2>
+<blockquote>
+<p>Example Request (ZAR):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<span class="o">{</span>
+    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
+    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
+    <span class="s2">"currency"</span>: <span class="s2">"ZAR"</span>,
+    <span class="s2">"type"</span>: <span class="s2">"southafrica"</span>,
+    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
+    <span class="s2">"details"</span>: <span class="o">{</span>
+       <span class="s2">"swiftCode"</span>: <span class="s2">"ALBRZAJJ"</span>,
+       <span class="s2">"accountNumber"</span>: <span class="s2">"0000000052312891"</span>
+     <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre>
+<p>Send payments to South African Republic. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p>Recipient type = <em>&#39;southafrica&#39;</em></p>
+
+<p>Required details: swiftCode, accountNumber</p>
+
+<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 
       </div>
       <div class="dark-box">
