@@ -255,7 +255,7 @@
                     <a href="#download-account-statement" class="toc-h2 toc-link" data-title="Download account statement">Download account statement</a>
                   </li>
                   <li>
-                    <a href="#go-live" class="toc-h2 toc-link" data-title="Go Live">Go Live</a>
+                    <a href="#going-live-checklist" class="toc-h2 toc-link" data-title="Going Live checklist">Going Live checklist</a>
                   </li>
               </ul>
           </li>
@@ -410,12 +410,15 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='payouts-api'>Payouts API</h1><h2 id='before-you-start-coding'>Before you start coding</h2><h3 id='1-learn-about-transferwise-borderless-account'>1. Learn about TransferWise borderless account.</h3>
+        <h1 id='payouts-api'>Payouts API</h1><h2 id='before-you-start-coding'>Before you start coding</h2>
+<p>Welcome to TransferWise Payouts API documentation. 
+Before you jump into coding please take few moments to go through these 3 topics at first.</p>
+<h3 id='1-learn-about-transferwise-borderless-account'>1. Learn about TransferWise borderless account.</h3>
 <p>Borderless account features and pricing are best explained below.</p>
 
 <p><a href="https://transferwise.com/gb/borderless/pricing">https://transferwise.com/gb/borderless/pricing</a></p>
 <h3 id='2-signup-for-transferwise-borderless-account'>2. Signup for TransferWise borderless account</h3>
-<p>Get hands-on experience before you start with API integration as it will help you understand how our payment flow works. 
+<p>Get hands-on experience as it will help you understand how our payment flow works. 
 Just follow these three simple steps. </p>
 
 <ul>
@@ -424,7 +427,7 @@ Just follow these three simple steps. </p>
 <li><p>Verify that our coverage includes your currency route(s).</p></li>
 </ul>
 <h3 id='3-choose-the-best-tool-for-you'>3. Choose the best tool for you</h3>
-<p>There are two ways you can execute large number of payouts:</p>
+<p>There are two ways you can make large number of payouts:</p>
 
 <ul>
 <li><p><em>Batch payments.</em> Prepare CSV file and upload this using our Batch Payments tool: <a href="https://transferwise.com/batch">https://transferwise.com/batch</a></p></li>
@@ -1330,11 +1333,11 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/transfers/<span class="o">{
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
-<p>You can check transfer latest status by polling this endpoint. We are building webhook notification support to notify about status changes, but unfortunately this is not available yet.</p>
-<h3 id='state-flow-of-transfers'>State flow of transfers:</h3>
+<p>You can check transfer latest status by polling this endpoint. We are building webhook notification support to notify about status changes, but unfortunately this is not available yet. Normal state flow of transfers: </p>
+
 <p><strong>Incoming Payment Waiting ⇒ Processing ⇒ Funds Converted ⇒ Outgoing Payment Sent</strong></p>
 
-<p>Outgoing Payment Sent is the final state of happy flow. Should the payment fail then the problematic flow continues. For example, if recipient bank account does not exist and payment is returned.</p>
+<p>Outgoing Payment Sent is the final state of normal flow. Should the payment fail then the problematic flow continues. For example, if recipient bank account does not exist and payment is returned. Problematic state flow of transfers: </p>
 
 <p><strong>Outgoing Payment Sent ⇒ Bounced Back ⇒ Funds Refunded</strong></p>
 
@@ -1355,7 +1358,639 @@ Payment systems in different countries operate in different speeds and frequency
 <li><p><strong>funds_refunded</strong> — Transfer has been refunded. Final state of transfer.</p></li>
 <li><p><strong>bounced_back</strong> — Transfer has bounced back but has not been cancelled nor refunded yet.</p></li>
 </ul>
-<h2 id='check-account-balance'>Check account balance</h2><h2 id='download-account-statement'>Download account statement</h2><h2 id='go-live'>Go Live</h2><h1 id='recipients-api'>Recipients API</h1><h2 id='create-aed-recipient'>Create AED recipient</h2>
+<h2 id='check-account-balance'>Check account balance</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X GET https://api.sandbox.transferwise.tech/v1/borderless-accounts?profileId<span class="o">={</span>profileId<span class="o">}</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileId"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recipientId"</span><span class="p">:</span><span class="w"> </span><span class="mi">13828530</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"creationTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-14T12:31:15.678Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"modificationTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-19T15:19:42.111Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"balances"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"balanceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AVAILABLE"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">10999859</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"reservedAmount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"bankDetails"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"balanceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AVAILABLE"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">9945236.2</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"reservedAmount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"bankDetails"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Get available balances for all activated currencies in your borderless account.</p>
+<h3 id='request-7'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/borderless-accounts?profileId={profileId}</code></strong></p>
+
+<p>Use profile id obtained earlier to make this call. </p>
+<h3 id='response-7'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Borderless account id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>profileId</td>
+<td>Personal or business profile id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>recipientId</td>
+<td>Recipient id you can use for borderless topup payment order</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>creationTime</td>
+<td>Date when balance account was opened</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>modificationTime</td>
+<td>Date when balance account setup was modified.</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>active</td>
+<td>Is borderless account active or inactive</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>eligible</td>
+<td>Ignore</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>balances[n].balanceType</td>
+<td>AVAILABLE</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>balances[n].currency</td>
+<td>Currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>balances[n].amount.value</td>
+<td>Available balance in specified currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>balances[n].amount.currency</td>
+<td>Currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>balances[n].reservedAmount.value</td>
+<td>Reserved amount from your balance</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>balances[n].reservedAmount.currency</td>
+<td>Reserved amount currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>balances[n].bankDetails</td>
+<td>Your borderless account bank details</td>
+<td>Group</td>
+</tr>
+</tbody></table>
+<h2 id='download-account-statement'>Download account statement</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X GET https://api.sandbox.transferwise.tech/v1/borderless-accounts/<span class="o">{</span>borderlessAccountId<span class="o">}</span>/statement.json?
+<span class="nv">currency</span><span class="o">=</span>EUR&amp;intervalStart<span class="o">=</span>2018-03-01T00:00:00.000Z&amp;intervalEnd<span class="o">=</span>2018-03-15T23:59:59.999Z <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"accountHolder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PERSONAL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"addressFirstLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Veerenni 24"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tallinn"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12112"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"stateCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"countryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Estonia"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oliver"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wilson"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"issuer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TransferWise Ltd."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"firstLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56 Shoreditch High Street"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E1 6JJ"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"stateCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Kingdom"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"bankDetails"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEBIT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-30T08:47:05.832Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">-7.76</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"totalFees"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.04</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CARD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Card transaction of 6.80 GBP issued by Tfl.gov.uk/cp TFL TRAVEL CH"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">6.8</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transportation Suburban and Loca"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tfl.gov.uk/cp"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"firstLine"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SW1H 0TL  "</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TFL TRAVEL CH"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"   "</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transportation Suburban and Loca"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"exchangeDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"forAmount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">6.8</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"runningBalance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">16.01</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"referenceNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CARD-249281"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CREDIT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-17T07:47:00.227Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"totalFees"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPOSIT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Received money from HEIN LAURI with reference SVWZ+topup card"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"senderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEIN LAURI"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"senderAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EE76 1700 0170 0049 6704 "</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"paymentReference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SVWZ+topup card"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"exchangeDetails"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"runningBalance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">207.69</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"referenceNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRANSFER-34188888"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CREDIT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-10T05:58:34.681Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.94</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"totalFees"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONVERSION"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Converted 8.69 GBP to 9.94 EUR"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"sourceAmount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">8.69</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"targetAmount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.94</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.147806</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"exchangeDetails"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"runningBalance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.94</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"referenceNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONVERSION-1511237"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"endOfStatementBalance"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.94</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"intervalStart"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-01T00:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"intervalEnd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-30T23:59:59.999Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Get borderless account statement for one currency and for specified time range. 
+The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
+<h3 id='request-8'>Request</h3>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/borderless-accounts/{borderlessAccountId}/statement.json?</code></strong></p>
+
+<p><strong><code>currency=EUR&amp;intervalStart=2018-03-01T00:00:00.000Z&amp;intervalEnd=2018-03-15T23:59:59.999Z</code></strong></p>
+
+<p>All query parameters are mandatory.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>borderlessAccountId</td>
+<td>You can obtain your borderless account id from previous &quot;Check account balance&quot; response.</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>Currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>intervalStart</td>
+<td>Statement start time in UTC time</td>
+<td>Zulu time. Don&#39;t forget the &#39;Z&#39; at the end.</td>
+</tr>
+<tr>
+<td>intervalEnd</td>
+<td>Statement start time in UTC time</td>
+<td>Zulu time. Don&#39;t forget the &#39;Z&#39; at the end.</td>
+</tr>
+</tbody></table>
+
+<p>Note that you can also download statements in PDF and CSV formats if you replace statement.json with statement.csv or statement.pdf respectively in the above URL.</p>
+<h3 id='response-8'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>accountHolder.type</td>
+<td>Account holder type: PERSONAL or BUSINESS</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>accountHolder.address.addressFirstLine</td>
+<td>Account holder address street</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>accountHolder.address.city</td>
+<td>Account holder address city</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>accountHolder.address.postCode</td>
+<td>Account holder address zipc ode</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>accountHolder.address.stateCode</td>
+<td>Account holder address state</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>accountHolder.address.countryName</td>
+<td>Account holder address country</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>accountHolder.firstName</td>
+<td>Account holder first name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>accountHolder.lastName</td>
+<td>Account holder last name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>issuer.name</td>
+<td>Account issuer name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>issuer.firstLine</td>
+<td>Account issuer address street</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>issuer.city</td>
+<td>Account issuer address city</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>issuer.postCode</td>
+<td>Account issuer address zip code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>issuer.stateCode</td>
+<td>Account issuer address state</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>issuer.country</td>
+<td>Account issuer address country</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>bankDetails</td>
+<td>Your borderless account bank details</td>
+<td>Group</td>
+</tr>
+<tr>
+<td>transactions[n].type</td>
+<td>DEBIT or CREDIT</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].date</td>
+<td>Time of transaction</td>
+<td>Zulu time</td>
+</tr>
+<tr>
+<td>transactions[n].amount.value</td>
+<td>Transaction amount</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>transactions[n].amount.currency</td>
+<td>Transaction currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].totalFees.value</td>
+<td>Transaction fee amount</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>transactions[n].totalFees.currency</td>
+<td>Transaction fee currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.type</td>
+<td>CARD, CONVERSION, DEPOSIT, TRANSFER, MONEY_ADDED</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.description</td>
+<td>Human readable explanation about the transaction</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.amount.value</td>
+<td>Amount in original currency (card transactions abroad)</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>transactions[n].details.amount.currency</td>
+<td>Original currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.sourceAmount.value</td>
+<td>Amount in source currency (conversions)</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>transactions[n].details.sourceAmount.currency</td>
+<td>Source currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.targetAmount.value</td>
+<td>Amount in target currency (conversions)</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>transactions[n].details.targetAmount.currency</td>
+<td>Target currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.fee.value</td>
+<td>Conversion fee amount</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>transactions[n].details.fee.currency</td>
+<td>Conversion fee currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.rate</td>
+<td>Conversion exchange rate</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>transactions[n].details.senderName</td>
+<td>Deposit sender name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.senderAccount</td>
+<td>Deposit sender bank account details</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.paymentReference</td>
+<td>Deposit payment reference text</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.category</td>
+<td>Card transaction category</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.merchant.name</td>
+<td>Card transaction merchant name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.merchant.firstLine</td>
+<td>Merchant address street</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.merchant.postCode</td>
+<td>Merchant address zipcode</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.merchant.city</td>
+<td>Merchant address city</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.merchant.state</td>
+<td>Merchant address state</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.merchant.country</td>
+<td>Merchant address country</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].details.merchant.category</td>
+<td>Merchant category</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].exchangeDetails.forAmount.value</td>
+<td>Currency exchange amount</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>transactions[n].exchangeDetails.forAmount.currency</td>
+<td>Currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].exchangeDetails.rate</td>
+<td>Exchange rate</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>transactions[n].runningBalance.value</td>
+<td>Running balance after the transaction</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>transactions[n].runningBalance.currency</td>
+<td>Running balance currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>transactions[n].referenceNumber</td>
+<td>TransferWise assigned unique transaction reference number</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>endOfStatementBalance.value</td>
+<td>Closing balance for specified time period</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>endOfStatementBalance.currency</td>
+<td>Closing balance currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>query.intervalStart</td>
+<td>Query parameter repeated</td>
+<td>Zulu time</td>
+</tr>
+<tr>
+<td>query.intervalEnd</td>
+<td>Query parameter repeated</td>
+<td>Zulu time</td>
+</tr>
+<tr>
+<td>query.currency</td>
+<td>Query parameter repeated</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>query.accountId</td>
+<td>Query parameter repeated</td>
+<td>Integer</td>
+</tr>
+</tbody></table>
+<h2 id='going-live-checklist'>Going Live checklist</h2><h3 id='1-make-your-integration-bulletproof'>1. Make your integration bulletproof</h3>
+<ul>
+<li><p>Implement basic retry mechanism to handle potential failures or network interruptions </p></li>
+<li><p>Implement duplicate prevention mechanism to avoid duplicate payments. Verify that UUID is uniquely generated for each individual payment and its value is kept same in case of retrying.</p></li>
+<li><p>Implement basic logging to help out in debugging and problem solving, if needed.</p></li>
+<li><p>Check that your  can handle all possible transfer states during polling of transfer info.</p></li>
+<li><p>Automatically check available balance before submitting requests to fund your transfers. This avoids rejections due to insufficient balance.</p></li>
+<li><p>Verify that your borderless account statement provides you all information you need for financial accounting.</p></li>
+</ul>
+<h3 id='2-open-live-account'>2. Open LIVE account</h3>
+<ul>
+<li>Sign up for Transferwise borderless account and go through on-boarding flow including 2FA setup.</li>
+</ul>
+<h3 id='3-setup-security-for-live-environment'>3. Setup Security for LIVE environment</h3>
+<ul>
+<li><p>Obtain your live API token from Settings page. </p></li>
+<li><p>Store your live API token securely in your production servers so that only authorized persons have access to it. </p></li>
+</ul>
+<h3 id='4-do-penny-testing-in-live'>4. Do penny testing in LIVE</h3>
+<ul>
+<li>Make a small deposit to your borderless account. </li>
+<li>Make few small value test payments via LIVE API before you start executing large number of transfers.</li>
+<li>All set. Switch it on.</li>
+</ul>
+<h1 id='recipients-api'>Recipients API</h1><h2 id='create-aed-recipient'>Create AED recipient</h2>
 <blockquote>
 <p>Example Request (AED):</p>
 </blockquote>
