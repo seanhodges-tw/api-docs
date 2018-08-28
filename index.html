@@ -222,19 +222,19 @@
             <a href="#payouts-api" class="toc-h1 toc-link" data-title="Payouts API">Payouts API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#before-you-start" class="toc-h2 toc-link" data-title="Before you start">Before you start</a>
+                    <a href="#before-you-start-coding" class="toc-h2 toc-link" data-title="Before you start coding">Before you start coding</a>
                   </li>
                   <li>
                     <a href="#api-access" class="toc-h2 toc-link" data-title="API access">API access</a>
                   </li>
                   <li>
-                    <a href="#find-your-profile-id" class="toc-h2 toc-link" data-title="Find your profile id">Find your profile id</a>
+                    <a href="#get-your-profile-id" class="toc-h2 toc-link" data-title="Get your profile id">Get your profile id</a>
                   </li>
                   <li>
                     <a href="#create-quote" class="toc-h2 toc-link" data-title="Create quote">Create quote</a>
                   </li>
                   <li>
-                    <a href="#create-recipient" class="toc-h2 toc-link" data-title="Create recipient">Create recipient</a>
+                    <a href="#create-recipient-account" class="toc-h2 toc-link" data-title="Create recipient account">Create recipient account</a>
                   </li>
                   <li>
                     <a href="#create-transfer" class="toc-h2 toc-link" data-title="Create transfer">Create transfer</a>
@@ -246,7 +246,7 @@
                     <a href="#get-transfer-delivery-time" class="toc-h2 toc-link" data-title="Get transfer delivery time">Get transfer delivery time</a>
                   </li>
                   <li>
-                    <a href="#get-transfer-status" class="toc-h2 toc-link" data-title="Get transfer status">Get transfer status</a>
+                    <a href="#track-transfer-status" class="toc-h2 toc-link" data-title="Track transfer status">Track transfer status</a>
                   </li>
                   <li>
                     <a href="#check-account-balance" class="toc-h2 toc-link" data-title="Check account balance">Check account balance</a>
@@ -410,8 +410,8 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='payouts-api'>Payouts API</h1><h2 id='before-you-start'>Before you start</h2><h3 id='1-learn-about-transferwise-borderless-account'>1. Learn about TransferWise borderless account.</h3>
-<p>Borderless account features and pricing are best explained here</p>
+        <h1 id='payouts-api'>Payouts API</h1><h2 id='before-you-start-coding'>Before you start coding</h2><h3 id='1-learn-about-transferwise-borderless-account'>1. Learn about TransferWise borderless account.</h3>
+<p>Borderless account features and pricing are best explained below.</p>
 
 <p><a href="https://transferwise.com/gb/borderless/pricing">https://transferwise.com/gb/borderless/pricing</a></p>
 <h3 id='2-signup-for-transferwise-borderless-account'>2. Signup for TransferWise borderless account</h3>
@@ -430,14 +430,14 @@ Just follow these three simple steps. </p>
 <li><p><em>Batch payments.</em> Prepare CSV file and upload this using our Batch Payments tool: <a href="https://transferwise.com/batch">https://transferwise.com/batch</a></p></li>
 <li><p><em>API integration.</em> Automate your payment process fully by sending payment orders via TransferWise API. </p></li>
 </ul>
-<h2 id='api-access'>API access</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sandbox.transferwise.tech/v1/profiles"</span>
-  -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<h2 id='api-access'>API access</h2><pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/profiles <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
 </code></pre><h3 id='authentication'>Authentication</h3>
 <p>Signup for developer account to get API token for sandbox. <a href="https://sandbox.transferwise.tech/register">https://sandbox.transferwise.tech/register</a></p>
 
 <p>Your developer account will have some test money so you can start making payments in same way as in LIVE environment.  You will find your API tokens in the Settings page. </p>
 
-<p>Add token as header parameter to every API call like this:</p>
+<p>Add your API token as header parameter to every request like this:</p>
 
 <p><em>Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx</em></p>
 <h3 id='test-and-live-environments'>TEST and LIVE environments</h3>
@@ -445,12 +445,12 @@ Just follow these three simple steps. </p>
 <li>Sandbox API is located at https://api.sandbox.transferwise.tech</li>
 <li>LIVE API is located at https://api.transferwise.com</li>
 </ul>
-<h2 id='find-your-profile-id'>Find your profile id</h2>
+<h2 id='get-your-profile-id'>Get your profile id</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sandbox.transferwise.tech/v1/profiles"</span>
-  -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/profiles <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -491,9 +491,9 @@ Just follow these three simple steps. </p>
 
 </span></code></pre>
 <p>You only need to call this endpoint once to obtain your user profile id.
-Your personal and business profiles have different IDs. You would need to use appropriate profile.id value when submitting further calls. </p>
+Your personal and business profiles have different IDs.  Profile id values are required when making payouts. </p>
 <h3 id='request'>Request</h3>
-<p><code>GET https://api.sandbox.transferwise.tech/v1/profiles</code></p>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/profiles</code></strong></p>
 <h3 id='response'>Response</h3>
 <p>Personal Profile Fields</p>
 
@@ -583,7 +583,7 @@ Your personal and business profiles have different IDs. You would need to use ap
 <tr>
 <td>details.acn</td>
 <td>ACN (only applicable for Australian business)</td>
-<td>&quot;yyyy-mm-dd&quot;</td>
+<td>Text</td>
 </tr>
 <tr>
 <td>details.abn</td>
@@ -622,11 +622,740 @@ Your personal and business profiles have different IDs. You would need to use ap
 </tr>
 </tbody></table>
 <h2 id='create-quote'>Create quote</h2>
-<p>V2 version of quote !?</p>
-<h2 id='create-recipient'>Create recipient</h2><h3 id='send-payments-to-email-recipients'>Send payments to email recipients.</h3>
-<p>TransferWise will email your recipient and collect their bank account details to complete your payment.
-This way all you need to know is recipient name and email address to send funds.</p>
-<h2 id='create-transfer'>Create transfer</h2><h2 id='fund-transfer'>Fund transfer</h2><h2 id='get-transfer-delivery-time'>Get transfer delivery time</h2><h2 id='get-transfer-status'>Get transfer status</h2><h2 id='check-account-balance'>Check account balance</h2><h2 id='download-account-statement'>Download account statement</h2><h2 id='go-live'>Go Live</h2><h1 id='recipients-api'>Recipients API</h1><h2 id='create-aed-recipient'>Create AED recipient</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X POST https://api.sandbox.transferwise.tech/v1/quotes <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "source": "EUR",
+          "target": "GBP",
+          "rateType": "FIXED",
+          "targetAmount": 600,
+          "type": "BALANCE_PAYOUT"
+        }'</span>
+
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10451930</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">663.84</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">600.00</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BALANCE_PAYOUT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9073</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-27T14:35:44.553Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdByUserId"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FIXED"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"deliveryEstimate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-27T14:35:44.496Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.34</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"allowedProfileTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"PERSONAL"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"BUSINESS"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"guaranteedTargetAmount"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ofSourceAmount"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>There are four steps to execute payouts: </p>
+
+<p><strong>Step 1: Create a quote</strong></p>
+
+<p>Step 2: Create a recipient account</p>
+
+<p>Step 3: Create a transfer</p>
+
+<p>Step 4: Fund a transfer</p>
+
+<p><br/>
+Quote fetches current mid-market exchange rate that will be used for your transfer. Quote also calculates our fee and estimated delivery time. </p>
+<h3 id='request-2'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/quotes</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>profile</td>
+<td>Personal or business profile id</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Source(send) currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>target</td>
+<td>Target(receive) currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>rateType</td>
+<td>Always use constant &#39;FIXED&#39;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>targetAmount</td>
+<td>Amount in target currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>sourceAmount</td>
+<td>Amount in source currency. <br/>Either sourceAmount or targetAmount is required, never both.</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>type</td>
+<td>&#39;BALANCE_PAYOUT&#39; for payments <br/> &#39;BALANCE_CONVERSION&#39; for conversion between balances</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='response-2'>Response</h3>
+<p>Quote id is needed for creating transfers in step 3.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Quote id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Source(send) currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>target</td>
+<td>Target(receive) currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>sourceAmount</td>
+<td>Amount in source currency.</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>targetAmount</td>
+<td>Amount in target currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>type</td>
+<td>&#39;BALANCE_PAYOUT&#39; for payments <br/> &#39;BALANCE_CONVERSION&#39; for conversion between balances</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>Exchange rate value</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>createdTime</td>
+<td>Quote created timestamp</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>createdByUserId</td>
+<td>Your used id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>profile</td>
+<td>Personal or business profile id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>rateType</td>
+<td>Always &#39;FIXED&#39;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>deliveryEstimate</td>
+<td>Estimated timestamp when recipient would receive funds, assuming transfer will be created now.</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>fee</td>
+<td>TransferWise fee in source currency for this payment (deducted from source amount).</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>allowedProfileTypes</td>
+<td>PERSONAL, BUSINESS or both. Specifies which legal entities can use this quote. There are few currency routes are where we dont support business customers yet.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>guaranteedTargetAmount</td>
+<td>Not relevant for fixed rate quotes. Please ignore.</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>ofSourceAmount</td>
+<td>Not relevant for fixed rate quotes. Please ignore.</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+<h2 id='create-recipient-account'>Create recipient account</h2>
+<blockquote>
+<p>Example Request (Create GBP recipient):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X POST https://api.sandbox.transferwise.tech/v1/accounts <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "currency": "GBP", 
+          "type": "sort_code", 
+          "profile": &lt;your profile id&gt;, 
+          "accountHolderName": "Ann Johnson",
+          "legalType": "PRIVATE",
+           "details": { 
+              "sortCode": "231470", 
+              "accountNumber": "28821822" 
+           } 
+         }'</span>
+
+</code></pre>
+<blockquote>
+<p>Example Response (Create GBP recipient):</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">31273058</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"accountHolderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ann Johnson"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sort_code"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="w">
+    </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"28821822"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"sortCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"231470"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>There are four steps to execute payouts: </p>
+
+<p>Step 1: Create a quote</p>
+
+<p><strong>Step 2: Create a recipient account</strong></p>
+
+<p>Step 3: Create a transfer</p>
+
+<p>Step 4: Fund a transfer</p>
+
+<p><br/>
+Recipient is a person or institution  who is the ultimate beneficiary of your payment. </p>
+
+<p>Recipient bank account details are different for different currencies. For example you only need to know IBAN number to send payments to most European and Nordic countries. 
+But in order to send money to Canada you would need to know four fields: Institution No, Transit no, Account No &amp; Account Type.</p>
+
+<p>GBP example is provided here. You can find other currency examples in Recipient API section below.  </p>
+<h3 id='request-3'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/accounts</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>3 character currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Recipient type</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>profile</td>
+<td>Personal or business profile id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>accountHolderName</td>
+<td>Recipient full name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>legalType</td>
+<td>Recipient legal type: PRIVATE or BUSINESS</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details</td>
+<td>Currency specific group, see Recipients API</td>
+<td></td>
+</tr>
+<tr>
+<td>details.sortCode</td>
+<td>Recipient bank sort code (GBP example)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.accountNumber</td>
+<td>Recipient bank account no (GBP example)</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='response-3'>Response</h3>
+<p>Recipient id is needed for creating transfers in step 3.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Recipient id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>profile</td>
+<td>Personal or business profile id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>acccountHolderName</td>
+<td>Recipient full name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>2 character country code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>country</td>
+<td>3 character currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Recipient type</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details</td>
+<td>Currency specific group, see Recipients API</td>
+<td></td>
+</tr>
+<tr>
+<td>details.sortCode</td>
+<td>Recipient bank sort code (GBP example)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.accountNumber</td>
+<td>Recipient bank account no (GBP example)</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='send-money-to-email-recipient'>Send money to email recipient</h3>
+<p>If you don&#39;t know recipient bank account details you can set up <strong>email recipient</strong> so that TransferWise can collect bank details directly from the recipient. </p>
+
+<p>TransferWise will then email your recipient with a link to collect their bank account details. 
+Once recipient provides bank account details to us we are able to complete your transfer.</p>
+
+<p>So all you need to know is recipient name and email to send payment.
+See below under Recipient API how to create email recipients.</p>
+<h2 id='create-transfer'>Create transfer</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X POST https://api.sandbox.transferwise.tech/v1/transfers <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "targetAccount": &lt;recipient account id&gt;,   
+          "quote": &lt;quote id&gt;,
+          "customerTransactionId": "&lt;the UUID you generated for the transfer attempt&gt;",
+          "details" : {
+              "reference" : "to my friend"
+            } 
+         }'</span>
+
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">468956</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetAccount"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;recipient</span><span class="w"> </span><span class="err">account</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceAccount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"quote"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;quote</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incoming_payment_waiting"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"to my friend"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9065</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-28 07:43:55"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">business</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"transferRequest"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"to my friend"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"hasActiveIssues"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">661.89</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"customerTransactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bd244a95-dcf8-4c31-aac8-bf5e2f3e54c0"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>There are four steps to execute payouts: </p>
+
+<p>Step 1: Create a quote</p>
+
+<p>Step 2: Create a recipient account</p>
+
+<p><strong>Step 3: Create a transfer</strong></p>
+
+<p>Step 4: Fund a transfer</p>
+
+<p><br/>
+Transfer is a payout order which consists of quote and recipient account. You can also add reference text and you need to specify unique identifier to avoid creating duplicate transfers. 
+Once created then a transfer needs to be funded during next 5 working days. In case not it will get automatically cancelled.  </p>
+<h3 id='request-4'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/accounts</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>targetAccount</td>
+<td>Recipient account id. You can create multiple transfers to same recipient account.</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>quote</td>
+<td>Quote id. You can only create one transfer per one quote. <br/>You cannot use same quote ID to create multiple transfers.</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>customerTransactionId</td>
+<td>This is required to perform idempotency check to avoid duplicate transfers in case of network failures or timeouts.</td>
+<td>UUID</td>
+</tr>
+<tr>
+<td>details.reference (optional)</td>
+<td>Recipient will see this reference text in their bank statement. Maximum allowed characters depends on the currency route. <a href="https://transferwise.com/help/article/2348295/business/business-payment-tips">Business Payments Tips</a> article has a full list.</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='response-4'>Response</h3>
+<p>You need to save transfer id for tracking its status later.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Transfer id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>user</td>
+<td>Your user id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>targetAccount</td>
+<td>Recipient account id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>sourceAccount</td>
+<td>Not used</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>quote</td>
+<td>Quote id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Transfer current status</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>Deprecated, use details.reference instead</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>Exchange rate value</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>created</td>
+<td>Timestamp when transfer was created</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>business</td>
+<td>Your business profile id</td>
+<td></td>
+</tr>
+<tr>
+<td>transferRequest</td>
+<td>Not used</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>details.reference</td>
+<td>Payment reference text</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>hasActiveIssues</td>
+<td>Are there any pending issues which stop executing the transfer?</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>sourceCurrency</td>
+<td>Source currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>sourceValue</td>
+<td>Transfer amount in source currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>targetCurrency</td>
+<td>Target currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>targetValue</td>
+<td>Transfer amount in target currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>customerTransactionId</td>
+<td>UUID format unique identifier assinged by customer. Used for idempotency check purposes.</td>
+<td>UUID</td>
+</tr>
+</tbody></table>
+<h3 id='avoiding-duplicate-transfers'>Avoiding duplicate transfers</h3>
+<p>We use <strong>customerTransactionId</strong> field to avoid duplicate transfer requests. 
+When your first call fails (error or timeout) then you should use the same value in <strong>customerTransactionId</strong> field that you used in the original call when you are submitting a retry message. 
+This way we can treat subsequent retry messages as <strong>repeat messages</strong> and will not create duplicate transfers to your account. </p>
+<h2 id='fund-transfer'>Fund transfer</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X POST https://api.sandbox.transferwise.tech/v1/transfers/<span class="o">{</span>transferId<span class="o">}</span>/payments <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "type": "BALANCE"   
+         }'</span>
+
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BALANCE"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>There are four steps to execute payouts: </p>
+
+<p>Step 1: Create a quote</p>
+
+<p>Step 2: Create a recipient account</p>
+
+<p>Step 3: Create a transfer</p>
+
+<p><strong>Step 4: Fund a transfer</strong></p>
+
+<p><br/>
+This API call is the final step for executing payouts. TransferWise will now debit funds from your borderless balance and start processing your transfer. 
+If your borderless balance is short of funds then this call will fail with &quot;insufficient funds&quot; error.</p>
+<h3 id='request-5'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/transfers/{transferId}/payments</code></strong></p>
+
+<p>Use transfer id that you obtained in previous step. </p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>&quot;BALANCE&quot;.  <br/>This indicates that your transfer will be funded from your borderless account balance.</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='response-5'>Response</h3>
+<p>You need to save transfer id for tracking its status later.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>&quot;BALANCE&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>status</td>
+<td>&quot;COMPLETED&quot; or &quot;REJECTED&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>errorCode</td>
+<td>Failure reason. For example &quot;balance.payment-option-unavailable&quot;</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h2 id='get-transfer-delivery-time'>Get transfer delivery time</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X GET https://api.sandbox.transferwise.tech/v1/delivery-estimates/<span class="o">{</span>transferId<span class="o">}</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"estimatedDeliveryDate"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-10T12:15:00.000+0000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>Get the live delivery estimate for a transfer by the transfer ID. 
+The delivery estimate is the time at which we currently expect the transfer to arrive in the benificiary&#39;s bank account. 
+This is not a guaranteed time but we are working hard to make these estimates as accurate as possible.</p>
+<h3 id='request-6'>Request</h3>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/delivery-estimates/{transferId}</code></strong></p>
+<h3 id='response-6'>Response</h3>
+<p>You need to save transfer id for tracking its status later.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>estimatedDeliveryDate</td>
+<td>Estimated time when funds will arrive to recipient&#39;s bank account</td>
+<td>Timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='track-transfer-status'>Track transfer status</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X GET https://api.sandbox.transferwise.tech/v1/transfers/<span class="o">{</span>transferId<span class="o">}</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">468956</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetAccount"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;recipient</span><span class="w"> </span><span class="err">account</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceAccount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"quote"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;quote</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outgoing_payment_sent"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"to my friend"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9065</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-28 07:43:55"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">business</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"transferRequest"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"to my friend"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"hasActiveIssues"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">661.89</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"customerTransactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bd244a95-dcf8-4c31-aac8-bf5e2f3e54c0"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>You can check transfer latest status by polling this endpoint. We are building webhook notification support to notify about status changes, but unfortunately this is not available yet.</p>
+<h3 id='state-flow-of-transfers'>State flow of transfers:</h3>
+<p><strong>Incoming Payment Waiting ⇒ Processing ⇒ Funds Converted ⇒ Outgoing Payment Sent</strong></p>
+
+<p>Outgoing Payment Sent is the final state of happy flow. Should the payment fail then the problematic flow continues. For example, if recipient bank account does not exist and payment is returned.</p>
+
+<p><strong>Outgoing Payment Sent ⇒ Bounced Back ⇒ Funds Refunded</strong></p>
+
+<p>Most bounce backs occur within 2-3 business days. However, to be on safe side, we advise to check transfer status for potential bounce backs for 2 weeks.</p>
+
+<p><br/></p>
+
+<p>Full list of transfer statuses in the order of their occurence is given below:</p>
+
+<ul>
+<li><p><strong>incoming_payment_waiting</strong> — You have submitted transfer and transfer is waiting for funding.</p></li>
+<li><p><strong>waiting_recipient_input_to_proceed</strong> — This status is only used for “send money to email” transfers, when we are waiting for your recipient to fill in their bank details so we can continue processing your transfer.</p></li>
+<li><p><strong>processing</strong> — Your funds have been received and your transfer is being processed by TransferWise. Processing is a generic term that includes our behind-the-scene activities like AML, compliance and fraud checks.</p></li>
+<li><p><strong>funds_converted</strong> — All compliance checks have been completed with your transfer and funds have been converted from source currency to target currency.</p></li>
+<li><p><strong>outgoing_payment_sent</strong> — TransferWise has paid out funds to your recipient. This is final state of transfer, assuming funds are not returned. When a transfer has this state it does not immediately mean your recipient already has funds available in their bank account. 
+Payment systems in different countries operate in different speeds and frequency. For example, in UK the payment will reach your recipient bank account within few minutes after we have sent the outgoing payment. However, in Eurozone and US, it usually takes one day until funds are available.</p></li>
+<li><p><strong>cancelled</strong> — This status is used when transfer you created was not funded and therefore never processed. Final state of transfer.</p></li>
+<li><p><strong>funds_refunded</strong> — Transfer has been refunded. Final state of transfer.</p></li>
+<li><p><strong>bounced_back</strong> — Transfer has bounced back but has not been cancelled nor refunded yet.</p></li>
+</ul>
+<h2 id='check-account-balance'>Check account balance</h2><h2 id='download-account-statement'>Download account statement</h2><h2 id='go-live'>Go Live</h2><h1 id='recipients-api'>Recipients API</h1><h2 id='create-aed-recipient'>Create AED recipient</h2>
 <blockquote>
 <p>Example Request (AED):</p>
 </blockquote>
