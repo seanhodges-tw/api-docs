@@ -270,8 +270,27 @@
           <li>
             <a href="#bank-integrations-guide" class="toc-h1 toc-link" data-title="Bank Integrations Guide">Bank Integrations Guide</a>
           </li>
+            <div class="api-reference-separator-container">
+              <div class="api-reference-separator">
+                Full API Reference
+              </div>
+            </div>
           <li>
-            <a href="#recipients-api-guide" class="toc-h1 toc-link" data-title="Recipients API Guide">Recipients API Guide</a>
+            <a href="#quotes" class="toc-h1 toc-link" data-title="Quotes">Quotes</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create" class="toc-h2 toc-link" data-title="Create">Create</a>
+                  </li>
+                  <li>
+                    <a href="#list" class="toc-h2 toc-link" data-title="List">List</a>
+                  </li>
+                  <li>
+                    <a href="#get-by-id" class="toc-h2 toc-link" data-title="Get By Id">Get By Id</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#recipients" class="toc-h1 toc-link" data-title="Recipients">Recipients</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#create-aed-recipient" class="toc-h2 toc-link" data-title="Create AED recipient">Create AED recipient</a>
@@ -413,25 +432,6 @@
                   </li>
                   <li>
                     <a href="#create-zar-recipient" class="toc-h2 toc-link" data-title="Create ZAR recipient">Create ZAR recipient</a>
-                  </li>
-              </ul>
-          </li>
-            <div class="api-reference-separator-container">
-              <div class="api-reference-separator">
-                Full API Reference
-              </div>
-            </div>
-          <li>
-            <a href="#quotes" class="toc-h1 toc-link" data-title="Quotes">Quotes</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#create" class="toc-h2 toc-link" data-title="Create">Create</a>
-                  </li>
-                  <li>
-                    <a href="#list" class="toc-h2 toc-link" data-title="List">List</a>
-                  </li>
-                  <li>
-                    <a href="#get-by-id" class="toc-h2 toc-link" data-title="Get By Id">Get By Id</a>
                   </li>
               </ul>
           </li>
@@ -2036,7 +2036,13 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <li>Make few small value test payments via LIVE API before you start executing large number of transfers.</li>
 <li>All set. Switch it on.</li>
 </ul>
-<h1 id='affiliates-guide'>Affiliates Guide</h1><h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h1 id='recipients-api-guide'>Recipients API Guide</h1><h2 id='create-aed-recipient'>Create AED recipient</h2>
+<h1 id='affiliates-guide'>Affiliates Guide</h1><h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h1 id='quotes'>Quotes</h1><h2 id='create'>Create</h2>
+<p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
+<h2 id='list'>List</h2>
+<p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
+<h2 id='get-by-id'>Get By Id</h2>
+<p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
+<h1 id='recipients'>Recipients</h1><h2 id='create-aed-recipient'>Create AED recipient</h2>
 <blockquote>
 <p>Example Request (AED):</p>
 </blockquote>
@@ -3523,12 +3529,6 @@ We only support private customers sending payments to private recipients. Busine
 <p>Required details: swiftCode, accountNumber</p>
 
 <p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
-<h1 id='quotes'>Quotes</h1><h2 id='create'>Create</h2>
-<p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
-<h2 id='list'>List</h2>
-<p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
-<h2 id='get-by-id'>Get By Id</h2>
-<p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
 <h1 id='transfers'>Transfers</h1><h2 id='create'>Create</h2>
 <p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
 &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
