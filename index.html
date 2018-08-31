@@ -2080,64 +2080,142 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <li>Make few small value test payments via LIVE API before you start executing large number of transfers.</li>
 <li>All set. Switch it on.</li>
 </ul>
-<h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h1 id='affiliates-guide'>Affiliates Guide</h1><h1 id='addresses'>Addresses</h1><h2 id='addresses-create'>Create</h2><h2 id='addresses-get-by-id'>Get By Id</h2><h2 id='addresses-list'>List</h2><h2 id='addresses-get-requirements'>Get Requirements</h2><h2 id='addresses-refresh-requirements'>Refresh Requirements</h2>
+<h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h1 id='affiliates-guide'>Affiliates Guide</h1><h1 id='addresses'>Addresses</h1><h2 id='addresses-create'>Create</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/address-requirements"</span> <span class="se">\</span>
-     -H <span class="s2">"Authorization: &lt;your api token&gt;"</span>
+<pre class="highlight shell tab-shell"><code>
+curl -X POST https://api.sandbox.transferwise.tech/v1/addresses <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "details": {
+            "country": "EE",
+            "firstLine": "Narva mnt 5-1",
+            "postCode": "10113",
+            "city": "Tallinn"
+          }
+        }'</span>
+
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15574445</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">294205</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"targetAccount"</span><span class="p">:</span><span class="w"> </span><span class="mi">7993919</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sourceAccount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"quote"</span><span class="p">:</span><span class="w"> </span><span class="mi">113379</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processing"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good times"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2151</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-14 15:25:51"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"transferRequest"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">236532</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="mi">217896</span><span class="p">,</span><span class="w">
   </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good times"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"hasActiveIssues"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sourceValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sourceCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">895.32</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"targetCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GPB"</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EE"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"firstLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narva mnt 5-1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10113"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tallinn"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"occupation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
-<p>You can simulate payment processing by changing transfer statuses using these endpoints. </p>
+<p>Create an address for user profile.
+List of required are slightly different for countries.<br>
+For example state field is required for US, CA, BR and AU addresses.
+Please use <a href="#addresses-get-requirements">Addresses.Get Requirements</a> and  <a href="#addresses-refresh-requirements">Addresses.Refresh Requirements</a> endpoints to figure out which fields you need to create addresses in specific countries.</p>
+<h3 id='addresses-create-request'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/addresses</code></strong></p>
 
-<p>This feature is limited to sandbox only.</p>
-<h3 id='addresses-refresh-requirements-request'>Request</h3>
-<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/processing</code></strong></p>
-
-<p>Changes transfer status from incoming_payment_waiting to processing.</p>
-
-<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/funds_converted</code></strong></p>
-
-<p>Changes transfer status from processing to funds_converted.<br/></p>
-
-<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/outgoing_payment_sent</code></strong></p>
-
-<p>Changes transfer status from funds_converted to outgoing_payment_sent.<br/></p>
-
-<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/bounced_back</code></strong></p>
-
-<p>Changes transfer status from outgoing_payment_sent to bounced_back.<br/></p>
-
-<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/funds_refunded</code></strong></p>
-
-<p>Changes transfer status from bounced_back to funds_refunded.</p>
-<h3 id='addresses-refresh-requirements-response'>Response</h3>
-<p>Transfer entity with changed status. See more at <a href="#transfers-get-by-id">Transfers.Get By Id</a></p>
-<h1 id='exchange-rates'>Exchange Rates</h1><h2 id='exchange-rates-get-exchange-rates'>Get Exchange Rates</h2>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>profile</td>
+<td>User profile id.</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>details.country</td>
+<td>2 digit ISO country code.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.firstLine</td>
+<td>Address line: street, house, apartment.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.postCode</td>
+<td>Zip code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.city</td>
+<td>City name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.state</td>
+<td>State code. Required if country is US, CA, AU, BR</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.occupation</td>
+<td>User occupation. Required for US, CA, JP</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='addresses-create-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Address id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>profile</td>
+<td>User profile id.</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>details.country</td>
+<td>2 digit ISO country code.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.firstLine</td>
+<td>Address line: street, house, apartment.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.postCode</td>
+<td>Zip code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.city</td>
+<td>City name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.state</td>
+<td>State code. Required if country is US, CA, AU, BR</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.occupation</td>
+<td>User occupation. Required for US, CA, JP</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h2 id='addresses-get-by-id'>Get By Id</h2><h2 id='addresses-list'>List</h2><h2 id='addresses-get-requirements'>Get Requirements</h2><h2 id='addresses-refresh-requirements'>Refresh Requirements</h2><h1 id='exchange-rates'>Exchange Rates</h1><h2 id='exchange-rates-get-exchange-rates'>Get Exchange Rates</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -2259,18 +2337,19 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <blockquote>
 <p>Example Request (AED):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"AED"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"emirates"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"AE070331234567890123456"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "AED",
+          "type": "emirates",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "AE070331234567890123456"
+         }
+      }'</span>
 </code></pre>
 <p>Send payments to United Arab Emirates. </p>
 
