@@ -276,6 +276,34 @@
               </div>
             </div>
           <li>
+            <a href="#addresses" class="toc-h1 toc-link" data-title="Addresses">Addresses</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#addresses-create" class="toc-h2 toc-link" data-title="Create">Create</a>
+                  </li>
+                  <li>
+                    <a href="#addresses-get-by-id" class="toc-h2 toc-link" data-title="Get By Id">Get By Id</a>
+                  </li>
+                  <li>
+                    <a href="#addresses-list" class="toc-h2 toc-link" data-title="List">List</a>
+                  </li>
+                  <li>
+                    <a href="#addresses-get-requirements" class="toc-h2 toc-link" data-title="Get Requirements">Get Requirements</a>
+                  </li>
+                  <li>
+                    <a href="#addresses-refresh-requirements" class="toc-h2 toc-link" data-title="Refresh Requirements">Refresh Requirements</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#exchange-rates" class="toc-h1 toc-link" data-title="Exchange Rates">Exchange Rates</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#exchange-rates-get-exchange-rates" class="toc-h2 toc-link" data-title="Get Exchange Rates">Get Exchange Rates</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#quotes" class="toc-h1 toc-link" data-title="Quotes">Quotes</a>
               <ul class="toc-list-h2">
                   <li>
@@ -436,20 +464,6 @@
               </ul>
           </li>
           <li>
-            <a href="#transfers" class="toc-h1 toc-link" data-title="Transfers">Transfers</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#transfers-create" class="toc-h2 toc-link" data-title="Create">Create</a>
-                  </li>
-                  <li>
-                    <a href="#transfers-list" class="toc-h2 toc-link" data-title="List">List</a>
-                  </li>
-                  <li>
-                    <a href="#transfers-get-by-id" class="toc-h2 toc-link" data-title="Get By Id">Get By Id</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
             <a href="#simulation" class="toc-h1 toc-link" data-title="Simulation">Simulation</a>
               <ul class="toc-list-h2">
                   <li>
@@ -462,6 +476,20 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#terms-and-conditions-get-terms-and-conditions" class="toc-h2 toc-link" data-title="Get Terms and Conditions">Get Terms and Conditions</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#transfers" class="toc-h1 toc-link" data-title="Transfers">Transfers</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#transfers-create" class="toc-h2 toc-link" data-title="Create">Create</a>
+                  </li>
+                  <li>
+                    <a href="#transfers-list" class="toc-h2 toc-link" data-title="List">List</a>
+                  </li>
+                  <li>
+                    <a href="#transfers-get-by-id" class="toc-h2 toc-link" data-title="Get By Id">Get By Id</a>
                   </li>
               </ul>
           </li>
@@ -2052,7 +2080,176 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <li>Make few small value test payments via LIVE API before you start executing large number of transfers.</li>
 <li>All set. Switch it on.</li>
 </ul>
-<h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h1 id='affiliates-guide'>Affiliates Guide</h1><h1 id='quotes'>Quotes</h1><h2 id='quotes-create'>Create</h2>
+<h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h1 id='affiliates-guide'>Affiliates Guide</h1><h1 id='addresses'>Addresses</h1><h2 id='addresses-create'>Create</h2><h2 id='addresses-get-by-id'>Get By Id</h2><h2 id='addresses-list'>List</h2><h2 id='addresses-get-requirements'>Get Requirements</h2><h2 id='addresses-refresh-requirements'>Refresh Requirements</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/address-requirements"</span>
+     -H <span class="s2">"Authorization: &lt;your api token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15574445</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">294205</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetAccount"</span><span class="p">:</span><span class="w"> </span><span class="mi">7993919</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceAccount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"quote"</span><span class="p">:</span><span class="w"> </span><span class="mi">113379</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processing"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good times"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2151</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-14 15:25:51"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"transferRequest"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good times"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"hasActiveIssues"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">895.32</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GPB"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>You can simulate payment processing by changing transfer statuses using these endpoints. </p>
+
+<p>This feature is limited to sandbox only.</p>
+<h3 id='addresses-refresh-requirements-request'>Request</h3>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/processing</code></strong></p>
+
+<p>Changes transfer status from incoming_payment_waiting to processing.</p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/funds_converted</code></strong></p>
+
+<p>Changes transfer status from processing to funds_converted.<br/></p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/outgoing_payment_sent</code></strong></p>
+
+<p>Changes transfer status from funds_converted to outgoing_payment_sent.<br/></p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/bounced_back</code></strong></p>
+
+<p>Changes transfer status from outgoing_payment_sent to bounced_back.<br/></p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/funds_refunded</code></strong></p>
+
+<p>Changes transfer status from bounced_back to funds_refunded.</p>
+<h3 id='addresses-refresh-requirements-response'>Response</h3>
+<p>Transfer entity with changed status. See more at <a href="#transfers-get-by-id">Transfers.Get By Id</a></p>
+<h1 id='exchange-rates'>Exchange Rates</h1><h2 id='exchange-rates-get-exchange-rates'>Get Exchange Rates</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD"</span>
+     -H <span class="s2">"Authorization: &lt;your api token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.166</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-31T10:43:31+0000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/rates</code></strong></p>
+
+<p>Fetch latest exchange rates of all currencies.<br/></p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD</code></strong></p>
+
+<p>Fetch latest exchange rate of one currency pair.<br/></p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD&amp;time=2017-02-13T14:53:01</code></strong></p>
+
+<p>Fetch exchange rate of specific historical timestamp.<br/></p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD&amp;from=2017-02-13T14:53:01&amp;to=2017-03-13T14:53:01&amp;group=day</code></strong></p>
+
+<p>Fetch exchange rate history over period of time with daily interval.<br/></p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD&amp;from=2017-02-13T14:53:01&amp;to=2017-03-13T14:53:01&amp;group=hour</code></strong></p>
+
+<p>Fetch exchange rate history over period of time with hourly interval.<br/></p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD&amp;from=2017-02-13T14:53:01&amp;to=2017-03-13T14:53:01&amp;group=minute</code></strong></p>
+
+<p>Fetch exchange rate history over period of time with 10 minute interval.<br/></p>
+<h3 id='exchange-rates-get-exchange-rates-request'>Request</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source</td>
+<td>Source(send) currency code.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>target</td>
+<td>Target(receive) currency code.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Timestamp to get historic exchange rate for specific time/date.</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>from</td>
+<td>Period start date to get exchange rate history.</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>to</td>
+<td>Period end date to get exchange rate history.</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>group</td>
+<td>Interval: day;hour;minute</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='exchange-rates-get-exchange-rates-response'>Response</h3>
+<p>List of exchange rate values which meet your query criteria.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rate</td>
+<td>Exchange rate value.</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Source(send) currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>target</td>
+<td>Target(receive) currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Timestamp for exchange rate.</td>
+<td>Timestamp</td>
+</tr>
+</tbody></table>
+<h1 id='quotes'>Quotes</h1><h2 id='quotes-create'>Create</h2>
 <p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
 <h2 id='quotes-list'>List</h2>
 <p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
@@ -3545,23 +3742,12 @@ We only support private customers sending payments to private recipients. Busine
 <p>Required details: swiftCode, accountNumber</p>
 
 <p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
-<h1 id='transfers'>Transfers</h1><h2 id='transfers-create'>Create</h2>
-<p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
-&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
-&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
-<h2 id='transfers-list'>List</h2>
-<p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
-&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
-<h2 id='transfers-get-by-id'>Get By Id</h2>
-<p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
-&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
-&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
 <h1 id='simulation'>Simulation</h1><h2 id='simulation-simulate-transfer-processing'>Simulate Transfer Processing</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sandbox.transferwise.tech//v1/simulation/transfers/{transferId}/processing"</span>
-  -H <span class="s2">"Authorization: &lt;your api token&gt;"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/processing"</span>
+     -H <span class="s2">"Authorization: &lt;your api token&gt;"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -3617,7 +3803,7 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sandbox.transferwise.tech/v1/terms/default"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/terms/default"</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -3888,6 +4074,17 @@ This endpoint is applicable for bank integrations and third party application in
 <p>No authentication is required for this endpoint.</p>
 <h3 id='terms-and-conditions-get-terms-and-conditions-response'>Response</h3>
 <p>Terms and conditions in HTML format.</p>
+<h1 id='transfers'>Transfers</h1><h2 id='transfers-create'>Create</h2>
+<p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
+&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
+&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
+<h2 id='transfers-list'>List</h2>
+<p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
+&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
+<h2 id='transfers-get-by-id'>Get By Id</h2>
+<p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
+&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
+&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
 
       </div>
       <div class="dark-box">
