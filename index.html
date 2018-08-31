@@ -216,7 +216,7 @@
               <a href="#" data-language-name="shell">shell</a>
         </div>
         <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
+          <input type="text" class="search" id="input-search" placeholder="Search..">
         </div>
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
@@ -2084,7 +2084,7 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/address-requirements"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/address-requirements"</span> <span class="se">\</span>
      -H <span class="s2">"Authorization: &lt;your api token&gt;"</span>
 </code></pre>
 <blockquote>
@@ -2141,7 +2141,7 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD"</span> <span class="se">\</span>
      -H <span class="s2">"Authorization: &lt;your api token&gt;"</span>
 </code></pre>
 <blockquote>
@@ -3746,7 +3746,7 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/processing"</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/simulation/transfers/{transferId}/processing"</span> <span class="se">\</span>
      -H <span class="s2">"Authorization: &lt;your api token&gt;"</span>
 </code></pre>
 <blockquote>
