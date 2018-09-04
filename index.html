@@ -498,7 +498,13 @@
               <a href="#user-profiles" class="toc-h1 toc-link" data-title="User Profiles">User Profiles</a>
                 <ul class="toc-list-h2">
                     <li>
-                      <a href="#user-profiles-create" class="toc-h2 toc-link" data-title="Create">Create</a>
+                      <a href="#user-profiles-create-personal" class="toc-h2 toc-link" data-title="Create (Personal)">Create (Personal)</a>
+                    </li>
+                    <li>
+                      <a href="#user-profiles-create-business" class="toc-h2 toc-link" data-title="Create (Business)">Create (Business)</a>
+                    </li>
+                    <li>
+                      <a href="#user-profiles-update" class="toc-h2 toc-link" data-title="Update">Update</a>
                     </li>
                     <li>
                       <a href="#user-profiles-get-by-id" class="toc-h2 toc-link" data-title="Get By Id">Get By Id</a>
@@ -507,7 +513,7 @@
                       <a href="#user-profiles-list" class="toc-h2 toc-link" data-title="List">List</a>
                     </li>
                     <li>
-                      <a href="#user-profiles-requirements" class="toc-h2 toc-link" data-title="Requirements">Requirements</a>
+                      <a href="#user-profiles-create-identification-document" class="toc-h2 toc-link" data-title="Create Identification Document">Create Identification Document</a>
                     </li>
                 </ul>
             </li>
@@ -4450,321 +4456,49 @@ This endpoint is applicable for bank integrations and third party application in
 <p>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
 &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;
 &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</p>
-<h1 id='user-profiles'>User Profiles</h1><h2 id='user-profiles-create'>Create</h2>
+<h1 id='user-profiles'>User Profiles</h1><h2 id='user-profiles-create-personal'>Create (Personal)</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>
-curl -X POST https://api.sandbox.transferwise.tech/v1/addresses <span class="se">\</span>
+curl -X POST https://api.sandbox.transferwise.tech/v1/profiles <span class="se">\</span>
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
      -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
      -d <span class="s1">'{ 
-          "profile": &lt;your profile id&gt;,
+          "type": "personal",
           "details": {
-            "country": "EE",
-            "firstLine": "Narva mnt 5-1",
-            "postCode": "10113",
-            "city": "Tallinn"
-          }
+            "firstName": "Oliver",
+            "lastName": "Wilson",
+            "dateOfBirth": "1977-07-01",
+            "phoneNumber": "+3725064992"
+           }
         }'</span>
 
+
 </code></pre>
 <blockquote>
-<p>Example Response:</p>
+<p>Example Response (Personal):</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">236532</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">personal</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EE"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"firstLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narva mnt 5-1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10113"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tallinn"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"occupation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oliver"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wilson"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dateOfBirth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1977-07-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+3725064992"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"occupation"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"primaryAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre>
-<p>Adds address info to user profile.
-List of required fields are slightly different for different countries.<br>
-For example state field is required for US, CA, BR and AU addresses but not for other countries.
-Please look at <a href="#addresses-requirements">Addresses.Requirements</a> to figure out which fields are required to create addresses in specific country.</p>
-<h3 id='user-profiles-create-request'>Request</h3>
-<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/addresses</code></strong></p>
+<p>Create personal user profile.
+Same person cannot have multiple active duplicate user profiles.
+Thus creating multiple profiles with the same details will fail.</p>
+<h3 id='user-profiles-create-personal-request'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/profiles</code></strong></p>
 
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>profile</td>
-<td>User profile id.</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>details.country</td>
-<td>2 digit ISO country code.</td>
-<td>Text</td>
-</tr>
-<tr>
-<td>details.firstLine</td>
-<td>Address line: street, house, apartment.</td>
-<td>Text</td>
-</tr>
-<tr>
-<td>details.postCode</td>
-<td>Zip code</td>
-<td>Text</td>
-</tr>
-<tr>
-<td>details.city</td>
-<td>City name</td>
-<td>Text</td>
-</tr>
-<tr>
-<td>details.state</td>
-<td>State code. Required if country is US, CA, AU, BR</td>
-<td>Text</td>
-</tr>
-<tr>
-<td>details.occupation</td>
-<td>User occupation. Required for US, CA, JP</td>
-<td>Text</td>
-</tr>
-</tbody></table>
-<h3 id='user-profiles-create-response'>Response</h3>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>Address id</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>profile</td>
-<td>User profile id.</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>details.country</td>
-<td>2 digit ISO country code.</td>
-<td>Text</td>
-</tr>
-<tr>
-<td>details.firstLine</td>
-<td>Address line: street, house, apartment.</td>
-<td>Text</td>
-</tr>
-<tr>
-<td>details.postCode</td>
-<td>Zip code</td>
-<td>Text</td>
-</tr>
-<tr>
-<td>details.city</td>
-<td>City name</td>
-<td>Text</td>
-</tr>
-<tr>
-<td>details.state</td>
-<td>State code. Required if country is US, CA, AU, BR</td>
-<td>Text</td>
-</tr>
-<tr>
-<td>details.occupation</td>
-<td>User occupation. Required for US, CA, JP</td>
-<td>Text</td>
-</tr>
-</tbody></table>
-<h2 id='user-profiles-get-by-id'>Get By Id</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>
-curl -X GET https://api.sandbox.transferwise.tech/v1/addresses/<span class="o">{</span>addressId<span class="o">}</span> <span class="se">\</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">236532</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EE"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"firstLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Narva mnt 5-1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10113"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tallinn"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"occupation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre>
-<p>Get address info by id.</p>
-<h3 id='user-profiles-get-by-id-request'>Request</h3>
-<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/addresses/{addressId}</code></strong></p>
-<h2 id='user-profiles-list'>List</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>
-curl -X GET https://api.sandbox.transferwise.tech/v1/addresses?profile<span class="o">={</span>profileId<span class="o">}</span> <span class="se">\</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7099091</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EE"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"firstLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Veerenni 29"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12991"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tallinn"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"occupation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-
-</span></code></pre>
-<p>List of addresses belonging to user profile.</p>
-<h3 id='user-profiles-list-request'>Request</h3>
-<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/addresses?profile={profileId}</code></strong></p>
-<h2 id='user-profiles-requirements'>Requirements</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>
-curl -X GET https://api.sandbox.transferwise.tech/v1/address-requirements <span class="se">\</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Country"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"country"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"refreshRequirementsOnChange"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"displayFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Germany"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"validationRegexp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"validationAsync"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"valuesAllowed"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AX"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Åland Islands"</span><span class="w">
-              </span><span class="p">},</span><span class="w">
-              </span><span class="err">...</span><span class="w">
-              </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZM"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zambia"</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"refreshRequirementsOnChange"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"displayFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"validationRegexp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"validationAsync"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"valuesAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Postal code"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"postCode"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"refreshRequirementsOnChange"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"displayFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10025"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"validationRegexp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"validationAsync"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"valuesAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre><h3 id='user-profiles-requirements-request'>Request</h3>
-<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/address-requirements</code></strong><br/>
-<strong><code>POST https://api.sandbox.transferwise.tech/v1/address-requirements</code></strong><br/></p>
-
-<p>GET and POST address-requirements endpoints help you to figure out which fields are required to create a valid address for different countries.
-You could even build a dynamic user interface on top of these endpoints. This is a step-by-step guide on how to do this.</p>
-
-<ol>
-<li><p>Call GET /v1/address-requirements to get list of fields you need to fill with values in &quot;details&quot; section for creating a valid address.  Response contains 4 required top level fields: </p>
-
-<ul>
-<li>country   (select field with list of values)</li>
-<li>city      (text field)</li>
-<li>postCode  (text field)</li>
-<li>firstLine (text field)</li>
-</ul></li>
-<li><p>Analyze the list of fields. Because refreshRequirementsOnChange=true for field &#39;country&#39; then this indicates that there could be additional fields required depending on the selected value.</p></li>
-<li><p>Call POST /v1/address-requirements with selected country value to figure out if this is the case.  <br/>
-For example posting {&quot;details&quot;: {&quot;country&quot; : &quot;US&quot;}} will also add &quot;state&quot; to list of fields.<br/>
-But posting {&quot;details&quot;: {&quot;country&quot; : &quot;GB&quot;}} will not.</p></li>
-<li><p>If you choose &quot;US&quot; as country you will notice that &quot;state&quot; field also has refreshRequirementsOnChange=true.  This means you would need to make another POST call to /v1/address-requirements with a specific state value.<br/>
-For example posting {&quot;details&quot;: { &quot;country&quot; : &quot;US&quot;, &quot;state&quot;: &quot;AZ&quot; }} will also add &quot;occupation&quot; to list of fields.<br/>
-But posting {&quot;details&quot;: { &quot;country&quot; : &quot;US&quot;, &quot;state&quot;: &quot;AL&quot; }} will not.</p></li>
-<li><p>So once you get to the point where you have provided values for all fields which have refreshRequirementsOnChange=true then you have complete set of fields to compose a valid request to create an address object. 
-For example this is a valid request to create address in US Arizona:
-<br/> POST /v1/addresses:<br/>
-{
-&quot;profile&quot; : your-profile-id,<br/>
-&quot;details&quot;: {<br/>
-    &quot;country&quot; : &quot;US&quot;,<br/>
-    &quot;state&quot;: &quot;AZ&quot;,<br/>
-    &quot;city&quot;: &quot;Phoenix&quot;,<br/>
-    &quot;postCode&quot;: &quot;10025&quot;,<br/>
-    &quot;firstLine&quot;: &quot;50 Sunflower Ave.&quot;,<br/>
-    &quot;occupation&quot;: &quot;software engineer&quot;<br/>
-}
-}<br/></p></li>
-</ol>
-<h3 id='user-profiles-requirements-response'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -4774,73 +4508,453 @@ For example this is a valid request to create address in US Arizona:
 </thead><tbody>
 <tr>
 <td>type</td>
-<td>&quot;address&quot;</td>
+<td>&quot;personal&quot;</td>
 <td>Text</td>
 </tr>
 <tr>
-<td>fields[n].name</td>
-<td>Field description</td>
+<td>details.firstName</td>
+<td>First name</td>
 <td>Text</td>
 </tr>
 <tr>
-<td>fields[n].group[n].key</td>
-<td>Key is name of the field you should include in the JSON</td>
+<td>details.lastName</td>
+<td>Last name</td>
 <td>Text</td>
 </tr>
 <tr>
-<td>fields[n].group[n].type</td>
-<td>Display type of field (e.g. text, select, etc)</td>
+<td>details.dateOfBirth</td>
+<td>Date of birth</td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>details.phoneNumber</td>
+<td>Phone number</td>
 <td>Text</td>
 </tr>
+</tbody></table>
+<h3 id='user-profiles-create-personal-response'>Response</h3>
+<table><thead>
 <tr>
-<td>fields[n].group[n].refreshRequirementsOnChange</td>
-<td>Tells you whether you should call POST address-requirements once the field value is set to discover required lower level fields.</td>
-<td>Boolean</td>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
 </tr>
+</thead><tbody>
 <tr>
-<td>fields[n].group[n].required</td>
-<td>Indicates if the field is mandatory or not</td>
-<td>Boolean</td>
-</tr>
-<tr>
-<td>fields[n].group[n].displayFormat</td>
-<td>Display format pattern.</td>
-<td>Text</td>
-</tr>
-<tr>
-<td>fields[n].group[n].example</td>
-<td>Example value.</td>
-<td>Text</td>
-</tr>
-<tr>
-<td>fields[n].group[n].minLength</td>
-<td>Min valid length of field value.</td>
+<td>id</td>
+<td>profileId</td>
 <td>Integer</td>
 </tr>
 <tr>
-<td>fields[n].group[n].maxLength</td>
-<td>Max valid length of field value.</td>
+<td>type</td>
+<td>&quot;personal&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.firstName</td>
+<td>First name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.lastName</td>
+<td>Last name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.dateOfBirth</td>
+<td>Date of birth</td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>details.phoneNumber</td>
+<td>Phone number</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.avatar</td>
+<td>Link to person avatar image</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.occupation</td>
+<td>Person occupation</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.primaryAddress</td>
+<td>Address object id</td>
+<td>Integer</td>
+</tr>
+</tbody></table>
+<h2 id='user-profiles-create-business'>Create (Business)</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X POST https://api.sandbox.transferwise.tech/v1/profiles <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "type": "business",
+          "details": {
+            "name": "ABC Logistics Ltd",
+            "registrationNumber": "12144939",
+            "acn": null,
+            "abn": null,
+            "arbn": null,
+            "companyType": "LIMITED",
+            "companyRole": "OWNER",
+            "descriptionOfBusiness": "Information and communication",
+            "webpage": "https://abc-logistics.com"
+           }
+        }'</span>
+</code></pre>
+<blockquote>
+<p>Example Response (Business):</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">business</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"business"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC Logistics Ltd"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"registrationNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12144939"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"acn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"arbn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"companyType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMITED"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"companyRole"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OWNER"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"descriptionOfBusiness"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Information and communication"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"webpage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://abc-logistics.com"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"primaryAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Create business user profile.
+You would need to create personal profile first always. Business profile cannot be created without personal profile.</p>
+<h3 id='user-profiles-create-business-request-business'>Request (Business)</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/profiles</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>&quot;business&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.name</td>
+<td>Business name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.registrationNumber</td>
+<td>Business registration number</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.acn</td>
+<td>Australian Company Number  (only for AUS businesses)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.abn</td>
+<td>Australian Business Nnumber (only for AUS businesses)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.arbn</td>
+<td>Australian Registered Body Number  (only for AUS businesses)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.companyType</td>
+<td>Company legal form. Allowed values:   <ul><li>LIMITED</li><li>PARTNERSHIP</li><li>SOLE_TRADER</li><li>LIMITED_BY_GUARANTEE</li><li>LIMITED_LIABILITY_COMPANY</li><li>FOR_PROFIT_CORPORATION</li><li>NON_PROFIT_CORPORATION</li><li>LIMITED_PARTNERSHIP</li><li>LIMITED_LIABILITY_PARTNERSHIP</li><li>GENERAL_PARTNERSHIP</li><li>SOLE_PROPRIETORSHIP</li><li>PRIVATE_LIMITED_COMPANY</li><li>PUBLIC_LIMITED_COMPANY</li><li>TRUST</li><li>OTHER</ul></td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.companyRole</td>
+<td>Role of person. Allowed Values: <ul><li>OWNER</li><li>DIRECTOR</li><li>OTHER</ul></td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.descriptionOfBusiness</td>
+<td>Sector / filed of activity</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.webpage</td>
+<td>Business webpage</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='user-profiles-create-business-response-business'>Response (Business)</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>profileId</td>
 <td>Integer</td>
 </tr>
 <tr>
-<td>fields[n].group[n].validationRegexp</td>
-<td>Regexp validation pattern.</td>
+<td>type</td>
+<td>&quot;business&quot;</td>
 <td>Text</td>
 </tr>
 <tr>
-<td>fields[n].group[n].validationAsync</td>
-<td>Validator URL and parameter name you should use when submitting the value for validation</td>
+<td>details.name</td>
+<td>Business name</td>
 <td>Text</td>
 </tr>
 <tr>
-<td>fields[n].group[n].valuesAllowed[n].key</td>
-<td>List of allowed values. Value key</td>
+<td>details.registrationNumber</td>
+<td>Business registration number</td>
 <td>Text</td>
 </tr>
 <tr>
-<td>fields[n].group[n].valuesAllowed[n].name</td>
-<td>List of allowed values. Value name.</td>
+<td>details.acn</td>
+<td>Australian Company Number  (only for AUS businesses)</td>
 <td>Text</td>
+</tr>
+<tr>
+<td>details.abn</td>
+<td>Australian Business Nnumber (only for AUS businesses)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.arbn</td>
+<td>Australian Registered Body Number  (only for AUS businesses)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.companyType</td>
+<td>Company legal form</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.companyRole</td>
+<td>Role of person</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.descriptionOfBusiness</td>
+<td>Sector / filed of activity</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.webpage</td>
+<td>Business webpage</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.primaryAddress</td>
+<td>Address object id</td>
+<td>Integer</td>
+</tr>
+</tbody></table>
+<h2 id='user-profiles-update'>Update</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X PUT https://api.sandbox.transferwise.tech/v1/profiles <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "type": "personal",
+          "details": {
+            "firstName": "Oliver",
+            "lastName": "Wilson",
+            "dateOfBirth": "1977-07-01",
+            "phoneNumber": "+3725064992"
+           }
+        }'</span>
+
+
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">personal</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oliver"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wilson"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dateOfBirth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1977-07-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+3725064992"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"occupation"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"primaryAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Update user profile information. 
+If user profile has been verified by TransferWise then there are restrictions on what information is allowed to change. </p>
+<h3 id='user-profiles-update-request'>Request</h3>
+<p><strong><code>PUT https://api.sandbox.transferwise.tech/v1/profiles</code></strong>
+Request and response is same as described in <a href="#user-profile-create-personal">Create (Personal)</a> and <a href="#user-profile-create-business">Create (Business)</a></p>
+<h2 id='user-profiles-get-by-id'>Get By Id</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X GET https://api.sandbox.transferwise.tech/v1/profiles/<span class="o">{</span>profileId<span class="o">}</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">personal</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oliver"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wilson"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dateOfBirth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1977-07-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+3725064992"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"occupation"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"primaryAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Get profile info by id.</p>
+<h3 id='user-profiles-get-by-id-request'>Request</h3>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/profiles/{profileId}</code></strong></p>
+<h2 id='user-profiles-list'>List</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X GET https://api.sandbox.transferwise.tech/v1/profiles <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">personal</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"personal"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oliver"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wilson"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dateOfBirth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1977-07-01"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+3725064992"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"occupation"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"primaryAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">business</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"business"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC Logistics Ltd"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"registrationNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12144939"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"acn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"abn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"arbn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"companyType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMITED"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"companyRole"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OWNER"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"descriptionOfBusiness"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Information and communication"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"webpage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://abc-logistics.com"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"primaryAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+       </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+
+</span><span class="p">]</span><span class="w">
+
+</span></code></pre>
+<p>List of all profiles belonging to user.</p>
+<h3 id='user-profiles-list-request'>Request</h3>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/profiles</code></strong></p>
+<h2 id='user-profiles-create-identification-document'>Create Identification Document</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X POST https://api.sandbox.transferwise.tech/v1/profiles/<span class="o">{</span>profileId<span class="o">}</span>/verification-documents <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+            "firstName": "Oliver",
+            "lastName": "Wilson",
+            "type": "IDENTITY_CARD",
+            "uniqueIdentifier": "AA299822313",
+            "issueDate": "2017-12-31",
+            "issuerCountry": "EE",
+            "issuerState": "",
+            "expiryDate": "2027-12-31"
+        }'</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">  
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Add identification document details to user profile. Applicable to personal profiles (not business) only.<br>
+Returns empty result if successful. </p>
+<h3 id='user-profiles-create-identification-document-request-business'>Request (Business)</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/profiles</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>firstName</td>
+<td>Person first name in document</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>Person last name in document</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Document type. Allowed Values: <ul><li>DRIVERS_LICENCE</li><li>IDENTITY_CARD</li><li>GREEN_CARD</li><li>MY_NUMBER</li><li>PASSPORT</li><li>OTHER</ul></td>
+<td>Text</td>
+</tr>
+<tr>
+<td>uniqueIdentifier</td>
+<td>Document number</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>issueDate</td>
+<td>Document issue date</td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>issuerCountry</td>
+<td>Issued by country code. For example &quot;US&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>issuerState</td>
+<td>Issued by state code. For example &quot;NY&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>expiryDate</td>
+<td>Document expiry date. (optional)</td>
+<td>YYYY-MM-DD</td>
 </tr>
 </tbody></table>
 
