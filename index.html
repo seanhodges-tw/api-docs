@@ -516,28 +516,25 @@
               <a href="#transfers" class="toc-h1 toc-link" data-title="Transfers">Transfers</a>
                 <ul class="toc-list-h2">
                     <li>
-                      <a href="#transfers-create-todo" class="toc-h2 toc-link" data-title="Create  - todo">Create  - todo</a>
+                      <a href="#transfers-create" class="toc-h2 toc-link" data-title="Create">Create</a>
                     </li>
                     <li>
-                      <a href="#transfers-fund-todo" class="toc-h2 toc-link" data-title="Fund - todo">Fund - todo</a>
+                      <a href="#transfers-fund" class="toc-h2 toc-link" data-title="Fund">Fund</a>
                     </li>
                     <li>
-                      <a href="#transfers-cancel-todo" class="toc-h2 toc-link" data-title="Cancel - todo">Cancel - todo</a>
+                      <a href="#transfers-cancel" class="toc-h2 toc-link" data-title="Cancel">Cancel</a>
                     </li>
                     <li>
-                      <a href="#transfers-get-by-id-todo" class="toc-h2 toc-link" data-title="Get by Id - todo">Get by Id - todo</a>
+                      <a href="#transfers-get-by-id" class="toc-h2 toc-link" data-title="Get by Id">Get by Id</a>
                     </li>
                     <li>
-                      <a href="#transfers-get-issues-todo" class="toc-h2 toc-link" data-title="Get Issues - todo">Get Issues - todo</a>
+                      <a href="#transfers-get-issues" class="toc-h2 toc-link" data-title="Get Issues">Get Issues</a>
                     </li>
                     <li>
                       <a href="#transfers-get-delivery-time" class="toc-h2 toc-link" data-title="Get Delivery Time">Get Delivery Time</a>
                     </li>
                     <li>
-                      <a href="#transfers-list-todo" class="toc-h2 toc-link" data-title="List - todo">List - todo</a>
-                    </li>
-                    <li>
-                      <a href="#transfers-requirements-todo" class="toc-h2 toc-link" data-title="Requirements - todo">Requirements - todo</a>
+                      <a href="#transfers-list" class="toc-h2 toc-link" data-title="List">List</a>
                     </li>
                 </ul>
             </li>
@@ -1225,10 +1222,10 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/transfers <span class="se"
 <p>Step 4: Fund a transfer</p>
 
 <p><br/>
-Transfer is a payout order which consists of quote and recipient account. You can also add reference text and you need to specify unique identifier to avoid creating duplicate transfers. 
-Once created then a transfer needs to be funded during next 5 working days. In case not it will get automatically cancelled.  </p>
+Transfer is a payout order to recipient account based on a quote. Once created then a transfer needs to be funded during next 5 working days. 
+In case not it will get automatically cancelled.  </p>
 <h3 id='borderless-payouts-guide-create-transfer-request'>Request</h3>
-<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/accounts</code></strong></p>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/transfers</code></strong></p>
 
 <table><thead>
 <tr>
@@ -4103,7 +4100,7 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/accounts <span class="se">
          }'</span>
 </code></pre>
 <blockquote>
-<p>Example Response (Create email recipient):</p>
+<p>Example Response (Lookup email recipient):</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">31273058</span><span class="p">,</span><span class="w">
@@ -4211,7 +4208,7 @@ Therefore if you have very many recipient accounts defined in your business prof
 <td>Integer</td>
 </tr>
 <tr>
-<td>currencyCode</td>
+<td>currency</td>
 <td>Currency code</td>
 <td>Text</td>
 </tr>
@@ -6302,7 +6299,7 @@ This endpoint is applicable for bank integrations and third party application in
 <p>No authentication is required for this endpoint.</p>
 <h3 id='terms-and-conditions-get-terms-and-conditions-response'>Response</h3>
 <p>Terms and conditions in HTML format.</p>
-<h1 id='transfers'>Transfers</h1><h2 id='transfers-create-todo'>Create  - todo</h2>
+<h1 id='transfers'>Transfers</h1><h2 id='transfers-create'>Create</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -6347,10 +6344,10 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/transfers <span class="se"
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
-<p>Transfer is a payout order which consists of quote and recipient account. You can also add reference text and you need to specify unique identifier to avoid creating duplicate transfers. 
-Once created then a transfer needs to be funded during next 5 working days. In case not it will get automatically cancelled.  </p>
-<h3 id='transfers-create-todo-request'>Request</h3>
-<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/accounts</code></strong></p>
+<p>Transfer is a payout order to recipient account based on a quote. Once created then a transfer needs to be funded during next 5 working days. 
+In case not it will get automatically cancelled.  </p>
+<h3 id='transfers-create-request'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/transfers</code></strong></p>
 
 <table><thead>
 <tr>
@@ -6380,7 +6377,7 @@ Once created then a transfer needs to be funded during next 5 working days. In c
 <td>Text</td>
 </tr>
 </tbody></table>
-<h3 id='transfers-create-todo-response'>Response</h3>
+<h3 id='transfers-create-response'>Response</h3>
 <p>You need to save transfer id for tracking its status later.</p>
 
 <table><thead>
@@ -6481,11 +6478,11 @@ Once created then a transfer needs to be funded during next 5 working days. In c
 <td>UUID</td>
 </tr>
 </tbody></table>
-<h3 id='transfers-create-todo-avoiding-duplicate-transfers'>Avoiding duplicate transfers</h3>
+<h3 id='transfers-create-avoiding-duplicate-transfers'>Avoiding duplicate transfers</h3>
 <p>We use <strong>customerTransactionId</strong> field to avoid duplicate transfer requests. 
 When your first call fails (error or timeout) then you should use the same value in <strong>customerTransactionId</strong> field that you used in the original call when you are submitting a retry message. 
 This way we can treat subsequent retry messages as <strong>repeat messages</strong> and will not create duplicate transfers to your account. </p>
-<h2 id='transfers-fund-todo'>Fund - todo</h2>
+<h2 id='transfers-fund'>Fund</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -6510,7 +6507,7 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/transfers/<span class="o">
 </span></code></pre>
 <p>This API call is the final step for executing payouts. TransferWise will now debit funds from your borderless balance and start processing your transfer. 
 If your borderless balance is short of funds then this call will fail with &quot;insufficient funds&quot; error.</p>
-<h3 id='transfers-fund-todo-request'>Request</h3>
+<h3 id='transfers-fund-request'>Request</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/v1/transfers/{transferId}/payments</code></strong></p>
 
 <p>Use transfer id that you obtained in previous step. </p>
@@ -6528,7 +6525,7 @@ If your borderless balance is short of funds then this call will fail with &quot
 <td>Text</td>
 </tr>
 </tbody></table>
-<h3 id='transfers-fund-todo-response'>Response</h3>
+<h3 id='transfers-fund-response'>Response</h3>
 <p>You need to save transfer id for tracking its status later.</p>
 
 <table><thead>
@@ -6554,7 +6551,133 @@ If your borderless balance is short of funds then this call will fail with &quot
 <td>Text</td>
 </tr>
 </tbody></table>
-<h2 id='transfers-cancel-todo'>Cancel - todo</h2><h2 id='transfers-get-by-id-todo'>Get by Id - todo</h2><h2 id='transfers-get-issues-todo'>Get Issues - todo</h2><h2 id='transfers-get-delivery-time'>Get Delivery Time</h2>
+<h2 id='transfers-cancel'>Cancel</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X PUT https://api.sandbox.transferwise.tech/v1/transfers/<span class="o">{</span>transferId<span class="o">}</span>/cancel <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">16521632</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">4342275</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetAccount"</span><span class="p">:</span><span class="w"> </span><span class="mi">8692237</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceAccount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"quote"</span><span class="p">:</span><span class="w"> </span><span class="mi">657171</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reference text"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.89</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-24 10:47:49"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"transferRequest"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vambo 3"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"hasActiveIssues"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"customerTransactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54a6bc09-cef9-49a8-9041-f1f0c654cd88"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>Only transfers which are not funded can be cancelled. Cancellation is final it can not be undone.  </p>
+<h3 id='transfers-cancel-request'>Request</h3>
+<p><strong><code>PUT https://api.sandbox.transferwise.tech/v1/transfers/{transferId}/cancel</code></strong></p>
+
+<p>Use transfer id that you obtained when creating a transfer. </p>
+<h2 id='transfers-get-by-id'>Get by Id</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X GET https://api.sandbox.transferwise.tech/v1/transfers/<span class="o">{</span>transferId<span class="o">}</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15574445</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">294205</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetAccount"</span><span class="p">:</span><span class="w"> </span><span class="mi">7993919</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceAccount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"quote"</span><span class="p">:</span><span class="w"> </span><span class="mi">113379</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incoming_payment_waiting"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good times"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2151</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-14 15:25:51"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"transferRequest"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good times"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"hasActiveIssues"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">895.32</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GPB"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"customerTransactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6D9188CF-FA59-44C3-87A2-4506CE9C1EA3"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Get transfer info by id. Since we don&#39;t have push notifications yet, you can poll this endpoint to track your transfer status.</p>
+<h3 id='transfers-get-by-id-request'>Request</h3>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/transfers/{transferId}</code></strong></p>
+<h2 id='transfers-get-issues'>Get Issues</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X GET https://api.sandbox.transferwise.tech/v1/transfers/<span class="o">{</span>transferId<span class="o">}</span>/issues <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment has bounced back"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPENED"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Inorrect recipient account number"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Get pending issues that are suspending a transfer from further processing. This is more applicable for Bank Integrations use case when transfers are NOT funded from borderless account but funding is sent via bank transfer.
+For example &quot;DEPOSIT_AMOUNT_LESS_INVOICE&quot; means that arrived funding does not cover total transfer amount.</p>
+<h3 id='transfers-get-issues-request'>Request</h3>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/transfers/{transferId}/issues</code></strong></p>
+<h3 id='transfers-get-issues-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>Issue type: <br/><ul><li>DEPOSIT_AMOUNT_LESS_INVOICE</li><li>DEPOSIT_AMOUNT_MORE_INVOICE</li><li>PROVE_ACCOUNT_OWNERSHIP_WITH_REFERENCE_CODE</li><li>PROVE_ACCOUNT_OWNERSHIP_WITH_MICRO_DEPOSIT</li><li>JOINT_ACCOUNT_PROOF_NEEDED</li><li>BUSINESS_ORDER_PERSONAL_DEPO</li><li>INCORRECT_NAME_DEPOSIT</li><li>DEPOSIT_PROOF_NEEDED</li><li>PERSONAL_ORDER_BUSINESS_DEPO</li><li>INCORRECT_DEPOSIT_RECIPIENT_DETAILS</li><li>INCORRECT_SOURCE_ACCOUNT_NUMBER</li><ul></td>
+<td>Text</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Issue state: OPENED, IN_PROGRESS, CLOSED</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Additional details about issue. For example &#39;Incorrect recipient account number&#39;</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h2 id='transfers-get-delivery-time'>Get Delivery Time</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -6591,7 +6714,119 @@ This is not a guaranteed time but we are working hard to make these estimates as
 <td>Timestamp</td>
 </tr>
 </tbody></table>
-<h2 id='transfers-list-todo'>List - todo</h2><h2 id='transfers-requirements-todo'>Requirements - todo</h2><h1 id='users'>Users</h1><h2 id='users-sign-up-with-registration-code'>Sign Up with Registration Code</h2>
+<h2 id='transfers-list'>List</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X GET https://api.sandbox.transferwise.tech/v1/transfers?offset<span class="o">=</span>0&amp;limit<span class="o">=</span>100&amp;profile<span class="o">=</span>&lt;your profile id&gt;&amp;status<span class="o">=</span>funds_refunded&amp;createdDateStart<span class="o">=</span>2018-12-15&amp;createdDateEnd<span class="o">=</span>2018-12-30  <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:
+```json</p>
+</blockquote>
+
+<p>[
+  {
+    &quot;id&quot;: 15574445,
+    &quot;user&quot;: 294205,
+    &quot;targetAccount&quot;: 7993919,
+    &quot;sourceAccount&quot;: null,
+    &quot;quote&quot;: 113379,
+    &quot;status&quot;: &quot;funds_refunded&quot;,
+    &quot;reference&quot;: &quot;good times&quot;,
+    &quot;rate&quot;: 1.1179,
+    &quot;created&quot;: &quot;2018-12-16 15:25:51&quot;,
+    &quot;business&quot;: null,
+    &quot;transferRequest&quot;: null,
+    &quot;details&quot;: {
+      &quot;reference&quot;: &quot;good times&quot;
+    },
+    &quot;hasActiveIssues&quot;: false,
+    &quot;sourceValue&quot;: 1000,
+    &quot;sourceCurrency&quot;: &quot;EUR&quot;,
+    &quot;targetValue&quot;: 895.32,
+    &quot;targetCurrency&quot;: &quot;GPB&quot;,
+    &quot;customerTransactionId&quot;: &quot;6D9188CF-FA59-44C3-87A2-4506CE9C1EA3&quot;
+  },
+  {
+    &quot;id&quot;: 14759252,
+    &quot;user&quot;: 294205,
+    &quot;targetAccount&quot;: 5570192,
+    &quot;sourceAccount&quot;: null,
+    &quot;quote&quot;: 113371,
+    &quot;status&quot;: &quot;funds_refunded&quot;,
+    &quot;reference&quot;: &quot;&quot;,
+    &quot;rate&quot;: 1.1179,
+    &quot;created&quot;: &quot;2018-12-26 15:25:51&quot;,
+    &quot;business&quot;: null,
+    &quot;transferRequest&quot;: null,
+    &quot;details&quot;: {
+      &quot;reference&quot;: &quot;&quot;
+    },
+    &quot;hasActiveIssues&quot;: false,
+    &quot;sourceValue&quot;: 1000,
+    &quot;sourceCurrency&quot;: &quot;EUR&quot;,
+    &quot;targetValue&quot;: 895.32,
+    &quot;targetCurrency&quot;: &quot;GPB&quot;,
+    &quot;customerTransactionId&quot;: &quot;785C67AD-7E29-4DBC-9D4A-4C45D4D5333A&quot;
+  }
+]</p>
+<pre class="highlight plaintext"><code>
+Get the list of transfers for given user's profile (defaults to user's personal profile). 
+
+You can add query parameters to specify user's profile (personal or business), time period and/or payment status. 
+
+For example you can query:
+* all failed payments created since last week
+* all completed payments created since yesterday
+
+
+
+### Request
+
+**`GET https://api.sandbox.transferwise.tech/v1/transfers/?offset=0&amp;limit=100&amp;profile=&lt;your profile id&gt;&amp;status=funds_refunded&amp;createdDateStart=2018-12-15&amp;createdDateEnd=2018-12-30`**
+
+Field                     | Description             | Format
+---------                 | -------                 | -----------
+profile                   |        | Integer
+status                    |        | Integer
+createdDateStart          |        | Integer
+createdDateEnd            |        | Integer
+limit                     | Maximum !!!! todo       | Integer
+offset                    | Offset       | Integer
+
+
+
+
+
+#borderless-payouts-guide-track-transfer-status
+
+### Response
+
+You need to save transfer id for tracking its status later.
+
+Field                     | Description             | Format
+---------                 | -------                 | -----------
+estimatedDeliveryDate     | Estimated time when funds will arrive to recipient's bank account  | Timestamp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Requirements - todo
+
+</code></pre><h1 id='users'>Users</h1><h2 id='users-sign-up-with-registration-code'>Sign Up with Registration Code</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
