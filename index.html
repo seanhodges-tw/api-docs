@@ -270,6 +270,9 @@
             <li>
               <a href="#affiliates-guide" class="toc-h1 toc-link" data-title="Affiliates Guide">Affiliates Guide</a>
             </li>
+            <li>
+              <a href="#contact-us" class="toc-h1 toc-link" data-title="Contact Us">Contact Us</a>
+            </li>
             <div class="api-reference-separator">
               Full API Reference
             </div>
@@ -575,6 +578,23 @@
                     </li>
                     <li>
                       <a href="#user-profiles-create-identification-document" class="toc-h2 toc-link" data-title="Create Identification Document">Create Identification Document</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+              <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+                <ul class="toc-list-h2">
+                    <li>
+                      <a href="#errors-http-status-codes" class="toc-h2 toc-link" data-title="HTTP Status Codes">HTTP Status Codes</a>
+                    </li>
+                    <li>
+                      <a href="#errors-validation-errors" class="toc-h2 toc-link" data-title="Validation Errors">Validation Errors</a>
+                    </li>
+                    <li>
+                      <a href="#errors-authentication-errors" class="toc-h2 toc-link" data-title="Authentication Errors">Authentication Errors</a>
+                    </li>
+                    <li>
+                      <a href="#errors-system-errors" class="toc-h2 toc-link" data-title="System Errors">System Errors</a>
                     </li>
                 </ul>
             </li>
@@ -1099,8 +1119,8 @@ But in order to send money to Canada you would need to know four fields: Institu
 </tr>
 <tr>
 <td>details</td>
-<td>Currency specific group, see Recipients API</td>
-<td></td>
+<td>Currency specific fields</td>
+<td>Group</td>
 </tr>
 <tr>
 <td>details.sortCode</td>
@@ -1155,8 +1175,8 @@ But in order to send money to Canada you would need to know four fields: Institu
 </tr>
 <tr>
 <td>details</td>
-<td>Currency specific group, see Recipients API</td>
-<td></td>
+<td>Currency specific fields</td>
+<td>Group</td>
 </tr>
 <tr>
 <td>details.sortCode</td>
@@ -1176,7 +1196,7 @@ But in order to send money to Canada you would need to know four fields: Institu
 Once recipient provides bank account details to us we are able to complete your transfer.</p>
 
 <p>So all you need to know is recipient name and email to send payment.
-See below under Recipient API how to create email recipients.</p>
+See below under <a href="#recipient-accounts-create-email-recipient">Recipient Accounts.Create Email Recpients</a> for more details.</p>
 <h2 id='borderless-payouts-guide-create-transfer'>Create transfer</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -1190,7 +1210,9 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/transfers <span class="se"
           "quote": &lt;quote id&gt;,
           "customerTransactionId": "&lt;the UUID you generated for the transfer attempt&gt;",
           "details" : {
-              "reference" : "to my friend"
+              "reference" : "to my friend",
+              "transferPurpose": "verification.transfers.purpose.pay.bills",
+              "sourceOfFunds": "verification.source.of.funds.other"
             } 
          }'</span>
 
@@ -1265,7 +1287,23 @@ In case not it will get automatically cancelled.  </p>
 <td>Recipient will see this reference text in their bank statement. Maximum allowed characters depends on the currency route. <a href="https://transferwise.com/help/article/2348295/business/business-payment-tips">Business Payments Tips</a> article has a full list.</td>
 <td>Text</td>
 </tr>
+<tr>
+<td>details.transferPurpose (conditionally required)</td>
+<td>For example when target currency is THB. See more about conditions at <a href="#transfers-requirements">Transfers.Requirements</a></td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.sourceOfFunds (conditionally required)</td>
+<td>For example when target currency is USD and transfer amount exceeds 10k. See more about conditions at <a href="#transfers-requirements">Transfers.Requirements</a></td>
+<td>Text</td>
+</tr>
 </tbody></table>
+
+<p>There are two options to deal with conditionally required fields: <br/>
+<ul>
+ <li>Always provide values for these fields</li>
+ <li>Always call transfers-requirements endpoint and submit values only if indicated so.</li>
+</ul></p>
 <h3 id='borderless-payouts-guide-create-transfer-response'>Response</h3>
 <p>You need to save transfer id for tracking its status later.</p>
 
@@ -2195,7 +2233,19 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <li>Make few small value test payments via LIVE API before you start executing large number of transfers.</li>
 <li>All set. Switch it on.</li>
 </ul>
-<h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h1 id='affiliates-guide'>Affiliates Guide</h1><h1 id='full-api-reference'>Full API Reference</h1><h1 id='addresses'>Addresses</h1><h2 id='addresses-create'>Create</h2>
+<h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h1 id='affiliates-guide'>Affiliates Guide</h1><h1 id='contact-us'>Contact Us</h1>
+<p><strong>Have a technical question about API?</strong></br>
+Send email to api@transferwise.com</p>
+
+<p><strong>Making lots of payments?</strong></br>
+We have a dedicated team to talk to you. <a href="https://transferwise.com/contact-sales">https://transferwise.com/contact-sales</a></p>
+
+<p><strong>Have a question how TransferWise works?</strong><br/>
+Search Transferwise Help Centre. <a href="https://transferwise.com/help">https://transferwise.com/help</a></p>
+
+<p><strong>Want more information about your payments?</strong> <br/>
+Lookup TransferWise Support Centre details. <a href="https://transferwise.com/contact">https://transferwise.com/contact</a></p>
+<h1 id='full-api-reference'>Full API Reference</h1><h1 id='addresses'>Addresses</h1><h2 id='addresses-create'>Create</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -3375,7 +3425,7 @@ Quote which is used in this call must have type &quot;BALANCE_CONVERSION&quot;.<
 </thead><tbody>
 <tr>
 <td>borderlessAccountId</td>
-<td>Borderless account id</td>
+<td>Your borderlessAccountId is included in <a href="#borderless-accounts-get-account-balance">Get Account Balance</a> response as field &quot;id&quot;.</td>
 <td>Integer</td>
 </tr>
 <tr>
@@ -4027,8 +4077,8 @@ Please also look at <a href="#recipient-accounts-requirements">Recipients.Requir
 </tr>
 <tr>
 <td>details</td>
-<td>Currency specific group, see Recipients API</td>
-<td></td>
+<td>Currency specific fields</td>
+<td>Group</td>
 </tr>
 <tr>
 <td>details.legalType</td>
@@ -4088,8 +4138,8 @@ Please also look at <a href="#recipient-accounts-requirements">Recipients.Requir
 </tr>
 <tr>
 <td>details</td>
-<td>Currency specific group, see Recipients API</td>
-<td></td>
+<td>Currency specific fields</td>
+<td>Group</td>
 </tr>
 <tr>
 <td>details.legalType</td>
@@ -6361,7 +6411,7 @@ We only support private customers sending payments to private recipients. Busine
 
 <p>Changes transfer status from bounced_back to funds_refunded.</p>
 <h3 id='simulation-simulate-transfer-processing-response'>Response</h3>
-<p>Transfer entity with changed status. See more at <a href="#transfers-get-by-id">Transfers.Get By Id</a></p>
+<p>Transfer entity with changed status. </p>
 <h1 id='terms-and-conditions'>Terms and Conditions</h1><h2 id='terms-and-conditions-get-terms-and-conditions'>Get Terms and Conditions</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -6404,7 +6454,9 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/transfers <span class="se"
           "quote": &lt;quote id&gt;,
           "customerTransactionId": "&lt;the UUID you generated for the transfer attempt&gt;",
           "details" : {
-              "reference" : "to my friend"
+              "reference" : "to my friend",
+              "transferPurpose": "verification.transfers.purpose.pay.bills",
+              "sourceOfFunds": "verification.source.of.funds.other"
             } 
          }'</span>
 
@@ -6468,7 +6520,23 @@ In case not it will get automatically cancelled.  </p>
 <td>Recipient will see this reference text in their bank statement. Maximum allowed characters depends on the currency route. <a href="https://transferwise.com/help/article/2348295/business/business-payment-tips">Business Payments Tips</a> article has a full list.</td>
 <td>Text</td>
 </tr>
+<tr>
+<td>details.transferPurpose (conditionally required)</td>
+<td>For example when target currency is THB. See more about conditions at <a href="#transfers-requirements">Transfers.Requirements</a></td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.sourceOfFunds (conditionally required)</td>
+<td>For example when target currency is USD and transfer amount exceeds 10k. See more about conditions at <a href="#transfers-requirements">Transfers.Requirements</a></td>
+<td>Text</td>
+</tr>
 </tbody></table>
+
+<p>There are two options to deal with conditionally required fields: <br/>
+<ul>
+ <li>Always provide values for these fields</li>
+ <li>Always call transfers-requirements endpoint and submit values only if indicated so.</li>
+</ul></p>
 <h3 id='transfers-create-response'>Response</h3>
 <p>You need to save transfer id for tracking its status later.</p>
 
@@ -7888,6 +7956,93 @@ Returns empty result if successful. </p>
 <td>YYYY-MM-DD</td>
 </tr>
 </tbody></table>
+<h1 id='errors'>Errors</h1><h2 id='errors-http-status-codes'>HTTP Status Codes</h2>
+<p>We use common HTTP status codes included in the response header to indicate success or failure.</p>
+
+<table><thead>
+<tr>
+<th><strong>Code</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Successful request.</td>
+</tr>
+<tr>
+<td>201</td>
+<td>OK. Resource created.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request. Request message data did not pass validation.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorised. Not authorised to access requested data.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden. Access to requested data is forbidden.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found. Requested resource does not exist.</td>
+</tr>
+<tr>
+<td>408</td>
+<td>Timeout. Operation timed out.</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Unprocessable entity. Request message data did not pass validation.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>TransferWise server error.</td>
+</tr>
+</tbody></table>
+<h2 id='errors-validation-errors'>Validation Errors</h2>
+<blockquote>
+<p>Example Validation Error:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error.route.not.supported"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This route is not supported"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"CNY-EUR"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Data validation or violation of business rules related errors. Response could contain multiple errors.</p>
+<h2 id='errors-authentication-errors'>Authentication Errors</h2>
+<blockquote>
+<p>Example Authentication Error:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unauthorized"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Full authentication is required to access this resource"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Security related errors.</p>
+<h2 id='errors-system-errors'>System Errors</h2>
+<blockquote>
+<p>Example System Error:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-02T13:07:39.644+0000"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Internal Server Error"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"exception"</span><span class="p">:</span><span class="w"> </span><span class="s2">"java.lang.NullPointerException"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No message available"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/quotes/106031/account-requirements"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Something went wrong in our side.</p>
 
       </div>
       <div class="dark-box">
