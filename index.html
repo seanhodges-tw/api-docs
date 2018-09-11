@@ -536,6 +536,9 @@
                     <li>
                       <a href="#transfers-list" class="toc-h2 toc-link" data-title="List">List</a>
                     </li>
+                    <li>
+                      <a href="#transfers-requirements" class="toc-h2 toc-link" data-title="Requirements">Requirements</a>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -6723,110 +6726,359 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/transfers?offset<span class
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
 </code></pre>
 <blockquote>
-<p>Example Response:
-```json</p>
+<p>Example Response:</p>
 </blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15574445</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">294205</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetAccount"</span><span class="p">:</span><span class="w"> </span><span class="mi">7993919</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceAccount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"quote"</span><span class="p">:</span><span class="w"> </span><span class="mi">113379</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"funds_refunded"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good times"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.1179</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-16 15:25:51"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"transferRequest"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good times"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"hasActiveIssues"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">895.32</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GPB"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"customerTransactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6D9188CF-FA59-44C3-87A2-4506CE9C1EA3"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14759252</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="mi">294205</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetAccount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5570192</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceAccount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"quote"</span><span class="p">:</span><span class="w"> </span><span class="mi">113371</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"funds_refunded"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.1179</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-26 15:25:51"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"transferRequest"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"hasActiveIssues"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">895.32</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GPB"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"customerTransactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"785C67AD-7E29-4DBC-9D4A-4C45D4D5333A"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Get the list of transfers for given user&#39;s profile (defaults to user&#39;s personal profile). </p>
 
-<p>[
-  {
-    &quot;id&quot;: 15574445,
-    &quot;user&quot;: 294205,
-    &quot;targetAccount&quot;: 7993919,
-    &quot;sourceAccount&quot;: null,
-    &quot;quote&quot;: 113379,
-    &quot;status&quot;: &quot;funds_refunded&quot;,
-    &quot;reference&quot;: &quot;good times&quot;,
-    &quot;rate&quot;: 1.1179,
-    &quot;created&quot;: &quot;2018-12-16 15:25:51&quot;,
-    &quot;business&quot;: null,
-    &quot;transferRequest&quot;: null,
+<p>You can add query parameters to specify user&#39;s profile (personal or business), time period and/or payment status. </p>
+
+<p>For example you can query:<br/>
+<ul>
+  <li> all failed payments created since last week</li>
+  <li> all completed payments created since yesterday</li>
+</ul></p>
+<h3 id='transfers-list-request'>Request</h3>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/transfers/?offset=0&amp;limit=100&amp;profile=&lt;your profile id&gt;&amp;status=funds_refunded&amp;createdDateStart=2018-12-15&amp;createdDateEnd=2018-12-30</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>profile</td>
+<td>User profile id. If parameter is omitted, defaults to user&#39;s personal profile</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Status code or codes list (as comma separated value list) to filter returned transfers with. See <a href="#borderless-payouts-guide-track-transfer-status">Track transfer status</a> for complete list of statuses.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>createdDateStart</td>
+<td>Starting date to filter transfers, inclusive of the provided date.</td>
+<td>yyyy-MM-dd</td>
+</tr>
+<tr>
+<td>createdDateEnd</td>
+<td>Ending date to filter transfers, inclusive of the provided date.</td>
+<td>yyyy-MM-dd</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Maximum number of records to be returned in response</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Starting record number</td>
+<td>Integer</td>
+</tr>
+</tbody></table>
+<h2 id='transfers-requirements'>Requirements</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST https://api.sandbox.transferwise.tech/v1/transfer-requirements <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+            "targetAccount": &lt;recipient account id&gt;,
+            "quote": &lt;quote id&gt;,
+            "details": {
+              "reference": "good times",
+              "sourceOfFunds": "verification.source.of.funds.other",
+              "sourceOfFundsOther": "Trust funds"
+            },
+            "customerTransactionId": "6D9188CF-FA59-44C3-87A2-4506CE9C1EA3"
+         }'</span>
+
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transfer reference"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reference"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"refreshRequirementsOnChange"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"displayFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"example"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"validationRegexp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"validationAsync"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"valuesAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transfer purpose"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transferPurpose"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"refreshRequirementsOnChange"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"displayFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"example"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"validationRegexp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"validationAsync"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"valuesAllowed"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verification.transfers.purpose.purchase.property"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buying property abroad"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verification.transfers.purpose.pay.bills"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rent or other property expenses"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verification.transfers.purpose.mortgage"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mortgage payment"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verification.transfers.purpose.pay.tuition"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tuition fees or studying expenses"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verification.transfers.purpose.send.to.family"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sending money home to family"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verification.transfers.purpose.living.expenses"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"General monthly living expenses"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verification.transfers.purpose.other"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Other"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Source of funds"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sourceOfFunds"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"refreshRequirementsOnChange"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"displayFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"example"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"validationRegexp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"validationAsync"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"valuesAllowed"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verification.source.of.funds.salary"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Salary"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verification.source.of.funds.investment"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Investments (stocks, properties, etc.)"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verification.source.of.funds.inheritance"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Inheritance"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verification.source.of.funds.loan"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Loan"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verification.source.of.funds.other"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Other"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Almost every country has their own specific originality when it comes to the nitty gritty details of domestic payment systems and money transfer regulations. 
+Maximum allowed length of reference text is a good example. The US payment system, ACH, supports 10 characters only, but transfers within Mexico allow up to 100 characters and so on.</p>
+
+<p>Same is true for requirements arising from Anti-Money Laundering regulations adopted in different countries. Transfers from and to USD almost always require more details about source of funds and transfer purpose, compared to transfers to EUR or GBP.</p>
+
+<p>Endpoint /transfer-requirements exposes all these specific requirements based on specific quote and target recipient account.</p>
+
+<p>To make sure that processing of your transfers does not get delayed because of missing details, we highly recommend to verify the transfer requirements before before submitting any transfer.</p>
+<h3 id='transfers-requirements-request'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/transfer-requirements</code></strong><br/></p>
+
+<p>1.Prepare request body to create transfer object first. 
+Now post this request body to transfer-requirements endpoint to figure out if there are any other required fields.</p>
+
+<p>2.Analyze the returned list of fields. Our example includes reference, sourceOfFunds and transferPurpose fields.  Field &#39;reference&#39; is optional. Fields &#39;sourceOfFunds&#39; and &#39;transferPurpose&#39; are required and both have 
+refreshRequirementsOnChange=true which indicates that there could be additional fields required depending on the selected value.</p>
+
+<p>In our example you will have to POST request to/v1/transfer-requirements` second time as well with values set for &#39;transferPurpose&#39; and &#39;sourceOfFunds&#39;.
+So in case you set sourceOfFunds = &#39;verification.source.of.funds.other&#39;  then another text field called &quot;sourceOfFundsOther&quot; is also required where you need to specify the details in free format.</p>
+
+<p>3.Once you get to the point where you have provided values for all fields which have refreshRequirementsOnChange=true then you have complete set of fields to compose a valid request to create a transfer object. 
+For example this is a valid request to create a transfer.
+<br/> POST /v1/transfers:<br/></p>
+
+<p>{
+    &quot;targetAccount&quot;: <recipient account id>,
+    &quot;quote&quot;: <quote id>,
     &quot;details&quot;: {
-      &quot;reference&quot;: &quot;good times&quot;
+      &quot;reference&quot;: &quot;good times&quot;,
+      &quot;sourceOfFunds&quot;: &quot;verification.source.of.funds.other&quot;,
+      &quot;sourceOfFundsOther&quot;: &quot;Trust funds&quot;
     },
-    &quot;hasActiveIssues&quot;: false,
-    &quot;sourceValue&quot;: 1000,
-    &quot;sourceCurrency&quot;: &quot;EUR&quot;,
-    &quot;targetValue&quot;: 895.32,
-    &quot;targetCurrency&quot;: &quot;GPB&quot;,
     &quot;customerTransactionId&quot;: &quot;6D9188CF-FA59-44C3-87A2-4506CE9C1EA3&quot;
-  },
-  {
-    &quot;id&quot;: 14759252,
-    &quot;user&quot;: 294205,
-    &quot;targetAccount&quot;: 5570192,
-    &quot;sourceAccount&quot;: null,
-    &quot;quote&quot;: 113371,
-    &quot;status&quot;: &quot;funds_refunded&quot;,
-    &quot;reference&quot;: &quot;&quot;,
-    &quot;rate&quot;: 1.1179,
-    &quot;created&quot;: &quot;2018-12-26 15:25:51&quot;,
-    &quot;business&quot;: null,
-    &quot;transferRequest&quot;: null,
-    &quot;details&quot;: {
-      &quot;reference&quot;: &quot;&quot;
-    },
-    &quot;hasActiveIssues&quot;: false,
-    &quot;sourceValue&quot;: 1000,
-    &quot;sourceCurrency&quot;: &quot;EUR&quot;,
-    &quot;targetValue&quot;: 895.32,
-    &quot;targetCurrency&quot;: &quot;GPB&quot;,
-    &quot;customerTransactionId&quot;: &quot;785C67AD-7E29-4DBC-9D4A-4C45D4D5333A&quot;
-  }
-]</p>
-<pre class="highlight plaintext"><code>
-Get the list of transfers for given user's profile (defaults to user's personal profile). 
+}</p>
+<h3 id='transfers-requirements-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>&quot;transfer&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>fields[n].name</td>
+<td>Field description</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>fields[n].group[n].key</td>
+<td>Key is name of the field you should include in the JSON</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>fields[n].group[n].type</td>
+<td>Display type of field (e.g. text, select, etc)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>fields[n].group[n].refreshRequirementsOnChange</td>
+<td>Tells you whether you should call POST transfer-requirements once the field value is set to discover required lower level fields.</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>fields[n].group[n].required</td>
+<td>Indicates if the field is mandatory or not</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>fields[n].group[n].displayFormat</td>
+<td>Display format pattern.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>fields[n].group[n].example</td>
+<td>Example value.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>fields[n].group[n].minLength</td>
+<td>Min valid length of field value.</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>fields[n].group[n].maxLength</td>
+<td>Max valid length of field value.</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>fields[n].group[n].validationRegexp</td>
+<td>Regexp validation pattern.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>fields[n].group[n].validationAsync</td>
+<td>Validator URL and parameter name you should use when submitting the value for validation</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>fields[n].group[n].valuesAllowed[n].key</td>
+<td>List of allowed values. Value key</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>fields[n].group[n].valuesAllowed[n].name</td>
+<td>List of allowed values. Value name.</td>
+<td>Text</td>
+</tr>
+</tbody></table>
 
-You can add query parameters to specify user's profile (personal or business), time period and/or payment status. 
-
-For example you can query:
-* all failed payments created since last week
-* all completed payments created since yesterday
-
-
-
-### Request
-
-**`GET https://api.sandbox.transferwise.tech/v1/transfers/?offset=0&amp;limit=100&amp;profile=&lt;your profile id&gt;&amp;status=funds_refunded&amp;createdDateStart=2018-12-15&amp;createdDateEnd=2018-12-30`**
-
-Field                     | Description             | Format
----------                 | -------                 | -----------
-profile                   |        | Integer
-status                    |        | Integer
-createdDateStart          |        | Integer
-createdDateEnd            |        | Integer
-limit                     | Maximum !!!! todo       | Integer
-offset                    | Offset       | Integer
-
-
-
-
-
-#borderless-payouts-guide-track-transfer-status
-
-### Response
-
-You need to save transfer id for tracking its status later.
-
-Field                     | Description             | Format
----------                 | -------                 | -----------
-estimatedDeliveryDate     | Estimated time when funds will arrive to recipient's bank account  | Timestamp
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Requirements - todo
-
-</code></pre><h1 id='users'>Users</h1><h2 id='users-sign-up-with-registration-code'>Sign Up with Registration Code</h2>
+<p><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/></p>
+<h1 id='users'>Users</h1><h2 id='users-sign-up-with-registration-code'>Sign Up with Registration Code</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
