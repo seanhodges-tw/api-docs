@@ -348,6 +348,9 @@
                       <a href="#recipient-accounts-list" class="toc-h2 toc-link" data-title="List">List</a>
                     </li>
                     <li>
+                      <a href="#recipient-accounts-delete" class="toc-h2 toc-link" data-title="Delete">Delete</a>
+                    </li>
+                    <li>
                       <a href="#recipient-accounts-requirements" class="toc-h2 toc-link" data-title="Requirements">Requirements</a>
                     </li>
                     <li>
@@ -606,7 +609,7 @@ Just follow these three simple steps. </p>
 <ul>
 <li><p>Sign up for TransferWise borderless account. <a href="https://transferwise.com/gb/borderless">https://transferwise.com/gb/borderless</a></p></li>
 <li><p>Make a transfer — check <a href="https://transferwise.com/help/article/1779442/creating-a-transfer/video-guide-make-a-transfer">our video guide</a> for a step-by-step guide.</p></li>
-<li><p>Verify that our coverage includes your currency route(s).</p></li>
+<li><p>Verify that our coverage includes your currency route(s). Check <a href="https://transferwise.com/help/article/1569835/basic-information/supported-currencies">Supported Currencies</a>.</p></li>
 </ul>
 <h3 id='borderless-payouts-guide-getting-started-3-choose-the-best-tool-for-you'>3. Choose the best tool for you</h3>
 <p>There are two ways you can make large number of payouts:</p>
@@ -619,6 +622,8 @@ Just follow these three simple steps. </p>
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
 </code></pre><h3 id='borderless-payouts-guide-api-access-authentication'>Authentication</h3>
 <p>Signup for developer account to get API token for sandbox. <a href="https://sandbox.transferwise.tech/register">https://sandbox.transferwise.tech/register</a></p>
+
+<p>NB! Two factor authentication (2FA) code for sandbox login is 111111 for everyone.</p>
 
 <p>Your developer account will have some test money so you can start making payments in same way as in LIVE environment.  You will find your API tokens in the Settings page. </p>
 
@@ -677,6 +682,9 @@ Just follow these three simple steps. </p>
 </span></code></pre>
 <p>You only need to call this endpoint once to obtain your user profile id.
 Your personal and business profiles have different IDs.  Profile id values are required when making payouts. </p>
+
+<p>It is recommended to always provide profileId when you are creating new resources later (Create Quote, Create Recipient Account, Create Transfer). 
+If you omit profileId then resource will by default belong to your personal profile and this might not be your intention as you most probably want to execute transfers under your business profile.</p>
 <h3 id='borderless-payouts-guide-get-your-profile-id-request'>Request</h3>
 <p><strong><code>GET https://api.sandbox.transferwise.tech/v1/profiles</code></strong></p>
 <h3 id='borderless-payouts-guide-get-your-profile-id-response'>Response</h3>
@@ -1053,7 +1061,7 @@ Recipient is a person or institution  who is the ultimate beneficiary of your pa
 <p>Recipient bank account details are different for different currencies. For example you only need to know IBAN number to send payments to most European and Nordic countries. 
 But in order to send money to Canada you would need to know four fields: Institution No, Transit no, Account No &amp; Account Type.</p>
 
-<p>GBP example is provided here. You can find other currency examples in Recipient API section below.  </p>
+<p>GBP example is provided here. You can find other currency examples in <a href="#recipient-accounts">Recipient Accounts</a> section below.  </p>
 <h3 id='borderless-payouts-guide-create-recipient-account-request'>Request</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/v1/accounts</code></strong></p>
 
@@ -1399,6 +1407,11 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/transfers/<span class="o">
 <p><br/>
 This API call is the final step for executing payouts. TransferWise will now debit funds from your borderless balance and start processing your transfer. 
 If your borderless balance is short of funds then this call will fail with &quot;insufficient funds&quot; error.</p>
+
+<p>Initial developer account has by default plentiful funds available for EUR, USD, GBP and AUD.<br>
+You can add new currencies to your account via user interface: <a href="https://sandbox.transferwise.tech">https://sandbox.transferwise.tech</a></p>
+
+<p>And then you can topup your new currencies by converting funds from other currencies.</p>
 <h3 id='borderless-payouts-guide-fund-transfer-request'>Request</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/v1/transfers/{transferId}/payments</code></strong></p>
 
@@ -1540,6 +1553,16 @@ Payment systems in different countries operate in different speeds and frequency
 <li><p><strong>funds_refunded</strong> — Transfer has been refunded. Final state of transfer.</p></li>
 <li><p><strong>bounced_back</strong> — Transfer has bounced back but has not been cancelled nor refunded yet.</p></li>
 </ul>
+
+<p>Transfer statuses in API have different names than what you will see in our website. This is because we have transformed our API transfer statuses to more human readable texts in our website. 
+For example &quot;Completed&quot; in our website corresponds to &quot;outgoing_payment_sent&quot; in API.</p>
+
+<p><br/><br/>
+<strong>Sandbox limitations</strong></p>
+
+<p>We don&#39;t send out email notifications about payment status changes in sandbox.</p>
+
+<p>We don&#39;t process payments in sandbox which means that created payments remain in their first state. You can use <a href="#simulation">Simulation</a> endpoints to change transfer statuses in sandbox.</p>
 <h2 id='borderless-payouts-guide-check-account-balance'>Check account balance</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -3649,7 +3672,7 @@ Quote also calculates transfer fee and estimates delivery time. </p>
 </tr>
 <tr>
 <td>type</td>
-<td>&#39;BALANCE_PAYOUT&#39; for payments funded from borderless account <br/> &#39;REGULAR&#39; for other payments <br/> &#39;BALANCE_CONVERSION&#39; for conversion between balances</td>
+<td>&#39;BALANCE_PAYOUT&#39; for payments funded from borderless account  <br/> &#39;BALANCE_CONVERSION&#39; for conversion between balances  <br/> &#39;REGULAR&#39; for other payments</td>
 <td>Text</td>
 </tr>
 </tbody></table>
@@ -4190,7 +4213,7 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/accounts?profile<span class
 </span><span class="p">]</span><span class="w">
 
 </span></code></pre>
-<p>Fetch list of your recipient accounts. Filter by currency and/or by user profile Id.
+<p>Fetch list of your recipient accounts. Filter by currency and/or user profile Id.
 This list does not currently support pagination.
 Therefore if you have very many recipient accounts defined in your business profile then please filter by currency to ensure a reasonable response time.</p>
 <h3 id='recipient-accounts-list-request'>Request</h3>
@@ -4216,6 +4239,21 @@ Therefore if you have very many recipient accounts defined in your business prof
 <td>Text</td>
 </tr>
 </tbody></table>
+<h2 id='recipient-accounts-delete'>Delete</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X DELETE https://api.sandbox.transferwise.tech/v1/accounts/<span class="o">{</span>accountId<span class="o">}</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
+</code></pre>
+<p>Deletes a recipient by changing its status to inactive. Only active recipients can be deleted and a recipient cannot be reactivated, however you can create a new recipient with the same details instead.</p>
+
+<p>Response is empty if delete succeeds.</p>
+
+<p>Requesting to delete recipient that is already inactive will return an http status 403 (forbidden).</p>
+<h3 id='recipient-accounts-delete-request'>Request</h3>
+<p><strong><code>DELETE https://api.sandbox.transferwise.tech/v1/accounts/{accountId}</code></strong></p>
 <h2 id='recipient-accounts-requirements'>Requirements</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -4613,7 +4651,7 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/validators/sort-code?sortCo
 
 </span></code></pre>
 <p>There are several validation URLs that make creating correct recipient accounts easier. 
-These URLs are also included in fields provided by <a href="#recipients-requirements">Recipients.Requirements</a> endpoint.</p>
+These URLs are also included in fields provided by <a href="#recipient-accounts-requirements">Recipient Accounts.Requirements</a> endpoint.</p>
 
 <p><strong>GBP</strong></p>
 
@@ -4757,19 +4795,20 @@ These URLs are also included in fields provided by <a href="#recipients-requirem
 <blockquote>
 <p>Example Request (ARS):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"ARS"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"argentina"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"taxId"</span>: <span class="s2">"20-34149938-1"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"0110482420048200036238"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "ARS",
+          "type": "argentina",
+          "legalType": "PRIVATE",
+          "details": {
+           "taxId": "20-34149938-1",
+           "accountNumber": "0110482420048200036238"
+         }
+      }'</span>
 </code></pre>
 <p>Send payments to Argentina. </p>
 
@@ -4782,19 +4821,20 @@ These URLs are also included in fields provided by <a href="#recipients-requirem
 <blockquote>
 <p>Example Request (AUD):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"AUD"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"australian"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bsbCode"</span>: <span class="s2">"023604"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"123456789"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "AUD",
+          "type": "australian",
+          "legalType": "PRIVATE",
+          "details": {
+           "bsbCode": "023604",
+           "accountNumber": "123456789"
+          }
+        }'</span>
 </code></pre>
 <p>Send payments to Australia. </p>
 
@@ -4807,20 +4847,21 @@ These URLs are also included in fields provided by <a href="#recipients-requirem
 <blockquote>
 <p>Example Request (BDT):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"BDT"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"bangladesh"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"015"</span>,
-       <span class="s2">"branchCode"</span>: <span class="s2">"015270362"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"5060011118"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "BDT",
+          "type": "bangladesh",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "015",
+           "branchCode": "015270362",
+           "accountNumber": "5060011118"
+           }
+        }'</span>
 </code></pre>
 <aside class="warning">
 We only support private customers sending payments to private recipients. Businesses customers are not supported yet.
@@ -4837,18 +4878,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (BGN):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"BGN"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"BG89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "BGN",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "BG89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Bulgaria. </p>
 
@@ -4861,23 +4903,24 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (BRL):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"BRL"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"brazil"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"218"</span>,
-       <span class="s2">"branchCode"</span>: <span class="s2">"1234"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"12345678-9"</span>,
-       <span class="s2">"accountType"</span>: <span class="s2">"CHECKING"</span>,
-       <span class="s2">"cpf"</span>: <span class="s2">"123.456.789-12"</span>,
-       <span class="s2">"phoneNumber"</span>: <span class="s2">"+55 21 5555 5555"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "BRL",
+          "type": "brazil",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "218",
+           "branchCode": "1234",
+           "accountNumber": "12345678-9",
+           "accountType": "CHECKING",
+           "cpf": "123.456.789-12",
+           "phoneNumber": "+55 21 5555 5555"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Brazil. </p>
 
@@ -4892,22 +4935,22 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (CAD):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"CAD"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"canadian"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"institutionNumber"</span>: <span class="s2">"006"</span>,
-       <span class="s2">"transitNumber"</span>: <span class="s2">"04841"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"1234567"</span>,
-       <span class="s2">"accountType"</span>: <span class="s2">"Checking"</span>,
-
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "CAD",
+          "type": "canadian",
+          "legalType": "PRIVATE",
+          "details": {
+           "institutionNumber": "006",
+           "transitNumber": "04841",
+           "accountNumber": "1234567",
+           "accountType": "Checking",
+     }
+  }'</span>
 </code></pre>
 <p>Send payments to Canada. </p>
 
@@ -4922,18 +4965,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (CHF):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"CHF"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"CH89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "CHF",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "CH89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Switzerland. </p>
 
@@ -4946,22 +4990,23 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (CLP):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"CLP"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"chile"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"504"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"12345678901234567890"</span>,
-       <span class="s2">"rut"</span>: <span class="s2">"760864285"</span>,
-       <span class="s2">"accountType"</span>: <span class="s2">"CHECKING"</span>,
-       <span class="s2">"phoneNumber"</span>: <span class="s2">"+56 33 555 5555"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "CLP",
+          "type": "chile",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "504",
+           "accountNumber": "12345678901234567890",
+           "rut": "760864285",
+           "accountType": "CHECKING",
+           "phoneNumber": "+56 33 555 5555"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Chile. </p>
 
@@ -4974,18 +5019,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (CNY):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"CNY"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"chinese_card"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"cardNumber"</span>: <span class="s2">"6240008631401148"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "CNY",
+          "type": "chinese_card",
+          "legalType": "PRIVATE",
+          "details": {
+           "cardNumber": "6240008631401148"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to China Unionpay cardholder. </p>
 
@@ -4998,36 +5044,38 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (CZK Local):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"CZK"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"czech"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"prefix"</span>: <span class="s2">"000000"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"5060011118"</span>,
-       <span class="s2">"bankCode"</span>: <span class="s2">"5500"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "CZK",
+          "type": "czech",
+          "legalType": "PRIVATE",
+          "details": {
+           "prefix": "000000",
+           "accountNumber": "5060011118",
+           "bankCode": "5500"
+           }
+        }'</span>
 </code></pre>
 <blockquote>
 <p>Example Request (CZK IBAN):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"CZK"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"CZ89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "CZK",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "CZ89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Czech Republic. </p>
 
@@ -5052,18 +5100,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (DKK):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"DKK"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"DK89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "DKK",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "DK89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Denmark. </p>
 
@@ -5076,19 +5125,20 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (EGP):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"EGP"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"egypt_local"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"ECBAEGCA"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"123456789"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "EGP",
+          "type": "egypt_local",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "ECBAEGCA",
+           "accountNumber": "123456789"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Egypt. </p>
 
@@ -5103,18 +5153,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (EUR):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"EUR"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"DE89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "EUR",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "DE89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Eurozone countries: Austria, Belgium, Cyprus, Estonia, Finland, France, Germany, Greece, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Portugal, Slovakia, Slovenia, Spain.</p>
 
@@ -5127,35 +5178,37 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (GBP Sort Code):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"GBP"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"sort_code"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"sortCode"</span>: <span class="s2">"40-30-20"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"12345678"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "GBP",
+          "type": "sort_code",
+          "legalType": "PRIVATE",
+          "details": {
+           "sortCode": "40-30-20",
+           "accountNumber": "12345678"
+           }
+        }'</span>
 </code></pre>
 <blockquote>
 <p>Example Request (GBP IBAN):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"GBP"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"GB89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "GBP",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "GB89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to United Kingdom. </p>
 
@@ -5180,18 +5233,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (GEL):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"GEL"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"GE89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "GEL",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "GE89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Georgia.</p>
 
@@ -5204,19 +5258,20 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (GHS):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"GHS"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"ghana"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"030100"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"0011XXXXXXXXXX"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "GHS",
+          "type": "ghana",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "030100",
+           "accountNumber": "0011XXXXXXXXXX"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Ghana.</p>
 
@@ -5231,19 +5286,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (HKD):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"HKD"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"hongkong"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"307"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"005-231289-112"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "HKD",
+          "type": "hongkong",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "307",
+           "accountNumber": "005-231289-112"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Hong Kong.</p>
 
@@ -5258,18 +5313,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"HRK"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"HR89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "HRK",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "HR89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Croatia.</p>
 
@@ -5282,34 +5338,36 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (HUF Local):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"HUF"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"hungarian"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"accountNumber"</span>: <span class="s2">"12000000-12345678-00000000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "HUF",
+          "type": "hungarian",
+          "legalType": "PRIVATE",
+          "details": {
+           "accountNumber": "12000000-12345678-00000000"
+           }
+        }'</span>
 </code></pre>
 <blockquote>
 <p>Example Request (HUF IBAN):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"HUF"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"HU89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "HUF",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "HU89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Hungary. </p>
 
@@ -5334,19 +5392,20 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (IDR):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"IDR"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"indonesian"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"610306"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"6789112345678"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "IDR",
+          "type": "indonesian",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "610306",
+           "accountNumber": "6789112345678"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Indonesia.</p>
 
@@ -5361,36 +5420,38 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (ILS IBAN):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"ILS"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"israeli_local"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"IL620108000000099999999"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+        "profile": &lt;your profile id&gt;,
+        "accountHolderName": "&lt;recipient name&gt;",
+        "currency": "ILS",
+        "type": "israeli_local",
+        "legalType": "PRIVATE",
+        "details": {
+         "IBAN": "IL620108000000099999999"
+         }
+      }'</span>
 </code></pre>
 <blockquote>
 <p>Example Request (ILS Local Bank Code):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"ILS"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"israeli_bank_code"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"054"</span>,
-       <span class="s2">"branchCode"</span>: <span class="s2">"001"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"123456789"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "ILS",
+          "type": "israeli_bank_code",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "054",
+           "branchCode": "001",
+           "accountNumber": "123456789"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Israel. </p>
 
@@ -5417,20 +5478,20 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (INR):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"INR"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"indian"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"ifscCode"</span>: <span class="s2">"YESB0236041"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"678911234567891"</span>,
-
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "INR",
+          "type": "indian",
+          "legalType": "PRIVATE",
+          "details": {
+           "ifscCode": "YESB0236041",
+           "accountNumber": "678911234567891",
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to India.</p>
 
@@ -5443,21 +5504,22 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (JPY):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"JPY"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"japanese"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"6470"</span>,
-       <span class="s2">"branchCode"</span>: <span class="s2">"100"</span>,
-       <span class="s2">"accountType"</span>: <span class="s2">"CURRENT"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"1234567"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "JPY",
+          "type": "japanese",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "6470",
+           "branchCode": "100",
+           "accountType": "CURRENT",
+           "accountNumber": "1234567"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Japan.</p>
 
@@ -5472,35 +5534,37 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (KES Bank Account):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"KES"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"kenya_local"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"35"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"0023183991919"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "KES",
+          "type": "kenya_local",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "35",
+           "accountNumber": "0023183991919"
+           }
+        }'</span>
 </code></pre>
 <blockquote>
 <p>Example Request (KES Mobile MPESA):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"KES"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"kenya_mobile"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"accountNumber"</span>: <span class="s2">"2547XXXXXXXX"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "KES",
+          "type": "kenya_mobile",
+          "legalType": "PRIVATE",
+          "details": {
+           "accountNumber": "2547XXXXXXXX"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Kenya. </p>
 
@@ -5527,20 +5591,21 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (LKR):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"LKR"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"srilanka"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"7214"</span>,
-       <span class="s2">"branchCode"</span>: <span class="s2">"100"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"5060011118"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "LKR",
+          "type": "srilanka",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "7214",
+           "branchCode": "100",
+           "accountNumber": "5060011118"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Sri Lanka. </p>
 
@@ -5555,19 +5620,20 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (MAD):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"MAD"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"morocco"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"BCMAMAMC"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"123456789012345678901234"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "MAD",
+          "type": "morocco",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "BCMAMAMC",
+           "accountNumber": "123456789012345678901234"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Morocco. </p>
 
@@ -5582,18 +5648,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (MXN):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"MXN"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"mexican"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"clabe"</span>: <span class="s2">"032180000118359719"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "MXN",
+          "type": "mexican",
+          "legalType": "PRIVATE",
+          "details": {
+           "clabe": "032180000118359719"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Mexico. </p>
 
@@ -5606,19 +5673,20 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (MYR):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"MYR"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"malaysian"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"swiftCode"</span>: <span class="s2">"ABNAMYKL"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"159012938613"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "MYR",
+          "type": "malaysian",
+          "legalType": "PRIVATE",
+          "details": {
+           "swiftCode": "ABNAMYKL",
+           "accountNumber": "159012938613"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Malaysia. </p>
 
@@ -5633,19 +5701,20 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (NGN):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"NGN"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"nigeria"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"044"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"0584412903"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "NGN",
+          "type": "nigeria",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "044",
+           "accountNumber": "0584412903"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Nigeria. </p>
 
@@ -5660,18 +5729,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (NOK):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"NOK"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"DE89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "NOK",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "DE89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Norway. </p>
 
@@ -5684,19 +5754,20 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (NPR):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"NPR"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"nepal"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"977056"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"1234567890"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "NPR",
+          "type": "nepal",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "977056",
+           "accountNumber": "1234567890"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Nepal. </p>
 
@@ -5711,18 +5782,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (NZD):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"NZD"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"newzealand"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"accountNumber"</span>: <span class="s2">"03-1587-0050000-00"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "NZD",
+          "type": "newzealand",
+          "legalType": "PRIVATE",
+          "details": {
+           "accountNumber": "03-1587-0050000-00"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to New Zealand. </p>
 
@@ -5735,23 +5807,24 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (PEN):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"PEN"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"peru"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"BCON"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"12345678901234567890"</span>,
-       <span class="s2">"accountType"</span>: <span class="s2">"CHECKING"</span>,
-       <span class="s2">"idDocumentType"</span>: <span class="s2">"DNI"</span>,
-       <span class="s2">"idDocumentNumber"</span>: <span class="s2">"09740475"</span>,
-       <span class="s2">"phoneNumber"</span>: <span class="s2">"+51 987654321"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "PEN",
+          "type": "peru",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "BCON",
+           "accountNumber": "12345678901234567890",
+           "accountType": "CHECKING",
+           "idDocumentType": "DNI",
+           "idDocumentNumber": "09740475",
+           "phoneNumber": "+51 987654321"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Peru. </p>
 
@@ -5766,25 +5839,26 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (PHP):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"PHP"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"philippines"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"AMA"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"0044XXXXXXXX"</span>,
-       <span class="s2">"address"</span> : <span class="o">{</span>
-          <span class="s2">"country"</span>: <span class="s2">"GB"</span>,
-          <span class="s2">"city"</span>: <span class="s2">"London"</span>,
-          <span class="s2">"postCode"</span>: <span class="s2">"10025"</span>,
-          <span class="s2">"firstLine"</span>: <span class="s2">"50 Branson Ave"</span>
-       <span class="o">}</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "PHP",
+          "type": "philippines",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "AMA",
+           "accountNumber": "0044XXXXXXXX",
+           "address" : {
+              "country": "GB",
+              "city": "London",
+              "postCode": "10025",
+              "firstLine": "50 Branson Ave"
+             }
+          }
+        }'</span>
 </code></pre>
 <p>Send payments to Philippines. </p>
 
@@ -5799,18 +5873,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (PKR):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"PKR"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"PK89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "PKR",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "PK89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Pakistan. </p>
 
@@ -5823,34 +5898,36 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (PLN IBAN):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"PLN"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"PL89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "PLN",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "PL89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <blockquote>
 <p>Example Request (PLN Local):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"PLN"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"polish"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"accountNumber"</span>: <span class="s2">"109010140000071219812874"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "PLN",
+          "type": "polish",
+          "legalType": "PRIVATE",
+          "details": {
+           "accountNumber": "109010140000071219812874"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Poland. </p>
 
@@ -5875,18 +5952,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (RON):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"RON"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"RO89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "RON",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "RO89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Romania. </p>
 
@@ -5899,26 +5977,27 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (RUB):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"RUB"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"russiarapida"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-     <span class="s2">"bankCode"</span>: <span class="s2">"041234567"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"40820810999999999999"</span>,
-       <span class="s2">"russiaRegion"</span>: <span class="s2">"ALTAIKRAI"</span>,
-       <span class="s2">"address"</span> : <span class="o">{</span>
-          <span class="s2">"country"</span>: <span class="s2">"GB"</span>,
-          <span class="s2">"city"</span>: <span class="s2">"London"</span>,
-          <span class="s2">"postCode"</span>: <span class="s2">"10025"</span>,
-          <span class="s2">"firstLine"</span>: <span class="s2">"50 Branson Ave"</span>
-       <span class="o">}</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "RUB",
+          "type": "russiarapida",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "041234567",
+           "accountNumber": "40820810999999999999",
+           "russiaRegion": "ALTAIKRAI",
+           "address" : {
+              "country": "GB",
+              "city": "London",
+              "postCode": "10025",
+              "firstLine": "50 Branson Ave"
+             }
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Russia. </p>
 
@@ -5933,51 +6012,54 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (SEK IBAN):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"SEK"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"iban"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"SE89370400440532013000"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "SEK",
+          "type": "iban",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "SE89370400440532013000"
+           }
+        }'</span>
 </code></pre>
 <blockquote>
 <p>Example Request (SEK Local):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"SEK"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"sweden_local"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"clearingNumber"</span>: <span class="s2">"1234"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"1234567"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "SEK",
+          "type": "sweden_local",
+          "legalType": "PRIVATE",
+          "details": {
+           "clearingNumber": "1234",
+           "accountNumber": "1234567"
+           }
+        }'</span>
 </code></pre>
 <blockquote>
 <p>Example Request (SEK BankGiro):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"SEK"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"bankgiro"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankgiroNumber"</span>: <span class="s2">"1234-5678"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "SEK",
+          "type": "bankgiro",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankgiroNumber": "1234-5678"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Sweden. </p>
 
@@ -6012,19 +6094,20 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (SGD):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"SGD"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"singapore"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"7418"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"1238827822"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "SGD",
+          "type": "singapore",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "7418",
+           "accountNumber": "1238827822"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Singapore. </p>
 
@@ -6039,25 +6122,26 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (THB):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"THB"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"thailand"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"bankCode"</span>: <span class="s2">"002"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"9517384260"</span>
-       <span class="s2">"address"</span> : <span class="o">{</span>
-          <span class="s2">"country"</span>: <span class="s2">"GB"</span>,
-          <span class="s2">"city"</span>: <span class="s2">"London"</span>,
-          <span class="s2">"postCode"</span>: <span class="s2">"10025"</span>,
-          <span class="s2">"firstLine"</span>: <span class="s2">"50 Branson Ave"</span>
-       <span class="o">}</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "THB",
+          "type": "thailand",
+          "legalType": "PRIVATE",
+          "details": {
+           "bankCode": "002",
+           "accountNumber": "9517384260"
+           "address" : {
+              "country": "GB",
+              "city": "London",
+              "postCode": "10025",
+              "firstLine": "50 Branson Ave"
+             }
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Thailand. </p>
 
@@ -6072,18 +6156,19 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (TRY):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"TRY"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"turkish_earthport"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"IBAN"</span>: <span class="s2">"TR330006100519786457841326"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "TRY",
+          "type": "turkish_earthport",
+          "legalType": "PRIVATE",
+          "details": {
+           "IBAN": "TR330006100519786457841326"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Turkey. </p>
 
@@ -6096,19 +6181,20 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (UAH):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"UAH"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"privatbank"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"phoneNumber"</span>: <span class="s2">"777210012"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"2662"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "UAH",
+          "type": "privatbank",
+          "legalType": "PRIVATE",
+          "details": {
+           "phoneNumber": "777210012",
+           "accountNumber": "2662"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Ukraine. </p>
 
@@ -6126,26 +6212,27 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (USD):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"USD"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"aba"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"abartn"</span>: <span class="s2">"111000025"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"12345678"</span>,
-       <span class="s2">"accountType"</span>: <span class="s2">"CHECKING"</span>,
-       <span class="s2">"address"</span> : <span class="o">{</span>
-          <span class="s2">"country"</span>: <span class="s2">"GB"</span>,
-          <span class="s2">"city"</span>: <span class="s2">"London"</span>,
-          <span class="s2">"postCode"</span>: <span class="s2">"10025"</span>,
-          <span class="s2">"firstLine"</span>: <span class="s2">"50 Branson Ave"</span>
-       <span class="o">}</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "USD",
+          "type": "aba",
+          "legalType": "PRIVATE",
+          "details": {
+           "abartn": "111000025",
+           "accountNumber": "12345678",
+           "accountType": "CHECKING",
+           "address" : {
+              "country": "GB",
+              "city": "London",
+              "postCode": "10025",
+              "firstLine": "50 Branson Ave"
+             }
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to USA. </p>
 
@@ -6165,20 +6252,21 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (VND):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"VND"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"vietname_earthport"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"swiftCode"</span>: <span class="s2">"ABBKVNVX"</span>,
-       <span class="s2">"branchCode"</span>: <span class="s2">"001"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"1234567890"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "VND",
+          "type": "vietname_earthport",
+          "legalType": "PRIVATE",
+          "details": {
+           "swiftCode": "ABBKVNVX",
+           "branchCode": "001",
+           "accountNumber": "1234567890"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to Vietnam. </p>
 
@@ -6193,19 +6281,20 @@ We only support private customers sending payments to private recipients. Busine
 <blockquote>
 <p>Example Request (ZAR):</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span>
-     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span>
-<span class="o">{</span>
-    <span class="s2">"profile"</span>: &lt;your profile id&gt;,
-    <span class="s2">"accountHolderName"</span>: <span class="s2">"&lt;recipient name&gt;"</span>,
-    <span class="s2">"currency"</span>: <span class="s2">"ZAR"</span>,
-    <span class="s2">"type"</span>: <span class="s2">"southafrica"</span>,
-    <span class="s2">"legalType"</span>: <span class="s2">"PRIVATE"</span>,
-    <span class="s2">"details"</span>: <span class="o">{</span>
-       <span class="s2">"swiftCode"</span>: <span class="s2">"ALBRZAJJ"</span>,
-       <span class="s2">"accountNumber"</span>: <span class="s2">"0000000052312891"</span>
-     <span class="o">}</span>
-  <span class="o">}</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "ZAR",
+          "type": "southafrica",
+          "legalType": "PRIVATE",
+          "details": {
+           "swiftCode": "ALBRZAJJ",
+           "accountNumber": "0000000052312891"
+           }
+        }'</span>
 </code></pre>
 <p>Send payments to South African Republic. </p>
 
