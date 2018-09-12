@@ -221,19 +221,19 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
             <li>
-              <a href="#api-documentation" class="toc-h1 toc-link" data-title="API Documentation">API Documentation</a>
+              <a href="#transferwise-api" class="toc-h1 toc-link" data-title="TransferWise API">TransferWise API</a>
                 <ul class="toc-list-h2">
                     <li>
-                      <a href="#api-documentation-borderless-payouts" class="toc-h2 toc-link" data-title="Borderless Payouts">Borderless Payouts</a>
+                      <a href="#transferwise-api-borderless-payouts" class="toc-h2 toc-link" data-title="Borderless Payouts">Borderless Payouts</a>
                     </li>
                     <li>
-                      <a href="#api-documentation-cross-border-payments-for-banks" class="toc-h2 toc-link" data-title="Cross-Border Payments for Banks">Cross-Border Payments for Banks</a>
+                      <a href="#transferwise-api-cross-border-payments-for-banks" class="toc-h2 toc-link" data-title="Cross-Border Payments for Banks">Cross-Border Payments for Banks</a>
                     </li>
                     <li>
-                      <a href="#api-documentation-third-party-payouts" class="toc-h2 toc-link" data-title="Third party payouts">Third party payouts</a>
+                      <a href="#transferwise-api-third-party-payouts" class="toc-h2 toc-link" data-title="Third-Party Payouts">Third-Party Payouts</a>
                     </li>
                     <li>
-                      <a href="#api-documentation-affiliates-tooling" class="toc-h2 toc-link" data-title="Affiliates Tooling">Affiliates Tooling</a>
+                      <a href="#transferwise-api-affiliates" class="toc-h2 toc-link" data-title="Affiliates">Affiliates</a>
                     </li>
                 </ul>
             </li>
@@ -282,7 +282,21 @@
               <a href="#bank-integrations-guide" class="toc-h1 toc-link" data-title="Bank Integrations Guide">Bank Integrations Guide</a>
             </li>
             <li>
-              <a href="#affiliates-guide" class="toc-h1 toc-link" data-title="Affiliates Guide">Affiliates Guide</a>
+              <a href="#affiliates-integration-guide" class="toc-h1 toc-link" data-title="Affiliates Integration Guide">Affiliates Integration Guide</a>
+                <ul class="toc-list-h2">
+                    <li>
+                      <a href="#affiliates-integration-guide-api-access" class="toc-h2 toc-link" data-title="API access">API access</a>
+                    </li>
+                    <li>
+                      <a href="#affiliates-integration-guide-get-current-exchange-rates" class="toc-h2 toc-link" data-title="Get current exchange rates">Get current exchange rates</a>
+                    </li>
+                    <li>
+                      <a href="#affiliates-integration-guide-get-exchange-rate-history" class="toc-h2 toc-link" data-title="Get exchange rate history">Get exchange rate history</a>
+                    </li>
+                    <li>
+                      <a href="#affiliates-integration-guide-get-pricing-and-speed" class="toc-h2 toc-link" data-title="Get pricing and speed">Get pricing and speed</a>
+                    </li>
+                </ul>
             </li>
             <li>
               <a href="#contact-us" class="toc-h1 toc-link" data-title="Contact Us">Contact Us</a>
@@ -617,16 +631,16 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='api-documentation'>API Documentation</h1>
-<p>Welcome to TransferWise API documentation. </p>
-<h2 id='api-documentation-borderless-payouts'>Borderless Payouts</h2>
+        <h1 id='transferwise-api'>TransferWise API</h1>
+<p>Welcome to TransferWise API documentation. Explore and choose the right product for your requirements. </p>
+<h2 id='transferwise-api-borderless-payouts'>Borderless Payouts</h2>
 <p>Open multi-currency Borderless Account and automate your cross-border and domestic payouts with single API integration.   </p>
 
 <ul>
   <li>Payouts to bank accounts</li>
   <li>Payouts to email recipients</li>
   <li>Currency exchange with mid-market exchange rate</li>
-  <li>Local bank account details for major currencies:
+  <li>Local bank account details for revenue collection in four currencies:
     <ul>
       <li>EUR (iban)</li>
       <li>GBP (sort code | account number)</li>
@@ -635,16 +649,33 @@
     </ul>  
   </li>
   <li>Low and transparent fees</li>
+  <li>Reconciliation with your accounting software</li>
 </ul>
 
-<p>Get started with technical integration with <a href="#borderless-payouts-guide">Borderless Payouts Guide</a>.</p>
-<h2 id='api-documentation-cross-border-payments-for-banks'>Cross-Border Payments for Banks</h2>
+<p><a href="#borderless-payouts-guide">Borderless Payouts Guide</a> helps you get started with technical integration.</p>
+<h2 id='transferwise-api-cross-border-payments-for-banks'>Cross-Border Payments for Banks</h2>
 <p>Get started with technical integration by following <a href="#bank-integrations-guide">Bank Integration Guide</a>.</p>
-<h2 id='api-documentation-third-party-payouts'>Third party payouts</h2>
+<h2 id='transferwise-api-third-party-payouts'>Third-Party Payouts</h2>
 <p>We are working on it.
 Please contact us for further clarification.</p>
-<h2 id='api-documentation-affiliates-tooling'>Affiliates Tooling</h2>
-<p>Read more from <a href="#affiliates-guide">Affiliates Guide</a></p>
+<h2 id='transferwise-api-affiliates'>Affiliates</h2>
+<p><a href="https://transferwise.com/partnerwise">Apply to TransferWise affiliates program</a> and help people all over the world discover money without borders.</p>
+
+<ul>                                   
+   <li>After we review your application, you can access our tracking software and all resources for successful campaigns.</li>
+   <li>Mention TransferWise in existing articles or create new content. Drive traffic to your articles through SEO.</li>
+   <li>Commission is based on performance. We'll pay you £10 for every referral, but this can change based on the success of your campaigns.</li>
+   <li>As an affiliate you will get access to our API to help you build your own valuable content to your customers.</li>
+   <li>TransferWise API enables you to:
+      <ul>
+        <li>Get real-time mid-market exchange rates for any currency route.</li>
+        <li>Get up to 30 days historical mid-market exchange rates for any currency route.</li>
+        <li>Get Transferwise quote for any supported currency route which includes you our fees and estimated delivery time.</li>
+      </ul>
+   </li>
+</ul>
+
+<p><a href="#affiliates-integration-guide">Affiliates Integration Guide</a> helps you get started with technical integration.</p>
 <h1 id='borderless-payouts-guide'>Borderless Payouts Guide</h1>
 <p>Welcome to TransferWise Payouts API documentation. 
 Before you jump into coding please take few moments to go through these 3 topics at first.</p>
@@ -2263,7 +2294,116 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <li>Make few small value test payments via LIVE API before you start executing large number of transfers.</li>
 <li>All set. Switch it on.</li>
 </ul>
-<h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h1 id='affiliates-guide'>Affiliates Guide</h1><h1 id='contact-us'>Contact Us</h1>
+<h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h1 id='affiliates-integration-guide'>Affiliates Integration Guide</h1><h2 id='affiliates-integration-guide-api-access'>API access</h2>
+<p>Once you become our affiliate we will send you TransferWise API access credentials: api_client_id &amp; api_client_secret. 
+You can then use these as username &amp; password with <strong>Basic Authentication</strong> method.</p>
+
+<p>There are two endpoints <a href="#exchange-rates-list">Exchange Rates.List</a> and <a href="#quotes-get-temporary-quote">Get Temporary Quote</a> which you can call with this authentication method.</p>
+<h2 id='affiliates-integration-guide-get-current-exchange-rates'>Get current exchange rates</h2>
+<blockquote>
+<p>Example Request (Basic authentication):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD"</span> <span class="se">\</span>
+     --user &lt;your api client_id&gt;:&lt;your api client_secret&gt; 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.166</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-31T10:43:31+0000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD</code></strong></p>
+
+<p>TransferWise updates exchange rates in nearly real-time — at least once per minute. 
+This allows you to track and see the current mid-market exchange rate for any currency route. </p>
+
+<p>See more at <a href="#exchange-rates-list">Exchange Rates.List</a> </p>
+<h2 id='affiliates-integration-guide-get-exchange-rate-history'>Get exchange rate history</h2>
+<blockquote>
+<p>Example Request (Basic authentication):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD&amp;from=2018-08-15T00:00:00&amp;to=2018-08-30T23:59:59&amp;group=day"</span> <span class="se">\</span>
+     --user &lt;your api client_id&gt;:&lt;your api client_secret&gt; 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.166</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-15T00:00:00+0000"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.168</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-30T00:00:00+0000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD&amp;from=2018-08-15T00:00:00&amp;to=2018-08-30T23:59:59&amp;group=day</code></strong></p>
+
+<p>We expose up to 30 days exchange rate history via our API. This helps you to build an analysis page to show trends and implement an alerting system for your users.</p>
+
+<p>See more at <a href="#exchange-rates-list">Exchange Rates.List</a> </p>
+<h2 id='affiliates-integration-guide-get-pricing-and-speed'>Get pricing and speed</h2>
+<blockquote>
+<p>Example Request (Basic authentication):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X GET https://api.sandbox.transferwise.tech/v1/quotes?source<span class="o">=</span>EUR&amp;target<span class="o">=</span>GBP&amp;rateType<span class="o">=</span>FIXED&amp;targetAmount<span class="o">=</span>600 <span class="se">\</span>
+     --user &lt;your api client_id&gt;:&lt;your api client_secret&gt; 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sourceAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">663.84</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"targetAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">600.00</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REGULAR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9073</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-27T14:35:44.553Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdByUserId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"rateType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FIXED"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"deliveryEstimate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-08-27T14:35:44.496Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.34</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"allowedProfileTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"PERSONAL"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"BUSINESS"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"guaranteedTargetAmount"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ofSourceAmount"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/quotes?source=EUR&amp;target=GBP&amp;rateType=FIXED&amp;targetAmount=600</code></strong></p>
+
+<p><strong>Is currency route supported?</strong></p>
+
+<p>If we don&#39;t support a route then this endpoint will response with an error code &quot;error.route.not.supported&quot;.</p>
+
+<p><strong>How much does a transfer cost?</strong></p>
+
+<p>TansferWise fee is included in the response. </p>
+
+<p><strong>How long does my transfer take?</strong></p>
+
+<p>Estimated delivery time is included in the response. 
+This can vary quite a lot for different currency routes. For example transfers often only take a few hours from EUR to GBP, while sending money from USD can take 1-2 business days. 
+This endpoint allows you to find out the estimated delivery time for each currency route.</p>
+
+<p>See more at <a href="#quotes-get-temporary-quote">Get Temporary Quote</a> </p>
+<h1 id='contact-us'>Contact Us</h1>
 <p><strong>Have a technical question about API?</strong></br>
 Send email to api@transferwise.com</p>
 
@@ -3553,10 +3693,16 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/borderless-accounts/balance
 <br/><br/><br/><br/><br/><br/><br/></p>
 <h1 id='exchange-rates'>Exchange Rates</h1><h2 id='exchange-rates-list'>List</h2>
 <blockquote>
-<p>Example Request:</p>
+<p>Example Request (Bearer token):</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD"</span> <span class="se">\</span>
      -H <span class="s2">"Authorization: &lt;your api token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>Example Request (Basic authentication):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v1/rates?source=EUR&amp;target=USD"</span> <span class="se">\</span>
+     --user &lt;your api client_id&gt;:&lt;your api client_secret&gt; 
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -3594,6 +3740,8 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/borderless-accounts/balance
 
 <p>Fetch exchange rate history over period of time with 10 minute interval.<br/></p>
 <h3 id='exchange-rates-list-request'>Request</h3>
+<p>Note that this endpoint supports two types of authentication: Bearer token and Basic authentication (client_id/client_secret).</p>
+
 <table><thead>
 <tr>
 <th>Field</th>
@@ -3926,12 +4074,19 @@ This endpoint will in future also include TransferWise bank account details wher
 </tbody></table>
 <h2 id='quotes-get-temporary-quote'>Get Temporary Quote</h2>
 <blockquote>
-<p>Example Request:</p>
+<p>Example Request (Bearer token):</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>
 curl -X GET https://api.sandbox.transferwise.tech/v1/quotes?source<span class="o">=</span>EUR&amp;target<span class="o">=</span>GBP&amp;rateType<span class="o">=</span>FIXED&amp;targetAmount<span class="o">=</span>600 <span class="se">\</span>
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
 
+</code></pre>
+<blockquote>
+<p>Example Request (Basic authentication):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X GET https://api.sandbox.transferwise.tech/v1/quotes?source<span class="o">=</span>EUR&amp;target<span class="o">=</span>GBP&amp;rateType<span class="o">=</span>FIXED&amp;targetAmount<span class="o">=</span>600 <span class="se">\</span>
+     --user &lt;your api client_id&gt;:&lt;your api client_secret&gt; 
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
@@ -3964,6 +4119,8 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/quotes?source<span class="o
 
 <p>Get temporary quote for sending SEK to 1000 USD<br/></p>
 <h3 id='quotes-get-temporary-quote-request'>Request</h3>
+<p>Note that this endpoint supports two types of authentication: Bearer token and Basic authentication (client_id/client_secret).</p>
+
 <p><strong><code>GET https://api.sandbox.transferwise.tech/v1/quotes</code></strong></p>
 
 <table><thead>
