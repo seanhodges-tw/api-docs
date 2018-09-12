@@ -277,12 +277,68 @@
                       <a href="#borderless-payouts-guide-get-account-statement" class="toc-h2 toc-link" data-title="Get account statement">Get account statement</a>
                     </li>
                     <li>
-                      <a href="#borderless-payouts-guide-going-live-checklist" class="toc-h2 toc-link" data-title="Going Live checklist">Going Live checklist</a>
+                      <a href="#borderless-payouts-guide-going-live-checklist" class="toc-h2 toc-link" data-title="Going live checklist">Going live checklist</a>
                     </li>
                 </ul>
             </li>
             <li>
               <a href="#bank-integrations-guide" class="toc-h1 toc-link" data-title="Bank Integrations Guide">Bank Integrations Guide</a>
+                <ul class="toc-list-h2">
+                    <li>
+                      <a href="#bank-integrations-guide-api-access" class="toc-h2 toc-link" data-title="API access">API access</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-user-experience" class="toc-h2 toc-link" data-title="User experience">User experience</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-get-user-authorization" class="toc-h2 toc-link" data-title="Get user authorization">Get user authorization</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-get-user-token" class="toc-h2 toc-link" data-title="Get user token">Get user token</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-refresh-user-token" class="toc-h2 toc-link" data-title="Refresh user token">Refresh user token</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-create-shadow-users-gt-move-this-to-reference" class="toc-h2 toc-link" data-title="Create shadow? users --&gt; Move this to reference ???">Create shadow? users --&gt; Move this to reference ???</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-get-user-profiles" class="toc-h2 toc-link" data-title="Get user profiles">Get user profiles</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-create-personal-user-profile" class="toc-h2 toc-link" data-title="Create personal user profile">Create personal user profile</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-create-identification-document" class="toc-h2 toc-link" data-title="Create identification document">Create identification document</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-create-business-user-profile" class="toc-h2 toc-link" data-title="Create business user profile">Create business user profile</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-create-quote" class="toc-h2 toc-link" data-title="Create quote">Create quote</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-create-recipient-account" class="toc-h2 toc-link" data-title="Create recipient account">Create recipient account</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-create-transfer" class="toc-h2 toc-link" data-title="Create transfer">Create transfer</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-get-pay-in-methods" class="toc-h2 toc-link" data-title="Get pay-in methods">Get pay-in methods</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-debit-customer-account" class="toc-h2 toc-link" data-title="Debit customer account">Debit customer account</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-get-transfer-delivery-time" class="toc-h2 toc-link" data-title="Get transfer delivery time">Get transfer delivery time</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-track-transfer-status" class="toc-h2 toc-link" data-title="Track transfer status">Track transfer status</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-going-live-checklist" class="toc-h2 toc-link" data-title="Going live checklist">Going live checklist</a>
+                    </li>
+                </ul>
             </li>
             <li>
               <a href="#affiliates-integration-guide" class="toc-h1 toc-link" data-title="Affiliates Integration Guide">Affiliates Integration Guide</a>
@@ -667,7 +723,7 @@ This product enables you to automate your own borderless account. </p>
 <p><a href="#borderless-payouts-guide">Borderless Payouts Guide</a> helps you get started with technical integration.</p>
 <h2 id='transferwise-api-banks'>Banks</h2>
 <p>Bank Product enables banks to build TransferWise payments seamlessly into their own desktop and mobile apps. 
-Banks can enhance their own native user experience and only use TransferWise payments API in the background.</p>
+Banks can build their own native user experience and use TransferWise API only in the background.</p>
 
 <p><strong>Why should my bank do it?</strong></p>
 
@@ -2328,7 +2384,7 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <td>Integer</td>
 </tr>
 </tbody></table>
-<h2 id='borderless-payouts-guide-going-live-checklist'>Going Live checklist</h2><h3 id='borderless-payouts-guide-going-live-checklist-1-make-your-integration-bulletproof'>1. Make your integration bulletproof</h3>
+<h2 id='borderless-payouts-guide-going-live-checklist'>Going live checklist</h2><h3 id='borderless-payouts-guide-going-live-checklist-1-make-your-integration-bulletproof'>1. Make your integration bulletproof</h3>
 <ul>
 <li>Implement basic retry mechanism to handle potential failures or network interruptions </li>
 <li>Implement duplicate prevention mechanism to avoid duplicate payments. Verify that UUID is uniquely generated for each individual payment and its value is kept same in case of retrying.</li>
@@ -2352,7 +2408,304 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <li>Make few small value test payments via LIVE API before you start executing large number of transfers.</li>
 <li>All set. Switch it on.</li>
 </ul>
-<h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h1 id='affiliates-integration-guide'>Affiliates Integration Guide</h1><h2 id='affiliates-integration-guide-api-access'>API access</h2>
+<h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h2 id='bank-integrations-guide-api-access'>API access</h2>
+<ul>
+<li>OAuth 2.0 protocol for authentication and authorization.</li>
+<li><p>we need from you redirect URL  (for existing users)</p></li>
+<li><p>we will give you client_id &amp; client_secret</p></li>
+<li><p>these give you access to API calls</p></li>
+</ul>
+<h2 id='bank-integrations-guide-user-experience'>User experience</h2>
+<p>It can be different . These are building blocks..</p>
+
+<p>Temporary quote for example...</p>
+<h2 id='bank-integrations-guide-get-user-authorization'>Get user authorization</h2>
+<p>OAuth flow - Sign up new user and obtain their authorization to access their account</p>
+
+<p>Existing users - oauth flow
+   New users - signup via oauth</p>
+
+<p>Registration code flow (shadow customers) &gt;&gt; </p>
+
+<p>2 ways: OAuth Flow: linking existing users !! creating new users !!!</p>
+
+<ol>
+<li>OAUTH FLOW Existing users - signup &amp; login (TW users)
+3.1. REDIRECT 
+re-direct from your app to this browser address bar, either manually or by forwarding your user to the address.
+https://api.transferwise.com/oauth/authorize?response_type=code&amp;client_id=sampleid&amp;
+redirect_uri=https://example.com</li>
+</ol>
+
+<p>Replace sampleid with your client ID and example.com with your designated redirect URI. 
+  The redirect URI should be the address you want the user to be retuened to after the authorization flow. 
+  If you are using the test environment, please replace the api.transferwise.com with sandbox.transferwise.tech, but only in this step, 
+  for calling sandbox endpoints please use api.sandbox.transferwise.tech.</p>
+
+<p>The starting point for Authorization Code grant type flow.
+  This is a web page shown to the customer where they approve the authorization request for you to access their TransferWise account on their behalf. 
+  Upon approval the browser will be redirected to the supplied redirect_uri with a generated code query string value. 
+  Your website or service can then use this code and exchange it customer specific API access tokens using  endpoint. 
+  An access token and a refresh token can be generated using this code and should be stored securely for future access.</p>
+
+<p>3.2. Customer logs in / signs up
+  A new page will open where the user can log in with their TransferWise credentials or sign up if they don&#39;t yet have a TransferWise account. 
+  Please note that in the test environment, you will have to create a new test account.
+  Customer authorizes your application to have access to his/her TW account </p>
+
+<p>3.3. Get authorization code from redirected URL parameter
+  After a login/sign up, an authorization code is generated and appended to the redirected URI, e.g.
+  https://www.example.com/?code=[CODE]</p>
+<h2 id='bank-integrations-guide-get-user-token'>Get user token</h2>
+<p>3.4. Get user token so you can act on behalf of users</p>
+
+<p>so you can act on behalf of the user.
+  Now you can exchange the authorization code for access and refresh tokens. To do that, you can use this curl request:
+  Request
+      curl \
+      -u &#39;[your client_id]:[your client secret]&#39; \
+      -d &#39;grant_type=authorization_code&#39; \
+      -d &#39;client_id=[your client id]&#39; \
+      -d &#39;code=[CODE]&#39; \
+      -d &#39;redirect_uri=https://example.com&#39; \
+      &#39;https://api.transferwise.com/oauth/token&#39; </p>
+
+<p>Changes you need to make to that request are:</p>
+
+<p>replace [your client id] with your client_id
+  replace [your client secret] with your client_secret
+  replace [CODE] with authorization code you have received in Step 3
+  replace https://example.com with the URI you specified in Step 1</p>
+
+<p>Response
+  {
+    &quot;access_token&quot;:&quot;ba8k9935-62f2-475a-60d8-6g45377b4062&quot;,
+    &quot;token_type&quot;:&quot;bearer&quot;,
+    &quot;refresh_token&quot;:&quot;a235uu9c-9azu-4o28-a1kn-e15500o151cx&quot;,
+    &quot;expires_in&quot;: 43199,
+    &quot;scope&quot;:&quot;transfers&quot;
+  }</p>
+
+<p>All set!
+  Your token is now ready to use.
+   Add your token in the request header for the endpoints that require it. 
+   It should be in the format &quot;Authorization&quot;: &quot;Bearer <token>&quot;.
+  It is valid for 12 hours. You should store refresh token. </p>
+<h2 id='bank-integrations-guide-refresh-user-token'>Refresh user token</h2>
+<p>3.5. Swapping a token because it is 12 hours only !!
+  In order to maintain an uninterrupted connection, you can request a new access token whenever it is close to expiring. 
+  You can do this by providing the refresh token:</p>
+
+<p>Obtains new access token based on refresh token.</p>
+
+<p>request 
+      curl \
+      &#39;https://api.transferwise.com/oauth/token&#39; \
+      -u &#39;client_id:client_secret&#39; \
+      -d &#39;grant_type=refresh_token&#39; \
+      -d &#39;refresh_token=[your refresh token]&#39;</p>
+
+<p>...and get the access token in response:</p>
+
+<p>response
+  {
+    &quot;access_token&quot;:&quot;be69d566-971e-4e15-9648-85a486195863&quot;,
+    &quot;token_type&quot;:&quot;bearer&quot;,
+    &quot;refresh_token&quot;:&quot;1d0ec7b9-b569-426d-a18d-8dead5b6a3cc&quot;,
+    &quot;expires_in&quot;:43199,
+    &quot;scope&quot;:&quot;transfers&quot;
+  }</p>
+
+<p>Keep in mind that access token will expire in 12 hours after issuing. The lifetime of refresh token is limited to 20 years.</p>
+<h2 id='bank-integrations-guide-create-shadow-users-gt-move-this-to-reference'>Create shadow? users --&gt; Move this to reference ???</h2>
+<p>Add this logic to #users-sign-up-with-registration-code</p>
+
+<p>Step 1: Get client credentials OAuth token</p>
+
+<p>Request POST /oauth/token
+      HTTP Basic using client ID for username and client secret as a password.
+      Body - Form
+      grant_type=client_credentials</p>
+
+<p>response
+      {
+        &quot;access_token&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
+        &quot;token_type&quot;: &quot;bearer&quot;,
+        &quot;expires_in&quot;: 43199,
+        &quot;scope&quot;: &quot;transfers&quot;
+      }</p>
+
+<p>Step 2: Create user</p>
+
+<p>Request POST /v1/user/signup/registration_code
+      Bearer ${clientCredentialsToken} header
+      {
+      &quot;email&quot;: &quot;${email}&quot;,
+      &quot;registrationCode&quot;: &quot;${registration code}&quot;
+      }</p>
+
+<p>${email} — new user&#39;s email address
+      ${registration code} — random value that is unique to this user, at least 32 characters long</p>
+
+<p>NB: Please apply the same security standards to handling registration code as if it was a password.</p>
+
+<p>Response — Success (201)
+      {
+        &quot;id&quot;: 12345,
+        &quot;name&quot;: null,
+        &quot;email&quot;: &quot;new.user@domain.com&quot;,
+        &quot;active&quot;: true,
+        &quot;details&quot;: null
+      }</p>
+
+<p>Response — Failure (409): User already exists
+      {
+        &quot;errors&quot;: [
+          {
+            &quot;code&quot;: &quot;NOT_UNIQUE&quot;,
+            &quot;message&quot;: &quot;You’re already a member. Please login&quot;,
+            &quot;path&quot;: &quot;email&quot;,
+            &quot;arguments&quot;: [
+              &quot;email&quot;,
+              &quot;class com.transferwise.fx.api.ApiRegisterCommand&quot;,
+              &quot;existing.user@domain.com&quot;
+            ]
+          }
+        ]
+      }</p>
+
+<p>If user already exists then authorization_code  should be used instead.</p>
+
+<p>Step 3: Get user token
+  POST /oauth/token</p>
+
+<p>Authentication
+  HTTP Basic using client ID for username and client secret as a password.
+  Body — Form</p>
+
+<p>grant_type=registration_code
+    client_id=${client id}
+    email=${email}
+    registration_code=${registration code from step 2}</p>
+
+<p>Step 3 can be repeated as long as user does reclaim their TransferWise account.</p>
+
+<p>Response — Success (200)
+    {
+      &quot;access_token&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
+      &quot;token_type&quot;: &quot;bearer&quot;,
+      &quot;refresh_token&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
+      &quot;expires_in&quot;: 43199,
+      &quot;scope&quot;: &quot;transfers&quot;
+    }</p>
+
+<p>Response — Failure (401): User reclaimed the account or invalid registration code used
+    {
+      &quot;error&quot;: &quot;invalid_grant&quot;,
+      &quot;error_description&quot;: &quot;Invalid user credentials.&quot;
+    }</p>
+
+<p>If user has reclaimed the account, then authorization_code  should be used instead.</p>
+<h2 id='bank-integrations-guide-get-user-profiles'>Get user profiles</h2><h2 id='bank-integrations-guide-create-personal-user-profile'>Create personal user profile</h2>
+<p>For existing users - &gt; get profiles first !?
+The guide assumes you have already created user — see .</p>
+
+<p>Using obtained user token.</p>
+
+<p>Personal user profile should be created before creating a transfer.</p>
+
+<p>If you will make business transfers, then personal profile is required to be filled in first as well, and business profile should be created afterwards.</p>
+
+<p>There are two steps to create a personal profile:
+- Create personal user profile - basic info.
+- Add address to personal user profile.</p>
+
+<p>Step 1. Create private customer  — basic info</p>
+
+<p>POST /v1/profiles</p>
+
+<p>{
+    &quot;type&quot;: &quot;personal&quot;,
+    &quot;details&quot; : {
+        &quot;firstName&quot;: &quot;John&quot;,
+        &quot;lastName&quot;: &quot;Snow&quot;,
+        &quot;dateOfBirth&quot;: &quot;1980-07-20&quot;,
+        &quot;phoneNumber&quot;: &quot;+380964441122&quot;
+    }
+}</p>
+
+<p>Response
+You should receive back a successful (200) response with a personal profile id along with other profile keys that have been successfully saved.</p>
+
+<p>Step 2. Add address to personal user profile</p>
+
+<p>Once basic profile information has been saved, you also need to add address information to personal user profile.
+When saving address, you need to specify which profile you want to save address to. 
+In profile key, provide a profile id of a personal profile that was returned in previous step response.</p>
+
+<p>Request
+POST /v1/addresses</p>
+
+<p>{
+    &quot;profile&quot; : 12345
+    &quot;details&quot;: {
+        &quot;country&quot;: &quot;US&quot;,
+        &quot;state&quot; : &quot;NY&quot;,
+        &quot;city&quot;: &quot;New York&quot;,
+        &quot;postCode&quot;: &quot;10112&quot;,
+        &quot;firstLine&quot;: &quot;Park Ave 4021&quot;
+    }
+}</p>
+
+<p>There is a guide #docTextSection:MEDFDFDMQrmJjtnHS that explains which data fields and validations are in place for addresses in different countries.</p>
+
+<p>You should get back a successful (200) response with a personal profile address id along with other address keys that have been successfully saved.</p>
+<h2 id='bank-integrations-guide-create-identification-document'>Create identification document</h2>
+<p>Only for personal profiles.  which you created </p>
+<h2 id='bank-integrations-guide-create-business-user-profile'>Create business user profile</h2>
+<p>Prerequisite is that personal user profile has been created. To onboard businesses, also business user profile has to be created.</p>
+
+<p>Similar two steps apply:</p>
+
+<p>Create business user profile — basic info
+Add address to business user profile</p>
+
+<p>Step 3.1. Create business user profile — basic info</p>
+
+<p>Request</p>
+
+<p>POST /v1/profiles</p>
+
+<p>{
+    &quot;type&quot;: &quot;business&quot;,
+    &quot;details&quot; : {
+        &quot;name&quot;: &quot;The Business&quot;,
+        &quot;registrationNumber&quot; : &quot;12345&quot;,
+        &quot;descriptionOfBusiness&quot; : &quot;education_and_learning&quot;,
+        &quot;type&quot; : &quot;limited&quot;,
+        &quot;webpage&quot;: &quot;http://business.com&quot;,
+        &quot;acn&quot;: &quot;australian-specific. only include if australian business&quot;,
+        &quot;abn&quot;: &quot;australian-specific. only include if australian business&quot;,
+        &quot;arbn&quot;: &quot;australian-specific. only include if australian business&quot;
+    }
+}</p>
+
+<p>Response</p>
+
+<p>You should receive back a successful (200) response with a business profile id along with other profile keys that have been successfully saved.</p>
+
+<p>Step 3.2. Add address to business user profile</p>
+
+<p>Once basic business profile information has been saved, you also need to add address information to business user profile. 
+This can be done exactly the same way as we did for personal profile. Please see description under Step 2.2 above.</p>
+<h2 id='bank-integrations-guide-create-quote'>Create quote</h2>
+<p>- Create quote   (type REGULAR, should be included in create quote endpoint !!)</p>
+<h2 id='bank-integrations-guide-create-recipient-account'>Create recipient account</h2><h2 id='bank-integrations-guide-create-transfer'>Create transfer</h2><h2 id='bank-integrations-guide-get-pay-in-methods'>Get pay-in methods</h2><h2 id='bank-integrations-guide-debit-customer-account'>Debit customer account</h2>
+<p>external process, not API</p>
+
+<p>GBP - FPS
+ EUR - Sepa </p>
+<h2 id='bank-integrations-guide-get-transfer-delivery-time'>Get transfer delivery time</h2><h2 id='bank-integrations-guide-track-transfer-status'>Track transfer status</h2><h2 id='bank-integrations-guide-going-live-checklist'>Going live checklist</h2><h1 id='affiliates-integration-guide'>Affiliates Integration Guide</h1><h2 id='affiliates-integration-guide-api-access'>API access</h2>
 <p>Once you become our affiliate we will send you TransferWise API access credentials: api_client_id &amp; api_client_secret. 
 You can then use these as username &amp; password with <strong>Basic Authentication</strong> method.</p>
 
