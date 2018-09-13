@@ -291,13 +291,16 @@
                       <a href="#bank-integrations-guide-customized-user-experience" class="toc-h2 toc-link" data-title="Customized user experience">Customized user experience</a>
                     </li>
                     <li>
+                      <a href="#bank-integrations-guide-user-on-boarding-flow" class="toc-h2 toc-link" data-title="User on-boarding flow">User on-boarding flow</a>
+                    </li>
+                    <li>
                       <a href="#bank-integrations-guide-get-user-authorization" class="toc-h2 toc-link" data-title="Get user authorization">Get user authorization</a>
                     </li>
                     <li>
                       <a href="#bank-integrations-guide-get-user-tokens" class="toc-h2 toc-link" data-title="Get user tokens">Get user tokens</a>
                     </li>
                     <li>
-                      <a href="#bank-integrations-guide-refresh-user-token" class="toc-h2 toc-link" data-title="Refresh user token">Refresh user token</a>
+                      <a href="#bank-integrations-guide-refresh-user-access-token" class="toc-h2 toc-link" data-title="Refresh user access token">Refresh user access token</a>
                     </li>
                     <li>
                       <a href="#bank-integrations-guide-signup-new-users-via-api" class="toc-h2 toc-link" data-title="Signup new users via API">Signup new users via API</a>
@@ -306,10 +309,10 @@
                       <a href="#bank-integrations-guide-create-personal-user-profile" class="toc-h2 toc-link" data-title="Create personal user profile">Create personal user profile</a>
                     </li>
                     <li>
-                      <a href="#bank-integrations-guide-create-identification-document" class="toc-h2 toc-link" data-title="Create identification document">Create identification document</a>
+                      <a href="#bank-integrations-guide-create-business-user-profile" class="toc-h2 toc-link" data-title="Create business user profile">Create business user profile</a>
                     </li>
                     <li>
-                      <a href="#bank-integrations-guide-create-business-user-profile" class="toc-h2 toc-link" data-title="Create business user profile">Create business user profile</a>
+                      <a href="#bank-integrations-guide-user-payment-flow" class="toc-h2 toc-link" data-title="User payment flow">User payment flow</a>
                     </li>
                     <li>
                       <a href="#bank-integrations-guide-create-quote" class="toc-h2 toc-link" data-title="Create quote">Create quote</a>
@@ -319,9 +322,6 @@
                     </li>
                     <li>
                       <a href="#bank-integrations-guide-create-transfer" class="toc-h2 toc-link" data-title="Create transfer">Create transfer</a>
-                    </li>
-                    <li>
-                      <a href="#bank-integrations-guide-get-pay-in-methods" class="toc-h2 toc-link" data-title="Get pay-in methods">Get pay-in methods</a>
                     </li>
                     <li>
                       <a href="#bank-integrations-guide-fund-customer-transfer" class="toc-h2 toc-link" data-title="Fund customer transfer">Fund customer transfer</a>
@@ -2385,7 +2385,7 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <li>Implement basic retry mechanism to handle potential failures or network interruptions </li>
 <li>Implement duplicate prevention mechanism to avoid duplicate payments. Verify that UUID is uniquely generated for each individual payment and its value is kept same in case of retrying.</li>
 <li>Implement basic logging to help out in debugging and problem solving, if needed.</li>
-<li>Check that your  can handle all possible transfer states during polling of transfer info.</li>
+<li>Check that you can handle all possible transfer states during polling of transfer info.</li>
 <li>Automatically check available balance before submitting requests to fund your transfers. This avoids rejections due to insufficient balance.</li>
 <li>Verify that your borderless account statement provides you all information you need for financial accounting.</li>
 </ul>
@@ -2393,7 +2393,7 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <ul>
 <li>Sign up for Transferwise borderless account and go through on-boarding flow including 2FA setup.</li>
 </ul>
-<h3 id='borderless-payouts-guide-going-live-checklist-3-setup-security-for-live-environment'>3. Setup Security for LIVE environment</h3>
+<h3 id='borderless-payouts-guide-going-live-checklist-3-setup-security-for-live-environment'>3. Setup security for LIVE environment</h3>
 <ul>
 <li>Obtain your live API token from Settings page. </li>
 <li>Store your live API token securely in your production servers so that only authorized persons have access to it. </li>
@@ -2427,6 +2427,16 @@ Or you can start from calculator, then collect recipient details and as a last s
 <p>So this guide is more like a list of building blocks rather than a strict step-by-step guide.</p>
 
 <p>We have a dedicated team focusing on bank partnerships who will be helping you to figure it out. </p>
+<h2 id='bank-integrations-guide-user-on-boarding-flow'>User on-boarding flow</h2>
+<p>User on-boarding flow consists of these building blocks.<br>
+You need to go through this flow only once per each customer before they are setting up their first payment.</p>
+
+<ul>
+<li><a href="#bank-integrations-guide-get-user-authorization">Get user authorization</a></li>
+<li><a href="#bank-integrations-guide-get-user-tokens">Get user tokens</a></li>
+<li><a href="#bank-integrations-guide-create-personal-user-profile">Create personal user profile</a></li>
+<li><a href="#bank-integrations-guide-create-business-user-profile">Create business user profile</a></li>
+</ul>
 <h2 id='bank-integrations-guide-get-user-authorization'>Get user authorization</h2>
 <blockquote>
 <p>Your app redirects user to Transferwise authorization webpage</p>
@@ -2557,7 +2567,7 @@ This means you have to securely store user&#39;s refresh_token. </p>
 <td>Text</td>
 </tr>
 </tbody></table>
-<h2 id='bank-integrations-guide-refresh-user-token'>Refresh user token</h2>
+<h2 id='bank-integrations-guide-refresh-user-access-token'>Refresh user access token</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -2582,7 +2592,7 @@ This means you have to securely store user&#39;s refresh_token. </p>
 
 <p>In order to maintain an uninterrupted connection, you can request a new access token whenever it is close to expiring.
 There is no need to wait for the actual expiration to happen first. </p>
-<h3 id='bank-integrations-guide-refresh-user-token-request'>Request</h3>
+<h3 id='bank-integrations-guide-refresh-user-access-token-request'>Request</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/v1/oauth/token</code></strong></p>
 
 <p>Use Basic Authentication with your api-client-id/api-client-secret as username/pwd.</p>
@@ -2605,7 +2615,7 @@ There is no need to wait for the actual expiration to happen first. </p>
 <td>uuid</td>
 </tr>
 </tbody></table>
-<h3 id='bank-integrations-guide-refresh-user-token-response'>Response</h3>
+<h3 id='bank-integrations-guide-refresh-user-access-token-response'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -2704,10 +2714,14 @@ POST /v1/addresses</p>
 <p>There is a guide #docTextSection:MEDFDFDMQrmJjtnHS that explains which data fields and validations are in place for addresses in different countries.</p>
 
 <p>You should get back a successful (200) response with a personal profile address id along with other address keys that have been successfully saved.</p>
-<h2 id='bank-integrations-guide-create-identification-document'>Create identification document</h2>
+
+<ol>
+<li>Create identification document</li>
+</ol>
+
 <p>Only for personal profiles.  which you created </p>
 <h2 id='bank-integrations-guide-create-business-user-profile'>Create business user profile</h2>
-<p>Prerequisite is that personal user profile has been created. To onboard businesses, also business user profile has to be created.</p>
+<p>Prerequisite is that personal user profile has been created. To on-board businesses, also business user profile has to be created.</p>
 
 <p>Similar two steps apply:</p>
 
@@ -2742,31 +2756,57 @@ Add address to business user profile</p>
 
 <p>Once basic business profile information has been saved, you also need to add address information to business user profile. 
 This can be done exactly the same way as we did for personal profile. Please see description under Step 2.2 above.</p>
+<h2 id='bank-integrations-guide-user-payment-flow'>User payment flow</h2>
+<p>To setup user payment flow you need these building blocks:</p>
+
+<ul>
+<li><a href="#bank-integrations-guide-refresh-user-access-token">Refresh user access token</a></li>
+<li><a href="#bank-integrations-guide-create-quote">Create quote</a></li>
+<li><a href="#bank-integrations-guide-create-recipient-account">Create recipient account</a></li>
+<li><a href="#bank-integrations-guide-create-transfer">Create transfer</a></li>
+<li><a href="#bank-integrations-guide-fund-customer-transfer">Fund transfer</a></li>
+</ul>
 <h2 id='bank-integrations-guide-create-quote'>Create quote</h2>
-<p>STEP 1-2-3 , use  3rd level heading ?!</p>
+<p>Please look at <a href="#quotes-create">Create quote</a> under Full API Reference.</p>
 
-<p>blaah !!!</p>
-
-<p>Difference REGULAR !!!!
-    - Create quote   (type REGULAR, should be included in create quote endpoint !!)</p>
+<p>You need to set quote type as &quot;REGULAR&quot;.</p>
 <h2 id='bank-integrations-guide-create-recipient-account'>Create recipient account</h2>
-<p>blaah !!!</p>
-
 <p>Please look at <a href="#recipient-accounts-create">Create recipient account</a> under Full API Reference.</p>
 <h2 id='bank-integrations-guide-create-transfer'>Create transfer</h2>
-<p>blaah !!!</p>
-
 <p>Please look at <a href="#transfers-create">Create transfer</a> under Full API Reference.</p>
-<h2 id='bank-integrations-guide-get-pay-in-methods'>Get pay-in methods</h2><h2 id='bank-integrations-guide-fund-customer-transfer'>Fund customer transfer</h2>
-<p>external process, not API</p>
+<h2 id='bank-integrations-guide-fund-customer-transfer'>Fund customer transfer</h2>
+<p>Once you have successfully created transfer order via Transferwise API 
+you can now debit the exact source amount from your customer&#39;s bank account 
+and send funds to TransferWise local bank account via domestic payment.</p>
 
-<p>GBP - FPS
- EUR - Sepa </p>
+<p>In order for us to link this incoming domestic payment with corresponding transfer order, we need you to use specific text in the &quot;payment reference&quot; field.
+Calling endpoint <a href="#quotes-get-pay-in-methods">Get pay-in methods</a> with quoteId returns you the correct reference text. </p>
 <h2 id='bank-integrations-guide-get-transfer-delivery-time'>Get transfer delivery time</h2>
 <p>Please look at <a href="#borderless-payouts-guide-get-transfer-delivery-time">Get transfer delivery time</a> under Borderless Payouts Guide.</p>
 <h2 id='bank-integrations-guide-track-transfer-status'>Track transfer status</h2>
 <p>Please look at <a href="#borderless-payouts-guide-track-transfer-status">Track transfer status</a> under Borderless Payouts Guide.</p>
-<h2 id='bank-integrations-guide-going-live-checklist'>Going live checklist</h2><h1 id='affiliates-integration-guide'>Affiliates Integration Guide</h1><h2 id='affiliates-integration-guide-api-access'>API access</h2>
+<h2 id='bank-integrations-guide-going-live-checklist'>Going live checklist</h2><h3 id='bank-integrations-guide-going-live-checklist-1-make-your-integration-bulletproof'>1. Make your integration bulletproof</h3>
+<ul>
+<li>Implement basic retry mechanism to handle potential failures or network interruptions </li>
+<li>Implement duplicate prevention mechanism to avoid duplicate payments. Verify that UUID is uniquely generated for each individual payment and its value is kept same in case of retrying.</li>
+<li>Implement basic logging to help out in debugging and problem solving, if needed.</li>
+<li>Check that you can handle all possible transfer states during polling of transfer info.</li>
+<li>Required data fields for user profile addresses, recipients and transfers vary for different currencies. Please explore <a href="#recipient-accounts-requirements">Recipient Accounts.Requirements</a>, <a href="#transfer-requirements">Transfers.Requirements</a> and <a href="##addresses-requirements">Addresses.Requirements</a>.</li>
+</ul>
+<h3 id='bank-integrations-guide-going-live-checklist-2-setup-security-for-live-environment'>2. Setup security for LIVE environment</h3>
+<ul>
+<li>We have received and successfully decrypted Live API credentials.</li>
+<li>Ensure access tokens and refresh tokens are stored securely and only exposed to authorized persons. </li>
+<li>Make sure your server has TLS version 1.2 or higher.</li>
+<li>Implement a mechanism to obtain new access token upon expiration.</li>
+</ul>
+<h3 id='bank-integrations-guide-going-live-checklist-3-do-penny-testing-in-live'>3. Do penny testing in LIVE</h3>
+<ul>
+<li>Launch LIVE integration to limit set of your customers and test all currency routes end-to-end. </li>
+<li>Test successful flow and bounce back flow. </li>
+<li>All set. Switch it on.</li>
+</ul>
+<h1 id='affiliates-integration-guide'>Affiliates Integration Guide</h1><h2 id='affiliates-integration-guide-api-access'>API access</h2>
 <p>Once you become our affiliate we will send you TransferWise API access credentials: api_client_id &amp; api_client_secret. 
 You can then use these as username &amp; password with <strong>Basic Authentication</strong> method.</p>
 
@@ -4377,7 +4417,7 @@ Quote also calculates transfer fee and estimates delivery time. </p>
 </tr>
 <tr>
 <td>type</td>
-<td>&#39;BALANCE_PAYOUT&#39; for payments funded from borderless account  <br/> &#39;BALANCE_CONVERSION&#39; for conversion between balances  <br/> &#39;REGULAR&#39; for other payments</td>
+<td>&#39;BALANCE_PAYOUT&#39; for payments funded from borderless account  <br/> &#39;BALANCE_CONVERSION&#39; for conversion between balances  <br/> &#39;REGULAR&#39; for payments funded via bank transfers</td>
 <td>Text</td>
 </tr>
 </tbody></table>
@@ -4526,8 +4566,8 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/quotes/<span class="o">{</s
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>Get payment reference text that you should use when sending your funds via bank transfer to TransferWise, also know as the &quot;P-ref&quot; Number of the user&#39;s account.
-This endpoint will in future also include TransferWise bank account details where to send funds to.</p>
+<p>Get text that you should use in the &quot;payment reference&quot; field when sending funds via local bank transfer to TransferWise to fund your payment request.
+Reference text includes &quot;P-REF&quot; number of user which we need in order to automatically link funds.</p>
 <h3 id='quotes-get-pay-in-methods-request'>Request</h3>
 <p><strong><code>GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/pay-in-methods</code></strong></p>
 <h3 id='quotes-get-pay-in-methods-response'>Response</h3>
