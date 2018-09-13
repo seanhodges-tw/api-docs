@@ -288,7 +288,7 @@
                       <a href="#bank-integrations-guide-api-access" class="toc-h2 toc-link" data-title="API access">API access</a>
                     </li>
                     <li>
-                      <a href="#bank-integrations-guide-user-experience" class="toc-h2 toc-link" data-title="User experience">User experience</a>
+                      <a href="#bank-integrations-guide-customized-user-experience" class="toc-h2 toc-link" data-title="Customized user experience">Customized user experience</a>
                     </li>
                     <li>
                       <a href="#bank-integrations-guide-get-user-authorization" class="toc-h2 toc-link" data-title="Get user authorization">Get user authorization</a>
@@ -300,7 +300,7 @@
                       <a href="#bank-integrations-guide-refresh-user-token" class="toc-h2 toc-link" data-title="Refresh user token">Refresh user token</a>
                     </li>
                     <li>
-                      <a href="#bank-integrations-guide-create-shadow-users-gt-move-this-to-reference" class="toc-h2 toc-link" data-title="Create shadow? users --&gt; Move this to reference ???">Create shadow? users --&gt; Move this to reference ???</a>
+                      <a href="#bank-integrations-guide-signup-new-users-via-api" class="toc-h2 toc-link" data-title="Signup new users via API">Signup new users via API</a>
                     </li>
                     <li>
                       <a href="#bank-integrations-guide-get-user-profiles" class="toc-h2 toc-link" data-title="Get user profiles">Get user profiles</a>
@@ -872,7 +872,6 @@ Just follow these three simple steps. </p>
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-
 
 </span></code></pre>
 <p>You only need to call this endpoint once to obtain your user profile id.
@@ -2413,7 +2412,7 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 
 <p>Once we start our partnership  we will send you API access credentials for sandbox environment: api_client_id &amp; api_client_secret.
 You need these in order to request user authorizations so you can make payments on behalf of them.
-We also need <em>redirect_url</em> from your technical team so that we can make the integration more secure. </p>
+We also need <em>redirect_url</em> from your technical team so that we can make the integration more secure by limiting our callbacks to only this URL. </p>
 
 <p><a href="https://auth0.com/blog/oauth2-the-complete-guide/">OAuth 2.0: The Complete Guide</a> is great guide to refresh your knowledge about the protocol itself.</p>
 <h3 id='bank-integrations-guide-api-access-test-and-live-environments'>TEST and LIVE environments</h3>
@@ -2421,7 +2420,7 @@ We also need <em>redirect_url</em> from your technical team so that we can make 
 <li>Sandbox API is located at https://api.sandbox.transferwise.tech</li>
 <li>LIVE API is located at https://api.transferwise.com</li>
 </ul>
-<h2 id='bank-integrations-guide-user-experience'>User experience</h2>
+<h2 id='bank-integrations-guide-customized-user-experience'>Customized user experience</h2>
 <p>You will be building user experience directly into your mobile and desktop applications and will be using TransferWise API only in the background. 
 There are different ways to build the frontend experience, especially when it comes to the sequence of steps in the payment flow.</p>
 
@@ -2433,57 +2432,39 @@ Or you can start from calculator, then collect recipient details and as a last s
 <p>We have a dedicated team focusing on bank partnerships who will be helping you to figure it out. </p>
 <h2 id='bank-integrations-guide-get-user-authorization'>Get user authorization</h2>
 <blockquote>
-<p>Your app redirects user to Transferwise authorization webpage
-<code>shell
-https://api.sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
-</code></p>
-
-<p>Transferwise authorization page redirects user back to your redirect page.
-<code>shell
-https://www.yourbank.com/?code=[CODE]
-</code></p>
+<p>Your app redirects user to Transferwise authorization webpage</p>
 </blockquote>
-<h3 id='bank-integrations-guide-get-user-authorization-your-app-redirects-user-to-transferwise-authorization-webpage'>Your app redirects user to Transferwise authorization webpage</h3>
-<p>Transferwise authorization page allows customers to login (existing user) or sign-up (new users) for TransferWise. </p>
+<pre class="highlight shell tab-shell"><code>https://api.sandbox.transferwise.tech/oauth/authorize?response_type<span class="o">=</span>code&amp;client_id<span class="o">=</span>&lt;your api client id&gt;&amp;redirect_uri<span class="o">=</span>https://www.yourbank.com
+</code></pre>
+<blockquote>
+<p>Transferwise authorization page redirects user back to your redirect page.</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>https://www.yourbank.com/?code<span class="o">=[</span>CODE]
+</code></pre><h3 id='bank-integrations-guide-get-user-authorization-your-banking-app-redirects-user-to-transferwise-authorization-webpage'>Your banking app redirects user to Transferwise authorization webpage</h3>
+<p><strong><code>https://sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=&lt;your-api-client-id&gt;&amp;redirect_uri=https://www.yourbank.com</code></strong></p>
 
-<p>https://api.sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=<your api client id>&amp;redirect_uri=https://www.yourbank.com</p>
+<p>Replace <em>your-api-client-id</em> and <em>redirect_uri</em> with your specific values. 
+The redirect URI should be the address you want the user to be returned to after the authorization flow. </p>
 
-<p>OAuth flow - Sign up new user and obtain their authorization to access their account</p>
+<p><em>Please note that URL for authorization page in sandbox is located at sandbox.transferwise.tech which is different than URL for API calls - api.sandbox.transferwise.tech. 
+In live environment standard api.transferwise.com url works for authorization page as well as API calls.</em></p>
+<h3 id='bank-integrations-guide-get-user-authorization-user-signs-up-or-logs-in-and-authorizes-your-banking-app-to-access-their-account'>User signs-up or logs in and authorizes your banking app to access their account</h3>
+<p>Transferwise provides options for existing customers to login and new customers to sign-up.</p>
 
-<p>Existing users - oauth flow
-   New users - signup via oauth</p>
+<p>Initial sign-up is is just limited to creating a user entity and does not include going through KYC. New customers have 3 options to signup:</p>
 
-<p>Registration code flow (shadow customers) &gt;&gt; </p>
+<p><ul>
+    <li>Providing email and password (email has to be unique)</li>
+    <li>Connect with Facebook</li>
+    <li>Connect with Google</li>
+  </ul></p>
 
-<p>2 ways: OAuth Flow: linking existing users !! creating new users !!!</p>
+<p>Users are then directed to authorization page where they can authorize your banking app to have access to their Transferwise account.</p>
+<h3 id='bank-integrations-guide-get-user-authorization-tranferwise-redirects-user-back-to-your-banking-app'>Tranferwise redirects user back to your banking app</h3>
+<p>https://www.yourbank.com/?code=[CODE]</p>
 
-<ol>
-<li>OAUTH FLOW Existing users - signup &amp; login (TW users)
-3.1. REDIRECT 
-re-direct from your app to this browser address bar, either manually or by forwarding your user to the address.
-https://api.transferwise.com/oauth/authorize?response_type=code&amp;client_id=sampleid&amp;
-redirect_uri=https://example.com</li>
-</ol>
-
-<p>Replace sampleid with your client ID and example.com with your designated redirect URI. 
-  The redirect URI should be the address you want the user to be retuened to after the authorization flow. 
-  If you are using the test environment, please replace the api.transferwise.com with sandbox.transferwise.tech, but only in this step, 
-  for calling sandbox endpoints please use api.sandbox.transferwise.tech.</p>
-
-<p>The starting point for Authorization Code grant type flow.
-  This is a web page shown to the customer where they approve the authorization request for you to access their TransferWise account on their behalf. 
-  Upon approval the browser will be redirected to the supplied redirect_uri with a generated code query string value. 
-  Your website or service can then use this code and exchange it customer specific API access tokens using  endpoint. 
-  An access token and a refresh token can be generated using this code and should be stored securely for future access.</p>
-
-<p>3.2. Customer logs in / signs up
-  A new page will open where the user can log in with their TransferWise credentials or sign up if they don&#39;t yet have a TransferWise account. 
-  Please note that in the test environment, you will have to create a new test account.
-  Customer authorizes your application to have access to his/her TW account </p>
-
-<p>3.3. Get authorization code from redirected URL parameter
-  After a login/sign up, an authorization code is generated and appended to the redirected URI, e.g.
-  https://www.yourbank.com/?code=[CODE]</p>
+<p>Once user gives your banking app authorization then user is redirected back to your <em>redirect_uri</em> with a generated code query string value. 
+Your website or service can then use this code to obtain access token to act on behalf of the user account.</p>
 <h2 id='bank-integrations-guide-get-user-token'>Get user token</h2>
 <p>3.4. Get user token so you can act on behalf of users</p>
 
@@ -2545,95 +2526,14 @@ redirect_uri=https://example.com</li>
   }</p>
 
 <p>Keep in mind that access token will expire in 12 hours after issuing. The lifetime of refresh token is limited to 20 years.</p>
-<h2 id='bank-integrations-guide-create-shadow-users-gt-move-this-to-reference'>Create shadow? users --&gt; Move this to reference ???</h2>
-<p>Add this logic to #users-sign-up-with-registration-code</p>
+<h2 id='bank-integrations-guide-signup-new-users-via-api'>Signup new users via API</h2>
+<p>We encourage bank integrations to use sign-up functionality included in <a href="#bank-integrations-guide-get-user-authorization">Get user authorization</a> flow. </p>
 
-<p>Step 1: Get client credentials OAuth token</p>
+<p>But there is also an alternative way to create new users to TransferWise platform by using <a href="#users-sign-up-with-registration-code">Signup with registration code</a> feature.</p>
 
-<p>Request POST /oauth/token
-      HTTP Basic using client ID for username and client secret as a password.
-      Body - Form
-      grant_type=client_credentials</p>
+<p>This functionality enables you to create new users directly via back-end API call, without the need to redirect new users to Transferwise authorization page. Existing users still need to go through authorization page flow.</p>
 
-<p>response
-      {
-        &quot;access_token&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
-        &quot;token_type&quot;: &quot;bearer&quot;,
-        &quot;expires_in&quot;: 43199,
-        &quot;scope&quot;: &quot;transfers&quot;
-      }</p>
-
-<p>Step 2: Create user</p>
-
-<p>Request POST /v1/user/signup/registration_code
-      Bearer ${clientCredentialsToken} header
-      {
-      &quot;email&quot;: &quot;${email}&quot;,
-      &quot;registrationCode&quot;: &quot;${registration code}&quot;
-      }</p>
-
-<p>${email} — new user&#39;s email address
-      ${registration code} — random value that is unique to this user, at least 32 characters long</p>
-
-<p>NB: Please apply the same security standards to handling registration code as if it was a password.</p>
-
-<p>Response — Success (201)
-      {
-        &quot;id&quot;: 12345,
-        &quot;name&quot;: null,
-        &quot;email&quot;: &quot;new.user@domain.com&quot;,
-        &quot;active&quot;: true,
-        &quot;details&quot;: null
-      }</p>
-
-<p>Response — Failure (409): User already exists
-      {
-        &quot;errors&quot;: [
-          {
-            &quot;code&quot;: &quot;NOT_UNIQUE&quot;,
-            &quot;message&quot;: &quot;You’re already a member. Please login&quot;,
-            &quot;path&quot;: &quot;email&quot;,
-            &quot;arguments&quot;: [
-              &quot;email&quot;,
-              &quot;class com.transferwise.fx.api.ApiRegisterCommand&quot;,
-              &quot;existing.user@domain.com&quot;
-            ]
-          }
-        ]
-      }</p>
-
-<p>If user already exists then authorization_code  should be used instead.</p>
-
-<p>Step 3: Get user token
-  POST /oauth/token</p>
-
-<p>Authentication
-  HTTP Basic using client ID for username and client secret as a password.
-  Body — Form</p>
-
-<p>grant_type=registration_code
-    client_id=${client id}
-    email=${email}
-    registration_code=${registration code from step 2}</p>
-
-<p>Step 3 can be repeated as long as user does reclaim their TransferWise account.</p>
-
-<p>Response — Success (200)
-    {
-      &quot;access_token&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
-      &quot;token_type&quot;: &quot;bearer&quot;,
-      &quot;refresh_token&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
-      &quot;expires_in&quot;: 43199,
-      &quot;scope&quot;: &quot;transfers&quot;
-    }</p>
-
-<p>Response — Failure (401): User reclaimed the account or invalid registration code used
-    {
-      &quot;error&quot;: &quot;invalid_grant&quot;,
-      &quot;error_description&quot;: &quot;Invalid user credentials.&quot;
-    }</p>
-
-<p>If user has reclaimed the account, then authorization_code  should be used instead.</p>
+<p>Note that these new users have to accept TransferWise Terms and Conditions as part of their signup process nevertheless.  See endpoint <a href="#terms-and-conditions-get-terms-and-conditions">Terms and conditions</a>.</p>
 <h2 id='bank-integrations-guide-get-user-profiles'>Get user profiles</h2><h2 id='bank-integrations-guide-create-personal-user-profile'>Create personal user profile</h2>
 <p>For existing users - &gt; get profiles first !?
 The guide assumes you have already created user — see .</p>
@@ -7909,11 +7809,107 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/user/signup/registration_c
   </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Please read how to create new users at <a href="#bank-integrations-guide">Bank Integrations Guide</a>.<br/>
-This endpoint allows to onboard new users to TransferWise using email and registration code. 
-TransferWise uses email address as customer unique identifier. 
+<p>This endpoint is related to <a href="#bank-integrations-guide">Bank Integrations</a> product.<br/>
+It  allows to onboard new users to TransferWise using email and registration code. </p>
+
+<p>TransferWise uses email address as unique identifier for users. 
 When you are submitting an email which already exists among TransferWise customers you will get a warning that
-&quot;You’re already a member. Please login&quot;.
+&quot;You’re already a member. Please login&quot;.</p>
+
+<p>TODO --  copy all this text here!!!</p>
+
+<p>Add this logic to #users-sign-up-with-registration-code</p>
+
+<p>Step 1: Get client credentials OAuth token</p>
+
+<p>Request POST /oauth/token
+      HTTP Basic using client ID for username and client secret as a password.
+      Body - Form
+      grant_type=client_credentials</p>
+
+<p>response
+      {
+        &quot;access_token&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
+        &quot;token_type&quot;: &quot;bearer&quot;,
+        &quot;expires_in&quot;: 43199,
+        &quot;scope&quot;: &quot;transfers&quot;
+      }</p>
+
+<p>Step 2: Create user</p>
+
+<p>Request POST /v1/user/signup/registration_code
+      Bearer ${clientCredentialsToken} header
+      {
+      &quot;email&quot;: &quot;${email}&quot;,
+      &quot;registrationCode&quot;: &quot;${registration code}&quot;
+      }</p>
+
+<p>${email} — new user&#39;s email address
+      ${registration code} — random value that is unique to this user, at least 32 characters long</p>
+
+<p>NB: Please apply the same security standards to handling registration code as if it was a password.</p>
+
+<p>Response — Success (201)
+      {
+        &quot;id&quot;: 12345,
+        &quot;name&quot;: null,
+        &quot;email&quot;: &quot;new.user@domain.com&quot;,
+        &quot;active&quot;: true,
+        &quot;details&quot;: null
+      }</p>
+
+<p>Response — Failure (409): User already exists
+      {
+        &quot;errors&quot;: [
+          {
+            &quot;code&quot;: &quot;NOT_UNIQUE&quot;,
+            &quot;message&quot;: &quot;You’re already a member. Please login&quot;,
+            &quot;path&quot;: &quot;email&quot;,
+            &quot;arguments&quot;: [
+              &quot;email&quot;,
+              &quot;class com.transferwise.fx.api.ApiRegisterCommand&quot;,
+              &quot;existing.user@domain.com&quot;
+            ]
+          }
+        ]
+      }</p>
+
+<p>If user already exists then authorization_code  should be used instead.</p>
+
+<p>Step 3: Get user token
+  POST /oauth/token</p>
+
+<p>Authentication
+  HTTP Basic using client ID for username and client secret as a password.
+  Body — Form</p>
+
+<p>grant_type=registration_code
+    client_id=${client id}
+    email=${email}
+    registration_code=${registration code from step 2}</p>
+
+<p>Step 3 can be repeated as long as user does reclaim their TransferWise account.</p>
+
+<p>Response — Success (200)
+    {
+      &quot;access_token&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
+      &quot;token_type&quot;: &quot;bearer&quot;,
+      &quot;refresh_token&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
+      &quot;expires_in&quot;: 43199,
+      &quot;scope&quot;: &quot;transfers&quot;
+    }</p>
+
+<p>Response — Failure (401): User reclaimed the account or invalid registration code used
+    {
+      &quot;error&quot;: &quot;invalid_grant&quot;,
+      &quot;error_description&quot;: &quot;Invalid user credentials.&quot;
+    }</p>
+
+<p>If user has reclaimed the account, then authorization_code  should be used instead.</p>
+
+<p>refresh token works same way as for the other flow.</p>
+
+<p>TODO ---
 <br/>
 If email is new (does not have active user) then new user will be created.</p>
 <h3 id='users-sign-up-with-registration-code-request'>Request</h3>
