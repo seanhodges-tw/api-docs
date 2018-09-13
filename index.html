@@ -327,7 +327,7 @@
                       <a href="#bank-integrations-guide-get-pay-in-methods" class="toc-h2 toc-link" data-title="Get pay-in methods">Get pay-in methods</a>
                     </li>
                     <li>
-                      <a href="#bank-integrations-guide-debit-customer-account" class="toc-h2 toc-link" data-title="Debit customer account">Debit customer account</a>
+                      <a href="#bank-integrations-guide-fund-customer-transfer" class="toc-h2 toc-link" data-title="Fund customer transfer">Fund customer transfer</a>
                     </li>
                     <li>
                       <a href="#bank-integrations-guide-get-transfer-delivery-time" class="toc-h2 toc-link" data-title="Get transfer delivery time">Get transfer delivery time</a>
@@ -747,7 +747,7 @@ Banks can build their own native user experience and use TransferWise API only i
   </li>
 </ul></p>
 
-<p><strong>Case Studies</strong></p>
+<p><strong>References</strong></p>
 
 <ul>
 <li><a href="https://monzo.com/blog/2018/06/25/monzo-international-transfers">Monzo &amp; TransferWise</a> in United Kingdom </li>
@@ -2409,17 +2409,45 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <li>All set. Switch it on.</li>
 </ul>
 <h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h2 id='bank-integrations-guide-api-access'>API access</h2>
+<p>TransferWise uses standard OAuth 2.0 protocol for authentication and authorization. </p>
+
+<p>Once we start our partnership  we will send you API access credentials for sandbox environment: api_client_id &amp; api_client_secret.
+You need these in order to request user authorizations so you can make payments on behalf of them.
+We also need <em>redirect_url</em> from your technical team so that we can make the integration more secure. </p>
+
+<p><a href="https://auth0.com/blog/oauth2-the-complete-guide/">OAuth 2.0: The Complete Guide</a> is great guide to refresh your knowledge about the protocol itself.</p>
+<h3 id='bank-integrations-guide-api-access-test-and-live-environments'>TEST and LIVE environments</h3>
 <ul>
-<li>OAuth 2.0 protocol for authentication and authorization.</li>
-<li><p>we need from you redirect URL  (for existing users)</p></li>
-<li><p>we will give you client_id &amp; client_secret</p></li>
-<li><p>these give you access to API calls</p></li>
+<li>Sandbox API is located at https://api.sandbox.transferwise.tech</li>
+<li>LIVE API is located at https://api.transferwise.com</li>
 </ul>
 <h2 id='bank-integrations-guide-user-experience'>User experience</h2>
-<p>It can be different . These are building blocks..</p>
+<p>You will be building user experience directly into your mobile and desktop applications and will be using TransferWise API only in the background. 
+There are different ways to build the frontend experience, especially when it comes to the sequence of steps in the payment flow.</p>
 
-<p>Temporary quote for example...</p>
+<p>For example you can put sign up/login step as a first step and then show currency calculator and then collect recipient details.
+Or you can start from calculator, then collect recipient details and as a last step ask user to login / signup.  </p>
+
+<p>So this guide is more like a list of building blocks rather than a strict step-by-step guide.</p>
+
+<p>We have a dedicated team focusing on bank partnerships who will be helping you to figure it out. </p>
 <h2 id='bank-integrations-guide-get-user-authorization'>Get user authorization</h2>
+<blockquote>
+<p>Your app redirects user to Transferwise authorization webpage
+<code>shell
+https://api.sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
+</code></p>
+
+<p>Transferwise authorization page redirects user back to your redirect page.
+<code>shell
+https://www.yourbank.com/?code=[CODE]
+</code></p>
+</blockquote>
+<h3 id='bank-integrations-guide-get-user-authorization-your-app-redirects-user-to-transferwise-authorization-webpage'>Your app redirects user to Transferwise authorization webpage</h3>
+<p>Transferwise authorization page allows customers to login (existing user) or sign-up (new users) for TransferWise. </p>
+
+<p>https://api.sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=<your api client id>&amp;redirect_uri=https://www.yourbank.com</p>
+
 <p>OAuth flow - Sign up new user and obtain their authorization to access their account</p>
 
 <p>Existing users - oauth flow
@@ -2455,7 +2483,7 @@ redirect_uri=https://example.com</li>
 
 <p>3.3. Get authorization code from redirected URL parameter
   After a login/sign up, an authorization code is generated and appended to the redirected URI, e.g.
-  https://www.example.com/?code=[CODE]</p>
+  https://www.yourbank.com/?code=[CODE]</p>
 <h2 id='bank-integrations-guide-get-user-token'>Get user token</h2>
 <p>3.4. Get user token so you can act on behalf of users</p>
 
@@ -2699,17 +2727,39 @@ Add address to business user profile</p>
 <p>Once basic business profile information has been saved, you also need to add address information to business user profile. 
 This can be done exactly the same way as we did for personal profile. Please see description under Step 2.2 above.</p>
 <h2 id='bank-integrations-guide-create-quote'>Create quote</h2>
-<p>- Create quote   (type REGULAR, should be included in create quote endpoint !!)</p>
-<h2 id='bank-integrations-guide-create-recipient-account'>Create recipient account</h2><h2 id='bank-integrations-guide-create-transfer'>Create transfer</h2><h2 id='bank-integrations-guide-get-pay-in-methods'>Get pay-in methods</h2><h2 id='bank-integrations-guide-debit-customer-account'>Debit customer account</h2>
+<p>STEP 1-2-3 , use  3rd level heading ?!</p>
+
+<p>blaah !!!</p>
+
+<p>Difference REGULAR !!!!
+    - Create quote   (type REGULAR, should be included in create quote endpoint !!)</p>
+<h2 id='bank-integrations-guide-create-recipient-account'>Create recipient account</h2>
+<p>blaah !!!</p>
+
+<p>Please look at <a href="#recipient-accounts-create">Create recipient account</a> under Full API Reference.</p>
+<h2 id='bank-integrations-guide-create-transfer'>Create transfer</h2>
+<p>blaah !!!</p>
+
+<p>Please look at <a href="#transfers-create">Create transfer</a> under Full API Reference.</p>
+<h2 id='bank-integrations-guide-get-pay-in-methods'>Get pay-in methods</h2><h2 id='bank-integrations-guide-fund-customer-transfer'>Fund customer transfer</h2>
 <p>external process, not API</p>
 
 <p>GBP - FPS
  EUR - Sepa </p>
-<h2 id='bank-integrations-guide-get-transfer-delivery-time'>Get transfer delivery time</h2><h2 id='bank-integrations-guide-track-transfer-status'>Track transfer status</h2><h2 id='bank-integrations-guide-going-live-checklist'>Going live checklist</h2><h1 id='affiliates-integration-guide'>Affiliates Integration Guide</h1><h2 id='affiliates-integration-guide-api-access'>API access</h2>
+<h2 id='bank-integrations-guide-get-transfer-delivery-time'>Get transfer delivery time</h2>
+<p>Please look at <a href="#borderless-payouts-guide-get-transfer-delivery-time">Get transfer delivery time</a> under Borderless Payouts Guide.</p>
+<h2 id='bank-integrations-guide-track-transfer-status'>Track transfer status</h2>
+<p>Please look at <a href="#borderless-payouts-guide-track-transfer-status">Track transfer status</a> under Borderless Payouts Guide.</p>
+<h2 id='bank-integrations-guide-going-live-checklist'>Going live checklist</h2><h1 id='affiliates-integration-guide'>Affiliates Integration Guide</h1><h2 id='affiliates-integration-guide-api-access'>API access</h2>
 <p>Once you become our affiliate we will send you TransferWise API access credentials: api_client_id &amp; api_client_secret. 
 You can then use these as username &amp; password with <strong>Basic Authentication</strong> method.</p>
 
 <p>There are two endpoints <a href="#exchange-rates-list">Exchange Rates.List</a> and <a href="#quotes-get-temporary-quote">Get Temporary Quote</a> which you can call with this authentication method.</p>
+<h3 id='affiliates-integration-guide-api-access-test-and-live-environments'>TEST and LIVE environments</h3>
+<ul>
+<li>Sandbox API is located at https://api.sandbox.transferwise.tech</li>
+<li>LIVE API is located at https://api.transferwise.com</li>
+</ul>
 <h2 id='affiliates-integration-guide-get-current-exchange-rates'>Get current exchange rates</h2>
 <blockquote>
 <p>Example Request (Basic authentication):</p>
