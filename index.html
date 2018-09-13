@@ -2427,7 +2427,7 @@ You need to go through this flow only once per each customer before they can set
 
 <ul>
 <li><a href="#bank-integrations-guide-get-user-authorization">Get user authorization</a></li>
-<li><a href="#bank-integrations-guide-signup-new-users-via-api">Signup new users via API</a> - this is optional alternative for user authorization of new users.</li>
+<li><a href="#bank-integrations-guide-signup-new-users-via-api">Signup new users via API</a> - this is optional alternative to getting user authorization for new users.</li>
 <li><a href="#bank-integrations-guide-get-user-tokens">Get user tokens</a></li>
 <li><a href="#bank-integrations-guide-create-personal-user-profile">Create personal user profile</a></li>
 <li><a href="#bank-integrations-guide-create-business-user-profile">Create business user profile</a></li>
@@ -2625,7 +2625,7 @@ There is no need to wait for the actual expiration to happen first. </p>
 </tr>
 <tr>
 <td>refresh_token</td>
-<td>User&#39;s refresh_token obtains in <a href="#bank-integrations-guide-get-user-tokens">Get user tokens</a> step.</td>
+<td>User&#39;s refresh_token obtained in <a href="#bank-integrations-guide-get-user-tokens">Get user tokens</a> step.</td>
 <td>uuid</td>
 </tr>
 </tbody></table>
@@ -2729,6 +2729,8 @@ POST /v1/addresses</p>
 <p>Prerequisite is that personal user profile has been created. To on-board businesses, also business user profile has to be created.</p>
 
 <p>Similar two steps apply:</p>
+
+<p><a href="#user-profiles-create-business">Create business user profile</a></p>
 
 <p>Create business user profile — basic info
 Add address to business user profile</p>
