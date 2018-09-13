@@ -294,7 +294,7 @@
                       <a href="#bank-integrations-guide-get-user-authorization" class="toc-h2 toc-link" data-title="Get user authorization">Get user authorization</a>
                     </li>
                     <li>
-                      <a href="#bank-integrations-guide-get-user-token" class="toc-h2 toc-link" data-title="Get user token">Get user token</a>
+                      <a href="#bank-integrations-guide-get-user-tokens" class="toc-h2 toc-link" data-title="Get user tokens">Get user tokens</a>
                     </li>
                     <li>
                       <a href="#bank-integrations-guide-refresh-user-token" class="toc-h2 toc-link" data-title="Refresh user token">Refresh user token</a>
@@ -2448,8 +2448,8 @@ The redirect URI should be the address you want the user to be returned to after
 
 <p><em>Please note that URL for authorization page in sandbox is located at sandbox.transferwise.tech which is different than URL for API calls - api.sandbox.transferwise.tech. 
 In live environment standard api.transferwise.com url works for authorization page as well as API calls.</em></p>
-<h3 id='bank-integrations-guide-get-user-authorization-user-signs-up-or-logs-in-and-authorizes-your-banking-app-to-access-their-account'>User signs-up or logs in and authorizes your banking app to access their account</h3>
-<p>Transferwise provides options for existing customers to login and new customers to sign-up.</p>
+<h3 id='bank-integrations-guide-get-user-authorization-user-signs-up-or-logs-in-and-authorizes-your-banking-app-to-access-their-transferwise-account'>User signs-up or logs in and authorizes your banking app to access their Transferwise account</h3>
+<p>Transferwise provides options for existing customers to login and new customers to sign-up first.</p>
 
 <p>Initial sign-up is is just limited to creating a user entity and does not include going through KYC. New customers have 3 options to signup:</p>
 
@@ -2465,67 +2465,183 @@ In live environment standard api.transferwise.com url works for authorization pa
 
 <p>Once user gives your banking app authorization then user is redirected back to your <em>redirect_uri</em> with a generated code query string value. 
 Your website or service can then use this code to obtain access token to act on behalf of the user account.</p>
-<h2 id='bank-integrations-guide-get-user-token'>Get user token</h2>
-<p>3.4. Get user token so you can act on behalf of users</p>
+<h2 id='bank-integrations-guide-get-user-tokens'>Get user tokens</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+-u <span class="s1">'[your-api-client-id]:[your-api-client-secret]'</span> <span class="se">\</span>
+-d <span class="s1">'grant_type=authorization_code'</span> <span class="se">\</span>
+-d <span class="s1">'client_id=[your-api-client-id]'</span> <span class="se">\</span>
+-d <span class="s1">'code=[CODE]'</span> <span class="se">\</span>
+-d <span class="s1">'redirect_uri=https://www.yourbank.com'</span> <span class="se">\</span>
+<span class="s1">'https://api.sandbox.transferwise.tech/oauth/token'</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="s2">"ba8k9935-62f2-475a-60d8-6g45377b4062"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"token_type"</span><span class="p">:</span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="s2">"a235uu9c-9azu-4o28-a1kn-e15500o151cx"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">43199</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="s2">"transfers"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>As next step you need to obtain user tokens so you can call API endpoints on behalf of user who gave this authorized your banking app.
+You need the <em>code</em> provided to you during authorization flow to get user&#39;s access_token and refresh_token.
+For calling API endpoints you need to provide access_token in request header in the format &quot;Authorization: Bearer access_token&quot;.
+Access tokens are however valid only for 12 hours, so upon expiry you need to use refresh_token to generate new access_token.
+This means you have to securely store user&#39;s refresh_token. </p>
+<h3 id='bank-integrations-guide-get-user-tokens-request'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/oauth/token</code></strong></p>
 
-<p>so you can act on behalf of the user.
-  Now you can exchange the authorization code for access and refresh tokens. To do that, you can use this curl request:
-  Request
-      curl \
-      -u &#39;[your client_id]:[your client secret]&#39; \
-      -d &#39;grant_type=authorization_code&#39; \
-      -d &#39;client_id=[your client id]&#39; \
-      -d &#39;code=[CODE]&#39; \
-      -d &#39;redirect_uri=https://example.com&#39; \
-      &#39;https://api.transferwise.com/oauth/token&#39; </p>
+<p>Use Basic Authentication with your api-client-id/api-client-secret as username/pwd.</p>
 
-<p>Changes you need to make to that request are:</p>
-
-<p>replace [your client id] with your client_id
-  replace [your client secret] with your client_secret
-  replace [CODE] with authorization code you have received in Step 3
-  replace https://example.com with the URI you specified in Step 1</p>
-
-<p>Response
-  {
-    &quot;access_token&quot;:&quot;ba8k9935-62f2-475a-60d8-6g45377b4062&quot;,
-    &quot;token_type&quot;:&quot;bearer&quot;,
-    &quot;refresh_token&quot;:&quot;a235uu9c-9azu-4o28-a1kn-e15500o151cx&quot;,
-    &quot;expires_in&quot;: 43199,
-    &quot;scope&quot;:&quot;transfers&quot;
-  }</p>
-
-<p>All set!
-  Your token is now ready to use.
-   Add your token in the request header for the endpoints that require it. 
-   It should be in the format &quot;Authorization&quot;: &quot;Bearer <token>&quot;.
-  It is valid for 12 hours. You should store refresh token. </p>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>grant_type</td>
+<td>&quot;authorization_code&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>your api_client_id</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>code</td>
+<td>Code  provided to you upon redirect back from authorization flow. See previous step <a href="#bank-integrations-guide-get-user-authorization">Get user authorization</a>.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>Redirect page associated with your api client credentials</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='bank-integrations-guide-get-user-tokens-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours.</td>
+<td>uuid</td>
+</tr>
+<tr>
+<td>token_type</td>
+<td>&quot;bearer&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>Refresh token which you need to use in order to request new access_token. The lifetime of refresh tokens is 10 years.</td>
+<td>uuid</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>Expiry time in seconds</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>&quot;transfers&quot;</td>
+<td>Text</td>
+</tr>
+</tbody></table>
 <h2 id='bank-integrations-guide-refresh-user-token'>Refresh user token</h2>
-<p>3.5. Swapping a token because it is 12 hours only !!
-  In order to maintain an uninterrupted connection, you can request a new access token whenever it is close to expiring. 
-  You can do this by providing the refresh token:</p>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>      curl <span class="se">\</span>
+      <span class="s1">'https://api.sandbox.transferwise.tech/oauth/token'</span> <span class="se">\</span>
+      -u <span class="s1">'[your-api-client-id]:[your-api-client-secret]'</span> <span class="se">\</span>
+      -d <span class="s1">'grant_type=refresh_token'</span> <span class="se">\</span>
+      -d <span class="s1">'refresh_token=[user'</span>s refresh token]<span class="s1">'
+</span></code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="s2">"be69d566-971e-4e15-9648-85a486195863"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"token_type"</span><span class="p">:</span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="s2">"1d0ec7b9-b569-426d-a18d-8dead5b6a3cc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="mi">43199</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="s2">"transfers"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Access tokens are valid for 12 hours, so upon expiry you need to use refresh_token to generate new access_token. </p>
 
-<p>Obtains new access token based on refresh token.</p>
+<p>In order to maintain an uninterrupted connection, you can request a new access token whenever it is close to expiring.
+There is no need to wait for the actual expiration to happen first. </p>
+<h3 id='bank-integrations-guide-refresh-user-token-request'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/oauth/token</code></strong></p>
 
-<p>request 
-      curl \
-      &#39;https://api.transferwise.com/oauth/token&#39; \
-      -u &#39;client_id:client_secret&#39; \
-      -d &#39;grant_type=refresh_token&#39; \
-      -d &#39;refresh_token=[your refresh token]&#39;</p>
+<p>Use Basic Authentication with your api-client-id/api-client-secret as username/pwd.</p>
 
-<p>...and get the access token in response:</p>
-
-<p>response
-  {
-    &quot;access_token&quot;:&quot;be69d566-971e-4e15-9648-85a486195863&quot;,
-    &quot;token_type&quot;:&quot;bearer&quot;,
-    &quot;refresh_token&quot;:&quot;1d0ec7b9-b569-426d-a18d-8dead5b6a3cc&quot;,
-    &quot;expires_in&quot;:43199,
-    &quot;scope&quot;:&quot;transfers&quot;
-  }</p>
-
-<p>Keep in mind that access token will expire in 12 hours after issuing. The lifetime of refresh token is limited to 20 years.</p>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>grant_type</td>
+<td>&quot;refresh_token&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>User&#39;s refresh_token obtains in previous <a href="#bank-integrations-guide-get-user-tokens">Get user tokens</a> step.</td>
+<td>uuid</td>
+</tr>
+</tbody></table>
+<h3 id='bank-integrations-guide-refresh-user-token-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours.</td>
+<td>uuid</td>
+</tr>
+<tr>
+<td>token_type</td>
+<td>&quot;bearer&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>Refresh token which you need to use in order to request new access_token once the existing one expires</td>
+<td>uuid</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>Expiry time in seconds</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>&quot;transfers&quot;</td>
+<td>Text</td>
+</tr>
+</tbody></table>
 <h2 id='bank-integrations-guide-signup-new-users-via-api'>Signup new users via API</h2>
 <p>We encourage bank integrations to use sign-up functionality included in <a href="#bank-integrations-guide-get-user-authorization">Get user authorization</a> flow. </p>
 
