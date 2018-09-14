@@ -752,7 +752,7 @@ Banks can build their own native user experience and use TransferWise API only i
 
 <p><img src="https://image.ibb.co/m8kXTv/tw_n26_example.png" title="N26 User Experience" alt="alt text" /></p>
 
-<p>Please contact murali.akella@transferwise.com to get started.</p>
+<p>Please contact bizdev@transferwise.com to get started.</p>
 
 <p>Also take a look at our technical integration here - <a href="#bank-integrations-guide">Bank Integration Guide</a>.</p>
 <h2 id='transferwise-api-affiliates'>Affiliates</h2>
@@ -780,7 +780,7 @@ so that your customers will enjoy the benefits of transparent and low cost inter
 It is different from Borderless Payouts since it does not require our customer to also be the originator of payments. 
 So TransferWise will act as third party to the person who initiated the payment.  </p>
 
-<p>We are working on making this feature available soon. Please contact stuart.gregory@transferwise.com for more info.  </p>
+<p>We are working on making this feature available soon. Please contact bizdev@transferwise.com for more info.  </p>
 <h1 id='borderless-payouts-guide'>Borderless Payouts Guide</h1>
 <p>Welcome to TransferWise Payouts API documentation. 
 Before you jump into coding please take few moments to go through these 3 topics at first.</p>
@@ -7992,7 +7992,7 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/users/<span class="o">{</sp
 </tbody></table>
 <h2 id='users-sign-up-with-registration-code'>Sign Up with Registration Code</h2>
 <blockquote>
-<p>Example Request: Get Client Credentials Token</p>
+<p>1) Example Request: Get Client Credentials Token</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
 -u <span class="s1">'[your-api-client-id]:[your-api-client-secret]'</span> <span class="se">\</span>
@@ -8000,7 +8000,7 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/users/<span class="o">{</sp
 <span class="s1">'https://api.sandbox.transferwise.tech/oauth/token'</span> 
 </code></pre>
 <blockquote>
-<p>Example Response: Get Client Credentials Token</p>
+<p>1) Example Response: Get Client Credentials Token</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
     </span><span class="s2">"access_token"</span><span class="p">:</span><span class="s2">"ba8k1234-00f2-475a-60d8-6g45377b4062"</span><span class="p">,</span><span class="w">
@@ -8008,113 +8008,171 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/users/<span class="o">{</sp
     </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">43199</span><span class="p">,</span><span class="w">
     </span><span class="s2">"scope"</span><span class="p">:</span><span class="s2">"transfers"</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<blockquote>
-<p>Example Request: Create User</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
--u <span class="s1">'[your-api-client-id]:[your-api-client-secret]'</span> <span class="se">\</span>
--d <span class="s1">'grant_type=client_credentials'</span> <span class="se">\</span>
-<span class="s1">'https://api.sandbox.transferwise.tech/oauth/token'</span> 
-</code></pre>
-<blockquote>
-<p>Example Response: Create User</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="s2">"ba8k1234-00f2-475a-60d8-6g45377b4062"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"token_type"</span><span class="p">:</span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">43199</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"scope"</span><span class="p">:</span><span class="s2">"transfers"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint is related to <a href="#bank-integrations-guide">Bank Integrations</a> product.<br/>
-It allows to onboard new users to TransferWise using email and registration code. </p>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</span></code></pre>
+<blockquote>
+<p>2) Example Request: Create User</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X POST https://api.sandbox.transferwise.tech/v1/user/signup/registration_code <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your client credentials token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "email": &lt;user email&gt;,
+          "registrationCode": &lt;registration code&gt;
+        }'</span>
+
+</code></pre>
+<blockquote>
+<p>2) Example Response: Create User (Success (200) user created successfully)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new.user@domain.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>2) Example Response: Create User (Failure (409): User already exists)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NOT_UNIQUE"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You’re already a member. Please login"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"arguments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"class com.transferwise.fx.api.ApiRegisterCommand"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"existing.user@domain.com"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+
+
+
+
+
+
+
+
+
+</span></code></pre>
+<blockquote>
+<p>3) Example Request: Get User Tokens</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl <span class="se">\</span>
+-u <span class="s1">'[your-api-client-id]:[your-api-client-secret]'</span> <span class="se">\</span>
+-d <span class="s1">'grant_type=registration_code'</span> <span class="se">\</span>
+-d <span class="s1">'email=&lt;user email&gt;'</span> <span class="se">\</span>
+-d <span class="s1">'registration_code=&lt;registration code used to create user&gt;'</span> <span class="se">\</span>
+<span class="s1">'https://api.sandbox.transferwise.tech/oauth/token'</span> 
+</code></pre>
+<blockquote>
+<p>3) Example Response: Get User Tokens (Success: 200)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01234567-89ab-cdef-0123-456789abcdef"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01234567-89ab-cdef-0123-456789abcdef"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">43199</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfers"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>3) Example Response: Get User Tokens (Failure: 401 - User reclaimed the account or invalid registration code used)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid_grant"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"error_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid user credentials."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This feature is related to <a href="#bank-integrations-guide">Bank Integrations</a> product. 
+It enables onboarding new users to TransferWise via backend API calls only. 
+To get authorization from Transferwise existing users you still need to redirect them to our authorization webpage.</p>
+
+<p>There are 3 steps you need to go through:</p>
+<h3 id='users-sign-up-with-registration-code-1-get-client-credentials-token'>1) Get Client Credentials Token</h3>
+<p>Obtain access_token based on your API client credentials. </p>
+<h3 id='users-sign-up-with-registration-code-request'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/oauth/token</code></strong></p>
+
+<p>Use Basic Authentication with your api-client-id/api-client-secret as username/pwd.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>grant_type</td>
+<td>&quot;client_credentials&quot;</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='users-sign-up-with-registration-code-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>Access token to be used when calling &quot;create user&quot; endpoint. Valid for 12 hours.</td>
+<td>uuid</td>
+</tr>
+<tr>
+<td>token_type</td>
+<td>&quot;bearer&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>Expiry time in seconds</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>&quot;transfers&quot;</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='users-sign-up-with-registration-code-2-create-user'>2) Create User</h3>
 <p>TransferWise uses email address as unique identifier for users. 
-When you are submitting an email which already exists among TransferWise customers you will get a warning that
-&quot;You’re already a member. Please login&quot;.</p>
+If email is new (there is no active user already) then new user will be created.</p>
 
-<p>TODO --  copy all this text here!!!</p>
-
-<p>Step 2: Create user</p>
-
-<p>Request POST /v1/user/signup/registration_code
-      Bearer ${clientCredentialsToken} header
-      {
-      &quot;email&quot;: &quot;${email}&quot;,
-      &quot;registrationCode&quot;: &quot;${registration code}&quot;
-      }</p>
-
-<p>${email} — new user&#39;s email address
-      ${registration code} — random value that is unique to this user, at least 32 characters long</p>
-
-<p>NB: Please apply the same security standards to handling registration code as if it was a password.</p>
-
-<p>Response — Success (201)
-      {
-        &quot;id&quot;: 12345,
-        &quot;name&quot;: null,
-        &quot;email&quot;: &quot;new.user@domain.com&quot;,
-        &quot;active&quot;: true,
-        &quot;details&quot;: null
-      }</p>
-
-<p>Response — Failure (409): User already exists
-      {
-        &quot;errors&quot;: [
-          {
-            &quot;code&quot;: &quot;NOT_UNIQUE&quot;,
-            &quot;message&quot;: &quot;You’re already a member. Please login&quot;,
-            &quot;path&quot;: &quot;email&quot;,
-            &quot;arguments&quot;: [
-              &quot;email&quot;,
-              &quot;class com.transferwise.fx.api.ApiRegisterCommand&quot;,
-              &quot;existing.user@domain.com&quot;
-            ]
-          }
-        ]
-      }</p>
-
-<p>If user already exists then authorization_code  should be used instead.</p>
-
-<p>Step 3: Get user token
-  POST /oauth/token</p>
-
-<p>Authentication
-  HTTP Basic using client ID for username and client secret as a password.
-  Body — Form</p>
-
-<p>grant_type=registration_code
-    client_id=${client id}
-    email=${email}
-    registration_code=${registration code from step 2}</p>
-
-<p>Step 3 can be repeated as long as user does reclaim their TransferWise account.</p>
-
-<p>Response — Success (200)
-    {
-      &quot;access_token&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
-      &quot;token_type&quot;: &quot;bearer&quot;,
-      &quot;refresh_token&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
-      &quot;expires_in&quot;: 43199,
-      &quot;scope&quot;: &quot;transfers&quot;
-    }</p>
-
-<p>Response — Failure (401): User reclaimed the account or invalid registration code used
-    {
-      &quot;error&quot;: &quot;invalid_grant&quot;,
-      &quot;error_description&quot;: &quot;Invalid user credentials.&quot;
-    }</p>
-
-<p>If user has reclaimed the account, then authorization_code  should be used instead.</p>
-
-<p>refresh token works same way as for the other flow.</p>
-
-<p>TODO ---
-<br/>
-If email is new (does not have active user) then new user will be created.</p>
+<p>When you are submitting an email which already exists amongst our users then you will get a warning that
+&quot;You’re already a member. Please login&quot;.  If user already exists then you need to redirect to <a href="#bank-integrations-guide-get-user-authorization">Get user authorization</a> webpage.</p>
 <h3 id='users-sign-up-with-registration-code-request'>Request</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/v1/user/signup/registration_code</code></strong></p>
+
+<p>Use access_token obtained in first step as authentication header.</p>
 
 <table><thead>
 <tr>
@@ -8125,12 +8183,12 @@ If email is new (does not have active user) then new user will be created.</p>
 </thead><tbody>
 <tr>
 <td>email</td>
-<td>User email</td>
+<td>New user&#39;s email address</td>
 <td>Email</td>
 </tr>
 <tr>
 <td>registrationCode</td>
-<td>Generated registration code. You need your registration code later to obtain access token on behalf of this newly created user.</td>
+<td>Randomly generated registration code that is unique to this user. At least 32 characters long. <br/>You need to store registration code to obtain access token on behalf of this <br/>newly created user in next step. <br/>Please apply the same security standards to handling registration code as if it was a password.</td>
 <td>Text, min length is 32 chars</td>
 </tr>
 </tbody></table>
@@ -8166,6 +8224,74 @@ If email is new (does not have active user) then new user will be created.</p>
 <td>details</td>
 <td>User details. Empty.</td>
 <td>Group</td>
+</tr>
+</tbody></table>
+<h3 id='users-sign-up-with-registration-code-3-get-user-tokens'>3) Get User Tokens</h3>
+<p>You can now use registration code to obtain user access token and refresh token. 
+This step can be repeated as long as user does not reclaim their TransferWise account. 
+If user has reclaimed the account, then redirect to <a href="#bank-integrations-guide-get-user-authorization">Get user authorization</a> flow should be used instead.</p>
+
+<p><a href="#bank-integrations-guide-refresh-user-access-token">Refresh user access token</a> works same way for this flow as well.</p>
+<h3 id='users-sign-up-with-registration-code-request'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/oauth/token</code></strong></p>
+
+<p>Use Basic Authentication with your api-client-id/api-client-secret as username/pwd.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>grant_type</td>
+<td>&quot;registration_code&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>email</td>
+<td>New user&#39;s email address</td>
+<td>Email</td>
+</tr>
+<tr>
+<td>registration_code</td>
+<td>registrationCode from step 2</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='users-sign-up-with-registration-code-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours.</td>
+<td>uuid</td>
+</tr>
+<tr>
+<td>token_type</td>
+<td>&quot;bearer&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>Refresh token which you need to use in order to request new access_token. The lifetime of refresh tokens is 10 years.</td>
+<td>uuid</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>Expiry time in seconds</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>&quot;transfers&quot;</td>
+<td>Text</td>
 </tr>
 </tbody></table>
 <h1 id='user-profiles'>User Profiles</h1><h2 id='user-profiles-create-personal'>Create (Personal)</h2>
