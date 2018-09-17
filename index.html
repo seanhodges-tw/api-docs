@@ -224,7 +224,7 @@
               <a href="#transferwise-api" class="toc-h1 toc-link" data-title="TransferWise API">TransferWise API</a>
                 <ul class="toc-list-h2">
                     <li>
-                      <a href="#transferwise-api-borderless-payouts" class="toc-h2 toc-link" data-title="Borderless Payouts">Borderless Payouts</a>
+                      <a href="#transferwise-api-borderless-payouts-amp-account-automation" class="toc-h2 toc-link" data-title="Borderless Payouts &amp; Account Automation">Borderless Payouts &amp; Account Automation</a>
                     </li>
                     <li>
                       <a href="#transferwise-api-banks" class="toc-h2 toc-link" data-title="Banks">Banks</a>
@@ -237,6 +237,9 @@
                     </li>
                     <li>
                       <a href="#transferwise-api-third-party-payouts" class="toc-h2 toc-link" data-title="Third-Party Payouts">Third-Party Payouts</a>
+                    </li>
+                    <li>
+                      <a href="#transferwise-api-receive-money" class="toc-h2 toc-link" data-title="Receive Money">Receive Money</a>
                     </li>
                 </ul>
             </li>
@@ -700,31 +703,24 @@
 <li><a href="#transferwise-api-affiliates">Affiliates</a><br></li>
 <li><a href="#transferwise-api-connected-applications">Connected Applications</a><br></li>
 <li><a href="#transferwise-api-third-party-payouts">Third-Party Payouts</a><br></li>
+<li><a href="#transferwise-api-receive-money">Receive Money</a></li>
 </ul>
-<h2 id='transferwise-api-borderless-payouts'>Borderless Payouts</h2>
-<p>Open multi-currency Borderless Account and automate your cross-border and domestic payouts with single API integration.<br>
-This product enables you to automate <strong>your own</strong> borderless account for making payouts and reconciliation. </p>
+<h2 id='transferwise-api-borderless-payouts-amp-account-automation'>Borderless Payouts &amp; Account Automation</h2>
+<p>This product enables you to automate your own borderless account for making payouts, managing your money and reconciliation.</p>
 
 <ul>
-  <li>Payouts to bank accounts</li>
-  <li>Payouts to email recipients</li>
-  <li>Currency exchange with mid-market exchange rate</li>
-  <li>Local bank account details for revenue collection in four currencies:
-    <ul>
-      <li>EUR (iban)</li>
-      <li>GBP (sort code | account number)</li>
-      <li>USD (account number | wire routing number | ACH routing number)</li>
-      <li>AUD (bsb code | account number)</li>
-    </ul>  
-  </li>
-  <li>Low and transparent fees</li>
-  <li>Reconciliation with your accounting software</li>
+  <li>Power your cross-border and domestic payouts with a single API integration.</li>
+  <li>Payout directly to bank accounts or to email recipients.</li>
+  <li>Monitor revenue received to your local bank details (AUD, EUR, GBP, USD).</li> 
+  <li>Get statements for balance reconciliation and accounting purposes.</li>
+  <li>Fully automate transfer creation and track statuses.</li>
+  <li>All with the mid-market exchange and our low cost transparent fees.</li>
 </ul>
 
 <p><a href="#borderless-payouts-guide">Borderless Payouts Guide</a> helps you get started with technical integration.</p>
 <h2 id='transferwise-api-banks'>Banks</h2>
-<p>Bank Product enables banks to build TransferWise payments seamlessly into their own desktop and mobile apps. 
-Banks can build their own native user experience and use TransferWise API only in the background.</p>
+<p>Our Bank Product enables banks to build TransferWise payments seamlessly into their own desktop and mobile apps. 
+Banks can build their own native user experience directly on our API, co-branded with TransferWise.</p>
 
 <p><strong>Why should my bank do it?</strong></p>
 
@@ -779,19 +775,18 @@ Banks can build their own native user experience and use TransferWise API only i
 
 <p><a href="#affiliates-integration-guide">Affiliates Integration Guide</a> helps you get started with technical integration.</p>
 <h2 id='transferwise-api-connected-applications'>Connected Applications</h2>
-<p>Connected Applications means the possibility to embed TransferWise product into your own application 
-so that your customers will enjoy the benefits of transparent and low cost international transfers or for example automatically 
-downloading their account statements to your accounting software.</p>
-
-<p>Unfortunately today we have capacity to support only few such integrations. We are working on making this feature available for everyone.  </p>
-
-<p>Please contact bizdev@transferwise.com for more info.  </p>
+<p>Connected Applications gives you the ability to let users connect their TransferWise accounts to your product. Whether it’s automated reconciliation for customers in accounting software, pushing customer’s payroll runs straight into TransferWise or building on our borderless account functionality.
+Unfortunately this functionality isn’t generally available yet but we are working to open it to everyone. To discuss your use case please contact contact bizdev@transferwise.com for more info.</p>
 <h2 id='transferwise-api-third-party-payouts'>Third-Party Payouts</h2>
 <p>Third-Party Payouts is a product for marketplaces and financial institutions (banks and payment service providers).
 It is different from Borderless Payouts since it does not require our customer to also be the originator of payments. 
-So TransferWise will act as third party to the person who initiated the payment.  </p>
+So TransferWise will act as a third-party to the person who initiated the payment.  </p>
 
 <p>We are working on making this feature available soon. Please contact bizdev@transferwise.com for more info.  </p>
+<h2 id='transferwise-api-receive-money'>Receive Money</h2>
+<p>You can receive money to the local bank details that come with your Borderless Account (AUD, EUR, GBP and USD) and reconcile these incoming payments via the API. </p>
+
+<p>We do not currently offer the option to build TransferWise into your checkout flow as a payment option to receive money as a merchant or any other request or receive money flows. Note though that TransferWise can be added as a payout option on your site for beneficiaries to choose to receive their payout through (to email or straight to bank account).</p>
 <h1 id='borderless-payouts-guide'>Borderless Payouts Guide</h1>
 <p>Welcome to TransferWise Payouts API documentation. 
 Before you jump into coding please take few moments to go through these 3 topics at first.</p>
@@ -799,16 +794,16 @@ Before you jump into coding please take few moments to go through these 3 topics
 <p>Borderless account features and pricing are best explained below.</p>
 
 <p><a href="https://transferwise.com/gb/borderless/pricing">https://transferwise.com/gb/borderless/pricing</a></p>
-<h3 id='borderless-payouts-guide-getting-started-2-signup-for-transferwise-borderless-account'>2. Signup for TransferWise borderless account</h3>
+<h3 id='borderless-payouts-guide-getting-started-2-signup-for-transferwise-borderless-account-and-complete-verification'>2. Signup for TransferWise borderless account and complete verification</h3>
 <p>Get hands-on experience as it will help you understand how our payment flow works. 
 Just follow these four steps. </p>
 
 <ul>
-<li><p>Sign up for TransferWise borderless account here <a href="https://transferwise.com/gb/borderless">https://transferwise.com/gb/borderless</a>. 
-By going through TransferWise verification process before you start technical integration will give you confidence that you are in full compliance with our <a href="https://transferwise.com/terms-and-conditions">Terms and Conditions</a>.</p></li>
+<li><p>Sign up for TransferWise borderless account here <a href="https://transferwise.com/gb/borderless">https://transferwise.com/gb/borderless</a>. </p></li>
+<li><p>Complete verification before you start technical integration and ensure that you’re compliant with our <a href="https://transferwise.com/terms-and-conditions">Terms and Conditions</a> and <a href="https://transferwise.com/acceptable-use-policy-eea">Acceptable Use Policy</a>.</p></li>
 <li><p>Make a transfer — check <a href="https://transferwise.com/help/article/1779442/creating-a-transfer/video-guide-make-a-transfer">our video guide</a> for a step-by-step instructions.</p></li>
 <li><p>Verify that our coverage includes your currency route(s). Check <a href="https://transferwise.com/help/article/1569835/basic-information/supported-currencies">Supported Currencies</a>.</p></li>
-<li><p>Read through our <a href="https://transferwise.com/acceptable-use-policy-eea">Acceptable Use Policy</a> to avoid unpleasant surprises too late.</p></li>
+<li><p>Please note that our Fixed Rate functionality is intended to provide time for customers to send funds to TransferWise, while holding the rate for them. TransferWise is not a trading platform and the Fixed Rate functionality is automatically disabled if abusive behaviour (such as multiple transfer creation and selective completion) is detected.</p></li>
 </ul>
 <h3 id='borderless-payouts-guide-getting-started-3-choose-the-best-tool-for-you'>3. Choose the best tool for you</h3>
 <p>There are two ways you can make large number of payouts:</p>
