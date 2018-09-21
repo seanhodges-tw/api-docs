@@ -749,8 +749,8 @@ Banks can build their own native user experience directly on our API, co-branded
 
 <ul>
 <li><a href="https://monzo.com/blog/2018/06/25/monzo-international-transfers">Monzo &amp; TransferWise</a> in United Kingdom </li>
-<li><a href="https://www.lhv.ee/en/transferwise">N26 &amp; TransferWise</a> in Germany</li>
-<li><a href="https://n26.com/en-eu/transferwise">LHV &amp; TransferWise</a> in Estonia</li>
+<li><a href="https://n26.com/en-eu/transferwise">N26 &amp; TransferWise</a> in Germany</li>
+<li><a href="https://www.lhv.ee/en/transferwise">LHV &amp; TransferWise</a> in Estonia</li>
 <li><a href="https://www.bankingtech.com/2018/06/bpce-natixis-and-transferwise-team-for-affordable-cross-border-remittances">BPCE &amp; TransferWise</a> in France</li>
 </ul>
 
@@ -4101,7 +4101,7 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/borderless-accounts/balance
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>Get list of currencies that you can hold in your borderless account. Also shows which currencies have the option to get bank account details.</p>
+<p>Get list of currencies that your can hold in your borderless account. Also shows which currencies have the option to get bank account details.</p>
 <h3 id='borderless-accounts-get-available-currencies-request'>Request</h3>
 <p><strong><code>GET https://api.sandbox.transferwise.tech/v1/borderless-accounts/balance-currencies</code></strong></p>
 <h3 id='borderless-accounts-get-available-currencies-response'>Response</h3>
@@ -5486,8 +5486,8 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "ARS",
           "type": "argentina",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "taxId": "20-34149938-1",
            "accountNumber": "0110482420048200036238"
          }
@@ -5512,8 +5512,8 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "AUD",
           "type": "australian",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bsbCode": "023604",
            "accountNumber": "123456789"
           }
@@ -5538,8 +5538,8 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "BDT",
           "type": "bangladesh",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "015",
            "branchCode": "015270362",
            "accountNumber": "5060011118"
@@ -5569,8 +5569,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "BGN",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "BG89370400440532013000"
            }
         }'</span>
@@ -5594,8 +5594,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "BRL",
           "type": "brazil",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "218",
            "branchCode": "1234",
            "accountNumber": "12345678-9",
@@ -5626,8 +5626,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "CAD",
           "type": "canadian",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "institutionNumber": "006",
            "transitNumber": "04841",
            "accountNumber": "1234567",
@@ -5656,8 +5656,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "CHF",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "CH89370400440532013000"
            }
         }'</span>
@@ -5681,8 +5681,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "CLP",
           "type": "chile",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "504",
            "accountNumber": "12345678901234567890",
            "rut": "760864285",
@@ -5710,8 +5710,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "CNY",
           "type": "chinese_card",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "cardNumber": "6240008631401148"
            }
         }'</span>
@@ -5735,8 +5735,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "CZK",
           "type": "czech",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "prefix": "000000",
            "accountNumber": "5060011118",
            "bankCode": "5500"
@@ -5754,8 +5754,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "CZK",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "CZ89370400440532013000"
            }
         }'</span>
@@ -5791,8 +5791,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "DKK",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "DK89370400440532013000"
            }
         }'</span>
@@ -5816,8 +5816,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "EGP",
           "type": "egypt_local",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "ECBAEGCA",
            "accountNumber": "123456789"
            }
@@ -5844,8 +5844,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "EUR",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "DE89370400440532013000"
            }
         }'</span>
@@ -5869,8 +5869,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "GBP",
           "type": "sort_code",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "sortCode": "40-30-20",
            "accountNumber": "12345678"
            }
@@ -5887,9 +5887,9 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "GBP",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
-           "IBAN": "GB89370400440532013000"
+            "legalType": "PRIVATE",
+            "IBAN": "GB89370400440532013000"
            }
         }'</span>
 </code></pre>
@@ -5924,8 +5924,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "GEL",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "GE89370400440532013000"
            }
         }'</span>
@@ -5949,8 +5949,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "GHS",
           "type": "ghana",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "030100",
            "accountNumber": "0011XXXXXXXXXX"
            }
@@ -5976,8 +5976,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "HKD",
           "type": "hongkong",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "307",
            "accountNumber": "005-231289-112"
            }
@@ -6004,8 +6004,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "HRK",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "HR89370400440532013000"
            }
         }'</span>
@@ -6029,8 +6029,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "HUF",
           "type": "hungarian",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "accountNumber": "12000000-12345678-00000000"
            }
         }'</span>
@@ -6046,8 +6046,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "HUF",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "HU89370400440532013000"
            }
         }'</span>
@@ -6083,8 +6083,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "IDR",
           "type": "indonesian",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "610306",
            "accountNumber": "6789112345678"
            }
@@ -6111,8 +6111,8 @@ We only support private customers sending payments to private recipients. Busine
         "accountHolderName": "&lt;recipient name&gt;",
         "currency": "ILS",
         "type": "israeli_local",
-        "legalType": "PRIVATE",
         "details": {
+         "legalType": "PRIVATE",
          "IBAN": "IL620108000000099999999"
          }
       }'</span>
@@ -6128,8 +6128,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "ILS",
           "type": "israeli_bank_code",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "054",
            "branchCode": "001",
            "accountNumber": "123456789"
@@ -6169,8 +6169,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "INR",
           "type": "indian",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "ifscCode": "YESB0236041",
            "accountNumber": "678911234567891",
            }
@@ -6195,8 +6195,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "JPY",
           "type": "japanese",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "6470",
            "branchCode": "100",
            "accountType": "CURRENT",
@@ -6225,8 +6225,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "KES",
           "type": "kenya_local",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "35",
            "accountNumber": "0023183991919"
            }
@@ -6243,8 +6243,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "KES",
           "type": "kenya_mobile",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "accountNumber": "2547XXXXXXXX"
            }
         }'</span>
@@ -6282,8 +6282,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "LKR",
           "type": "srilanka",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "7214",
            "branchCode": "100",
            "accountNumber": "5060011118"
@@ -6311,8 +6311,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "MAD",
           "type": "morocco",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "BCMAMAMC",
            "accountNumber": "123456789012345678901234"
            }
@@ -6339,8 +6339,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "MXN",
           "type": "mexican",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "clabe": "032180000118359719"
            }
         }'</span>
@@ -6364,8 +6364,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "MYR",
           "type": "malaysian",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "swiftCode": "ABNAMYKL",
            "accountNumber": "159012938613"
            }
@@ -6392,8 +6392,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "NGN",
           "type": "nigeria",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "044",
            "accountNumber": "0584412903"
            }
@@ -6420,8 +6420,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "NOK",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "DE89370400440532013000"
            }
         }'</span>
@@ -6473,8 +6473,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "NZD",
           "type": "newzealand",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "accountNumber": "03-1587-0050000-00"
            }
         }'</span>
@@ -6498,8 +6498,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "PEN",
           "type": "peru",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "BCON",
            "accountNumber": "12345678901234567890",
            "accountType": "CHECKING",
@@ -6530,8 +6530,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "PHP",
           "type": "philippines",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "AMA",
            "accountNumber": "0044XXXXXXXX",
            "address" : {
@@ -6564,8 +6564,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "PKR",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "PK89370400440532013000"
            }
         }'</span>
@@ -6589,8 +6589,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "PLN",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "PL89370400440532013000"
            }
         }'</span>
@@ -6606,8 +6606,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "PLN",
           "type": "polish",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "accountNumber": "109010140000071219812874"
            }
         }'</span>
@@ -6643,8 +6643,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "RON",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "RO89370400440532013000"
            }
         }'</span>
@@ -6668,8 +6668,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "RUB",
           "type": "russiarapida",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "041234567",
            "accountNumber": "40820810999999999999",
            "russiaRegion": "ALTAIKRAI",
@@ -6703,8 +6703,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "SEK",
           "type": "iban",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "SE89370400440532013000"
            }
         }'</span>
@@ -6720,8 +6720,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "SEK",
           "type": "sweden_local",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "clearingNumber": "1234",
            "accountNumber": "1234567"
            }
@@ -6738,8 +6738,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "SEK",
           "type": "bankgiro",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankgiroNumber": "1234-5678"
            }
         }'</span>
@@ -6785,8 +6785,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "SGD",
           "type": "singapore",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "7418",
            "accountNumber": "1238827822"
            }
@@ -6813,8 +6813,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "THB",
           "type": "thailand",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "bankCode": "002",
            "accountNumber": "9517384260"
            "address" : {
@@ -6847,8 +6847,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "TRY",
           "type": "turkish_earthport",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "IBAN": "TR330006100519786457841326"
            }
         }'</span>
@@ -6872,8 +6872,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "UAH",
           "type": "privatbank",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "phoneNumber": "777210012",
            "accountNumber": "2662"
            }
@@ -6903,8 +6903,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "USD",
           "type": "aba",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "abartn": "111000025",
            "accountNumber": "12345678",
            "accountType": "CHECKING",
@@ -6943,8 +6943,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "VND",
           "type": "vietname_earthport",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "swiftCode": "ABBKVNVX",
            "branchCode": "001",
            "accountNumber": "1234567890"
@@ -6972,8 +6972,8 @@ We only support private customers sending payments to private recipients. Busine
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "ZAR",
           "type": "southafrica",
-          "legalType": "PRIVATE",
           "details": {
+           "legalType": "PRIVATE",
            "swiftCode": "ALBRZAJJ",
            "accountNumber": "0000000052312891"
            }
