@@ -5491,7 +5491,11 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 
 <p>Recipient type = <em>&#39;argentina&#39;</em></p>
 
-<p>Required details: taxId, accountNumber</p>
+<p>Required details: </p>
+
+<p>taxId - Recipient’s CUIT / CUIL (Single Tax Identification/ Single Labor Identification), 11 characters </p>
+
+<p>accountNumber - Recipient’s account CBU,  22 characters (Alias not supported)</p>
 <h2 id='recipient-accounts-create-aud-recipient'>Create AUD Recipient</h2>
 <blockquote>
 <p>Example Request (AUD):</p>
@@ -5517,7 +5521,11 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 
 <p>Recipient type = <em>&#39;australia&#39;</em></p>
 
-<p>Required details: bsbCode, accountNumber</p>
+<p>Required details: </p>
+
+<p>bsbCode - 6 digits</p>
+
+<p>accountNumber - 5..9 digits</p>
 <h2 id='recipient-accounts-create-bdt-recipient'>Create BDT Recipient</h2>
 <blockquote>
 <p>Example Request (BDT):</p>
@@ -5539,7 +5547,7 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
         }'</span>
 </code></pre>
 <aside class="warning">
-We only support private customers sending payments to private recipients. Businesses customers are not supported yet.
+<b>Only private customers sending payments to private recipients. Businesses customers are not supported yet.</b>
 </aside>
 
 <p>Send payments to Bangladesh. </p>
@@ -5597,9 +5605,11 @@ We only support private customers sending payments to private recipients. Busine
            }
         }'</span>
 </code></pre>
-<p>Send payments to Brazil. </p>
+<aside class="warning">
+<b>Only private customers sending payments to private recipients. Businesses customers are not supported yet.</b>
+</aside>
 
-<p>Private and business recipients are supported. </p>
+<p>Send payments to Brazil. </p>
 
 <p>Recipient type = <em>&#39;brazil&#39;</em></p>
 
@@ -5708,9 +5718,11 @@ We only support private customers sending payments to private recipients. Busine
            }
         }'</span>
 </code></pre>
-<p>Send payments to China Unionpay cardholder. </p>
+<aside class="warning">
+<b>Only sending payments to private recipients. It is not allowed to send funds to business recipients.</b>
+</aside>
 
-<p>Private and business recipients are supported. </p>
+<p>Send payments to China Unionpay cardholder. </p>
 
 <p>Recipient type = <em>&#39;chinese_card&#39;</em></p>
 
@@ -6168,6 +6180,11 @@ We only support private customers sending payments to private recipients. Busine
            }
         }'</span>
 </code></pre>
+<aside class="warning">
+<b>Private recipient: 1 mln GBP per payment (~ 88 mln INR)<br/>
+Business recipient: 1,5 mln INR per day (~ 17 800 GBP)</b>
+</aside>
+
 <p>Send payments to India.</p>
 
 <p>Private and business recipients are supported. </p>
@@ -6243,7 +6260,7 @@ We only support private customers sending payments to private recipients. Busine
 </code></pre>
 <p>Send payments to Kenya. </p>
 
-<p>Private and business recipients are supported. </p>
+<p>Private and business recipients are supported. However please note that only individuals can hold MPESA accounts.</p>
 
 <p><br/></p>
 
@@ -6282,6 +6299,11 @@ We only support private customers sending payments to private recipients. Busine
            }
         }'</span>
 </code></pre>
+<aside class="warning">
+<b>Personal to personal: 4,999,999 LKR (~33,000 USD) per transfer <br/>
+Business to personal, personal to business & business to business: 3,000,000 LKR (~20,000 USD) per transfer</b>
+</aside>
+
 <p>Send payments to Sri Lanka. </p>
 
 <p>Private and business recipients are supported. </p>
@@ -6312,7 +6334,7 @@ We only support private customers sending payments to private recipients. Busine
 </code></pre>
 <p>Send payments to Morocco. </p>
 
-<p>Private and business recipients are supported. </p>
+<p>Private and business recipients are supported. 260,000 MAD per transaction</p>
 
 <p>Recipient type = <em>&#39;morocco&#39;</em></p>
 
@@ -6365,7 +6387,7 @@ We only support private customers sending payments to private recipients. Busine
 </code></pre>
 <p>Send payments to Malaysia. </p>
 
-<p>Private and business recipients are supported. </p>
+<p>Private and business recipients are supported. Maximum amount is 10,000,000 MYR per payment.</p>
 
 <p>Recipient type = <em>&#39;malaysian&#39;</em></p>
 
@@ -6393,7 +6415,7 @@ We only support private customers sending payments to private recipients. Busine
 </code></pre>
 <p>Send payments to Nigeria. </p>
 
-<p>Private and business recipients are supported. </p>
+<p>Private and business recipients are supported. Maximum amount is 2,000,000 NGN per payment.</p>
 
 <p>Recipient type = <em>&#39;nigeria&#39;</em></p>
 
@@ -6444,6 +6466,10 @@ We only support private customers sending payments to private recipients. Busine
            }
         }'</span>
 </code></pre>
+<aside class="warning">
+<b>Only sending payments to private recipients. Businesses recipients are not supported yet.</b>
+</aside>
+
 <p>Send payments to Nepal. </p>
 
 <p>Private recipients are supported. </p>
@@ -6473,7 +6499,7 @@ We only support private customers sending payments to private recipients. Busine
 </code></pre>
 <p>Send payments to New Zealand. </p>
 
-<p>Private and business recipients are supported. </p>
+<p>1mln NPR per transaction / per month for individual account.</p>
 
 <p>Recipient type = <em>&#39;newzealand&#39;</em></p>
 
@@ -6503,7 +6529,7 @@ We only support private customers sending payments to private recipients. Busine
 </code></pre>
 <p>Send payments to Peru. </p>
 
-<p>Private and business recipients are supported. </p>
+<p>Private and business recipients are supported. 1,900 USD per transfer / 9,900 USD per 30 days.</p>
 
 <p>Recipient type = <em>&#39;peru&#39;</em></p>
 
@@ -6537,7 +6563,7 @@ We only support private customers sending payments to private recipients. Busine
 </code></pre>
 <p>Send payments to Philippines. </p>
 
-<p>Private and business recipients are supported. </p>
+<p>Private and business recipients are supported. 480,000 PHP per payment.</p>
 
 <p>Recipient type = <em>&#39;philippines&#39;</em></p>
 
@@ -6562,9 +6588,11 @@ We only support private customers sending payments to private recipients. Busine
            }
         }'</span>
 </code></pre>
-<p>Send payments to Pakistan. </p>
+<aside class="warning">
+<b>Only private customers sending payments to private recipients. Business customers and business recipients are not supported yet.</b>
+</aside>
 
-<p>Private and business recipients are supported. </p>
+<p>Send payments to Pakistan. Max 1 million PKR per payment.</p>
 
 <p>Recipient type = <em>&#39;iban&#39;</em></p>
 
@@ -6674,9 +6702,11 @@ We only support private customers sending payments to private recipients. Busine
            }
         }'</span>
 </code></pre>
-<p>Send payments to Russia. </p>
+<aside class="warning">
+<b>Only payments to private recipients. Businesses recipients are not supported yet.</b>
+</aside>
 
-<p>Private and business recipients are supported. </p>
+<p>Send payments to Russia. </p>
 
 <p>Recipient type = <em>&#39;russiarapida&#39;</em></p>
 
@@ -6818,7 +6848,7 @@ We only support private customers sending payments to private recipients. Busine
            }
         }'</span>
 </code></pre>
-<p>Send payments to Thailand. </p>
+<p>Send payments to Thailand. Max 2 mln THB per payment.</p>
 
 <p>Private and business recipients are supported. </p>
 
@@ -6847,7 +6877,7 @@ We only support private customers sending payments to private recipients. Busine
 </code></pre>
 <p>Send payments to Turkey. </p>
 
-<p>Private and business recipients are supported. </p>
+<p>Private and business recipients are supported. 1 000 000 TRY per payment.   </p>
 
 <p>Recipient type = <em>&#39;turkish_earthport&#39;</em></p>
 
@@ -6871,9 +6901,11 @@ We only support private customers sending payments to private recipients. Busine
            }
         }'</span>
 </code></pre>
-<p>Send payments to Ukraine. </p>
+<aside class="warning">
+<b>Only sending payments to private recipients. Businesses recipients are not supported yet.</b>
+</aside>
 
-<p>Private and business recipients are supported. </p>
+<p>Send payments to Ukraine. Maximum 1,2m UAH per payment.</p>
 
 <p>Recipient type = <em>&#39;privatbank&#39;</em></p>
 
@@ -6911,7 +6943,7 @@ We only support private customers sending payments to private recipients. Busine
 </code></pre>
 <p>Send payments to USA. </p>
 
-<p>Private and business recipients are supported. </p>
+<p>Private and business recipients are supported. Max 1 Million USD per payment.</p>
 
 <p>Recipient type = <em>&#39;aba&#39;</em></p>
 
