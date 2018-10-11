@@ -817,15 +817,31 @@ Just follow these four steps.</p>
 
 <p>NB! Two factor authentication (2FA) code for sandbox login is 111111.</p>
 
-<p>Your developer account will have some test money that you can use to start making payments in same way as you would in a live environment. You get your API token in the Settings tab of your account page.</p>
+<p>Your developer account will have some test money that you can use to start making payments in same way as you would in a live environment. </p>
 
 <p>Add your API token as header parameter to every request like this:</p>
 
 <p><em>Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx</em></p>
+<h3 id='transferwise-payouts-guide-api-access-acquiring-your-api-token'>Acquiring your API token</h3>
+<p>Your API tokens section can be found at the bottom of the Settings page inside your TransferWise account.</p>
+<h3 id='transferwise-payouts-guide-api-access-limiting-token-access-by-ip'>Limiting token access by IP</h3>
+<p>Optionally, you can enhance your integration security by restricting the calling IPs addresses.</p>
+
+<p>Each token access can be limited to single IP addresses or entire IP ranges in the API token detailed view.</p>
+
+<p>Please note that the ip whitelisting requires:</p>
+
+<ul>
+<li>IP addresses should use only IPv4 format e.g. <code>192.168.100.14</code>.</li>
+<li>IP ranges should use <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">CIDR notation</a> e.g. 
+<code>192.168.100.0/24</code> which would include <code>192.168.100.0</code> up to <code>192.168.100.255</code>. </li>
+</ul>
+
+<p>If a request is being made using an IP address that is not in the whitelisted IP addresses, the server will respond with a <a href="https://tools.ietf.org/html/rfc7235#page-6">401 Unauthorized HTTP status code</a>.</p>
 <h3 id='transferwise-payouts-guide-api-access-test-and-live-environments'>TEST and LIVE environments</h3>
 <ul>
-<li>You can access the Sandbox API at https://api.sandbox.transferwise.tech</li>
-<li>The LIVE API is located at https://api.transferwise.com</li>
+<li>You can access the Sandbox API at <a href="https://api.sandbox.transferwise.tech">https://api.sandbox.transferwise.tech</a></li>
+<li>The LIVE API is located at <a href="https://api.transferwise.com">https://api.transferwise.com</a></li>
 </ul>
 <h2 id='transferwise-payouts-guide-get-your-profile-id'>Get your profile id</h2>
 <blockquote>
