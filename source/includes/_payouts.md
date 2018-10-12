@@ -55,6 +55,13 @@ Add your API token as header parameter to every request like this:
 ### Acquiring your API token
 Your API tokens section can be found at the bottom of the Settings page inside your TransferWise account.
 
+Please enable have two-factor authentication before issuing tokens. You have an option to whitelist single IPs or entire IP ranges and select the right privileges for the token during the creation or later on. 
+
+Once the token is issued, you can reveal it anytime using two-factor authentication.
+
+*NB! Please do not pass your token to anyone or expose it on the internet and do not paste it into unreliable websites.*
+
+
 ### Limiting token access by IP
 Optionally, you can enhance your integration security by restricting the calling IPs addresses.
 
