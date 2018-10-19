@@ -4063,7 +4063,7 @@ Quote which is used in this call must have type &quot;BALANCE_CONVERSION&quot;.<
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>
-curl -X GET https://api.sandbox.transferwise.tech/v2/borderless-accounts-configuration/profiles/<span class="o">{</span>profileID<span class="o">}</span>/balance-currencies <span class="se">\</span>
+curl -X GET https://api.sandbox.transferwise.tech/v1/borderless-accounts/balance-currencies <span class="se">\</span>
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
 </code></pre>
 <blockquote>
@@ -4074,141 +4074,16 @@ curl -X GET https://api.sandbox.transferwise.tech/v2/borderless-accounts-configu
         </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"hasBankDetails"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"payInAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sampleBankDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"profileId"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">personal</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"accountHolderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lauri Hein"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"bankCode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"swiftCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEKTDxxxxxx"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"iban"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE52 7001 111x xxxx xxxx xx"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"firstLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Handelsbank"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"secondLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elsenheimer Str. 41"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80687"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"München"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Germany"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"stateCode"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"limits"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"daily"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="s2">"yearly"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"translations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"accountLimits.daily"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24 hour receive limit"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"bankCode.swiftCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bank code (SWIFT / BIC)"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"accountNumber.iban"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IBAN"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"address.default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Address"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"accountLimits.yearly"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Annual receive limit"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"accountHolderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TW Account Holder"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NOT_OPENED"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"sampleBankDetails"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"hasBankDetails"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"payInAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sampleBankDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"profileId"</span><span class="p">:</span><span class="w"> </span><span class="mi">5916067</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"accountHolderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lauri Hein"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"bankCode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"sortCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23-1x-xx"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000xxxx"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"firstLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TransferWise"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"secondLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56 Shoreditch High Street"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E1 6JJ"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Kingdom"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"stateCode"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"limits"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"daily"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="s2">"yearly"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"translations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"accountLimits.daily"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24 hour receive limit"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"accountNumber.default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Account number"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"address.default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Address"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"bankCode.sortCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK Sort Code"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"accountLimits.yearly"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Annual receive limit"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"accountHolderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Account Holder"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NOT_OPENED"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"sampleBankDetails"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"hasBankDetails"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"payInAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sampleBankDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"profileId"</span><span class="p">:</span><span class="w"> </span><span class="mi">5916067</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"accountHolderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lauri Hein"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"bankCode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"wireRoutingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0260xxxxx"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"achRoutingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0260xxxxx"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8xx00xxxxx"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"firstLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TransferWise"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"secondLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19 W 24th Street"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10010"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New York"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"stateCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NY"</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"limits"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"daily"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">250000</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="s2">"yearly"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"translations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"accountLimits.daily"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24 hour receive limit"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"accountNumber.default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Account number"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"address.default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Address"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"bankCode.achRoutingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACH Routing Number"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"bankCode.wireRoutingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wire Routing Number"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"accountLimits.yearly"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Annual receive limit"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"accountHolderName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Account Holder"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NOT_OPENED"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PLN"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"hasBankDetails"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="s2">"payInAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"sampleBankDetails"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
@@ -5039,7 +4914,7 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/accounts?profile<span class
 This list does not currently support pagination.
 Therefore if you have very many recipient accounts defined in your business profile then please filter by currency to ensure a reasonable response time.</p>
 <h3 id='recipient-accounts-list-request'>Request</h3>
-<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/accounts?profile=&lt;profileId&gt;&amp;currency=&lt;currencyCode&gt;</code></strong></p>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/accounts?s?profile=&lt;profileId&gt;&amp;currency=&lt;currencyCode&gt;</code></strong></p>
 
 <p>Both query parameters are optional.</p>
 
