@@ -753,8 +753,8 @@ We don't process payments in sandbox, which means that created payments remain i
 > Example Request:
 
 ```shell
-curl -X GET https://api.sandbox.transferwise.tech/v1/borderless-accounts?profileId={profileId} \
-     -H "Authorization: Bearer <your api token>" 
+curl -X GET https://api.sandbox.transferwise.tech/v2/borderless-accounts?profileId={profileId} \
+     -H "Authorization: Bearer <your api token>"
 ```
 
 > Example Response:
@@ -771,7 +771,6 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/borderless-accounts?profile
         "eligible": true,
         "balances": [
             {
-                "balanceType": "AVAILABLE",
                 "currency": "GBP",
                 "amount": {
                     "value": 10999859,
@@ -784,7 +783,6 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/borderless-accounts?profile
                 "bankDetails": null
             },
             {
-                "balanceType": "AVAILABLE",
                 "currency": "EUR",
                 "amount": {
                     "value": 9945236.2,
@@ -805,7 +803,7 @@ Get available balances for all activated currencies in your account.
 
 ### Request
 
-**`GET https://api.sandbox.transferwise.tech/v1/borderless-accounts?profileId={profileId}`**
+**`GET https://api.sandbox.transferwise.tech/v2/borderless-accounts?profileId={profileId}`**
 
 Use profile id obtained earlier to make this call.   
 
@@ -820,7 +818,6 @@ creationTime                      | Date when balance account was opened        
 modificationTime                  | Date when balance account setup was modified            | Timestamp
 active                            | Is borderless account active or inactive       | Boolean
 eligible                          | Ignore                                         | Boolean
-balances[n].balanceType              | AVAILABLE                                     | Text
 balances[n].currency                 | Currency code      | Text
 balances[n].amount.value             | Available balance in specified currency       | Decimal
 balances[n].amount.currency          | Currency code       | Text
