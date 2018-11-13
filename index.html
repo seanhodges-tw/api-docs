@@ -664,6 +664,9 @@
                 </ul>
             </li>
             <li>
+              <a href="#language-support" class="toc-h1 toc-link" data-title="Language Support">Language Support</a>
+            </li>
+            <li>
               <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
                 <ul class="toc-list-h2">
                     <li>
@@ -8911,6 +8914,92 @@ Returns empty result if successful. </p>
 <td>YYYY-MM-DD</td>
 </tr>
 </tbody></table>
+<h1 id='language-support'>Language Support</h1>
+<p>Internationalisation support for translation of strings returned by the API is supported for the following endpoints:</p>
+
+<table><thead>
+<tr>
+<th>Endpoint</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>/v1/quotes</code></td>
+</tr>
+<tr>
+<td><code>/v1/quotes/&lt;quoteId&gt;/account-requirements</code></td>
+</tr>
+<tr>
+<td><code>/v1/accounts</code></td>
+</tr>
+</tbody></table>
+
+<p>When calling these endpoints if you include an <code>Accept-Language</code> header with a supported language code as the value then stings will be returned in the requested language. The languages supported by TransferWise are:</p>
+
+<table><thead>
+<tr>
+<th>Language</th>
+<th>Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>American English</td>
+<td>en_US</td>
+</tr>
+<tr>
+<td>British English</td>
+<td>en</td>
+</tr>
+<tr>
+<td>Dutch</td>
+<td>nl</td>
+</tr>
+<tr>
+<td>French</td>
+<td>fr</td>
+</tr>
+<tr>
+<td>German</td>
+<td>de</td>
+</tr>
+<tr>
+<td>Hungarian</td>
+<td>hu</td>
+</tr>
+<tr>
+<td>Italian</td>
+<td>it</td>
+</tr>
+<tr>
+<td>Japanese</td>
+<td>ja</td>
+</tr>
+<tr>
+<td>Korean</td>
+<td>ko</td>
+</tr>
+<tr>
+<td>Polish</td>
+<td>pl</td>
+</tr>
+<tr>
+<td>Portuguese</td>
+<td>pt</td>
+</tr>
+<tr>
+<td>Romanian</td>
+<td>ro</td>
+</tr>
+<tr>
+<td>Russian</td>
+<td>ru</td>
+</tr>
+<tr>
+<td>Spanish</td>
+<td>es</td>
+</tr>
+</tbody></table>
+
+<p>If you request an unsupported language then British English will be returned by default.</p>
 <h1 id='errors'>Errors</h1><h2 id='errors-http-status-codes'>HTTP Status Codes</h2>
 <p>We use common HTTP status codes included in the response header to indicate success or failure.</p>
 
