@@ -2609,14 +2609,14 @@ You need to go through this flow only once for each customer before they can set
 
 <p><code>
   https://api.sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
-</code>``
+</code>
   </li>
   <li>The user logs in to TransferWise</li>
   <li> The user agrees to provide access, the TransferWise authorization page then redirects user back to your preconfigured url, including a code you can use to geneate user tokens.</p>
 
 <p><code>
   https://www.yourbank.com/?code=[CODE]
-</code>``
+</code>
   </li>
 </ol></p>
 
@@ -2832,10 +2832,13 @@ There is no need to wait for the actual expiration to happen first. </p>
 </tr>
 </tbody></table>
 <h2 id='bank-integrations-guide-token-expiry'>Token Expiry</h2>
-<p>It is possible that a user&#39;s refresh token will become invalid. This could happen for a number of reasons, for example:
-* The user revokes access for your application to their account.
-* The user enables enhanced security on their TransferWise account.
-* TransferWise revoke tokens due to a security breach of your client secret.</p>
+<p>It is possible that a user&#39;s refresh token will become invalid. This could happen for a number of reasons, for example:</p>
+
+<ul>
+<li>The user revokes access for your application to their account.</li>
+<li>The user enables enhanced security on their TransferWise account.</li>
+<li>TransferWise revoke tokens due to a security breach of your client secret.</li>
+</ul>
 
 <p>Due to this possibility your application should handle a failing refresh token scenario - to do this depends on how you originally gained access to the user.</p>
 <h3 id='bank-integrations-guide-token-expiry-1-an-existing-user-granted-your-application-access-to-the-account'>1. An existing user granted your application access to the account</h3>
@@ -2846,12 +2849,12 @@ There is no need to wait for the actual expiration to happen first. </p>
 <p>If the user has not reclaimed their account then the original <code>registrationCode</code> you generated should still be able to generate new tokens for the user. Because of this you should store this code when alongside the created user ID in your database.</p>
 
 <p>If the previosuly stored token fails with an error code 400 and error:</p>
-<pre class="highlight plaintext"><code>{
-    "error": "invalid_grant",
-    "error_description": "Invalid user credentials."
-}
-</code></pre>
-<p>In this case you can assume the user has reclaimed the account. and pus them through the <a href="#bank-integrations-guide-get-user-authorization-for-existing-accounts">get user authorization for existing accounts</a> flow.</p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid_grant"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid user credentials."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>In this case you can assume the user has reclaimed the account and push them through the <a href="#bank-integrations-guide-get-user-authorization-for-existing-accounts">get user authorization for existing accounts</a> flow.</p>
 <h2 id='bank-integrations-guide-create-personal-user-profile'>Create personal user profile</h2>
 <p>When you first get access to a user&#39;s TransferWise user account you will cannot predict if they already have submitted thier profile data or not.</p>
 
