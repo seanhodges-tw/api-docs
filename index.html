@@ -645,6 +645,9 @@
                       <a href="#users-get-by-id" class="toc-h2 toc-link" data-title="Get By Id">Get By Id</a>
                     </li>
                     <li>
+                      <a href="#users-get-the-currently-logged-in-user" class="toc-h2 toc-link" data-title="Get the currently logged in user">Get the currently logged in user</a>
+                    </li>
+                    <li>
                       <a href="#users-sign-up-with-registration-code" class="toc-h2 toc-link" data-title="Sign Up with Registration Code">Sign Up with Registration Code</a>
                     </li>
                 </ul>
@@ -773,7 +776,7 @@
 
 <p><img src="https://image.ibb.co/m8kXTv/tw_n26_example.png" title="N26 User Experience" alt="alt text" /></p>
 
-<p>Please contact <a href="mailto:bizdev@transferwise.com">bizdev@transferwise.com</a> to get started.</p>
+<p>Please contact <a href="mailto:banks@transferwise.com">banks@transferwise.com</a> to get started.</p>
 
 <p>Take a look at our technical integration here – <a href="#bank-integrations-guide">Bank Integration Guide</a>.</p>
 <h2 id='transferwise-api-affiliates'>Affiliates</h2>
@@ -790,7 +793,7 @@
 <h2 id='transferwise-api-connected-applications'>Connected Applications</h2>
 <p>With Connected Applications, you can let your customers connect their TransferWise accounts to your product. Say you’re an accounting software – doing this could let your customers automate reconciliation. If you’re a payroll company, you could push customer payments right into TransferWise. Or you could push TransferWise notifications through your app. Whatever you want to build, you likely could! </p>
 
-<p>Unfortunately this functionality isn’t available to everyone yet, but we’re working hard to open it to everyone. To discuss your use case please contact (bizdev@transferwise.com)[mailto:bizdev@transferwise.com].</p>
+<p>Unfortunately this functionality isn’t available to everyone yet, but we’re working hard to open it to everyone. To discuss your use case please contact <a href="mailto:bizdev@transferwise.com">bizdev@transferwise.com</a>.</p>
 <h2 id='transferwise-api-third-party-payouts'>Third-Party Payouts</h2>
 <p>Third-Party Payouts allows marketplaces and financial institutions (banks and payment service providers) to use TransferWise as a payout option for their customers.
 It’s different from Payouts because it doesn’t require you to be the originator of payments. 
@@ -6394,7 +6397,7 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
           "profile": &lt;your profile id&gt;,
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "GHS",
-          "type": "ghana",
+          "type": "ghana_local",
           "details": {
            "legalType": "PRIVATE",
            "bankCode": "030100",
@@ -6406,7 +6409,7 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 
 <p>Private and business recipients are supported. </p>
 
-<p>Recipient type = <em>&#39;ghana&#39;</em></p>
+<p>Recipient type = <em>&#39;ghana_local&#39;</em></p>
 
 <p>Required details: bankCode, accountNumber</p>
 
@@ -8329,25 +8332,25 @@ For example this is a valid request to create a transfer.
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">294205</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oliver Wilson"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oliver@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example Person"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"person@example.com"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oliver"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wilson"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+3725064992"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+37111111111"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"occupation"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tallinn"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"countryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EE"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12112"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"firstLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Salu tee 134"</span><span class="w">
+      </span><span class="s2">"firstLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Road 123"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"dateOfBirth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1977-07-01"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://lh6.googleusercontent.com/-XzeFZ2PJE1A/AAAAAAAAAAI/AAAAAAAAAAA/RvuvhXFsqs0/photo.jpg"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"primaryAddress"</span><span class="p">:</span><span class="w"> </span><span class="mi">236532</span><span class="w">
+    </span><span class="s2">"dateOfBirth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1977-01-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://lh6.googleusercontent.com/photo.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"primaryAddress"</span><span class="p">:</span><span class="w"> </span><span class="mi">111</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -8414,11 +8417,141 @@ For example this is a valid request to create a transfer.
 </tr>
 <tr>
 <td>details.primaryAddress</td>
-<td>Address object id</td>
+<td>Address object id to use in addesses endpoints</td>
 <td>Integer</td>
 </tr>
 <tr>
-<td>details.address.country</td>
+<td>details.address.countryCode</td>
+<td>Address country code in 2 digits. &quot;US&quot; for example</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.address.firstLine</td>
+<td>Address first line</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.address.postCode</td>
+<td>Address post code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.address.city</td>
+<td>Address city name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.address.state</td>
+<td>Address state code State code. Required if country is US, CA, AU, BR.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.address.occupation</td>
+<td>User occupation. Required for US, CA, JP</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h2 id='users-get-the-currently-logged-in-user'>Get the currently logged in user</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/me <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example Person"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"person@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+37111111111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"occupation"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tallinn"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"countryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EE"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"firstLine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Road 123"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"dateOfBirth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1977-01-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://lh6.googleusercontent.com/photo.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"primaryAddress"</span><span class="p">:</span><span class="w"> </span><span class="mi">111</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Get authenticated user details for the user&#39;s token submitted in the <code>Authorization</code> header. Response includes also personal user profile info.</p>
+<h3 id='users-get-the-currently-logged-in-user-request'>Request</h3>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/me</code></strong></p>
+<h3 id='users-get-the-currently-logged-in-user-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>userId</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>name</td>
+<td>User full name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>email</td>
+<td>User email</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>active</td>
+<td>If user is active or not</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>details.firstName</td>
+<td>User first name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.lastName</td>
+<td>User lastname</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.phoneNumber</td>
+<td>Phone number</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.dateOfBirth</td>
+<td>Date of birth</td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>details.occupation</td>
+<td>Person occupation</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.avatar</td>
+<td>Link to person avatar image</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>details.primaryAddress</td>
+<td>Address object id to use in addesses endpoints</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>details.address.countryCode</td>
 <td>Address country code in 2 digits. &quot;US&quot; for example</td>
 <td>Text</td>
 </tr>
@@ -8452,10 +8585,10 @@ For example this is a valid request to create a transfer.
 <blockquote>
 <p>1) Example Request: Get Client Credentials Token</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
--u <span class="s1">'[your-api-client-id]:[your-api-client-secret]'</span> <span class="se">\</span>
--d <span class="s1">'grant_type=client_credentials'</span> <span class="se">\</span>
-<span class="s1">'https://api.sandbox.transferwise.tech/oauth/token'</span> 
+<pre class="highlight shell tab-shell"><code>curl -X <span class="s2">"POST"</span> <span class="s2">"https://api.sandbox.transferwise.tech/oauth/token"</span> <span class="se">\</span>
+     -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+     -u <span class="s1">'[your-api-client-id]:[your-api-client-secret]'</span> <span class="se">\</span>
+     --data-urlencode <span class="s2">"grant_type=client_credentials"</span> 
 </code></pre>
 <blockquote>
 <p>1) Example Response: Get Client Credentials Token</p>
@@ -8572,7 +8705,7 @@ To get authorization from Transferwise existing users you still need to redirect
 <h3 id='users-sign-up-with-registration-code-request'>Request</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/oauth/token</code></strong></p>
 
-<p>Use Basic Authentication with your api-client-id/api-client-secret as username/pwd.</p>
+<p>Use Basic Authentication with your api-client-id/api-client-secret as username/pwd and also use the header <code>Content-Type: application/x-www-form-urlencoded</code>.</p>
 
 <table><thead>
 <tr>
@@ -8788,7 +8921,7 @@ If user has reclaimed the account, then redirect to <a href="#bank-integrations-
 </span></code></pre>
 <p>Create personal user profile.
 Same person cannot have multiple active duplicate user profiles.
-Thus creating multiple profiles with the same details will fail.</p>
+Thus creating multiple profiles with the same details will fail. Use the <code>access token</code> you received to act on behalf of the user in the <code>Authorization</code> header.</p>
 <h3 id='user-profiles-create-personal-request'>Request</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/v1/profiles</code></strong></p>
 
