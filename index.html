@@ -2,6 +2,16 @@
 <!doctype html>
 <html>
   <head>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130059683-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-16492313-9');
+      </script>
+
     <base href="/">
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
@@ -325,7 +335,7 @@
                       <a href="#bank-integrations-guide-create-quote" class="toc-h2 toc-link" data-title="Create quote">Create quote</a>
                     </li>
                     <li>
-                      <a href="#bank-integrations-guide-create-recipient-account" class="toc-h2 toc-link" data-title="Create recipient account">Create recipient account</a>
+                      <a href="#bank-integrations-guide-create-or-select-recipient-account" class="toc-h2 toc-link" data-title="Create or select recipient account">Create or select recipient account</a>
                     </li>
                     <li>
                       <a href="#bank-integrations-guide-create-transfer" class="toc-h2 toc-link" data-title="Create transfer">Create transfer</a>
@@ -338,6 +348,9 @@
                     </li>
                     <li>
                       <a href="#bank-integrations-guide-get-updated-transfer-delivery-time-estimate" class="toc-h2 toc-link" data-title="Get updated transfer delivery time estimate">Get updated transfer delivery time estimate</a>
+                    </li>
+                    <li>
+                      <a href="#bank-integrations-guide-edge-case-handling" class="toc-h2 toc-link" data-title="Edge case handling">Edge case handling</a>
                     </li>
                     <li>
                       <a href="#bank-integrations-guide-going-live-checklist" class="toc-h2 toc-link" data-title="Going live checklist">Going live checklist</a>
@@ -827,7 +840,7 @@ Please note that there are few restrictions for businesses, please review <a hre
 <p>You don’t necessarily need to integrate with the API to make a large number of payouts. We have two ways you can do it: </p>
 
 <ul>
-<li><p><em>Batch payments.</em> Create and send up to 1,000 transfers with just one payment using our [Batch Payments tool](https://transferwise.com/batch](https://transferwise.com/batch). All you need to do is fill a CSV file with all the transfer details, upload it to TransferWise, and pay for the batch. No development effort needed. </p></li>
+<li><p><em>Batch payments.</em> Create and send up to 1,000 transfers with just one payment using our <a href="https://transferwise.com/batch">Batch Payments tool</a>. All you need to do is fill a CSV file with all the transfer details, upload it to TransferWise, and pay for the batch. No development effort needed. </p></li>
 <li><p><em>API integration.</em> Completely automate your payment process by sending payment orders via the TransferWise API.  </p></li>
 </ul>
 <h2 id='transferwise-payouts-guide-api-access'>API access</h2><pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/profiles <span class="se">\</span>
@@ -2599,7 +2612,7 @@ You need to go through this flow only once for each customer before they can set
 <li><a href="#bank-integrations-guide-fund-transfer">Fund transfer</a></li>
 </ul>
 <h3 id='bank-integrations-guide-your-transferwise-user-experience-transfer-update-polling'>Transfer update polling</h3>
-<p>To keep your users informed of the stateus and edtimated time of arrival of their transfer:</p>
+<p>To keep your users informed of the status and estimated time of arrival of their transfer:</p>
 
 <ul>
 <li><a href="#bank-integrations-guide-track-transfer-status">Transfer status</a></li>
@@ -2646,6 +2659,8 @@ In the live environment the api.transferwise.com URL works for the authorization
 <p>Your website or service can then use this code to obtain the access token to act on behalf of the user account.</p>
 
 <p>If you are building your TransferWise integraion as a native mobile phone app then the redirect URL should be able to handle returning the user to the correct place in the app.</p>
+
+<p>At the point you gain access to a user account you should double check it is the one you were expecting to be given access to - sometimes users can get confused and log in to a different account. Together we want to avoid TransferWise accounts being linked to bank accounts of a different person or business, therefore you should check the user&#39;s details once the link is created. Currently you should do this sanity check based on the date of birth of the user but are working on a more robust solution. If the DoB exists but doesn&#39;t match then you should not allow the link to be made and inform the user we do not think the accounts match and to get in touch with customer service.</p>
 <h2 id='bank-integrations-guide-sign-up-new-users-via-api'>Sign up new users via API</h2>
 <p>If the user doesn&#39;t already have a TransferWise account then you can create one for them. The <a href="#users-sign-up-with-registration-code">signup with registration code</a> feature lets you create new users directly via an API call, without the need to redirect new users to the TransferWise authorization page. This way new users can complete everything without ever leaving your banking app, making a very streamlined flow.</p>
 
@@ -2849,12 +2864,12 @@ There is no need to wait for the actual expiration to happen first. </p>
 <h3 id='bank-integrations-guide-token-expiry-2-your-application-created-the-user'>2. Your application created the user</h3>
 <p>In the case you created the user using the <a href="#bank-integrations-guide-sign-up-new-users-via-api">sign up new users via API</a> flow then the mechanism for regenerating tokens is depenedent on whether the user you created has &quot;reclaimed&quot; their TransferWise account and used our website or apps directly.</p>
 
-<p>If the user has not reclaimed their account then the original <code>registrationCode</code> you generated should still be able to generate new tokens for the user. Because of this you should store this code when alongside the created user ID in your database.</p>
+<p>If the user has not reclaimed their account then the original <code>registrationCode</code> you generated should still be able to generate new tokens for the user. Because of this you should store this code alongside the created user ID in your database at the point of user generation.</p>
 
 <p>If the previosuly stored token fails with an error code 400 and error:</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid_grant"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"error_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid user credentials."</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid_grant"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"error_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid user credentials."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>In this case you can assume the user has reclaimed the account and push them through the <a href="#bank-integrations-guide-get-user-authorization-for-existing-accounts">get user authorization for existing accounts</a> flow.</p>
@@ -2887,8 +2902,14 @@ figure out if a user has already set up this data with TransferWise or not. If t
 <p>Please look at <a href="#quotes-create">Create quote</a> under Full API Reference.</p>
 
 <p>You need to set quote type as &quot;REGULAR&quot;.</p>
-<h2 id='bank-integrations-guide-create-recipient-account'>Create recipient account</h2>
-<p>Please look at <a href="#recipient-accounts-create">Create recipient account</a> under Full API Reference.</p>
+<h2 id='bank-integrations-guide-create-or-select-recipient-account'>Create or select recipient account</h2>
+<p>Please look at <a href="#recipient-accounts-create">Create recipient account</a> under Full API Reference for information on the calls to crerate recipients.</p>
+
+<p>It is also reccomended that you use the <code>GET accounts</code> endpoint to load the user&#39;s previously used reciepients and allow them to select from them in your user interface. This allows them to only have to create a recipinet once and then re-use it in future, plus it allows exising TransferWise users to use their familiar users from our platform.</p>
+
+<p>You should store a cached copy of the recipients that are <em>used</em> or <em>created</em> by users of your app such that you can load that data again quickly to show in your app, for example a transfer tracking screen might show recipient data.</p>
+
+<p>PLease note, when creating a new transfer always reload the full list of reciepients over our API as cannot be certain the recipients you store a copy of have not been deleted in the meantime.</p>
 <h2 id='bank-integrations-guide-create-transfer'>Create transfer</h2>
 <p>Please look at <a href="#transfers-create">Create transfer</a> under Full API Reference.</p>
 <h2 id='bank-integrations-guide-fund-transfer'>Fund transfer</h2>
@@ -2902,13 +2923,40 @@ Calling endpoint <a href="#quotes-get-pay-in-methods">Get pay-in methods</a> wit
 <p>Please look at <a href="#transferwise-payouts-guide-track-transfer-status">Track transfer status</a> under TransferWise Payouts Guide.</p>
 <h2 id='bank-integrations-guide-get-updated-transfer-delivery-time-estimate'>Get updated transfer delivery time estimate</h2>
 <p>Please look at <a href="#transferwise-payouts-guide-get-transfer-delivery-time">Get transfer delivery time</a> under TransferWise Payouts Guide.</p>
+<h2 id='bank-integrations-guide-edge-case-handling'>Edge case handling</h2>
+<p>This section discusses some edge cases that you should test and handle before going live with your integration.</p>
+<h3 id='bank-integrations-guide-edge-case-handling-email-address-considerations'>Email address considerations</h3>
+<p>Due to how getting access to user accounts works the TransferWise platform relies on user email addresses matching between the bank and ourselves. At the point the bank attempts to create a user we check and see if an account already exists for that email address, if so we retun a 409 response and the client application forwards the user to login to TransferWise to do the OAuth grant flow.</p>
+
+<p>This works well when the email addresses match in the first place and aren&#39;t updated on either side after the link is established. Of course, this is not always going to be the case so we must consider what happens in either eventuality.</p>
+<h3 id='bank-integrations-guide-edge-case-handling-non-matching-email-addresses'>Non-matching email addresses</h3>
+<p>If a user already has a TransferWise account and you create a user for the same person under a differnt email address they could end up with a duplicate user account under the second email address. Currently we monitor this behaviour for abuse but we are working on a more robust user creation solution to prevent this occuring.</p>
+<h3 id='bank-integrations-guide-edge-case-handling-email-change'>Email Change</h3>
+<p>It is possible to change a user’s email address both at TransferWise and potentially also on the bank platform. These flows can cause complications with the integration.</p>
+<h3 id='bank-integrations-guide-edge-case-handling-email-changed-at-transferwise'>Email changed at TransferWise</h3>
+<p>If a user changes their email address all tokens to the user account are revoked. In this case the bank will receive a 400 when attempting to generate an access_token and as such should follow the same process as described in the <a href="#bank-integrations-guide-token-expiry">token expiry</a> section above and start the sign up flow from the beginning.</p>
+
+<p>In this case, if the user has changed their email address at TransferWise, it is possible the user will end up with a new TransferWise account using their old email address still held by the bank, or they might link their bank account to a different already existing TransferWise account under the old email address.</p>
+<h3 id='bank-integrations-guide-edge-case-handling-email-changed-at-the-bank'>Email changed at the bank</h3>
+<p>In this case the tokens will remain valid for the TransferWise account, however, depending on how the user originally linked the account, different things can happen when/if that token expires.</p>
+
+<p>If the bank created the account originally they will be unable to generate tokens using the registration_code they have as the endpoint requires the email address which will now no longer match. To mitigate this it is recommended that the bank store the email that was originally used for signup alongside the registration code and use this rather than the most up to date email address they store for the user.</p>
+
+<p>If the token expires for a user not created by the bank and the user has a new email address at the bank then they can be pushed through the signup flow with this new email address and either have a new account created or link an existing against the new email, as described in <a href="#bank-integrations-guide-token-expiry">token expiry</a>.</p>
+
+<p>The result of many of these flows is that the user may end up with more than one TransferWise account, which is undesirable. Currently we monitor this behaviour for abuse but we are working on a more robust user creation scenario to prevent this occuring.</p>
+<h3 id='bank-integrations-guide-edge-case-handling-email-change-mitigation'>Email change mitigation</h3>
+<p>The result of these eventualities are that over time a user of the bank could be linked to more than one TransferWise account and so therefore you will need to be defensive when requesting older user data as the request may fail because we forbid one user to access other user&#39;s data. We recommend to keep a local copy of your user&#39;s transfer data and update it asynchronously such that older transfers remain accessible to the user in the case where it can no longerbe accessed. You should also make sure to handle these failing calls gracefully and continue to process transfers that can be accessed over the API.</p>
+
+<p>In the event a user is not happy at losing access to their older data or having two accounts is confusing then we can manually update the email addresses to match for the two accounts they wahnt.</p>
 <h2 id='bank-integrations-guide-going-live-checklist'>Going live checklist</h2><h3 id='bank-integrations-guide-going-live-checklist-1-make-your-integration-bulletproof'>1. Make your integration bulletproof</h3>
 <ul>
 <li>Implement basic retry mechanism to handle potential failures or network interruptions </li>
 <li>Implement duplicate prevention mechanism to avoid duplicate payments. Verify that UUID is uniquely generated for each individual payment and its value is kept same in case of retrying.</li>
 <li>Implement basic logging to help out in debugging and problem solving, if needed.</li>
 <li>Check that you can handle all possible transfer states during polling of transfer info.</li>
-<li>Required data fields for user profile addresses, recipients, and transfers vary for different currencies. Please explore <a href="#recipient-accounts-requirements">Recipient Accounts.Requirements</a>, <a href="#transfer-requirements">Transfers.Requirements</a> and <a href="##addresses-requirements">Addresses.Requirements</a>.</li>
+<li>Handle the potential issues described in <a href="#bank-integrations-guide-edge-case-handling">edge case handling</a>.</li>
+<li>Required data fields for user profile addresses, recipients, and transfers vary for different currencies. Please explore <a href="#recipient-accounts-requirements">Recipient Accounts.Requirements</a>, <a href="#transfer-requirements">Transfers.Requirements</a> and <a href="#addresses-requirements">Addresses.Requirements</a>.</li>
 </ul>
 <h3 id='bank-integrations-guide-going-live-checklist-2-set-up-security-for-live-environment'>2. Set up security for LIVE environment</h3>
 <ul>
@@ -4863,7 +4911,6 @@ Temporary quote is not associated with any user, it is anonymous. </p>
     </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">ID&gt;</span><span class="p">,</span><span class="w">
     </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre>
 <p>Recipient is a person or institution  who is the ultimate beneficiary of your payment. </p>
 
@@ -4897,8 +4944,8 @@ Temporary quote is not associated with any user, it is anonymous. </p>
 <li>Zip code</li>
 </ul></p>
 
-<p>GBP example is provided here. You can find other currency examples below.<br/>
-Please also look at <a href="#recipient-accounts-requirements">Recipients.Requirements</a> to figure out which fields are required to create recipients in specific countries.</p>
+<p>A GBP example is provided here. You can find other currency examples below.<br/>
+As you can see many of the fields are <code>null</code>, in order to know which fields are required for which currency we expose the <a href="#recipient-accounts-requirements">Recipients.Requirements</a> endpoint.</p>
 <h3 id='recipient-accounts-create-request'>Request</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/v1/accounts</code></strong></p>
 
@@ -4932,7 +4979,7 @@ Please also look at <a href="#recipient-accounts-requirements">Recipients.Requir
 <tr>
 <td>details</td>
 <td>Currency specific fields</td>
-<td>Group</td>
+<td>Object</td>
 </tr>
 <tr>
 <td>details.legalType</td>
@@ -4993,7 +5040,7 @@ Please also look at <a href="#recipient-accounts-requirements">Recipients.Requir
 <tr>
 <td>details</td>
 <td>Currency specific fields</td>
-<td>Group</td>
+<td>Object</td>
 </tr>
 <tr>
 <td>details.legalType</td>
@@ -5102,8 +5149,8 @@ Please also look at <a href="#recipient-accounts-requirements">Recipients.Requir
 </span></code></pre>
 <p>If you don&#39;t know recipient bank account details you can set up <strong>email recipient</strong> so that TransferWise will collect bank details directly from the recipient. </p>
 
-<p>TransferWise will then email your recipient with a link to collect their bank account details. 
-Once recipient provides bank account details securely to Transferwise we are able to complete your transfer.</p>
+<p>TransferWise will email your recipient with a link to collect their bank account details. 
+Once your recipient provides bank account details securely to Transferwise we are able to complete your transfer.</p>
 
 <aside class="warning">
 <b>Please read through the support article referenced below to understand how this works and what are known constraints.</b>
@@ -5336,9 +5383,8 @@ Once recipient provides bank account details securely to Transferwise we are abl
 </span><span class="p">]</span><span class="w">
 
 </span></code></pre>
-<p>Fetch list of your recipient accounts. Filter by currency and/or user profile Id.
-This list does not currently support pagination.
-Therefore if you have very many recipient accounts defined in your business profile then please filter by currency to ensure a reasonable response time.</p>
+<p>Fetch a list of your recipient accounts. Use the <code>currency</code> and <code>profile</code> parameters to filter by currency and/or user profile Id.
+This list does not currently support pagination, therefore if you have many recipient accounts defined in your business profile then please filter by currency to ensure a reasonable response time.</p>
 <h3 id='recipient-accounts-list-request'>Request</h3>
 <p><strong><code>GET https://api.sandbox.transferwise.tech/v1/accounts?profile=&lt;profileId&gt;&amp;currency=&lt;currencyCode&gt;</code></strong></p>
 
@@ -5590,10 +5636,10 @@ Therefore if you have very many recipient accounts defined in your business prof
 <strong><code>POST https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements</code></strong><br/></p>
 
 <p>GET and POST account-requirements endpoints help you to figure out which fields are required to create a valid recipient for different currencies.
-You could even build a dynamic user interface on top of these endpoints. 
+You can use this to build a dynamic user interface on top of these endpoints. 
 This is a step-by-step guide on how these endpoints work.</p>
 
-<p>1.Create quote first to specify currencies and transfer amounts. See <a href="#quotes-create">Create.Quote</a>.</p>
+<p>1.First create a quote to specify currencies and transfer amounts. See <a href="#quotes-create">Create.Quote</a>.</p>
 
 <p>2.Call GET /v1/quotes/{quoteId}/account-requirements to get list of fields you need to fill with values in &quot;details&quot; section for creating a valid recipient account. </p>
 
@@ -5608,41 +5654,44 @@ This is a step-by-step guide on how these endpoints work.</p>
  <li>address.firstLine</li>
 </ul></p>
 
-<p>Analyze the list of fields. Because refreshRequirementsOnChange=true for field &#39;address.country&#39; then this indicates that there are additional fields required depending on the selected value.</p>
+<p>Some fields require multiple levels of fields in the details request, for example Country followed by State. This should be handled by the client base don the <code>refreshRequirementsOnChange</code> field. In the example above &#39;address.country&#39; has this field set to true, indicating that there are additional fields required depending on the selected value. To manage this you should create a request with all of the initially requested data and call the <code>POST account-requirements</code> endpoint. You will be returned a response similar the previosuly returned data from <code>GET account-requirements</code> but with additional fields.</p>
 
-<p>3.Construct a recipient object with top level fields and call POST /v1/quotes/{quoteId}/account-requirements with these value to expose sub fields.  <br/>
-For example posting US as country will also add &quot;state&quot; to list of fields.<br/>
-                    {
-                        &quot;type&quot;: &quot;aba&quot;,
-                        &quot;details&quot;: {
-                            &quot;legalType&quot;: &quot;PRIVATE&quot;,
-                            &quot;abartn&quot;: &quot;111000025&quot;,
-                            &quot;accountNumber&quot;: &quot;12345678&quot;,
-                            &quot;accountType&quot;: &quot;CHECKING&quot;,
-                            &quot;address&quot;: {
-                                &quot;country&quot;: &quot;US&quot;
-                            }
-                        }
-                    }</p>
+<p>3.For example, construct a recipient object with top level fields and call POST /v1/quotes/{quoteId}/account-requirements with these value to expose sub fields.  <br/>
+For example posting US as country will also add &quot;state&quot; to list of fields.<br/></p>
+<pre class="highlight plaintext"><code>{
+    "type": "aba",
+    "details": {
+      "legalType": "PRIVATE",
+      "abartn": "111000025",
+      "accountNumber": "12345678",
+      "accountType": "CHECKING",
+      "address": {
+        "country": "US"
+      }
+    }
+}
+</code></pre>
+<p>However, posting GB as country will not add any new fields as GB addresses do not have this extra requirement.</p>
+<pre class="highlight plaintext"><code>{
+    "type": "aba",
+    "details": {
+      "legalType": "PRIVATE",
+      "abartn": "111000025",
+      "accountNumber": "12345678",
+      "accountType": "CHECKING",
+      "address": {
+        "country": "US"
+      }
+    }
+}
+</code></pre>
+<p>It is possible that any new fields retuened may <em>also</em> have <code>refreshRequirementsOnChange</code> field set to true. Thereofe you must keep iterating on the partially created details object until <code>POST account-requirements</code> returns you no new fields that it previously didn&#39;t include in the response, you can do this by checking the size of the array returned.</p>
 
-<p>But posting GB as country will not add new fields anything.</p>
+<p>4.Once you have built your full reciepient details object you can use it to create a reciepient.</p>
 
-<p>{
-                        &quot;type&quot;: &quot;aba&quot;,
-                        &quot;details&quot;: {
-                            &quot;legalType&quot;: &quot;PRIVATE&quot;,
-                            &quot;abartn&quot;: &quot;111000025&quot;,
-                            &quot;accountNumber&quot;: &quot;12345678&quot;,
-                            &quot;accountType&quot;: &quot;CHECKING&quot;,
-                            &quot;address&quot;: {
-                                &quot;country&quot;: &quot;US&quot;
-                            }
-                        }
-                    }</p>
-
-<p>4.So once you get to the point where you have provided values for all fields which have refreshRequirementsOnChange=true then you have complete set of fields to compose a valid request to create an recipient object. 
-For example this is a valid request to create a recipient with address in US Arizona:
-<br/> POST /v1/accounts:<br/>
+<p>For example this is a valid request to create a recipient with address in US Arizona:
+<br/> <code>POST /v1/accounts</code>:<br/>
+<code>
 {
     &quot;profile&quot;: your-profile-id,
     &quot;accountHolderName&quot;: &quot;John Smith&quot;,
@@ -5661,7 +5710,8 @@ For example this is a valid request to create a recipient with address in US Ari
             &quot;firstLine&quot;: &quot;45 Sunflower Ave&quot;
         }
     }
-}</p>
+}
+</code></p>
 <h3 id='recipient-accounts-requirements-response'>Response</h3>
 <table><thead>
 <tr>
