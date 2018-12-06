@@ -2905,17 +2905,19 @@ figure out if a user has already set up this data with TransferWise or not. If t
 <h2 id='bank-integrations-guide-create-or-select-recipient-account'>Create or select recipient account</h2>
 <p>Please look at <a href="#recipient-accounts-create">Create recipient account</a> under Full API Reference for information on the calls to crerate recipients.</p>
 
-<p>It is also reccomended that you use the <code>GET accounts</code> endpoint to load the user&#39;s previously used reciepients and allow them to select from them in your user interface. This allows them to only have to create a recipinet once and then re-use it in future, plus it allows exising TransferWise users to use their familiar users from our platform.</p>
+<p>It is also reccomended that you use the <code>GET accounts</code> endpoint to load the user&#39;s previously used reciepients and allow them to select from them in your user interface. This allows them to only have to create a recipient once and then re-use it in future, plus it allows exising TransferWise users to use their familiar users from our platform.</p>
+
+<p>When returning this list please filter out any recipient of type <code>SwiftCode</code>, unfortunately API limitations mean these cannot be used in bank integrations.</p>
 
 <p>You should store a cached copy of the recipients that are <em>used</em> or <em>created</em> by users of your app such that you can load that data again quickly to show in your app, for example a transfer tracking screen might show recipient data.</p>
 
-<p>PLease note, when creating a new transfer always reload the full list of reciepients over our API as cannot be certain the recipients you store a copy of have not been deleted in the meantime.</p>
+<p>Please note, when creating a new transfer always reload the full list of reciepients over our API as cannot be certain the recipients you store a copy of have not been deleted in the meantime.</p>
 <h2 id='bank-integrations-guide-create-transfer'>Create transfer</h2>
 <p>Please look at <a href="#transfers-create">Create transfer</a> under Full API Reference.</p>
 <h2 id='bank-integrations-guide-fund-transfer'>Fund transfer</h2>
 <p>Once you have successfully created a transfer via the TransferWise API 
 you should debit the exact source amount from your customer&#39;s bank account 
-and send the funds to TransferWise’s local bank account via domestic payment. The details of this bank account will be shared with you by the TransferWise team helping your integration.</p>
+and send the funds to TransferWise’s local bank account via domestic payment. You should send the amount provided in the quote object you created in the first step of the process. The details of this bank account will be shared with you by the TransferWise team helping your integration.</p>
 
 <p>In order for us to link this incoming domestic payment with a corresponding transfer order, we need you to use specific text in the &quot;payment reference&quot; field.
 Calling endpoint <a href="#quotes-get-pay-in-methods">Get pay-in methods</a> with quoteId returns you the correct reference text. e.g. <code>quote-1456477 P5472304</code>. We currently drive this behaviour using the second part of this string, starting with <em>P</em>, you should use a regular expression to extract this string to send as the reference, e.g. <code>.*(P\d+)</code>, taking the second group.</p>
