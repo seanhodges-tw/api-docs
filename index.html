@@ -4946,7 +4946,12 @@ Temporary quote is not associated with any user, it is anonymous. </p>
 <li>Zip code</li>
 </ul></p>
 
-<p>A GBP example is provided here. You can find other currency examples below.<br/>
+<p>When creating recipient, the following general rules should be applied to &quot;accountHolderName&quot; field:
+1. Full names for personal recipients.  They must include more than one name, and both first and last name must have more than one character.
+2. Business names must be in full, but can be just a single name, and can include single characters.  But must have more than one character in any one word.
+3. Digits are not allowed, except in business names.
+These requirements may vary depending of recipient type.
+A GBP example is provided here. You can find other currency examples below.<br/>
 As you can see many of the fields are <code>null</code>, in order to know which fields are required for which currency we expose the <a href="#recipient-accounts-requirements">Recipients.Requirements</a> endpoint.</p>
 <h3 id='recipient-accounts-create-request'>Request</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/v1/accounts</code></strong></p>
@@ -6969,7 +6974,8 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 
 <p>Send payments to Nepal. </p>
 
-<p>Private recipients are supported. </p>
+<p>Private recipients are supported.
+1mln NPR per transaction / per month for individual account. </p>
 
 <p>Recipient type = <em>&#39;nepal&#39;</em></p>
 
@@ -6995,8 +7001,6 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
         }'</span>
 </code></pre>
 <p>Send payments to New Zealand. </p>
-
-<p>1mln NPR per transaction / per month for individual account.</p>
 
 <p>Recipient type = <em>&#39;newzealand&#39;</em></p>
 
