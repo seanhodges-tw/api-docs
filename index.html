@@ -2567,7 +2567,7 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 
 <p>Once our partnership begins, we’ll send you API access credentials for the sandbox environment consisting of a Client ID and a Client Secret.
 The credentials are needed to complete the authorisation_code grant type of OAuth 2.0 through which the customer will allow your application to be able to act on their behalf.
-We also need <em>redirect_url</em> from your technical team so that we can limit our callbacks to only that URL, this is URL that we will forward users to after sucessfully granting your application access to their TransferWise account. Specifying this explicityly makes the integration more secure.
+We also need <em>redirect_url</em> from your technical team so that we can limit our callbacks to only that URL, this is URL that we will forward users to after successfully granting your application access to their TransferWise account. Specifying this explicitly makes the integration more secure.
 <a href="https://auth0.com/blog/oauth2-the-complete-guide/">OAuth 2.0: The Complete Guide</a> is a great way to refresh your knowledge about the protocol itself.</p>
 <h3 id='bank-integrations-guide-api-access-test-and-live-environments'>TEST and LIVE environments</h3>
 <ul>
@@ -2584,11 +2584,11 @@ Alternatively, you can build it so a user starts from the calculator, then you c
 
 <p>We have plenty of examples to show you how this has been done by our current parterns and can help you to build a great expereince for your customers.</p>
 <h2 id='bank-integrations-guide-building-your-backend'>Building your backend</h2>
-<p>You should expose an API interanlly for your web and mobile clients to call to provide the required TransferWise features. Your backend system will manage both communication to the TransferWise API and internal operations such as checking a user has sufficient balance to make the requested transfer and triggering the funds to be sent to TransferWise when they confirm a transfer.</p>
+<p>You should expose an API internally for your web and mobile clients to call to provide the required TransferWise features. Your backend system will manage both communication to the TransferWise API and internal operations such as checking a user has sufficient balance to make the requested transfer and triggering the funds to be sent to TransferWise when they confirm a transfer.</p>
 
 <p>You should also store a copy of certain data relating to TransferWise to decrease latency and increase resiliency when users review previous transfers they made or recipients they sent funds to. The extent of what you store will depend on your integration.</p>
 
-<p>You should also build a polling mechansim to periodically update the status of a transfer and its delivery estimate, keeping your user up to date of where their transfer is in the process.</p>
+<p>You should also build a polling mechanism to periodically update the status of a transfer and its delivery estimate, keeping your user up to date of where their transfer is in the process.</p>
 
 <p>We have a dedicated team focusing on bank partnerships who will help you along the way, sharing knowledge and experience from previous integrations to help you build a robust and highly available system.</p>
 <h2 id='bank-integrations-guide-your-transferwise-user-experience'>Your TransferWise  user experience</h2><h3 id='bank-integrations-guide-your-transferwise-user-experience-user-onboarding-flow'>User onboarding flow</h3>
@@ -2658,13 +2658,13 @@ In the live environment the api.transferwise.com URL works for the authorization
 
 <p>Your website or service can then use this code to obtain the access token to act on behalf of the user account.</p>
 
-<p>If you are building your TransferWise integraion as a native mobile phone app then the redirect URL should be able to handle returning the user to the correct place in the app.</p>
+<p>If you are building your TransferWise integration as a native mobile phone app then the redirect URL should be able to handle returning the user to the correct place in the app.</p>
 
 <p>At the point you gain access to a user account you should double check it is the one you were expecting to be given access to - sometimes users can get confused and log in to a different account. Together we want to avoid TransferWise accounts being linked to bank accounts of a different person or business, therefore you should check the user&#39;s details once the link is created. Currently you should do this sanity check based on the date of birth of the user but are working on a more robust solution. If the DoB exists but doesn&#39;t match then you should not allow the link to be made and inform the user we do not think the accounts match and to get in touch with customer service.</p>
 <h2 id='bank-integrations-guide-sign-up-new-users-via-api'>Sign up new users via API</h2>
 <p>If the user doesn&#39;t already have a TransferWise account then you can create one for them. The <a href="#users-sign-up-with-registration-code">signup with registration code</a> feature lets you create new users directly via an API call, without the need to redirect new users to the TransferWise authorization page. This way new users can complete everything without ever leaving your banking app, making a very streamlined flow.</p>
 
-<p>We can provide this option to banks where we cann create a trusted reliance model on your KYC processes. Please discuss this option with the team supporting your integration.</p>
+<p>We can provide this option to banks where we can create a trusted reliance model on your KYC processes. Please discuss this option with the team supporting your integration.</p>
 
 <p>Existing TransferWise users will always need to be redirected to authorization page flow, you can detect this at the point you attempt to create the user based ont he API response.</p>
 
@@ -2699,7 +2699,7 @@ In the live environment the api.transferwise.com URL works for the authorization
 <p>For calling API endpoints you need to provide the user&#39;s <code>access_token</code> in the request&#39;s HTTP header in the format <code>Authorization: Bearer &lt;access_token&gt;</code>.
 Access tokens are short lived for security reasons, they are only valid for 12 hours by default. When they expire you need to use the <code>refresh_token</code> to generate a new access_token.</p>
 
-<p>This means you have to securely store the user&#39;s <code>refresh_token</code> in order to geneate a new <code>access_token</code> each time they use your TransferWise integration, or you poll for updated data,</p>
+<p>This means you have to securely store the user&#39;s <code>refresh_token</code> in order to generate a new <code>access_token</code> each time they use your TransferWise integration, or you poll for updated data,</p>
 <h3 id='bank-integrations-guide-get-user-tokens-request'>Request</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/v1/oauth/token</code></strong></p>
 
@@ -2862,7 +2862,7 @@ There is no need to wait for the actual expiration to happen first. </p>
 <h3 id='bank-integrations-guide-token-expiry-1-an-existing-user-granted-your-application-access-to-the-account'>1. An existing user granted your application access to the account</h3>
 <p>If you were granted access by an existing user then you should send the user through the same flow as you initially did to generate tokens described in <a href="#bank-integrations-guide-get-user-authorization-for-existing-accounts">get user authorization for existing accounts</a>.</p>
 <h3 id='bank-integrations-guide-token-expiry-2-your-application-created-the-user'>2. Your application created the user</h3>
-<p>In the case you created the user using the <a href="#bank-integrations-guide-sign-up-new-users-via-api">sign up new users via API</a> flow then the mechanism for regenerating tokens is depenedent on whether the user you created has &quot;reclaimed&quot; their TransferWise account and used our website or apps directly.</p>
+<p>In the case you created the user using the <a href="#bank-integrations-guide-sign-up-new-users-via-api">sign up new users via API</a> flow then the mechanism for regenerating tokens is dependent on whether the user you created has &quot;reclaimed&quot; their TransferWise account and used our website or apps directly.</p>
 
 <p>If the user has not reclaimed their account then the original <code>registrationCode</code> you generated should still be able to generate new tokens for the user. Because of this you should store this code alongside the created user ID in your database at the point of user generation.</p>
 
@@ -2874,7 +2874,7 @@ There is no need to wait for the actual expiration to happen first. </p>
 </span></code></pre>
 <p>In this case you can assume the user has reclaimed the account and push them through the <a href="#bank-integrations-guide-get-user-authorization-for-existing-accounts">get user authorization for existing accounts</a> flow.</p>
 <h2 id='bank-integrations-guide-create-personal-user-profile'>Create personal user profile</h2>
-<p>When you first get access to a user&#39;s TransferWise user account you will cannot predict if they already have submitted thier profile data or not.</p>
+<p>When you first get access to a user&#39;s TransferWise user account you will cannot predict if they already have submitted their profile data or not.</p>
 
 <p><a href="#user-profiles-list">User Profiles.List</a> endpoint will give you data for both personal and business profiles, if it exists. This makes it easy to
 figure out if a user has already set up this data with TransferWise or not. If the user already has a personal profile set up, then you can skip this creation step.</p>
@@ -2903,15 +2903,15 @@ figure out if a user has already set up this data with TransferWise or not. If t
 
 <p>You need to set quote type as &quot;REGULAR&quot;.</p>
 <h2 id='bank-integrations-guide-create-or-select-recipient-account'>Create or select recipient account</h2>
-<p>Please look at <a href="#recipient-accounts-create">Create recipient account</a> under Full API Reference for information on the calls to crerate recipients.</p>
+<p>Please look at <a href="#recipient-accounts-create">Create recipient account</a> under Full API Reference for information on the calls to create recipients.</p>
 
-<p>It is also reccomended that you use the <code>GET accounts</code> endpoint to load the user&#39;s previously used reciepients and allow them to select from them in your user interface. This allows them to only have to create a recipient once and then re-use it in future, plus it allows exising TransferWise users to use their familiar users from our platform.</p>
+<p>It is also recommended that you use the <code>GET accounts</code> endpoint to load the user&#39;s previously used recipients and allow them to select from them in your user interface. This allows them to only have to create a recipient once and then re-use it in future, plus it allows existing TransferWise users to use their familiar users from our platform.</p>
 
 <p>When returning this list please filter out any recipient of type <code>SwiftCode</code>, unfortunately API limitations mean these cannot be used in bank integrations.</p>
 
 <p>You should store a cached copy of the recipients that are <em>used</em> or <em>created</em> by users of your app such that you can load that data again quickly to show in your app, for example a transfer tracking screen might show recipient data.</p>
 
-<p>Please note, when creating a new transfer always reload the full list of reciepients over our API as cannot be certain the recipients you store a copy of have not been deleted in the meantime.</p>
+<p>Please note, when creating a new transfer always reload the full list of recipients over our API as cannot be certain the recipients you store a copy of have not been deleted in the meantime.</p>
 <h2 id='bank-integrations-guide-create-transfer'>Create transfer</h2>
 <p>Please look at <a href="#transfers-create">Create transfer</a> under Full API Reference.</p>
 <h2 id='bank-integrations-guide-fund-transfer'>Fund transfer</h2>
@@ -2946,11 +2946,11 @@ Calling endpoint <a href="#quotes-get-pay-in-methods">Get pay-in methods</a> wit
 
 <p>If the token expires for a user not created by the bank and the user has a new email address at the bank then they can be pushed through the signup flow with this new email address and either have a new account created or link an existing against the new email, as described in <a href="#bank-integrations-guide-token-expiry">token expiry</a>.</p>
 
-<p>The result of many of these flows is that the user may end up with more than one TransferWise account, which is undesirable. Currently we monitor this behaviour for abuse but we are working on a more robust user creation scenario to prevent this occuring.</p>
+<p>The result of many of these flows is that the user may end up with more than one TransferWise account, which is undesirable. Currently we monitor this behaviour for abuse but we are working on a more robust user creation scenario to prevent this occurring.</p>
 <h3 id='bank-integrations-guide-edge-case-handling-email-change-mitigation'>Email change mitigation</h3>
 <p>The result of these eventualities are that over time a user of the bank could be linked to more than one TransferWise account and so therefore you will need to be defensive when requesting older user data as the request may fail because we forbid one user to access other user&#39;s data. We recommend to keep a local copy of your user&#39;s transfer data and update it asynchronously such that older transfers remain accessible to the user in the case where it can no longerbe accessed. You should also make sure to handle these failing calls gracefully and continue to process transfers that can be accessed over the API.</p>
 
-<p>In the event a user is not happy at losing access to their older data or having two accounts is confusing then we can manually update the email addresses to match for the two accounts they wahnt.</p>
+<p>In the event a user is not happy at losing access to their older data or having two accounts is confusing then we can manually update the email addresses to match for the two accounts they want.</p>
 <h2 id='bank-integrations-guide-going-live-checklist'>Going live checklist</h2><h3 id='bank-integrations-guide-going-live-checklist-1-make-your-integration-bulletproof'>1. Make your integration bulletproof</h3>
 <ul>
 <li>Implement basic retry mechanism to handle potential failures or network interruptions </li>
@@ -2970,7 +2970,7 @@ Calling endpoint <a href="#quotes-get-pay-in-methods">Get pay-in methods</a> wit
 <h3 id='bank-integrations-guide-going-live-checklist-3-do-some-testing-in-live'>3. Do some testing in LIVE</h3>
 <ul>
 <li>Launch LIVE integration to a limited set of your customers and test all currency routes you will offer end-to-end. </li>
-<li>We reccomend launching a limited set of currencies intially to limit the scope of potential issues, please seek guidance from the TransferWise team.</li>
+<li>We recommend launching a limited set of currencies initially to limit the scope of potential issues, please seek guidance from the TransferWise team.</li>
 <li>Test successful flow and bounce back flow (where funds cannot be delivered). </li>
 <li>All set. Switch it on.</li>
 </ul>
@@ -3095,7 +3095,7 @@ Send email to api@transferwise.com</p>
 We have a dedicated team to talk to you. <a href="https://transferwise.com/contact-sales">https://transferwise.com/contact-sales</a></p>
 
 <p><strong>Have a question about how TransferWise works?</strong><br/>
-Search Transferwise Help Centre. <a href="https://transferwise.com/help">https://transferwise.com/help</a></p>
+Search TransferWise Help Centre. <a href="https://transferwise.com/help">https://transferwise.com/help</a></p>
 
 <p><strong>Want more information about your payments?</strong> <br/>
 Lookup TransferWise Support Centre details. <a href="https://transferwise.com/contact">https://transferwise.com/contact</a></p>
@@ -5161,7 +5161,7 @@ As you can see many of the fields are <code>null</code>, in order to know which 
 <p>If you don&#39;t know recipient bank account details you can set up <strong>email recipient</strong> so that TransferWise will collect bank details directly from the recipient. </p>
 
 <p>TransferWise will email your recipient with a link to collect their bank account details. 
-Once your recipient provides bank account details securely to Transferwise we are able to complete your transfer.</p>
+Once your recipient provides bank account details securely to TransferWise we are able to complete your transfer.</p>
 
 <aside class="warning">
 <b>Please read through the support article referenced below to understand how this works and what are known constraints.</b>
