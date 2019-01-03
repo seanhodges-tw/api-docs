@@ -464,6 +464,9 @@
                       <a href="#recipient-accounts-validate-recipient-fields" class="toc-h2 toc-link" data-title="Validate Recipient Fields">Validate Recipient Fields</a>
                     </li>
                     <li>
+                      <a href="#recipient-accounts-banks-and-branches" class="toc-h2 toc-link" data-title="Banks and Branches">Banks and Branches</a>
+                    </li>
+                    <li>
                       <a href="#recipient-accounts-create-aed-recipient" class="toc-h2 toc-link" data-title="Create AED Recipient">Create AED Recipient</a>
                     </li>
                     <li>
@@ -5947,6 +5950,86 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 <p>Validate Thailand bank account number</p>
 
 <p><a href="https://api.transferwise.com/v1/validators/thailand-account-number?accountNumber=9517384260">https://api.transferwise.com/v1/validators/thailand-account-number?accountNumber=9517384260</a></p>
+<h2 id='recipient-accounts-banks-and-branches'>Banks and Branches</h2>
+<blockquote>
+<p>Example Request (Get list of banks for Hong Kong):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/banks/country<span class="o">=</span>HK
+</code></pre>
+<blockquote>
+<p>Example Response (Get list of banks for Hong Kong):</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"003"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STANDARD CHARTERED BANK (HONG KONG) LIMITED"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"552"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAREAL BANK AG, WIESBADEN, GERMANY"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"307"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABN AMRO BANK N.V."</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"222"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AGRICULTURAL BANK OF CHINA LIMITED"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"525"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZIBO CITY COMMERCIAL BANK, SHANDONG"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example Request (Get list of bank branches for a Hong Kong bank with code 003):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/bank-branches?country<span class="o">=</span>HK&amp;bankCode<span class="o">=</span>003
+</code></pre>
+<blockquote>
+<p>Example Response (Get list of bank branches for a Hong Kong bank with code 003):</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HK"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"251"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarry Bay Branch [251]"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"parentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"003"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"983"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Canton Road Branch [983]"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"parentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"003"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"984"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tuen Mun Branch [984]"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"parentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"003"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"985"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kwun Tong Branch [985]"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"parentCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"003"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><strong>Get list of banks by country code</strong> </p>
+
+<p>List of banks is available for these countries:
+BD, BR, CZ, CL, EG, GH, HK, ID, IL, IN, JP, KE, LK, MA, NG, NP, PE, PH, RU, SG, TH, VN</p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/banks?country=HK</code></strong><br/></p>
+
+<p><strong>Get list of branches by country and bank code</strong></p>
+
+<p>List of bank branches is available for these countries: BD, GH, HK, IL, IN, JP, LK, SG, VN</p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/bank-branches?country=HK&amp;bankCode=&lt;bankCode&gt;</code></strong><br/></p>
 <h2 id='recipient-accounts-create-aed-recipient'>Create AED Recipient</h2>
 <blockquote>
 <p>Example Request (AED):</p>
@@ -6062,7 +6145,9 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 
 <p>Required details: bankCode, branchCode, accountNumber</p>
 
-<p>You can get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-bgn-recipient'>Create BGN Recipient</h2>
 <blockquote>
 <p>Example Request (BGN):</p>
@@ -6121,7 +6206,9 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 
 <p>Required details: bankCode, branchCode, accountNumber, accountType (CHECKING or SAVINGS), cpf (tax reg no), recipient phone number</p>
 
-<p>You can get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-cad-recipient'>Create CAD Recipient</h2>
 <blockquote>
 <p>Example Request (CAD):</p>
@@ -6150,8 +6237,6 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 <p>Recipient type = <em>&#39;canadian&#39;</em></p>
 
 <p>Required details: institutionNumber, transitNumber, accountNumber, accountType (Checking or Saving)</p>
-
-<p>You can get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-chf-recipient'>Create CHF Recipient</h2>
 <blockquote>
 <p>Example Request (CHF):</p>
@@ -6206,6 +6291,10 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 <p>Recipient type = <em>&#39;chile&#39;</em></p>
 
 <p>Required details: bankCode, accountNumber, rut (Rol Único Tributario), accountType (CHECKING, SAVINGS, CUENTA_VISTA), recipient phone number</p>
+
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-cny-recipient'>Create CNY Recipient</h2>
 <blockquote>
 <p>Example Request (CNY):</p>
@@ -6280,6 +6369,10 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 
 <p>Required details: prefix, accountNumber, bankCode</p>
 
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+
 <p><br/></p>
 
 <p>OR </p>
@@ -6341,7 +6434,9 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 
 <p>Required details: bankCode, accountNumber (Swift code)</p>
 
-<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-eur-recipient'>Create EUR Recipient</h2>
 <blockquote>
 <p>Example Request (EUR):</p>
@@ -6474,7 +6569,9 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 
 <p>Required details: bankCode, accountNumber</p>
 
-<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-hkd-recipient'>Create HKD Recipient</h2>
 <blockquote>
 <p>Example Request (HKD):</p>
@@ -6501,7 +6598,9 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 
 <p>Required details: bankCode, accountNumber</p>
 
-<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-hrk-recipient'>Create HRK Recipient</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -6608,7 +6707,9 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 
 <p>Required details: bankCode, accountNumber</p>
 
-<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-ils-recipient'>Create ILS Recipient</h2>
 <blockquote>
 <p>Example Request (ILS IBAN):</p>
@@ -6666,7 +6767,9 @@ These URLs are also included in fields provided by <a href="#recipient-accounts-
 
 <p>Required details: bankCode, branchCode, accountNumber</p>
 
-<p>You can get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-inr-recipient'>Create INR Recipient</h2>
 <blockquote>
 <p>Example Request (INR):</p>
@@ -6698,6 +6801,10 @@ Business recipient: 1,5 mln INR per day (~ 17 800 GBP)</b>
 <p>Recipient type = <em>&#39;indian&#39;</em></p>
 
 <p>Required details: ifscCode, accountNumber</p>
+
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-jpy-recipient'>Create JPY Recipient</h2>
 <blockquote>
 <p>Example Request (JPY):</p>
@@ -6727,7 +6834,9 @@ Business recipient: 1,5 mln INR per day (~ 17 800 GBP)</b>
 
 <p>Required details: bankCode, branchCode accountNumber, accountType (CURRENT, SAVINGS, CHECKING), </p>
 
-<p>You can get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-kes-recipient'>Create KES Recipient</h2>
 <blockquote>
 <p>Example Request (KES Bank Account):</p>
@@ -6774,7 +6883,9 @@ Business recipient: 1,5 mln INR per day (~ 17 800 GBP)</b>
 
 <p>Required details: bankCode, accountNumber</p>
 
-<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 
 <p><br/></p>
 
@@ -6818,7 +6929,9 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 
 <p>Required details: bankCode, branchCode, accountNumber</p>
 
-<p>You can get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-mad-recipient'>Create MAD Recipient</h2>
 <blockquote>
 <p>Example Request (MAD):</p>
@@ -6846,7 +6959,9 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 
 <p>Required details: bankCode, accountNumber</p>
 
-<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-mxn-recipient'>Create MXN Recipient</h2>
 <blockquote>
 <p>Example Request (MXN):</p>
@@ -6898,8 +7013,6 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 <p>Recipient type = <em>&#39;malaysian&#39;</em></p>
 
 <p>Required details: swiftCode, accountNumber</p>
-
-<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-ngn-recipient'>Create NGN Recipient</h2>
 <blockquote>
 <p>Example Request (NGN):</p>
@@ -6927,7 +7040,9 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 
 <p>Required details: bankCode, accountNumber</p>
 
-<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-nok-recipient'>Create NOK Recipient</h2>
 <blockquote>
 <p>Example Request (NOK):</p>
@@ -6985,7 +7100,9 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 
 <p>Required details: bankCode, accountNumber</p>
 
-<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-nzd-recipient'>Create NZD Recipient</h2>
 <blockquote>
 <p>Example Request (NZD):</p>
@@ -7040,7 +7157,9 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 
 <p>Required details: bankCode, accountNumber, accountType (CHECKING, SAVINGS), ID document type (DNI, RUC, C_EXT, PASSP), ID document number, recipient phone number</p>
 
-<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-php-recipient'>Create PHP Recipient</h2>
 <blockquote>
 <p>Example Request (PHP):</p>
@@ -7074,7 +7193,9 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 
 <p>Required details: bankCode, accountNumber, recipient address</p>
 
-<p>You can get list of bank and country codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-pkr-recipient'>Create PKR Recipient</h2>
 <blockquote>
 <p>Example Request (PKR):</p>
@@ -7218,6 +7339,8 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 <p>Required details: bankCode, accountNumber, region, recipient address</p>
 
 <p>You can get list of bank, region and country codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
 <h2 id='recipient-accounts-create-sek-recipient'>Create SEK Recipient</h2>
 <blockquote>
 <p>Example Request (SEK IBAN):</p>
@@ -7327,7 +7450,9 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 
 <p>Required details: bankCode, accountNumber</p>
 
-<p>You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-thb-recipient'>Create THB Recipient</h2>
 <blockquote>
 <p>Example Request (THB):</p>
@@ -7361,7 +7486,9 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 
 <p>Required details: bankCode, accountNumber</p>
 
-<p>You can get list of bank and country codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-try-recipient'>Create TRY Recipient</h2>
 <blockquote>
 <p>Example Request (TRY):</p>
@@ -7488,7 +7615,9 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 
 <p>Required details: swiftCode, branchCode, accountNumber</p>
 
-<p>You can get list of bank  and branc codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
 <h2 id='recipient-accounts-create-zar-recipient'>Create ZAR Recipient</h2>
 <blockquote>
 <p>Example Request (ZAR):</p>
