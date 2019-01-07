@@ -647,6 +647,9 @@
                       <a href="#transfers-get-delivery-time" class="toc-h2 toc-link" data-title="Get Delivery Time">Get Delivery Time</a>
                     </li>
                     <li>
+                      <a href="#transfers-get-receipt-pdf" class="toc-h2 toc-link" data-title="Get Receipt PDF">Get Receipt PDF</a>
+                    </li>
+                    <li>
                       <a href="#transfers-list" class="toc-h2 toc-link" data-title="List">List</a>
                     </li>
                     <li>
@@ -8151,6 +8154,23 @@ This is not a guaranteed time but we are working hard to make these estimates as
 <td>Timestamp</td>
 </tr>
 </tbody></table>
+<h2 id='transfers-get-receipt-pdf'>Get Receipt PDF</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/transfers/<span class="o">{</span>transferId<span class="o">}</span>/receipt.pdf <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>Receipt presented as application/pdf content-type
+</code></pre>
+<p>Download transfer confirmation receipt in PDF format for transfers that are in status <strong>outgoing_payment_sent</strong>. <br/></p>
+<h3 id='transfers-get-receipt-pdf-request'>Request</h3>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/transfers/{transferId}/receipt.pdf</code></strong></p>
+<h3 id='transfers-get-receipt-pdf-response'>Response</h3>
+<p>Transfer confirmation receipt in PDF format.</p>
 <h2 id='transfers-list'>List</h2>
 <blockquote>
 <p>Example Request:</p>
