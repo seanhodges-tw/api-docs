@@ -412,6 +412,9 @@
                     <li>
                       <a href="#borderless-accounts-get-available-currencies" class="toc-h2 toc-link" data-title="Get Available Currencies">Get Available Currencies</a>
                     </li>
+                    <li>
+                      <a href="#borderless-accounts-get-currency-pairs" class="toc-h2 toc-link" data-title="Get Currency Pairs">Get Currency Pairs</a>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -465,6 +468,9 @@
                     </li>
                     <li>
                       <a href="#recipient-accounts-banks-and-branches" class="toc-h2 toc-link" data-title="Banks and Branches">Banks and Branches</a>
+                    </li>
+                    <li>
+                      <a href="#recipient-accounts-countries-and-states" class="toc-h2 toc-link" data-title="Countries and States">Countries and States</a>
                     </li>
                     <li>
                       <a href="#recipient-accounts-create-aed-recipient" class="toc-h2 toc-link" data-title="Create AED Recipient">Create AED Recipient</a>
@@ -4368,6 +4374,96 @@ Quote which is used in this call must have type &quot;BALANCE_CONVERSION&quot;.<
 <p><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/></p>
+<h2 id='borderless-accounts-get-currency-pairs'>Get Currency Pairs</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/currency-pairs <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"sourceCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"currencyCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"maxInvoiceAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"targetCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"currencyCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"minInvoiceAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"fixedTargetPaymentAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"currencyCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INR"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"minInvoiceAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"fixedTargetPaymentAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"currencyCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"minInvoiceAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"fixedTargetPaymentAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+</span><span class="err">...</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"currencyCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VND"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"minInvoiceAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"fixedTargetPaymentAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"currencyCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZAR"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"minInvoiceAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"fixedTargetPaymentAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"totalTargetCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="mi">47</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Get list of allowed currency pairs that your can setup your transfers. </p>
+<h3 id='borderless-accounts-get-currency-pairs-request'>Request</h3>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/currency-pairs</code></strong></p>
+<h3 id='borderless-accounts-get-currency-pairs-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sourceCurrencies.currencyCode</td>
+<td>Source currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>sourceCurrencies.maxInvoiceAmount</td>
+<td>Maximum allowed transfer amount in source currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>targetCurrencies.currencyCode</td>
+<td>Target currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>targetCurrencies.minInvoiceAmount</td>
+<td>Minimum allowed transfer amount in source currency for this pair.</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>targetCurrencies.fixedTargetPaymentAllowed</td>
+<td>Can you setup fixed rate payments or not.</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+
+<p><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/></p>
 <h1 id='exchange-rates'>Exchange Rates</h1><h2 id='exchange-rates-list'>List</h2>
 <blockquote>
 <p>Example Request (Bearer token):</p>
@@ -6033,6 +6129,78 @@ BD, BR, CZ, CL, EG, GH, HK, ID, IL, IN, JP, KE, LK, MA, NG, NP, PE, PH, RU, SG, 
 <p>List of bank branches is available for these countries: BD, GH, HK, IL, IN, JP, LK, SG, VN</p>
 
 <p><strong><code>GET https://api.sandbox.transferwise.tech/v1/bank-branches?country=HK&amp;bankCode=&lt;bankCode&gt;</code></strong><br/></p>
+<h2 id='recipient-accounts-countries-and-states'>Countries and States</h2>
+<blockquote>
+<p>Example Request (Get list of allowed countries):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/countries
+</code></pre>
+<blockquote>
+<p>Example Response (Get list of allowed countries):</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AL"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Albania"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DZ"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Algeria"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZW"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zimbabwe"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AX"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Åland Islands"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example Request (Get list of states for a country code US):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/countries/US/states
+</code></pre>
+<blockquote>
+<p>Example Response (Get list of states for a country code US):</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AL"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alabama"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AK"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alaska"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PR"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Puerto Rico"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VI"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Virgin Islands"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><strong>Get list of countries</strong> </p>
+
+<p>List of allowed countries to be used in recipient or user-profile addresses.</p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/countries</code></strong><br/></p>
+
+<p><strong>Get list of states by country code</strong></p>
+
+<p>List of states is available for these countries: US, CA, BR, AU.</p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/countries/{countryCode}/states</code></strong><br/></p>
 <h2 id='recipient-accounts-create-aed-recipient'>Create AED Recipient</h2>
 <blockquote>
 <p>Example Request (AED):</p>
