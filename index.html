@@ -291,6 +291,9 @@
                       <a href="#transferwise-payouts-guide-get-account-statement" class="toc-h2 toc-link" data-title="Get account statement">Get account statement</a>
                     </li>
                     <li>
+                      <a href="#transferwise-payouts-guide-create-topup-order" class="toc-h2 toc-link" data-title="Create topup order">Create topup order</a>
+                    </li>
+                    <li>
                       <a href="#transferwise-payouts-guide-going-live-checklist" class="toc-h2 toc-link" data-title="Going live checklist">Going live checklist</a>
                     </li>
                 </ul>
@@ -2550,6 +2553,42 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <td>Integer</td>
 </tr>
 </tbody></table>
+<h2 id='transferwise-payouts-guide-create-topup-order'>Create topup order</h2>
+<p>There are 2 different ways you can send funds to your borderless account:
+1) Simply send domestic bank transfer from your bank account to <strong>your borderless account details</strong> (IBAN / SortCode-AccountNo) which TransferWise issued to your account. There is no need to setup any topup order in this case.</p>
+
+<p>2) Create a topup order and then send corresponding amount via domestic or international bank transfer to <strong>TransferWise escrow acccount details</strong>.
+Before you can do this you need to obtain our escrow bank account details from your account manager.
+This option is usually used when sending funds via international (swift) transfers.</p>
+
+<p>Setting up topup order is similar to setting up regular transfer with a few tweaks.</p>
+<h3 id='transferwise-payouts-guide-create-topup-order-1-create-topup-quote'>1. Create topup quote</h3>
+<p>Same way as described in <a href="#transferwise-payouts-guide-create-quote">Create quote</a> but use quote type REGULAR:</p>
+
+<p>&quot;profile&quot;: <your profile id>,
+          &quot;source&quot;: &quot;EUR&quot;,
+          &quot;target&quot;: &quot;EUR&quot;,
+          &quot;rateType&quot;: &quot;FIXED&quot;,
+          &quot;targetAmount&quot;: 6000,
+          &quot;type&quot;: &quot;REGULAR&quot;</p>
+<h3 id='transferwise-payouts-guide-create-topup-order-2-find-out-your-balance-recipient-account-id'>2. Find out your balance recipient account id</h3>
+<p>Call <a href="#transferwise-payouts-guide-check-account-balance">Check account balance</a> endpoint and fetch <strong>recipientId</strong> field value from the response.</p>
+
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/borderless-accounts?profileId={profileId}</code></strong></p>
+
+<p>You need to use this value in <strong>targetAccount</strong> field when calling  create transfer endpoint in next step.
+This recipientId will not change, so you just need to fetch it once and then you can use the same value for all topup orders.</p>
+<h3 id='transferwise-payouts-guide-create-topup-order-3-create-topup-transfer-order'>3. Create topup transfer (order)</h3>
+<p>As last step you now need to create transfer (topup order). This is same call as described in <a href="#transferwise-payouts-guide-create-transfer">Create transfer</a>.</p>
+
+<p>&quot;targetAccount&quot;: <recipient account id fetched in step 2>,<br>
+          &quot;quote&quot;: <quote id from step 1>,
+          &quot;customerTransactionId&quot;: &quot;<the UUID you generated for the transfer attempt>&quot;,
+          &quot;details&quot; : {
+              &quot;reference&quot; : &quot;optional text to identify your topup order&quot;
+            } </p>
+
+<p>All done. </p>
 <h2 id='transferwise-payouts-guide-going-live-checklist'>Going live checklist</h2><h3 id='transferwise-payouts-guide-going-live-checklist-1-make-your-integration-bulletproof'>1. Make your integration bulletproof</h3>
 <ul>
 <li>Implement basic retry mechanism to handle potential failures or network interruptions </li>
@@ -3587,7 +3626,7 @@ For example this is a valid request to create address in US Arizona:
 </tr>
 <tr>
 <td>recipientId</td>
-<td>Recipient id you can use for borderless topup payment order</td>
+<td>Recipient id you can use for borderless topup transfer</td>
 <td>Integer</td>
 </tr>
 <tr>
