@@ -2554,23 +2554,65 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 </tr>
 </tbody></table>
 <h2 id='transferwise-payouts-guide-create-topup-order'>Create topup order</h2>
-<p>There are 2 different ways you can send funds to your borderless account:
-1) Simply send domestic bank transfer from your bank account to <strong>your borderless account details</strong> (IBAN / SortCode-AccountNo) which TransferWise issued to your account. There is no need to setup any topup order in this case.</p>
+<blockquote>
+<p>Step 1 - Create Quote for topup:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST https://api.sandbox.transferwise.tech/v1/quotes <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "source": "EUR",
+          "target": "EUR",
+          "rateType": "FIXED",
+          "targetAmount": 6000,
+          "type": "REGULAR"
+         }'</span>
+</code></pre>
+<blockquote>
+<p>Step 2 - Find out your balance recipient account id:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/borderless-accounts?profileId<span class="o">={</span>profileId<span class="o">}</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileId"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recipientId"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">balance</span><span class="w"> </span><span class="err">recipient</span><span class="w"> </span><span class="err">account</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Step 3 - Create Transfer for topup:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST https://api.sandbox.transferwise.tech/v1/transfers <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "targetAccount": &lt;recipient account id fetched in step 2&gt;,   
+          "quote": &lt;quote id from step 1&gt;,
+          "customerTransactionId": "&lt;the UUID you generated for the transfer attempt&gt;",
+          "details" : {
+              "reference" : "optional text to identify your topup order"
+            } 
+         }'</span>
+</code></pre>
+<p>There are 2 different ways you can send funds to your borderless account:</p>
 
-<p>2) Create a topup order and then send corresponding amount via domestic or international bank transfer to <strong>TransferWise escrow acccount details</strong>.
-Before you can do this you need to obtain our escrow bank account details from your account manager.
-This option is usually used when sending funds via international (swift) transfers.</p>
+<p>1) Simply send domestic bank transfer from your bank account to <strong>your borderless account details</strong> (IBAN / SortCode-AccountNo). There is no need to setup a topup order in this case.</p>
 
-<p>Setting up topup order is similar to setting up regular transfer with a few tweaks.</p>
+<p>2) Create a topup order and then send corresponding amount via domestic or international bank transfer to <strong>TransferWise escrow bank account details</strong>.
+You can obtain escrow account details from your account manager.
+This option is usually used when you are sending funds via international (swift) transfers.</p>
+
+<p>Setting up a topup order is similar to setting up a regular transfer. Some minor changes are documented below. </p>
 <h3 id='transferwise-payouts-guide-create-topup-order-1-create-topup-quote'>1. Create topup quote</h3>
 <p>Same way as described in <a href="#transferwise-payouts-guide-create-quote">Create quote</a> but use quote type REGULAR:</p>
-
-<p>&quot;profile&quot;: <your profile id>,
-          &quot;source&quot;: &quot;EUR&quot;,
-          &quot;target&quot;: &quot;EUR&quot;,
-          &quot;rateType&quot;: &quot;FIXED&quot;,
-          &quot;targetAmount&quot;: 6000,
-          &quot;type&quot;: &quot;REGULAR&quot;</p>
 <h3 id='transferwise-payouts-guide-create-topup-order-2-find-out-your-balance-recipient-account-id'>2. Find out your balance recipient account id</h3>
 <p>Call <a href="#transferwise-payouts-guide-check-account-balance">Check account balance</a> endpoint and fetch <strong>recipientId</strong> field value from the response.</p>
 
@@ -2579,16 +2621,8 @@ This option is usually used when sending funds via international (swift) transfe
 <p>You need to use this value in <strong>targetAccount</strong> field when calling  create transfer endpoint in next step.
 This recipientId will not change, so you just need to fetch it once and then you can use the same value for all topup orders.</p>
 <h3 id='transferwise-payouts-guide-create-topup-order-3-create-topup-transfer-order'>3. Create topup transfer (order)</h3>
-<p>As last step you now need to create transfer (topup order). This is same call as described in <a href="#transferwise-payouts-guide-create-transfer">Create transfer</a>.</p>
-
-<p>&quot;targetAccount&quot;: <recipient account id fetched in step 2>,<br>
-          &quot;quote&quot;: <quote id from step 1>,
-          &quot;customerTransactionId&quot;: &quot;<the UUID you generated for the transfer attempt>&quot;,
-          &quot;details&quot; : {
-              &quot;reference&quot; : &quot;optional text to identify your topup order&quot;
-            } </p>
-
-<p>All done. </p>
+<p>As last step you now need to create transfer (topup order). This is same call as described in <a href="#transferwise-payouts-guide-create-transfer">Create transfer</a>.
+All done. </p>
 <h2 id='transferwise-payouts-guide-going-live-checklist'>Going live checklist</h2><h3 id='transferwise-payouts-guide-going-live-checklist-1-make-your-integration-bulletproof'>1. Make your integration bulletproof</h3>
 <ul>
 <li>Implement basic retry mechanism to handle potential failures or network interruptions </li>
