@@ -8288,6 +8288,105 @@ If your borderless balance is short of funds then this call will fail with &quot
 <p><strong><code>PUT https://api.sandbox.transferwise.tech/v1/transfers/{transferId}/cancel</code></strong></p>
 
 <p>Use transfer id that you obtained when creating a transfer. </p>
+<h3 id='transfers-cancel-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Transfer id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>user</td>
+<td>Your user id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>targetAccount</td>
+<td>Recipient account id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>sourceAccount</td>
+<td>Not used</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>quote</td>
+<td>Quote id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Transfer current status</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>Deprecated, use details.reference instead</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>Exchange rate value</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>created</td>
+<td>Timestamp when transfer was created</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>business</td>
+<td>Your business profile id</td>
+<td></td>
+</tr>
+<tr>
+<td>transferRequest</td>
+<td>Not used</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>details.reference</td>
+<td>Payment reference text</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>hasActiveIssues</td>
+<td>Are there any pending issues which stop executing the transfer?</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>sourceCurrency</td>
+<td>Source currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>sourceValue</td>
+<td>Transfer amount in source currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>targetCurrency</td>
+<td>Target currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>targetValue</td>
+<td>Transfer amount in target currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>customerTransactionId</td>
+<td>UUID format unique identifier assinged by customer. Used for idempotency check purposes.</td>
+<td>UUID</td>
+</tr>
+</tbody></table>
 <h2 id='transfers-get-by-id'>Get by Id</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -8324,6 +8423,105 @@ If your borderless balance is short of funds then this call will fail with &quot
 <p>Get transfer info by id. Since we don&#39;t have push notifications yet, you can poll this endpoint to track your transfer status.</p>
 <h3 id='transfers-get-by-id-request'>Request</h3>
 <p><strong><code>GET https://api.sandbox.transferwise.tech/v1/transfers/{transferId}</code></strong></p>
+<h3 id='transfers-get-by-id-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Transfer id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>user</td>
+<td>Your user id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>targetAccount</td>
+<td>Recipient account id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>sourceAccount</td>
+<td>Not used</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>quote</td>
+<td>Quote id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Transfer current status</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>Deprecated, use details.reference instead</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>Exchange rate value</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>created</td>
+<td>Timestamp when transfer was created</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>business</td>
+<td>Your business profile id</td>
+<td></td>
+</tr>
+<tr>
+<td>transferRequest</td>
+<td>Not used</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>details.reference</td>
+<td>Payment reference text</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>hasActiveIssues</td>
+<td>Are there any pending issues which stop executing the transfer?</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>sourceCurrency</td>
+<td>Source currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>sourceValue</td>
+<td>Transfer amount in source currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>targetCurrency</td>
+<td>Target currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>targetValue</td>
+<td>Transfer amount in target currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>customerTransactionId</td>
+<td>UUID format unique identifier assinged by customer. Used for idempotency check purposes.</td>
+<td>UUID</td>
+</tr>
+</tbody></table>
 <h2 id='transfers-get-issues'>Get Issues</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -8527,6 +8725,105 @@ This is not a guaranteed time but we are working hard to make these estimates as
 <td>offset</td>
 <td>Starting record number</td>
 <td>Integer</td>
+</tr>
+</tbody></table>
+<h3 id='transfers-list-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Transfer id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>user</td>
+<td>Your user id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>targetAccount</td>
+<td>Recipient account id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>sourceAccount</td>
+<td>Not used</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>quote</td>
+<td>Quote id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Transfer current status</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>Deprecated, use details.reference instead</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>Exchange rate value</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>created</td>
+<td>Timestamp when transfer was created</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>business</td>
+<td>Your business profile id</td>
+<td></td>
+</tr>
+<tr>
+<td>transferRequest</td>
+<td>Not used</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>details.reference</td>
+<td>Payment reference text</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>hasActiveIssues</td>
+<td>Are there any pending issues which stop executing the transfer?</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>sourceCurrency</td>
+<td>Source currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>sourceValue</td>
+<td>Transfer amount in source currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>targetCurrency</td>
+<td>Target currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>targetValue</td>
+<td>Transfer amount in target currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>customerTransactionId</td>
+<td>UUID format unique identifier assinged by customer. Used for idempotency check purposes.</td>
+<td>UUID</td>
 </tr>
 </tbody></table>
 <h2 id='transfers-requirements'>Requirements</h2>
