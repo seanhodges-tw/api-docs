@@ -299,6 +299,17 @@
                 </ul>
             </li>
             <li>
+              <a href="#third-party-payouts-guide" class="toc-h1 toc-link" data-title="Third-Party Payouts Guide">Third-Party Payouts Guide</a>
+                <ul class="toc-list-h2">
+                    <li>
+                      <a href="#third-party-payouts-guide-differences" class="toc-h2 toc-link" data-title="Differences">Differences</a>
+                    </li>
+                    <li>
+                      <a href="#third-party-payouts-guide-limitations" class="toc-h2 toc-link" data-title="Limitations">Limitations</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
               <a href="#bank-integrations-guide" class="toc-h1 toc-link" data-title="Bank Integrations Guide">Bank Integrations Guide</a>
                 <ul class="toc-list-h2">
                     <li>
@@ -2666,6 +2677,40 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <li>Make a small deposit into your borderless account. </li>
 <li>Make few small value test payments via LIVE API before you start executing larger transfers.</li>
 <li>All set. Switch it on.</li>
+</ul>
+<h1 id='third-party-payouts-guide'>Third-Party Payouts Guide</h1>
+<p>This guide is an extension to <a href="#payouts-guide">Payouts Guide</a> and it only outlines small differences between creating regular transfers and creating third party transfers.
+Please read through regular Payouts Guide first.  </p>
+<h2 id='third-party-payouts-guide-differences'>Differences</h2>
+<p>There are four steps to complete payouts: </p>
+
+<ul>
+  <li>Step 1: Create a quote</li>
+  <li>Step 2: Create a recipient account</li>
+  <li>Step 3: Create a transfer</li>
+  <li>Step 4: Fund a transfer</li>
+</ul>
+
+<p>The  difference compared to regular payouts is limited to using a different endpoint in <strong>Step 3: Create a transfer</strong>.</p>
+
+<p>Instead of using  <strong><code>POST https://api.sandbox.transferwise.tech/v1/transfers</code></strong> endpoint to create transfers you need to use</p>
+
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/profiles/{profileId}/third-party-payments</code></strong> endpoint.</p>
+
+<p>This endpoint is very similar to regular <strong>Create transfers</strong> endpoint, but please note these differences:
+<ul>
+  <li>Payment originator datablock is additionally required.</li>
+  <li>originalTransferId field is being used instead of customerTransactionId</li>
+</ul></p>
+
+<p>Full details how to use this endpoint can be found under API Reference section <a href="#transfers-create-third-party-transfers">Create Third-Party Transfers</a>.</p>
+
+<p>All other functionality is available exactly same way as described under Payouts Guide above.</p>
+<h2 id='third-party-payouts-guide-limitations'>Limitations</h2>
+<ul>
+<li><p><strong>API only.</strong> You can only create third party transfers via API.  Creating third party transfers via batch file upload or via transferwise.com user interface is not possible yet.</p></li>
+<li><p><strong>Email recipients are not supported.</strong> We don&#39;t support setting up third party transfers to email recipients. You can send payments to bank accounts only.</p></li>
+<li><p><strong>Few target currencies are not supported.</strong> Please contact bizdev@transferwise.com for details. </p></li>
 </ul>
 <h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h2 id='bank-integrations-guide-api-access'>API access</h2>
 <p>TransferWise uses standard OAuth 2.0 protocol for authentication and authorization. </p>
@@ -9135,7 +9180,7 @@ For example this is a valid request to create a transfer.
               "name" : {
                 "fullName": "Hot Air Balloon Services Ltd"
               },
-                  "businessRegistrationCode": "1999212",
+              "businessRegistrationCode": "1999212",
               "address" : {
                 "firstLine": "Aiandi tee 1431",
                 "city": "Tallinn",
@@ -9195,9 +9240,9 @@ For example this is a valid request to create a transfer.
 <h3 id='transfers-create-third-party-transfers-request'>Request</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/v1/profiles/{profileId}/third-party-transfers</code></strong></p>
 
-<p>This is very similar to <strong>Create transfers</strong> endpoint, but please not these differences:
+<p>This is very similar to <strong>Create transfers</strong> endpoint, but please note these differences:
 <ul>
-  <li>Originator datablock is additionally required</li>
+  <li>originator datablock is additionally required</li>
   <li>originalTransferId field is being used instead of customerTransactionId</li>
 </ul></p>
 
