@@ -8744,7 +8744,7 @@ This is not a guaranteed time but we are working hard to make these estimates as
   <li> all completed payments created since yesterday</li>
 </ul></p>
 <h3 id='transfers-list-request'>Request</h3>
-<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/transfers/?offset=0&amp;limit=100&amp;profile=&lt;your profile id&gt;&amp;status=funds_refunded&amp;createdDateStart=2018-12-15&amp;createdDateEnd=2018-12-30</code></strong></p>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/transfers/?offset=0&amp;limit=100&amp;profile=&lt;your profile id&gt;&amp;status=funds_refunded&amp;sourceCurrency=EUR&amp;createdDateStart=2018-12-15T01:30:00.000Z&amp;createdDateEnd=2018-12-30T01:30:00.000Z</code></strong></p>
 
 <table><thead>
 <tr>
@@ -8764,14 +8764,24 @@ This is not a guaranteed time but we are working hard to make these estimates as
 <td>Text</td>
 </tr>
 <tr>
+<td>sourceCurrency</td>
+<td>Source currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>targetCurrency</td>
+<td>Target currency code</td>
+<td>Text</td>
+</tr>
+<tr>
 <td>createdDateStart</td>
 <td>Starting date to filter transfers, inclusive of the provided date.</td>
-<td>yyyy-MM-dd</td>
+<td>yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS&#39;Z&#39;</td>
 </tr>
 <tr>
 <td>createdDateEnd</td>
 <td>Ending date to filter transfers, inclusive of the provided date.</td>
-<td>yyyy-MM-dd</td>
+<td>yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSS&#39;Z&#39;</td>
 </tr>
 <tr>
 <td>limit</td>
@@ -9151,7 +9161,7 @@ For example this is a valid request to create a transfer.
                 "middleNames": ["Ryan"],
                 "familyName": "Godspeed"
               },
-                  "dateOfBirth": "1977-07-01",
+              "dateOfBirth": "1977-07-01",
               "address" : {
                 "firstLine": "Salu tee 100, Apt 4B",
                 "city": "Tallinn",
