@@ -478,6 +478,9 @@
                       <a href="#recipient-accounts-requirements" class="toc-h2 toc-link" data-title="Requirements">Requirements</a>
                     </li>
                     <li>
+                      <a href="#recipient-accounts-using-account-requirements" class="toc-h2 toc-link" data-title="Using account requirements">Using account requirements</a>
+                    </li>
+                    <li>
                       <a href="#recipient-accounts-validate-recipient-fields" class="toc-h2 toc-link" data-title="Validate Recipient Fields">Validate Recipient Fields</a>
                     </li>
                     <li>
@@ -2732,7 +2735,7 @@ We also need <em>redirect_url</em> from your technical team so that we can limit
 <p>For example, you can put sign up/log in step as a first step, then show the currency calculator, and then collect recipient details.
 Alternatively, you can build it so a user starts from the calculator, then you collect recipient details, and as a last step ask user to sign up/log in.</p>
 
-<p>We have plenty of examples to show you how this has been done by our current parterns and can help you to build a great expereince for your customers.</p>
+<p>We have plenty of examples to show you how this has been done by our current parterns and can help you to build a great experience for your customers.</p>
 <h2 id='bank-integrations-guide-building-your-backend'>Building your backend</h2>
 <p>You should expose an API internally for your web and mobile clients to call to provide the required TransferWise features. Your backend system will manage both communication to the TransferWise API and internal operations such as checking a user has sufficient balance to make the requested transfer and triggering the funds to be sent to TransferWise when they confirm a transfer.</p>
 
@@ -5073,7 +5076,8 @@ Temporary quote is not associated with any user, it is anonymous. </p>
      -d <span class="s1">'{ 
           "currency": "GBP", 
           "type": "sort_code", 
-          "profile": &lt;your profile id&gt;, 
+          "profile": &lt;your profile id&gt;,
+          "ownedByCustomer": true, 
           "accountHolderName": "Ann Johnson",
            "details": { 
               "legalType": "PRIVATE",
@@ -5151,7 +5155,8 @@ Temporary quote is not associated with any user, it is anonymous. </p>
         </span><span class="s2">"BIC"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">ID&gt;</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ownedByCustomer"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Recipient is a person or institution  who is the ultimate beneficiary of your payment. </p>
@@ -5163,7 +5168,10 @@ Temporary quote is not associated with any user, it is anonymous. </p>
 <li>Recipient full name</li>
 <li>Legal type (private/business)</li>
 <li>Currency</li>
+<li>Owned by customer</li>
 </ul></p>
+
+<p>Owned by customer is a boolen to flag whether this recipient is the same entity (person or business) as the one sending the funds. i.e. A user sending money to thier own account in another country/currency. This can be used to separate these recipients in your UI.</p>
 
 <p><strong>2) Bank account data</strong></p>
 
@@ -5205,47 +5213,62 @@ As you can see many of the fields are <code>null</code>, in order to know which 
 <th>Field</th>
 <th>Description</th>
 <th>Format</th>
+<th>Optional</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>currency</td>
 <td>3 character currency code</td>
 <td>Text</td>
+<td>false</td>
 </tr>
 <tr>
 <td>type</td>
 <td>Recipient type</td>
 <td>Text</td>
+<td>false</td>
 </tr>
 <tr>
 <td>profile</td>
 <td>Personal or business profile id</td>
 <td>Integer</td>
+<td>false</td>
 </tr>
 <tr>
 <td>accountHolderName</td>
 <td>Recipient full name</td>
 <td>Text</td>
+<td>false</td>
+</tr>
+<tr>
+<td>ownedByCustomer</td>
+<td>Whether this account is owned by the sending user</td>
+<td>Text</td>
+<td>true</td>
 </tr>
 <tr>
 <td>details</td>
 <td>Currency specific fields</td>
 <td>Object</td>
+<td>false</td>
 </tr>
 <tr>
 <td>details.legalType</td>
 <td>Recipient legal type: PRIVATE or BUSINESS</td>
 <td>Text</td>
+<td>false</td>
 </tr>
 <tr>
 <td>details.sortCode</td>
 <td>Recipient bank sort code (GBP example)</td>
 <td>Text</td>
+<td>false</td>
 </tr>
 <tr>
 <td>details.accountNumber</td>
 <td>Recipient bank account no (GBP example)</td>
 <td>Text</td>
+<td>false</td>
 </tr>
 </tbody></table>
 <h3 id='recipient-accounts-create-response'>Response</h3>
@@ -5286,6 +5309,11 @@ As you can see many of the fields are <code>null</code>, in order to know which 
 <tr>
 <td>type</td>
 <td>Recipient type</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>ownedByCustomer</td>
+<td>Whether this account is owned by the sending user</td>
 <td>Text</td>
 </tr>
 <tr>
@@ -5394,7 +5422,8 @@ As you can see many of the fields are <code>null</code>, in order to know which 
         </span><span class="s2">"BIC"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">id&gt;</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ownedByCustomer"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
@@ -5482,7 +5511,8 @@ Once your recipient provides bank account details securely to TransferWise we ar
         </span><span class="s2">"BIC"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">ID&gt;</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ownedByCustomer"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Get recipient account info by id.</p>
@@ -5563,7 +5593,8 @@ Once your recipient provides bank account details securely to TransferWise we ar
           </span><span class="s2">"BIC"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">ID&gt;</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ownedByCustomer"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">31273090</span><span class="p">,</span><span class="w">
@@ -5629,10 +5660,10 @@ Once your recipient provides bank account details securely to TransferWise we ar
           </span><span class="s2">"BIC"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">ID&gt;</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ownedByCustomer"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-
 </span></code></pre>
 <p>Fetch a list of your recipient accounts. Use the <code>currency</code> and <code>profile</code> parameters to filter by currency and/or user profile Id.
 This list does not currently support pagination, therefore if you have many recipient accounts defined in your business profile then please filter by currency to ensure a reasonable response time.</p>
@@ -5686,6 +5717,7 @@ This list does not currently support pagination, therefore if you have many reci
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aba"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Local bank account"</span><span class="p">,</span><span class="w">
      </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Legal type"</span><span class="p">,</span><span class="w">
@@ -5886,15 +5918,15 @@ This list does not currently support pagination, therefore if you have many reci
 <p><strong><code>GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements</code></strong><br/>
 <strong><code>POST https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements</code></strong><br/></p>
 
-<p>GET and POST account-requirements endpoints help you to figure out which fields are required to create a valid recipient for different currencies.
-You can use this to build a dynamic user interface on top of these endpoints. 
+<p>The <code>GET</code> and <code>POST</code> account-requirements endpoints help you to figure out which fields are required to create a valid recipient for different currencies.
+You can use this data to build a dynamic user interface on top of these endpoints. 
 This is a step-by-step guide on how these endpoints work.</p>
-
+<h2 id='recipient-accounts-using-account-requirements'>Using account requirements</h2>
 <p>1.First create a quote to specify currencies and transfer amounts. See <a href="#quotes-create">Create.Quote</a>.</p>
 
-<p>2.Call GET /v1/quotes/{quoteId}/account-requirements to get list of fields you need to fill with values in &quot;details&quot; section for creating a valid recipient account. </p>
+<p>2.Call <code>GET /v1/quotes/{quoteId}/account-requirements</code> to get the list of fields you need to fill with values in the &quot;details&quot; section for creating a valid recipient account. </p>
 
-<p>In order to create &quot;aba&quot; recipient type you need these top level fields:<br/>
+<p>In order to create an &quot;aba&quot; recipient type you need these top level fields:<br/>
 <ul>
  <li>legalType (PRIVATE / BUSINESS)</li>
  <li>abartn (ABA routing number)</li>
@@ -5905,10 +5937,12 @@ This is a step-by-step guide on how these endpoints work.</p>
  <li>address.firstLine</li>
 </ul></p>
 
-<p>Some fields require multiple levels of fields in the details request, for example Country followed by State. This should be handled by the client base don the <code>refreshRequirementsOnChange</code> field. In the example above &#39;address.country&#39; has this field set to true, indicating that there are additional fields required depending on the selected value. To manage this you should create a request with all of the initially requested data and call the <code>POST account-requirements</code> endpoint. You will be returned a response similar the previosuly returned data from <code>GET account-requirements</code> but with additional fields.</p>
+<p>Some fields require multiple levels of fields in the details request, for example Country followed by State. This should be handled by the client based on the <code>refreshRequirementsOnChange</code> field. In the example above &#39;address.country&#39; has this field set to true, indicating that there are additional fields required depending on the selected value. To manage this you should create a request with all of the initially requested data and call the <code>POST account-requirements</code> endpoint. You will be returned a response similar the previosuly returned data from <code>GET account-requirements</code> but with additional fields.</p>
 
-<p>3.For example, construct a recipient object with top level fields and call POST /v1/quotes/{quoteId}/account-requirements with these value to expose sub fields.  <br/>
+<p>3.For example, construct a recipient object with all top level fields and call POST /v1/quotes/{quoteId}/account-requirements with these value to expose sub fields.  <br/>
 For example posting US as country will also add &quot;state&quot; to list of fields.<br/></p>
+
+<div class="center-column"></div>
 <pre class="highlight plaintext"><code>{
     "type": "aba",
     "details": {
@@ -5923,6 +5957,8 @@ For example posting US as country will also add &quot;state&quot; to list of fie
 }
 </code></pre>
 <p>However, posting GB as country will not add any new fields as GB addresses do not have this extra requirement.</p>
+
+<div class="center-column"></div>
 <pre class="highlight plaintext"><code>{
     "type": "aba",
     "details": {
@@ -5931,39 +5967,69 @@ For example posting US as country will also add &quot;state&quot; to list of fie
       "accountNumber": "12345678",
       "accountType": "CHECKING",
       "address": {
-        "country": "US"
+        "country": "GB"
       }
     }
 }
 </code></pre>
-<p>It is possible that any new fields retuened may <em>also</em> have <code>refreshRequirementsOnChange</code> field set to true. Thereofe you must keep iterating on the partially created details object until <code>POST account-requirements</code> returns you no new fields that it previously didn&#39;t include in the response, you can do this by checking the size of the array returned.</p>
+<p>It is possible that any new fields retuened may <em>also</em> have <code>refreshRequirementsOnChange</code> field set to true. Therefore you must keep iterating on the partially created details object until <code>POST account-requirements</code> returns you no new fields that it previously didn&#39;t include in the response, you can do this by checking the size of the array returned.</p>
 
 <p>4.Once you have built your full reciepient details object you can use it to create a reciepient.</p>
 
 <p>For example this is a valid request to create a recipient with address in US Arizona:
-<br/> <code>POST /v1/accounts</code>:<br/>
-<code>
-{
-    &quot;profile&quot;: your-profile-id,
-    &quot;accountHolderName&quot;: &quot;John Smith&quot;,
-    &quot;currency&quot;: &quot;USD&quot;,
-    &quot;type&quot;: &quot;aba&quot;,
-    &quot;details&quot;: {
-        &quot;legalType&quot;: &quot;PRIVATE&quot;,
-        &quot;abartn&quot;: &quot;111000025&quot;,
-        &quot;accountNumber&quot;: &quot;12345678&quot;,
-        &quot;accountType&quot;: &quot;CHECKING&quot;,
-        &quot;address&quot;: {
-            &quot;country&quot;: &quot;US&quot;,
-            &quot;state&quot;: &quot;AZ&quot;
-        &quot;city&quot;: &quot;New York&quot;,
-            &quot;postCode&quot;: &quot;10025&quot;,
-            &quot;firstLine&quot;: &quot;45 Sunflower Ave&quot;
+<br/> <code>POST /v1/accounts</code>:<br/></p>
+
+<div class="center-column"></div>
+<pre class="highlight plaintext"><code>{
+    "profile": your-profile-id,
+    "accountHolderName": "John Smith",
+    "currency": "USD",
+    "type": "aba",
+    "details": {
+        "legalType": "PRIVATE",
+        "abartn": "111000025",
+        "accountNumber": "12345678",
+        "accountType": "CHECKING",
+        "address": {
+            "country": "US",
+            "state": "AZ"
+        "city": "New York",
+            "postCode": "10025",
+            "firstLine": "45 Sunflower Ave"
         }
     }
 }
-</code></p>
-<h3 id='recipient-accounts-requirements-response'>Response</h3>
+</code></pre>
+<p>We do not require the recipient&#39;s address for most receiving currencies and as such do not return these form elements by default. In some cases it may be desirable for you to collect this from users and store it as part of the recipient object in the TransferWise platform. If you wish to do this you can include the parameter <code>&amp;addressRequired=true</code> in your call to <code>GET /v1/quotes/{quoteId}/account-requirements</code>, if this is present we will return address fields as part of the form.</p>
+<h3 id='recipient-accounts-using-account-requirements-building-a-user-interface'>Building a user interface</h3>
+<p>When requesting the form data from the account-requirements several the first level of the response defines different types of recipient you can create, the first thing to do is present the user a choice of which recipient type they wish to create, e.g. to GBP this could be local details or IBAN format. Each recipient type then has mutiple <code>fields</code> describing the form elements required to be shown to collect information from the user. Each field will have a <code>type</code> value, these tell you the field type that your front end needs to render to be able to collect the data. A number of field types are permitted, these are:</p>
+
+<table><thead>
+<tr>
+<th>type</th>
+<th>UI element</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>text</td>
+<td>A free text box</td>
+</tr>
+<tr>
+<td>select</td>
+<td>A selection box/dialog</td>
+</tr>
+<tr>
+<td>radio</td>
+<td>A radio button choice between options</td>
+</tr>
+<tr>
+<td>date</td>
+<td>A text box with a date picker</td>
+</tr>
+</tbody></table>
+
+<p>Example data is also included in each field which should be shown to the user, along with a regex or min and mex length constraints that should be applied as field level validations. You can optionally implement the dynamic validation using the <code>validationAsync</code> field, however these checks wil also be done when a completed recipient is submitted to <code>POST /v1/accounts</code>.</p>
+<h3 id='recipient-accounts-using-account-requirements-response'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
