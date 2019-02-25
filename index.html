@@ -2774,10 +2774,15 @@ You need to go through this flow only once for each customer before they can set
 <h2 id='bank-integrations-guide-get-user-authorization-for-existing-accounts'>Get user authorization for existing accounts</h2>
 <p>At a high level there are three steps to gaining access to an existing TransferWise account.
 <ol>
-  <li>Your app redirects the user to TransferWise authorization webpage, which prompts them to login if necessary.</p>
+  <li>Your app redirects the user to TransferWise authorization webpage, which prompts them to login if necessary.<br/></p>
 
-<p><code>
-  https://api.sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
+<p>Sandbox:<br>
+  <code>
+  https://sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
+</code> <br/>
+Live:<br>
+  <code>
+  https://api.transferwise.com/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
 </code>
   </li>
   <li>The user logs in to TransferWise</li>
