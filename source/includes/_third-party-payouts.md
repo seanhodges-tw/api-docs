@@ -1,6 +1,6 @@
-# Third-Party Payouts Guide
+# Payouts for PSPs
 
-This guide is an extension to [Payouts Guide](#payouts-guide) and it only outlines small differences between creating regular transfers and creating third party transfers.
+This guide is an extension to [Payouts Guide](#payouts-guide) and it only outlines small differences between creating regular transfers and creating payouts for Payment Service Providers on behalf of their customers.
 Please read through regular Payouts Guide first.  
 
 
