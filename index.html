@@ -768,19 +768,17 @@
                     <li>
                       <a href="#webhooks-deactivate" class="toc-h2 toc-link" data-title="Deactivate">Deactivate</a>
                     </li>
-                </ul>
-            </li>
-            <li>
-              <a href="#events" class="toc-h1 toc-link" data-title="Events">Events</a>
-                <ul class="toc-list-h2">
                     <li>
-                      <a href="#events-test-event" class="toc-h2 toc-link" data-title="Test event">Test event</a>
+                      <a href="#webhooks-events" class="toc-h2 toc-link" data-title="Events">Events</a>
                     </li>
                     <li>
-                      <a href="#events-transfer-status-change-event" class="toc-h2 toc-link" data-title="Transfer status change event">Transfer status change event</a>
+                      <a href="#webhooks-test-event" class="toc-h2 toc-link" data-title="Test event">Test event</a>
                     </li>
                     <li>
-                      <a href="#events-balance-deposit-event" class="toc-h2 toc-link" data-title="Balance deposit event">Balance deposit event</a>
+                      <a href="#webhooks-transfer-status-change-event" class="toc-h2 toc-link" data-title="Transfer status change event">Transfer status change event</a>
+                    </li>
+                    <li>
+                      <a href="#webhooks-balance-deposit-event" class="toc-h2 toc-link" data-title="Balance deposit event">Balance deposit event</a>
                     </li>
                 </ul>
             </li>
@@ -11621,11 +11619,9 @@ Returns the list of all ultimate beneficial owners associated with the business 
 <span class="o">}</span>
 </code></pre>
 <p>Deactivate a subscription.</p>
-<h1 id='events'>Events</h1>
-<p>Events will not contain any personally identifiable information.</p>
-
-<p>In case first delivery attempt fails, we will try to resend it 3 times consequently.</p>
-<h2 id='events-test-event'>Test event</h2>
+<h2 id='webhooks-events'>Events</h2>
+<p>Events describe payload that will be sent to your server in a form of a <code>POST</code> request. They will not contain any personally identifiable information. To acknowledge succesfully processed event, make sure your server answers with a status code <code>200</code>. Otherwise, we will try to resend the notification 3 times consequently.</p>
+<h2 id='webhooks-test-event'>Test event</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -11646,7 +11642,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>You can trigger a test event to be delivered to your server to check the connection between systems.</p>
-<h3 id='events-test-event-request'>Request</h3>
+<h3 id='webhooks-test-event-request'>Request</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -11660,7 +11656,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 <td>String</td>
 </tr>
 </tbody></table>
-<h3 id='events-test-event-response'>Response</h3>
+<h3 id='webhooks-test-event-response'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -11684,7 +11680,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 <td>Integer</td>
 </tr>
 </tbody></table>
-<h2 id='events-transfer-status-change-event'>Transfer status change event</h2>
+<h2 id='webhooks-transfer-status-change-event'>Transfer status change event</h2>
 <blockquote>
 <p>Example event:</p>
 </blockquote>
@@ -11695,8 +11691,8 @@ Returns the list of all ultimate beneficial owners associated with the business 
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outgoing_payment_sent"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"eventTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481713589566</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='events-transfer-status-change-event-event'>Event</h3>
-<p>Event will be triggered every time transfer status is updated.</p>
+</span></code></pre><h3 id='webhooks-transfer-status-change-event-event'>Event</h3>
+<p>Event will be triggered every time transfer status is updated. Each event contains a timestamp. As we do not guarantee the order of events, please use that <code>eventTime</code> to reconcile the order. </p>
 
 <table><thead>
 <tr>
@@ -11731,7 +11727,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 <td>Timestamp</td>
 </tr>
 </tbody></table>
-<h2 id='events-balance-deposit-event'>Balance deposit event</h2>
+<h2 id='webhooks-balance-deposit-event'>Balance deposit event</h2>
 <blockquote>
 <p>Example event:</p>
 </blockquote>
@@ -11742,7 +11738,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
   </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance-deposit-received"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='events-balance-deposit-event-event'>Event</h3>
+</span></code></pre><h3 id='webhooks-balance-deposit-event-event'>Event</h3>
 <p>Event will be triggered every time balance is debited.</p>
 
 <table><thead>
