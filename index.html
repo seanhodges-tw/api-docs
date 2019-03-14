@@ -1997,7 +1997,7 @@ This is not a guaranteed time, but we’re working hard to make these estimates 
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
-<p>You can check your latest transfer status by polling this endpoint. We’re building webhook notification support us notifying about status changes, but unfortunately this isn’t available yet. Normal state flow of transfers: </p>
+<p>You can check your latest transfer status by polling this endpoint. You can use <a href="#Webhooks">webhooks</a> to get notified about transfer status updates. Normal state flow of transfers: </p>
 
 <p><strong>Incoming Payment Waiting ⇒ Processing ⇒ Funds Converted ⇒ Outgoing Payment Sent</strong></p>
 
@@ -8932,7 +8932,7 @@ This is not a guaranteed time but we are working hard to make these estimates as
 </tr>
 <tr>
 <td>status</td>
-<td>Status code or codes list (as comma separated value list) to filter returned transfers with. See <a href="#transferwise-payouts-guide-track-transfer-status">Track transfer status</a> for complete list of statuses.</td>
+<td>Status code or codes list (as comma separated value list) to filter returned transfers with. See <a href="#payouts-guide-track-transfer-status">Track transfer status</a> for complete list of statuses.</td>
 <td>Text</td>
 </tr>
 <tr>
@@ -11620,7 +11620,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 </code></pre>
 <p>Deactivate a subscription.</p>
 <h2 id='webhooks-events'>Events</h2>
-<p>Events describe payload that will be sent to your server in a form of a <code>POST</code> request. They will not contain any personally identifiable information. To acknowledge succesfully processed event, make sure your server answers with a status code <code>200</code>. Otherwise, we will try to resend the notification 3 times consequently.</p>
+<p>Events describe payload that will be sent to your server in a form of a <code>POST</code> request. They will not contain any personally identifiable information. To acknowledge succesfully processed event, make sure your server answers with a status code <code>200</code> within 5s. Otherwise, we will try to resend the notification 3 times consequently.</p>
 <h2 id='webhooks-test-event'>Test event</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -11718,7 +11718,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 </tr>
 <tr>
 <td>status</td>
-<td>New status of the resource, possible values are same as <a href="#transferwise-payouts-guide-track-transfer-status">transfer statuses</a></td>
+<td>New status of the resource, possible values are same as <a href="#payouts-guide-track-transfer-status">transfer statuses</a></td>
 <td>String</td>
 </tr>
 <tr>
@@ -11761,7 +11761,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 <tr>
 <td>amount</td>
 <td>Deposit amount</td>
-<td>Integer</td>
+<td>Decimal</td>
 </tr>
 <tr>
 <td>currency</td>
