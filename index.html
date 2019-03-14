@@ -1997,7 +1997,7 @@ This is not a guaranteed time, but we’re working hard to make these estimates 
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
-<p>You can check your latest transfer status by polling this endpoint. You can use <a href="#Webhooks">webhooks</a> to get notified about transfer status updates. Normal state flow of transfers: </p>
+<p>You can check your latest transfer status by polling this endpoint. You can use <a href="#webhooks">webhooks</a> to get notified about transfer status updates. Normal state flow of transfers: </p>
 
 <p><strong>Incoming Payment Waiting ⇒ Processing ⇒ Funds Converted ⇒ Outgoing Payment Sent</strong></p>
 
@@ -3152,9 +3152,9 @@ and send the funds to TransferWise’s local bank account via domestic payment. 
 <p>In order for us to link this incoming domestic payment with a corresponding transfer order, we need you to use specific text in the &quot;payment reference&quot; field.
 Calling endpoint <a href="#quotes-get-pay-in-methods">Get pay-in methods</a> with quoteId returns you the correct reference text. e.g. <code>quote-1456477 P5472304</code>. We currently drive this behaviour using the second part of this string, starting with <em>P</em>, you should use a regular expression to extract this string to send as the reference, e.g. <code>.*(P\d+)</code>, taking the second group.</p>
 <h2 id='bank-integrations-guide-track-transfer-status'>Track transfer status</h2>
-<p>Please look at <a href="#transferwise-payouts-guide-track-transfer-status">Track transfer status</a> under TransferWise Payouts Guide.</p>
+<p>Please look at <a href="#payouts-guide-track-transfer-status">Track transfer status</a> under TransferWise Payouts Guide.</p>
 <h2 id='bank-integrations-guide-get-updated-transfer-delivery-time-estimate'>Get updated transfer delivery time estimate</h2>
-<p>Please look at <a href="#transferwise-payouts-guide-get-transfer-delivery-time">Get transfer delivery time</a> under TransferWise Payouts Guide.</p>
+<p>Please look at <a href="#payouts-guide-get-transfer-delivery-time">Get transfer delivery time</a> under TransferWise Payouts Guide.</p>
 <h2 id='bank-integrations-guide-updating-personal-profile'>Updating personal profile</h2>
 <p>When user data changes the personal profile information must be updated.</p>
 
