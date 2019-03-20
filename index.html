@@ -2842,19 +2842,10 @@ You need to go through this flow only once for each customer before they can set
 <h2 id='bank-integrations-guide-get-user-authorization-for-existing-accounts'>Get user authorization for existing accounts</h2>
 <p>At a high level there are three steps to gaining access to an existing TransferWise account.
 <ol>
-  <li>Your app redirects the user to TransferWise authorization webpage, which prompts them to login if necessary.<br/></p>
-
-<p>Sandbox:<br>
-  <code>
-  https://sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
-</code> <br/>
-Live:<br>
-  <code>
-  https://api.transferwise.com/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
-</code>
+  <li>Your app redirects the user to TransferWise authorization webpage, which prompts them to login if necessary.<br/>
   </li>
-  <li>The user logs in to TransferWise</li>
-  <li> The user agrees to provide access, the TransferWise authorization page then redirects user back to your preconfigured url, including a code you can use to geneate user tokens.</p>
+  <li>The user logs in to TransferWise.</li>
+  <li> The user agrees to provide access, the TransferWise authorization page then redirects user back to your preconfigured url, including a code you can use to geneate user tokens. e.g.</p>
 
 <p><code>
   https://www.yourbank.com/?code=[CODE]
@@ -2864,14 +2855,21 @@ Live:<br>
 
 <p>These steps are explained in more detail below.</p>
 <h3 id='bank-integrations-guide-get-user-authorization-for-existing-accounts-1-your-banking-app-redirects-user-to-transferwise-authorization-webpage'>1. Your banking app redirects user to TransferWise authorization webpage</h3>
-<p>Your webiste or app opens the folowing url in the user&#39;s browser.</p>
+<p>Your website or app opens the folowing url in the user&#39;s browser.</p>
 
-<p><code>https://sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=&lt;your-api-client-id&gt;&amp;redirect_uri=&lt;redirect-uri&gt;</code></p>
+<p>Sandbox:<br>
+<code>
+https://sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
+</code> <br/>
+Live:<br>
+<code>
+https://api.transferwise.com/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
+</code></p>
 
 <p>Replace <em>your-api-client-id</em> and <em>redirect-uri</em> with your specific values. 
 The redirect URL should be the address you want the user to return to after the authorization flow, which will have been preconfigured when you requested your API access tokens. This can be different across the sandbox and production environments and we can update it for you upon request.</p>
 
-<p>You should not use <code>WebView</code> components to show the authorization page to the users because they are not secure and will not allow users to log in to TransferWise with Google, which is an option used by some of our users. Your app should instead open the device&#39;s full browser app.</p>
+<p>On mobiles apps you should not use <code>WebView</code> components to show the authorization page to the users because they are not secure and will not allow users to log in to TransferWise with Google, which is an option used by some of our users. Your app should instead open the device&#39;s full browser app.</p>
 
 <p><em>Please note that the URL for the authorization page in sandbox is different than URL for API calls.<br>
 In the live environment the api.transferwise.com URL works for the authorization page as well as API calls.</em></p>
@@ -2882,7 +2880,7 @@ In the live environment the api.transferwise.com URL works for the authorization
 
 <p><code>https://www.yourbank.com/?code=[CODE]</code></p>
 
-<p>Your website or service can then use this code to obtain the access token to act on behalf of the user account.</p>
+<p>Your website or service can then use this code to obtain the access token to act on behalf of the user account described in the <a href="#bank-integrations-guide-get-user-tokens">get user tokens</a> section.</p>
 
 <p>If you are building your TransferWise integration as a native mobile phone app then the redirect URL should be able to handle returning the user to the correct place in the app.</p>
 
@@ -2896,7 +2894,7 @@ In the live environment the api.transferwise.com URL works for the authorization
 
 <p><em>Note that these new users have to accept TransferWise Terms and Conditions as part of their sign up process nevertheless. See endpoint <a href="#terms-and-conditions-get-terms-and-conditions">Terms and conditions</a>.</em></p>
 <h2 id='bank-integrations-guide-get-user-tokens'>Get user tokens</h2>
-<p>If you are using the first option (<a href="#bank-integrations-guide-get-user-authorization-for-existing-accounts">get user authorization for existing accounts </a>) then the next step is to generate tokens so you can call API endpoints on behalf of the user who authorized your banking app. You do this using the access code that was returned to you as a query string parameter in the <em>redirect_uri</em> you provided us.</p>
+<p>When using the first option to (<a href="#bank-integrations-guide-get-user-authorization-for-existing-accounts">get user authorization for existing accounts </a>) then this step is to generate user-level tokens so you can call API endpoints on behalf of the user who authorized your banking app. You do this using the access code that was returned to you as a query string parameter in the <em>redirect_uri</em> you provided us.</p>
 
 <blockquote>
 <p>Example Request:</p>
