@@ -395,6 +395,26 @@
                 </ul>
             </li>
             <li>
+              <a href="#connected-apps-guide" class="toc-h1 toc-link" data-title="Connected Apps Guide">Connected Apps Guide</a>
+                <ul class="toc-list-h2">
+                    <li>
+                      <a href="#connected-apps-guide-api-access" class="toc-h2 toc-link" data-title="API access">API access</a>
+                    </li>
+                    <li>
+                      <a href="#connected-apps-guide-get-user-authorization" class="toc-h2 toc-link" data-title="Get user authorization">Get user authorization</a>
+                    </li>
+                    <li>
+                      <a href="#connected-apps-guide-get-user-tokens" class="toc-h2 toc-link" data-title="Get user tokens">Get user tokens</a>
+                    </li>
+                    <li>
+                      <a href="#connected-apps-guide-refresh-user-access-token" class="toc-h2 toc-link" data-title="Refresh user access token">Refresh user access token</a>
+                    </li>
+                    <li>
+                      <a href="#connected-apps-guide-token-expiry" class="toc-h2 toc-link" data-title="Token Expiry">Token Expiry</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
               <a href="#contact-us" class="toc-h1 toc-link" data-title="Contact Us">Contact Us</a>
             </li>
             <div class="api-reference-separator">
@@ -911,6 +931,10 @@ Please contact bizdev@transferwise.com for more info how to get started.</p>
 <p>The <a href="#affiliates-integration-guide">Affiliates Integration Guide</a> helps you get started with the technical integration.</p>
 <h2 id='transferwise-api-connected-applications'>Connected Applications</h2>
 <p>With Connected Applications, you can let your customers connect their TransferWise accounts to your product. Say you’re an accounting software – doing this could let your customers automate reconciliation. If you’re a payroll company, you could push customer payments right into TransferWise. Or you could push TransferWise notifications through your app. Whatever you want to build, you likely could! </p>
+
+<p>We will to take a deeper look into your application use case and the added value it will bring to our joint customers. So before starting the technical integration please contact bizdev@transferwise.com for more info how to get started.</p>
+
+<p>Our <a href="#connected-apps-guide">Connected Apps Guide</a> gives you an overview of required technical integration work.</p>
 
 <p>Unfortunately this functionality isn’t available to everyone yet, but we’re working hard to open it to everyone. To discuss your use case please contact <a href="mailto:bizdev@transferwise.com">bizdev@transferwise.com</a>.</p>
 <h2 id='transferwise-api-receive-money'>Receive Money</h2>
@@ -2855,7 +2879,7 @@ You need to go through this flow only once for each customer before they can set
 
 <p>These steps are explained in more detail below.</p>
 <h3 id='bank-integrations-guide-get-user-authorization-for-existing-accounts-1-your-banking-app-redirects-user-to-transferwise-authorization-webpage'>1. Your banking app redirects user to TransferWise authorization webpage</h3>
-<p>Your website or app opens the folowing url in the user&#39;s browser.</p>
+<p>Your website or app opens the following url in the user&#39;s browser.</p>
 
 <p>Sandbox:<br>
 <code>
@@ -3344,6 +3368,255 @@ This can vary quite a lot for different currency routes. For example transfers o
 This endpoint allows you to find out the estimated delivery time for each currency route.</p>
 
 <p>See more at <a href="#quotes-get-temporary-quote">Get Temporary Quote</a></p>
+<h1 id='connected-apps-guide'>Connected Apps Guide</h1>
+<p>This guide described how your application can request TransferWise customers to grant access to their account to your application. </p>
+
+<p>Note that asking TransferWise users to copy-paste their Transferwise API access tokens directly into your application is a violating of our security policy.  So please only use proper OAuth authorization flow as described below.</p>
+<h2 id='connected-apps-guide-api-access'>API access</h2>
+<p>TransferWise uses standard OAuth 2.0 protocol for authentication and authorization. </p>
+
+<p>Once our partnership begins, we’ll send you API access credentials for the sandbox environment consisting of a Client ID and a Client Secret.
+The credentials are needed to complete the authorisation_code grant type of OAuth 2.0 through which the customer will allow your application to be able to act on their behalf.
+We also need <em>redirect_url</em> from your technical team so that we can limit our callbacks to only that URL, this is URL that we will forward users to after successfully granting your application access to their TransferWise account. Specifying this explicitly makes the integration more secure.
+<a href="https://auth0.com/blog/oauth2-the-complete-guide/">OAuth 2.0: The Complete Guide</a> is a great way to refresh your knowledge about the protocol itself.</p>
+<h3 id='connected-apps-guide-api-access-sandbox-and-live-environments'>SANDBOX and LIVE environments</h3>
+<ul>
+<li>Sandbox API is located at https://api.sandbox.transferwise.tech</li>
+<li>LIVE API is located at https://api.transferwise.com</li>
+</ul>
+<h2 id='connected-apps-guide-get-user-authorization'>Get user authorization</h2>
+<p>At a high level there are three steps to gaining access to an existing TransferWise account.
+<ol>
+  <li>Your app redirects the user to TransferWise authorization webpage, which prompts customers to login.<br/>
+  </li>
+  <li>The user logs in to TransferWise.</li>
+  <li> The user agrees to provide access, the TransferWise authorization page then redirects user back to your preconfigured url, including a code you can use to geneate user tokens. e.g.
+  <code>
+  https://www.yourapp.com/?code=[CODE]
+</code>
+  </li>
+</ol></p>
+
+<p>These steps are explained in more detail below.</p>
+<h3 id='connected-apps-guide-get-user-authorization-1-your-application-redirects-user-to-transferwise-authorization-webpage'>1. Your application redirects user to TransferWise authorization webpage</h3>
+<p>Your website or app opens the following url in the user&#39;s browser.</p>
+
+<p>Sandbox:<br>
+<code>
+https://sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourapp.com
+</code> <br/>
+Live:<br>
+<code>
+https://api.transferwise.com/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourapp.com
+</code></p>
+
+<p>Replace <em>your-api-client-id</em> and <em>redirect-uri</em> with your specific values. 
+The redirect URL should be the address you want the user to return to after the authorization flow, which will have been preconfigured when you requested your API access tokens. This can be different across the sandbox and production environments and we can update it for you upon request.</p>
+
+<p>On mobiles apps you should not use <code>WebView</code> components to show the authorization page to the users because they are not secure and will not allow users to log in to TransferWise with Google, which is an option used by some of our users. Your app should instead open the device&#39;s full browser app.</p>
+
+<p><em>Please note that the URL for the authorization page in sandbox is different than URL for API calls.<br>
+In the live environment the api.transferwise.com URL works for the authorization page as well as API calls.</em></p>
+<h3 id='connected-apps-guide-get-user-authorization-2-the-user-logs-in-to-transferwise'>2. The user logs in to TransferWise</h3>
+<p>Our usual log in screens are presented to the user if they are not already logged in on the browser being used. If enabled for a user they will also be prompted to go through our two-factor authentication procedure.</p>
+<h3 id='connected-apps-guide-get-user-authorization-3-the-user-agrees-to-grant-access-and-we-forward-them-to-your-redirect_url'>3. The user agrees to grant access and we forward them to your <em>redirect_url</em></h3>
+<p>Once a user gives your application authorization to connect to TransferWise and access their data, the user is redirected back to your <em>redirect_url</em> with a generated code query string value. For example</p>
+
+<p><code>https://www.yourapp.com/?code=[CODE]</code></p>
+
+<p>Your website or service can then use this code to obtain the access token to act on behalf of the user account described in the <a href="#conncted-apps-guide-get-user-tokens">get user tokens</a> section.</p>
+
+<p>If you are building your TransferWise integration as a native mobile phone app then the redirect URL should be able to handle returning the user to the correct place in the app.</p>
+<h2 id='connected-apps-guide-get-user-tokens'>Get user tokens</h2>
+<p>You can now use authorization code returned to you as a query string parameter to obtain user access and refresh tokens. So that you can make calls on behalf of TransferWise user.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+-u <span class="s1">'[your-api-client-id]:[your-api-client-secret]'</span> <span class="se">\</span>
+-d <span class="s1">'grant_type=authorization_code'</span> <span class="se">\</span>
+-d <span class="s1">'client_id=[your-api-client-id]'</span> <span class="se">\</span>
+-d <span class="s1">'code=[code-from-redirect-uri]'</span> <span class="se">\</span>
+-d <span class="s1">'redirect_uri=https://www.yourapp.com'</span> <span class="se">\</span>
+<span class="s1">'https://api.sandbox.transferwise.tech/oauth/token'</span> 
+</code></pre>
+<p>You will be returned an access token and a refresh token.</p>
+
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="s2">"ba8k9935-62f2-475a-60d8-6g45377b4062"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"token_type"</span><span class="p">:</span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="s2">"a235uu9c-9azu-4o28-a1kn-e15500o151cx"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">43199</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="s2">"transfers"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>For calling API endpoints you need to provide the user&#39;s <code>access_token</code> in the request&#39;s HTTP header in the format <code>Authorization: Bearer &lt;access_token&gt;</code>.
+Access tokens are short lived for security reasons, they are only valid for 12 hours by default. When they expire you need to use the <code>refresh_token</code> to generate a new access_token.</p>
+
+<p>This means you have to securely store the user&#39;s <code>refresh_token</code> in order to generate a new <code>access_token</code> each time they use your TransferWise integration, or you poll for updated data,</p>
+<h3 id='connected-apps-guide-get-user-tokens-request'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/oauth/token</code></strong></p>
+
+<p>Use Basic Authentication with your api-client-id/api-client-secret as username/pwd.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>grant_type</td>
+<td>&quot;authorization_code&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>your api_client_id</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>code</td>
+<td>Code  provided to you upon redirect back from authorization flow. See step <a href="#connected-apps-guide-get-user-authorization">Get user authorization</a>.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>Redirect page associated with your api client credentials</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='connected-apps-guide-get-user-tokens-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours.</td>
+<td>uuid</td>
+</tr>
+<tr>
+<td>token_type</td>
+<td>&quot;bearer&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>Refresh token which you need to use in order to request new access_token. The lifetime of refresh tokens is 10 years.</td>
+<td>uuid</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>Expiry time in seconds</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>&quot;transfers&quot;</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h2 id='connected-apps-guide-refresh-user-access-token'>Refresh user access token</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>      curl <span class="se">\</span>
+      <span class="s1">'https://api.sandbox.transferwise.tech/oauth/token'</span> <span class="se">\</span>
+      -u <span class="s1">'[your-api-client-id]:[your-api-client-secret]'</span> <span class="se">\</span>
+      -d <span class="s1">'grant_type=refresh_token'</span> <span class="se">\</span>
+      -d <span class="s1">'refresh_token=[user'</span>s refresh token]<span class="s1">'
+</span></code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="s2">"be69d566-971e-4e15-9648-85a486195863"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"token_type"</span><span class="p">:</span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="s2">"1d0ec7b9-b569-426d-a18d-8dead5b6a3cc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="mi">43199</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="s2">"transfers"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Access tokens are valid for 12 hours, so upon expiry you need to use refresh_token to generate new access_token. </p>
+
+<p>In order to maintain an uninterrupted connection, you can request a new access token whenever it’s close to expiring.
+There is no need to wait for the actual expiration to happen first. </p>
+<h3 id='connected-apps-guide-refresh-user-access-token-request'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/oauth/token</code></strong></p>
+
+<p>Use Basic Authentication with your api-client-id/api-client-secret as username/pwd.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>grant_type</td>
+<td>&quot;refresh_token&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>User&#39;s refresh_token obtained in <a href="#connected-apps-guide-get-user-tokens">Get user tokens</a> step.</td>
+<td>uuid</td>
+</tr>
+</tbody></table>
+<h3 id='connected-apps-guide-refresh-user-access-token-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours.</td>
+<td>uuid</td>
+</tr>
+<tr>
+<td>token_type</td>
+<td>&quot;bearer&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>Refresh token which you need to use in order to request new access_token once the existing one expires</td>
+<td>uuid</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>Expiry time in seconds</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>&quot;transfers&quot;</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h2 id='connected-apps-guide-token-expiry'>Token Expiry</h2>
+<p>It is possible that a user&#39;s refresh token will become invalid. This could happen for a number of reasons, for example:</p>
+
+<ul>
+<li>The user revokes access for your application to their account.</li>
+<li>The user enables enhanced security on their TransferWise account.</li>
+<li>TransferWise revoke tokens due to a security breach of your client secret.</li>
+</ul>
+
+<p>Due to this possibility your application should handle a failing refresh token scenario by sending the user through the authorization code flow as you initially did.</p>
 <h1 id='contact-us'>Contact Us</h1>
 <p><strong>Having issues while calling our API endpoints?</strong></br>
 Check our API status at <a href="https://status.transferwise.com/">https://status.transferwise.com/</a>
