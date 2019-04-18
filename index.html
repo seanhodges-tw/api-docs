@@ -2895,7 +2895,8 @@ The redirect URL should be the address you want the user to return to after the 
 <p>On mobiles apps you should not use <code>WebView</code> components to show the authorization page to the users because they are not secure and will not allow users to log in to TransferWise with Google, which is an option used by some of our users. Your app should instead open the device&#39;s full browser app.</p>
 
 <p><em>Please note that the URL for the authorization page in sandbox is different than URL for API calls.<br>
-In the live environment the api.transferwise.com URL works for the authorization page as well as API calls.</em></p>
+In the live environment the api.transferwise.com URL works for the authorization page as well as API calls.
+Please also note that provided <code>[CODE]</code> expires within 30 minutes and is one time use only.</em></p>
 <h3 id='bank-integrations-guide-get-user-authorization-for-existing-accounts-2-the-user-logs-in-to-transferwise'>2. The user logs in to TransferWise</h3>
 <p>Our usual log in screens are presented to the user if they are not already logged in on the browser being used. If enabled for a user they will also be prompted to go through our two-factor authentication procedure.</p>
 <h3 id='bank-integrations-guide-get-user-authorization-for-existing-accounts-3-the-user-agrees-to-grant-access-and-we-forward-them-to-your-redirect_url'>3. The user agrees to grant access and we forward them to your <em>redirect_url</em></h3>
@@ -3426,6 +3427,8 @@ In the live environment the api.transferwise.com URL works for the authorization
 <p>Your website or service can then use this code to obtain the access token to act on behalf of the user account described in the <a href="#conncted-apps-guide-get-user-tokens">get user tokens</a> section.</p>
 
 <p>If you are building your TransferWise integration as a native mobile phone app then the redirect URL should be able to handle returning the user to the correct place in the app.</p>
+
+<p><em>Please note that provided <code>[CODE]</code> expires within 30 minutes and is one time use only.</em></p>
 <h2 id='connected-apps-guide-get-user-tokens'>Get user tokens</h2>
 <p>You can now use authorization code returned to you as a query string parameter to obtain user access and refresh tokens. So that you can make calls on behalf of TransferWise user.</p>
 
