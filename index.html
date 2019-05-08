@@ -11978,6 +11978,27 @@ Returns the list of all ultimate beneficial owners associated with the business 
 <p>Deactivate a subscription.</p>
 <h2 id='webhooks-events'>Events</h2>
 <p>Events describe payload that will be sent to your server in a form of a <code>POST</code> request. They will not contain any personally identifiable information. To acknowledge succesfully processed event, make sure your server answers with a status code <code>200</code> within 5s. Otherwise, we will try to resend the notification 3 times consequently.</p>
+<h3 id='webhooks-events-signature-header'>Signature header</h3>
+<p>Each outgoing webhook request is signed. Whilst event payloads do not contain any sensitive information, you may want to verify if the request is coming from TransferWise (however this is optional). We advise you not to process any requests where signature appears to be forged.</p>
+
+<p>Each <code>POST</code> request includes <code>X-Signature</code> header, which contains a signature. To verify it, we offer an exemplary code snippet (in Java):
+```java
+public boolean verifySignature(String publicKey, String signature, String payload) {
+  X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(Base64.decode(pubicKey));
+  KeyFactory keyFactory = KeyFactory.getInstance(&quot;RSA&quot;);
+  PublicKey publicKey = keyFactory.generatePublic(publicKeySpec);</p>
+
+<p>Signature sign = Signature.getInstance(&quot;SHA1WithRSA&quot;);
+  sign.initVerify(publicKey);</p>
+
+<p>byte[] data = payload.getBytes();
+  sign.update(data);</p>
+
+<p>byte[] signatureBytes = Base64.decode(signature);</p>
+
+<p>return sign.verify(signatureBytes);
+}
+```</p>
 <h2 id='webhooks-test-event'>Test event</h2>
 <blockquote>
 <p>Example Request:</p>
