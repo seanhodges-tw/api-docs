@@ -11979,25 +11979,40 @@ Returns the list of all ultimate beneficial owners associated with the business 
 <h2 id='webhooks-events'>Events</h2>
 <p>Events describe payload that will be sent to your server in a form of a <code>POST</code> request. They will not contain any personally identifiable information. To acknowledge succesfully processed event, make sure your server answers with a status code <code>200</code> within 5s. Otherwise, we will try to resend the notification 3 times consequently.</p>
 <h3 id='webhooks-events-signature-header'>Signature header</h3>
+<blockquote>
+<p>TransferWise public key for production environment:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvO8vXV+JksBzZAY6GhSO
+XdoTCfhXaaiZ+qAbtaDBiu2AGkGVpmEygFmWP4Li9m5+Ni85BhVvZOodM9epgW3F
+bA5Q1SexvAF1PPjX4JpMstak/QhAgl1qMSqEevL8cmUeTgcMuVWCJmlge9h7B1CS
+D4rtlimGZozG39rUBDg6Qt2K+P4wBfLblL0k4C4YUdLnpGYEDIth+i8XsRpFlogx
+CAFyH9+knYsDbR43UJ9shtc42Ybd40Afihj8KnYKXzchyQ42aC8aZ/h5hyZ28yVy
+Oj3Vos0VdBIs/gAyJ/4yyQFCXYte64I7ssrlbGRaco4nKF3HmaNhxwyKyJafz19e
+HwIDAQAB
+</code></pre>
+<blockquote>
+<p>How to verify signature (in Java):</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verifySignature</span><span class="o">(</span><span class="n">String</span> <span class="n">publicKey</span><span class="o">,</span> <span class="n">String</span> <span class="n">signature</span><span class="o">,</span> <span class="n">String</span> <span class="n">payload</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">X509EncodedKeySpec</span> <span class="n">publicKeySpec</span> <span class="o">=</span> <span class="k">new</span> <span class="n">X509EncodedKeySpec</span><span class="o">(</span><span class="n">Base64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">pubicKey</span><span class="o">));</span>
+  <span class="n">KeyFactory</span> <span class="n">keyFactory</span> <span class="o">=</span> <span class="n">KeyFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"RSA"</span><span class="o">);</span>
+  <span class="n">PublicKey</span> <span class="n">publicKey</span> <span class="o">=</span> <span class="n">keyFactory</span><span class="o">.</span><span class="na">generatePublic</span><span class="o">(</span><span class="n">publicKeySpec</span><span class="o">);</span>
+
+  <span class="n">Signature</span> <span class="n">sign</span> <span class="o">=</span> <span class="n">Signature</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"SHA1WithRSA"</span><span class="o">);</span>
+  <span class="n">sign</span><span class="o">.</span><span class="na">initVerify</span><span class="o">(</span><span class="n">publicKey</span><span class="o">);</span>
+
+  <span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="na">getBytes</span><span class="o">();</span>
+  <span class="n">sign</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+
+  <span class="kt">byte</span><span class="o">[]</span> <span class="n">signatureBytes</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">signature</span><span class="o">);</span>
+
+  <span class="k">return</span> <span class="n">sign</span><span class="o">.</span><span class="na">verify</span><span class="o">(</span><span class="n">signatureBytes</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
 <p>Each outgoing webhook request is signed. Whilst event payloads do not contain any sensitive information, you may want to verify if the request is coming from TransferWise (however this is optional). We advise you not to process any requests where signature appears to be forged.</p>
 
-<p>Each <code>POST</code> request includes <code>X-Signature</code> header, which contains a signature. To verify it, we offer an example (in Java):</p>
-<pre class="highlight plaintext"><code>public boolean verifySignature(String publicKey, String signature, String payload) {
-  X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(Base64.decode(pubicKey));
-  KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-  PublicKey publicKey = keyFactory.generatePublic(publicKeySpec);
-
-  Signature sign = Signature.getInstance("SHA1WithRSA");
-  sign.initVerify(publicKey);
-
-  byte[] data = payload.getBytes();
-  sign.update(data);
-
-  byte[] signatureBytes = Base64.decode(signature);
-
-  return sign.verify(signatureBytes);
-}
-</code></pre><h2 id='webhooks-test-event'>Test event</h2>
+<p>Each <code>POST</code> request includes <code>X-Signature</code> header, which contains a signature.</p>
+<h2 id='webhooks-test-event'>Test event</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
