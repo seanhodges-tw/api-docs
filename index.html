@@ -654,6 +654,9 @@
                       <a href="#recipient-accounts-create-usd-recipient" class="toc-h2 toc-link" data-title="Create USD Recipient">Create USD Recipient</a>
                     </li>
                     <li>
+                      <a href="#recipient-accounts-create-global-usd-recipient-swift" class="toc-h2 toc-link" data-title="Create Global USD Recipient (SWIFT)">Create Global USD Recipient (SWIFT)</a>
+                    </li>
+                    <li>
                       <a href="#recipient-accounts-create-vnd-recipient" class="toc-h2 toc-link" data-title="Create VND Recipient">Create VND Recipient</a>
                     </li>
                     <li>
@@ -8413,6 +8416,44 @@ Business to personal, personal to business & business to business: 3,000,000 LKR
 <li>abartn        = ACH Routing number</li>
 <li>accountNumber = Recipient bank account number</li>
 <li>accountType   = CHECKING or SAVINGS</li>
+<li>address       = Recipient address</li>
+</ul>
+<h2 id='recipient-accounts-create-global-usd-recipient-swift'>Create Global USD Recipient (SWIFT)</h2>
+<blockquote>
+<p>Example Request (USD):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "USD",
+          "type": "swift_code",
+          "details": {
+           "legalType": "PRIVATE",
+           "swiftCode" : "BUKBGB22",
+           "accountNumber": "12345678",
+           "address" : {
+              "country": "GB",
+              "city": "London",
+              "postCode": "10025",
+              "firstLine": "50 Branson Ave"
+             }
+           }
+        }'</span>
+</code></pre>
+<p>Send USD payments globally via SWIFT. </p>
+
+<p>Private and business recipients are supported. Max 1.6 Million USD per payment.</p>
+
+<p>Recipient type = <em>&#39;swift_code&#39;</em></p>
+
+<p>Required details: </p>
+
+<ul>
+<li>swiftCode     = SWIFT code (or BIC) used to identify banks and financial institutions globally</li>
+<li>accountNumber = Recipient bank account number</li>
 <li>address       = Recipient address</li>
 </ul>
 <h2 id='recipient-accounts-create-vnd-recipient'>Create VND Recipient</h2>
