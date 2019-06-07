@@ -955,7 +955,7 @@ Just follow these four steps. </p>
 
 <ul>
 <li><p>Sign up for your TransferWise account <a href="https://transferwise.com/gb/borderless">https://transferwise.com/gb/borderless</a>. </p></li>
-<li><p>Complete verification – you need to do this before you start your technical integration. Also ensure you’re compliant with our <a href="https://transferwise.com/terms-and-conditions">Terms and Conditions</a> and <a href="https://transferwise.com/acceptable-use-policy-eea">Acceptable Use Policy</a>. Also make sure two-step log in is set up. </p></li>
+<li><p>Complete verification – you need to do this before you start your technical integration. Also ensure you’re compliant with our <a href="https://transferwise.com/terms-and-conditions">Terms and Conditions</a> and <a href="https://transferwise.com/acceptable-use-policy-eea">Acceptable Use Policy</a>. Also make sure two-step log in is set up.</p></li>
 <li><p>Activate at least one currency in your borderless account, deposit small amount (via card or bank transfer) and setup your first payment. 
 This penny-testing is not mandatory of course, but we do recommended it so you will understand how TransferWise payment flow works.   </p></li>
 <li><p>Verify that our coverage includes your currency route(s). Check <a href="https://transferwise.com/help/article/1569835/basic-information/supported-currencies">Supported Currencies</a>.
@@ -1099,7 +1099,7 @@ service layer. This would enable you to move API tokens there, separate from the
 The token should always live server-side, exposing domain-logic via API-s.</p>
 
 <p>If you need to pass the token around via HTTP requests, use HTTP headers or POST body - do not store the token in URI
-or query parameters. Webservers usually log the URL and browsers pass it between websites via the Referer header.</p>
+or query parameters. Web servers usually log the URL and browsers pass it between websites via the Referrer header.</p>
 <h3 id='payouts-guide-api-access-limiting-token-access-by-ip'>Limiting token access by IP</h3>
 <p>You can enhance your integration security by only allowing certain IP addresses to use your API token.</p>
 
@@ -2061,7 +2061,7 @@ For example &quot;Completed&quot; on our website means &quot;outgoing_payment_se
 
 <p>We don&#39;t send out email notifications about payment status changes in sandbox.</p>
 
-<p>We don&#39;t process payments in sandbox, which means that created payments remain in their first state. You can use <a href="#simulation">Simulation</a> endpoints to change transfer statuses in sandbox.   </p>
+<p>We don&#39;t process payments in sandbox, which means that created payments remain in their first state. You can use <a href="#simulation">Simulation</a> endpoints to change transfer statuses in sandbox.</p>
 <h2 id='payouts-guide-check-account-balance'>Check account balance</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -2116,7 +2116,7 @@ For example &quot;Completed&quot; on our website means &quot;outgoing_payment_se
 <h3 id='payouts-guide-check-account-balance-request'>Request</h3>
 <p><strong><code>GET https://api.sandbox.transferwise.tech/v1/borderless-accounts?profileId={profileId}</code></strong></p>
 
-<p>Use profile id obtained earlier to make this call.   </p>
+<p>Use profile id obtained earlier to make this call.</p>
 <h3 id='payouts-guide-check-account-balance-response'>Response</h3>
 <table><thead>
 <tr>
@@ -2770,10 +2770,10 @@ The period between intervalStart and intervalEnd cannot exceed 3 months.</p>
 <li>Make few small value test payments via LIVE API before you start executing larger transfers.</li>
 <li>All set. Switch it on.</li>
 </ul>
-<h3 id='payouts-guide-going-live-checklist-5-signup-for-api-status-notifications'>5. Signup for API status notifications.</h3>
+<h3 id='payouts-guide-going-live-checklist-5-sign-up-for-api-status-notifications'>5. Sign up for API status notifications.</h3>
 <ul>
 <li>You can always track our API status <a href="https://status.transferwise.com/">here</a>.</li>
-<li>Also you can <a href="http://eepurl.com/geU_O2">signup</a> for API status notifications.</li>
+<li>Also you can <a href="http://eepurl.com/geU_O2">sign up</a> for API status notifications.</li>
 </ul>
 <h1 id='third-party-payouts-guide'>Third-Party Payouts Guide</h1>
 <p>This guide is an extension to <a href="#payouts-guide">Payouts Guide</a> and it only outlines small differences between creating regular transfers and creating third party transfers.
@@ -2805,9 +2805,9 @@ Please read through regular Payouts Guide first.  </p>
 <p>All other functionality is available exactly same way as described under Payouts Guide above.</p>
 <h2 id='third-party-payouts-guide-limitations'>Limitations</h2>
 <ul>
-<li><p><strong>API only.</strong> You can only create third party transfers via API.  Creating third party transfers via batch file upload or via transferwise.com user interface is not possible yet.</p></li>
-<li><p><strong>Email recipients are not supported.</strong> We don&#39;t support setting up third party transfers to email recipients. You can send payments to bank accounts only.</p></li>
-<li><p><strong>Some currency routes are not supported.</strong> Please contact bizdev@transferwise.com for details. </p></li>
+<li><strong>API only.</strong> You can only create third party transfers via API.  Creating third party transfers via batch file upload or via transferwise.com user interface is not possible yet.</li>
+<li><strong>Email recipients are not supported.</strong> We don&#39;t support setting up third party transfers to email recipients. You can send payments to bank accounts only.</li>
+<li><strong>Some currency routes are not supported.</strong> Please contact bizdev@transferwise.com for details.</li>
 </ul>
 <h1 id='bank-integrations-guide'>Bank Integrations Guide</h1><h2 id='bank-integrations-guide-api-access'>API access</h2>
 <p>TransferWise uses standard OAuth 2.0 protocol for authentication and authorization. </p>
@@ -2843,10 +2843,10 @@ Alternatively, you can build it so a user starts from the calculator, then you c
 You need to go through this flow only once for each customer before they can set up their first transfer.</p>
 
 <ul>
-<li><a href="#bank-integrations-guide-get-user-authorization-for-existing-accounts">Get user authorization for existing accounts </a> or  <a href="#bank-integrations-guide-sign-up-new-users-via-api">sign up a new user via API</a></li>
+<li><a href="#bank-integrations-guide-get-user-authorization-for-existing-accounts">Get user authorization for existing accounts</a> or  <a href="#bank-integrations-guide-sign-up-new-users-via-api">sign up a new user via API</a></li>
 <li><a href="#bank-integrations-guide-get-user-tokens">Get user tokens</a></li>
 <li><a href="#bank-integrations-guide-create-personal-user-profile">Create personal user profile</a></li>
-<li><a href="#bank-integrations-guide-create-business-user-profile">Create business user profile</a> - this is an optional step only to be used if your bank is providing business customers access to TransferWise. Currently business onboarding still involves some manual step, we are working to fuly automate this.</li>
+<li><a href="#bank-integrations-guide-create-business-user-profile">Create business user profile</a> - this is an optional step only to be used if your bank is providing business customers access to TransferWise.</li>
 </ul>
 <h3 id='bank-integrations-guide-your-transferwise-user-experience-transfer-flow'>Transfer flow</h3>
 <p>To create transfers on behalf of users you need these building blocks:</p>
@@ -2871,7 +2871,7 @@ You need to go through this flow only once for each customer before they can set
   <li>Your app redirects the user to TransferWise authorization webpage, which prompts them to login if necessary.<br/>
   </li>
   <li>The user logs in to TransferWise.</li>
-  <li> The user agrees to provide access, the TransferWise authorization page then redirects user back to your preconfigured url, including a code you can use to geneate user tokens. e.g.</p>
+  <li> The user agrees to provide access, the TransferWise authorization page then redirects user back to your pre-configured url, including a code you can use to generate user tokens. e.g.</p>
 
 <p><code>
   https://www.yourbank.com/?code=[CODE]
@@ -2893,7 +2893,7 @@ https://transferwise.com/oauth/authorize?response_type=code&amp;client_id=&lt;yo
 </code></p>
 
 <p>Replace <em>your-api-client-id</em> and <em>redirect-uri</em> with your specific values. 
-The redirect URL should be the address you want the user to return to after the authorization flow, which will have been preconfigured when you requested your API access tokens. This can be different across the sandbox and production environments and we can update it for you upon request.</p>
+The redirect URL should be the address you want the user to return to after the authorization flow, which will have been pre-configured when you requested your API access tokens. This can be different across the sandbox and production environments and we can update it for you upon request.</p>
 
 <p>On mobiles apps you should not use <code>WebView</code> components to show the authorization page to the users because they are not secure and will not allow users to log in to TransferWise with Google, which is an option used by some of our users. Your app should instead open the device&#39;s full browser app.</p>
 
@@ -2913,7 +2913,7 @@ Please also note that provided <code>[CODE]</code> expires within 30 minutes and
 
 <p>At the point you gain access to a user account you should double check it is the one you were expecting to be given access to - sometimes users can get confused and log in to a different account. Together we want to avoid TransferWise accounts being linked to bank accounts of a different person or business, therefore you should check the user&#39;s details once the link is created. Currently you should do this sanity check based on the date of birth of the user but are working on a more robust solution. If the DoB exists but doesn&#39;t match then you should not allow the link to be made and inform the user we do not think the accounts match and to get in touch with customer service.</p>
 <h2 id='bank-integrations-guide-sign-up-new-users-via-api'>Sign up new users via API</h2>
-<p>If the user doesn&#39;t already have a TransferWise account then you can create one for them. The <a href="#users-sign-up-with-registration-code">signup with registration code</a> feature lets you create new users directly via an API call, without the need to redirect new users to the TransferWise authorization page. This way new users can complete everything without ever leaving your banking app, making a very streamlined flow.</p>
+<p>If the user doesn&#39;t already have a TransferWise account then you can create one for them. The <a href="#users-sign-up-with-registration-code">sign up with registration code</a> feature lets you create new users directly via an API call, without the need to redirect new users to the TransferWise authorization page. This way new users can complete everything without ever leaving your banking app, making a very streamlined flow.</p>
 
 <p>We can provide this option to banks where we can create a trusted reliance model on your KYC processes. Please discuss this option with the team supporting your integration.</p>
 
@@ -3125,9 +3125,9 @@ There is no need to wait for the actual expiration to happen first. </p>
 </span></code></pre>
 <p>In this case you can assume the user has reclaimed the account and push them through the <a href="#bank-integrations-guide-get-user-authorization-for-existing-accounts">get user authorization for existing accounts</a> flow.</p>
 <h2 id='bank-integrations-guide-create-personal-user-profile'>Create personal user profile</h2>
-<p>When you first get access to a user&#39;s TransferWise user account you will cannot predict if they already have submitted their profile data or not.</p>
+<p>When you first get access to a user&#39;s TransferWise user account you cannot predict if they already have submitted their profile data or not.</p>
 
-<p><a href="#user-profiles-list">User Profiles.List</a> endpoint will give you data for both personal and business profiles, if it exists. This makes it easy to
+<p>The <a href="#user-profiles-list">User Profiles.List</a> endpoint will give you data for both personal and business profiles, if they exist. This makes it easy to
 figure out if a user has already set up this data with TransferWise or not. If the user already has a personal profile set up, then you can skip this creation step.</p>
 
 <p>If you are using the <a href="#bank-integrations-guide-sign-up-new-users-via-api">sign up new users via API</a> feature then you absolutely need to create personal profile for the user, however it is possible you will also need to do it when getting access to an existing user account.</p>
@@ -3207,7 +3207,7 @@ Calling endpoint <a href="#quotes-get-pay-in-methods">Get pay-in methods</a> wit
 <h2 id='bank-integrations-guide-edge-case-handling'>Edge case handling</h2>
 <p>This section discusses some edge cases that you should test and handle before going live with your integration.</p>
 <h3 id='bank-integrations-guide-edge-case-handling-email-address-considerations'>Email address considerations</h3>
-<p>Due to how getting access to user accounts works the TransferWise platform relies on user email addresses matching between the bank and ourselves. At the point the bank attempts to create a user we check and see if an account already exists for that email address, if so we retun a 409 response and the client application forwards the user to login to TransferWise to do the OAuth grant flow.</p>
+<p>Due to how getting access to user accounts works the TransferWise platform relies on user email addresses matching between the bank and ourselves. At the point the bank attempts to create a user we check and see if an account already exists for that email address, if so we return a 409 response and the client application forwards the user to login to TransferWise to do the OAuth grant flow.</p>
 
 <p>This works well when the email addresses match in the first place and aren&#39;t updated on either side after the link is established. Of course, this is not always going to be the case so we must consider what happens in either eventuality.</p>
 <h3 id='bank-integrations-guide-edge-case-handling-non-matching-email-addresses'>Non-matching email addresses</h3>
@@ -3221,9 +3221,9 @@ Calling endpoint <a href="#quotes-get-pay-in-methods">Get pay-in methods</a> wit
 <h3 id='bank-integrations-guide-edge-case-handling-email-changed-at-the-bank'>Email changed at the bank</h3>
 <p>In this case the tokens will remain valid for the TransferWise account, however, depending on how the user originally linked the account, different things can happen when/if that token expires.</p>
 
-<p>If the bank created the account originally they will be unable to generate tokens using the registration_code they have as the endpoint requires the email address which will now no longer match. To mitigate this it is recommended that the bank store the email that was originally used for signup alongside the registration code and use this rather than the most up to date email address they store for the user.</p>
+<p>If the bank created the account originally they will be unable to generate tokens using the registration_code they have as the endpoint requires the email address which will now no longer match. To mitigate this it is recommended that the bank store the email that was originally used for sign up alongside the registration code and use this rather than the most up to date email address they store for the user.</p>
 
-<p>If the token expires for a user not created by the bank and the user has a new email address at the bank then they can be pushed through the signup flow with this new email address and either have a new account created or link an existing against the new email, as described in <a href="#bank-integrations-guide-token-expiry">token expiry</a>.</p>
+<p>If the token expires for a user not created by the bank and the user has a new email address at the bank then they can be pushed through the sign up flow with this new email address and either have a new account created or link an existing against the new email, as described in <a href="#bank-integrations-guide-token-expiry">token expiry</a>.</p>
 
 <p>The result of many of these flows is that the user may end up with more than one TransferWise account, which is undesirable. Currently we monitor this behaviour for abuse but we are working on a more robust user creation scenario to prevent this occurring.</p>
 <h3 id='bank-integrations-guide-edge-case-handling-email-change-mitigation'>Email change mitigation</h3>
@@ -3253,10 +3253,10 @@ Calling endpoint <a href="#quotes-get-pay-in-methods">Get pay-in methods</a> wit
 <li>Test successful flow and bounce back flow (where funds cannot be delivered). </li>
 <li>All set. Switch it on.</li>
 </ul>
-<h3 id='bank-integrations-guide-going-live-checklist-4-signup-for-api-status-notifications'>4. Signup for API status notifications.</h3>
+<h3 id='bank-integrations-guide-going-live-checklist-4-sign-up-for-api-status-notifications'>4. Sign up for API status notifications.</h3>
 <ul>
 <li>You can always track our API status <a href="https://status.transferwise.com/">here</a>.</li>
-<li>Also you can <a href="http://eepurl.com/geU_O2">signup</a> for API status notifications.</li>
+<li>Also you can <a href="http://eepurl.com/geU_O2">sign up</a> for API status notifications.</li>
 </ul>
 <h1 id='affiliates-integration-guide'>Affiliates Integration Guide</h1><h2 id='affiliates-integration-guide-api-access'>API access</h2>
 <p>Once you become our affiliate we will send you TransferWise API access credentials: api_client_id &amp; api_client_secret. 
@@ -3625,7 +3625,7 @@ There is no need to wait for the actual expiration to happen first. </p>
 <h1 id='contact-us'>Contact Us</h1>
 <p><strong>Having issues while calling our API endpoints?</strong></br>
 Check our API status at <a href="https://status.transferwise.com/">https://status.transferwise.com/</a>
-If you would like to receive status change notifications, feel free to signup <a href="http://eepurl.com/geU_O2">here</a>.</p>
+If you would like to receive status change notifications, feel free to sign up <a href="http://eepurl.com/geU_O2">here</a>.</p>
 
 <p><strong>Have a technical question about API?</strong></br>
 Send email to api@transferwise.com</p>
@@ -10845,7 +10845,14 @@ You would need to create personal profile first always. Business profile cannot 
 <td>Business webpage</td>
 <td>Text</td>
 </tr>
+<tr>
+<td>details.businessCategory</td>
+<td>Type of buinsess. Allowed values: <ul><li>CHARITY_ALL_ACTIVITIES</li><li>ADVERTISING_AND_MARKETING</li><li>ARCHITECTURE</li><li>COMPANY_ESTABLISHMENT_FORMATION_SERVICES</li><li>DESIGN</li><li>FINANCIAL_CONSULTING_ACCOUNTING_TAXATION_AUDITING</li><li>IT_DEVELOPMENT</li><li>IT_HOSTING_SERVICES</li><li>IT_CONSULTING_AND_SERVICES</li><li>LEGAL_SERVICES</li><li>MANAGEMENT_CONSULTING</li><li>SCIENTIFIC_AND_TECHNICAL_CONSULTING</li><li>SOFTWARE_AS_A_SERVICE</li><li>TRANSLATION_AND_LANGUAGE_SERVICES</li><li>CONSULTING_OTHER</li><li>SERVICES_OTHER</li><li>FREELANCE_PLATFORMS</li><li>AUDIO_AND_VIDEO</li><li>PHOTOGRAPHY</li><li>PRINT_AND_ONLINE_MEDIA</li><li>TELECOMMUNICATIONS_SERVICES</li><li>ADULT_CONTENT</li><li>FINE_ARTS</li><li>ARTS_OTHER</li><li>EVENTS_AND_ENTERTAINMENT</li><li>GAMBLING_BETTING_AND_ONLINE_GAMING</li><li>NEWSPAPERS_MAGAZINES_AND_BOOKS</li><li>PERFORMING_ARTS</li><li>VIDEO_GAMING</li><li>SCHOOLS_AND_UNIVERSITIES</li><li>TEACHING_AND_TUTORING</li><li>ONLINE_LEARNING</li><li>CROWDFUNDING</li><li>CRYPTOCURRENCY_FINANCIAL_SERVICES</li><li>HOLDING_COMPANIES</li><li>INSURANCE</li><li>INVESTMENTS</li><li>MONEY_SERVICE_BUSINESSES</li><li>FINANCIAL_SERVICES_OTHER</li><li>ALCOHOL</li><li>FOOD_MANUFACTURING_RETAIL</li><li>RESTAURANTS_AND_CATERING</li><li>SOFT_DRINKS</li><li>TOBACCO</li><li>VITAMINS_AND_DIETARY_SUPPLEMENTS</li><li>HEALTH_AND_BEAUTY_PRODUCTS_AND_SERVICES</li><li>DENTAL_SERVICES</li><li>DOCTORS_AND_MEDICAL_SERVICES</li><li>ELDERLY_OR_OTHER_CARE_HOME</li><li>FITNESS_SPORTS_SERVICES</li><li>MEDICAL_EQUIPMENT</li><li>NURSING_AND_OTHER_CARE_SERVICES</li><li>PHARMACEUTICALS</li><li>PHARMACY</li><li>PUBLIC_ALL_SERVICES</li><li>CONSTRUCTION</li><li>REAL_ESTATE_DEVELOPMENT</li><li>REAL_ESTATE_SALE_PURCHASE_AND_MANAGEMENT</li><li>AGRICULTURE_SEEDS_PLANTS</li><li>AUTOMOTIVE_SALES_SPARE_PARTS_TRADE</li><li>AUTOMOTIVE_MANUFACTURING</li><li>CHEMICALS</li><li>CLOTHING</li><li>ELECTRICAL_PRODUCTS</li><li>FIREARMS_WEAPONS_AND_MILITARY_GOODS_SERVICES</li><li>HOME_ACCESSORIES_FURNITURE</li><li>FINE_JEWELLERY_WATCHES</li><li>FASHION_JEWELLERY</li><li>LEGAL_HIGHS_AND_RELATED_ACCESSORIES</li><li>MACHINERY</li><li>PETS</li><li>PRECIOUS_STONES_DIAMONDS_AND_METALS</li><li>SPORTING_EQUIPMENT</li><li>MANUFACTURING_OTHER</li><li>RETAIL_WHOLESALE_MARKETPLACE_AUCTION</li><li>RETAIL_WHOLESALE_OTHER</li><li>ACCOMMODATION_HOTELS</li><li>PASSENGER_TRANSPORT</li><li>FREIGHT_TRANSPORT</li><li>RIDESHARING_TRANSPORT_SHARING_SERVICES</li><li>TRANSPORT</li><li>TRAVEL_AGENCIES</li><li>TOUR_OPERATORS</li><li>TRAVEL_OR_TOUR_ACTIVITIES_OTHER</li><li>OTHER_NOT_LISTED_ABOVE</li></ul></td>
+<td>Text</td>
+</tr>
 </tbody></table>
+<h4 id='user-profiles-create-business-request-business-business-category'>Business Category</h4>
+<p>Ensure when submitting a business profile that you submit a category from the list above. You should map from the information you have about the business to on eof our categories. If this is problematic please get in touch with the TransferWise for Banks team to discuss alternate solutions.</p>
 <h3 id='user-profiles-create-business-response-business'>Response (Business)</h3>
 <table><thead>
 <tr>
