@@ -12000,23 +12000,23 @@ HwIDAQAB
 <blockquote>
 <p>How to verify signature (in Java):</p>
 </blockquote>
-<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verifySignature</span><span class="o">(</span><span class="n">String</span> <span class="n">publicKey</span><span class="o">,</span> <span class="n">String</span> <span class="n">signature</span><span class="o">,</span> <span class="n">String</span> <span class="n">payload</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">X509EncodedKeySpec</span> <span class="n">publicKeySpec</span> <span class="o">=</span> <span class="k">new</span> <span class="n">X509EncodedKeySpec</span><span class="o">(</span><span class="n">Base64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">publicKey</span><span class="o">));</span>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verifySignature</span><span class="o">(</span><span class="n">String</span> <span class="n">encodedPublicKey</span><span class="o">,</span> <span class="n">String</span> <span class="n">signature</span><span class="o">,</span> <span class="n">String</span> <span class="n">payload</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">X509EncodedKeySpec</span> <span class="n">publicKeySpec</span> <span class="o">=</span> <span class="k">new</span> <span class="n">X509EncodedKeySpec</span><span class="o">(</span><span class="n">Base64</span><span class="o">.</span><span class="na">getMimeDecoder</span><span class="o">().</span><span class="na">decode</span><span class="o">(</span><span class="n">encodedPublicKey</span><span class="o">));</span>
   <span class="n">KeyFactory</span> <span class="n">keyFactory</span> <span class="o">=</span> <span class="n">KeyFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"RSA"</span><span class="o">);</span>
   <span class="n">PublicKey</span> <span class="n">publicKey</span> <span class="o">=</span> <span class="n">keyFactory</span><span class="o">.</span><span class="na">generatePublic</span><span class="o">(</span><span class="n">publicKeySpec</span><span class="o">);</span>
 
   <span class="n">Signature</span> <span class="n">sign</span> <span class="o">=</span> <span class="n">Signature</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"SHA1WithRSA"</span><span class="o">);</span>
   <span class="n">sign</span><span class="o">.</span><span class="na">initVerify</span><span class="o">(</span><span class="n">publicKey</span><span class="o">);</span>
+  <span class="n">sign</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">payload</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
 
-  <span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="na">getBytes</span><span class="o">();</span>
-  <span class="n">sign</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-
-  <span class="kt">byte</span><span class="o">[]</span> <span class="n">signatureBytes</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">signature</span><span class="o">);</span>
+  <span class="kt">byte</span><span class="o">[]</span> <span class="n">signatureBytes</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">getDecoder</span><span class="o">().</span><span class="na">decode</span><span class="o">(</span><span class="n">signature</span><span class="o">);</span>
 
   <span class="k">return</span> <span class="n">sign</span><span class="o">.</span><span class="na">verify</span><span class="o">(</span><span class="n">signatureBytes</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre>
-<p>Each outgoing webhook request is signed. Whilst event payloads do not contain any sensitive information, you may want to verify if the request is coming from TransferWise (however this is optional). We advise you not to process any requests where signature appears to be forged.</p>
+<p>Each outgoing webhook request is signed. Whilst event payloads do not contain any sensitive information, you may want to
+verify if the request is coming from TransferWise (however this is optional).
+We advise you not to process any requests where signature appears to be forged.</p>
 
 <p>Each <code>POST</code> request includes <code>X-Signature</code> header, which contains a signature.</p>
 <h2 id='webhooks-test-event'>Test event</h2>
