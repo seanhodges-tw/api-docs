@@ -11984,7 +11984,13 @@ Returns the list of all ultimate beneficial owners associated with the business 
 </code></pre>
 <p>Deactivate a subscription.</p>
 <h2 id='webhooks-events'>Events</h2>
-<p>Events describe payload that will be sent to your server in a form of a <code>POST</code> request. They will not contain any personally identifiable information. To acknowledge succesfully processed event, make sure your server answers with a status code <code>200</code> within 5s. Otherwise, we will try to resend the notification 3 times consequently.</p>
+<p>Events are messages that will be sent to your server as HTTP <code>POST</code> requests.
+They will not contain any personally identifiable information.</p>
+
+<p>To acknowledge that you have successfully processed an event, make sure your server answers with the HTTP status code <code>200</code>
+within 5s. Otherwise, we will consider the delivery attempt as having failed and will later try to resend the message.</p>
+
+<p>We will attempt to redeliver messages at increasing intervals over a two week period. We will try at most 25 times to do this.</p>
 <h3 id='webhooks-events-signature-header'>Signature header</h3>
 <blockquote>
 <p>TransferWise public key for production environment:</p>
@@ -11998,7 +12004,7 @@ Oj3Vos0VdBIs/gAyJ/4yyQFCXYte64I7ssrlbGRaco4nKF3HmaNhxwyKyJafz19e
 HwIDAQAB
 </code></pre>
 <blockquote>
-<p>How to verify signature (in Java):</p>
+<p>How to verify signatures (in Java):</p>
 </blockquote>
 <pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verifySignature</span><span class="o">(</span><span class="n">String</span> <span class="n">encodedPublicKey</span><span class="o">,</span> <span class="n">String</span> <span class="n">signature</span><span class="o">,</span> <span class="n">String</span> <span class="n">payload</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">X509EncodedKeySpec</span> <span class="n">publicKeySpec</span> <span class="o">=</span> <span class="k">new</span> <span class="n">X509EncodedKeySpec</span><span class="o">(</span><span class="n">Base64</span><span class="o">.</span><span class="na">getMimeDecoder</span><span class="o">().</span><span class="na">decode</span><span class="o">(</span><span class="n">encodedPublicKey</span><span class="o">));</span>
