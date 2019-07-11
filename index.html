@@ -11056,11 +11056,15 @@ If user profile has been verified by TransferWise then there are restrictions on
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">  
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">  
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Add identification document details to user profile. Applicable to personal profiles (not business) only.<br>
 Returns empty result if successful. </p>
+
+<p>When sending a social security number (SSN) only <code>type</code> and <code>uniqueIdentifier</code> (only 9 digits no letters or symbols) are required.</p>
 <h3 id='user-profiles-create-identification-document-request-business'>Request (Business)</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/v1/profiles/{profileId}/verification-documents</code></strong></p>
 
@@ -11083,12 +11087,12 @@ Returns empty result if successful. </p>
 </tr>
 <tr>
 <td>type</td>
-<td>Document type. Allowed Values: <ul><li>DRIVERS_LICENCE</li><li>IDENTITY_CARD</li><li>GREEN_CARD</li><li>MY_NUMBER</li><li>PASSPORT</li><li>OTHER</ul></td>
+<td>Document type. Allowed Values: <ul><li>DRIVERS_LICENCE</li><li>IDENTITY_CARD</li><li>GREEN_CARD</li><li>MY_NUMBER</li><li>PASSPORT</li><li>SSN</li><li>OTHER</ul></td>
 <td>Text</td>
 </tr>
 <tr>
 <td>uniqueIdentifier</td>
-<td>Document number</td>
+<td>Document number. Only digits when SSN.</td>
 <td>Text</td>
 </tr>
 <tr>
