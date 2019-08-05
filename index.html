@@ -3464,7 +3464,7 @@ Access tokens are short lived for security reasons, they are only valid for 12 h
 
 <p>This means you have to securely store the user&#39;s <code>refresh_token</code> in order to generate a new <code>access_token</code> each time they use your TransferWise integration, or you poll for updated data,</p>
 <h3 id='connected-apps-guide-get-user-tokens-request'>Request</h3>
-<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/oauth/token</code></strong></p>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/oauth/token</code></strong></p>
 
 <p>Use Basic Authentication with your api-client-id/api-client-secret as username/pwd.</p>
 
@@ -3556,7 +3556,7 @@ Access tokens are short lived for security reasons, they are only valid for 12 h
 <p>In order to maintain an uninterrupted connection, you can request a new access token whenever it’s close to expiring.
 There is no need to wait for the actual expiration to happen first. </p>
 <h3 id='connected-apps-guide-refresh-user-access-token-request'>Request</h3>
-<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/oauth/token</code></strong></p>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/oauth/token</code></strong></p>
 
 <p>Use Basic Authentication with your api-client-id/api-client-secret as username/pwd.</p>
 
