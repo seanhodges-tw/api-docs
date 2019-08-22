@@ -6887,7 +6887,7 @@ BD, BR, CZ, CL, EG, GH, HK, ID, IL, IN, JP, KE, LK, MA, NG, NP, PE, PH, RU, SG, 
 <p>accountNumber - Recipient’s account CBU,  22 characters (Alias not supported)</p>
 <h2 id='recipient-accounts-create-aud-recipient'>Create AUD Recipient</h2>
 <blockquote>
-<p>Example Request (AUD):</p>
+<p>Example Request (AUD australian):</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
@@ -6904,17 +6904,54 @@ BD, BR, CZ, CL, EG, GH, HK, ID, IL, IN, JP, KE, LK, MA, NG, NP, PE, PH, RU, SG, 
           }
         }'</span>
 </code></pre>
+<blockquote>
+<p>Example Request (AUD australian_business):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient name&gt;",
+          "currency": "AUD",
+          "type": "australian_business",
+          "details": {
+           "legalType": "BUSINESS",
+           "bsbCode": "023604",
+           "businessNumber": "12 345 678 910"
+           "accountNumber": "123456789"
+          }
+        }'</span>
+</code></pre>
 <p>Send payments to Australia. </p>
 
-<p>Private and business recipients are supported. </p>
-
 <p>Recipient type = <em>&#39;australian&#39;</em></p>
+
+<p>Private recipients are supported. </p>
 
 <p>Required details: </p>
 
 <p>bsbCode - 6 digits</p>
 
-<p>accountNumber - 5..9 digits</p>
+<p>accountNumber - 5..14 digits</p>
+
+<p><br/></p>
+
+<p>OR</p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;australian_business&#39;</em></p>
+
+<p>Business recipients are supported.</p>
+
+<p>Required details:</p>
+
+<p>bsbCode - 6 digits</p>
+
+<p>businessNumber - 9..14 digits</p>
+
+<p>accountNumber - 5..14 digits</p>
 <h2 id='recipient-accounts-create-bdt-recipient'>Create BDT Recipient</h2>
 <blockquote>
 <p>Example Request (BDT):</p>
@@ -12310,7 +12347,7 @@ We advise you not to process any requests where signature appears to be forged.<
   </span><span class="s2">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance-deposit-received"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='webhooks-balance-deposit-event-event'>Event</h3>
-<p>Event will be triggered every time balance is debited.</p>
+<p>Event will be triggered every time balance is credited.</p>
 
 <table><thead>
 <tr>
