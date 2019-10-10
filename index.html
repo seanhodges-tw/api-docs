@@ -2885,21 +2885,38 @@ You need to go through this flow only once for each customer before they can set
 
 <p>Sandbox:<br>
 <code>
-https://sandbox.transferwise.tech/oauth/authorize/?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
+https://sandbox.transferwise.tech/oauth/authorize/?client_id={clientId}&amp;redirect_uri={redirectUri}
 </code> <br/>
 Live:<br>
 <code>
-https://transferwise.com/oauth/authorize/?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
+https://transferwise.com/oauth/authorize/?client_id={clientId}&amp;redirect_uri={redirectUri}
 </code></p>
 
-<p>Replace <em>your-api-client-id</em> and <em>redirect-uri</em> with your specific values. 
-The redirect URL should be the address you want the user to return to after the authorization flow, which will have been pre-configured when you requested your API access tokens. This can be different across the sandbox and production environments and we can update it for you upon request.</p>
+<p>List of available parameters:</p>
 
-<p>On mobiles apps you should not use <code>WebView</code> components to show the authorization page to the users because they are not secure and will not allow users to log in to TransferWise with Google, which is an option used by some of our users. Your app should instead open the device&#39;s full browser app.</p>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>client_id (required)</td>
+<td>The client ID you received from us.</td>
+</tr>
+<tr>
+<td>redirect_uri (required)</td>
+<td>The preconfigured URL in your application where users will be sent after authorization.</td>
+</tr>
+<tr>
+<td>state</td>
+<td>An opaque value, used for security purposes. If this parameter is set in the request, then it is returned to the application as part of the redirect_uri. <a href="https://auth0.com/docs/protocols/oauth2/oauth-state" target="_blank" rel="noopener noreferrer">More about state parameter</a>.</td>
+</tr>
+</tbody></table>
 
-<p><em>Please note that the URL for the authorization page in sandbox is different than URL for API calls.<br>
-In the live environment the api.transferwise.com URL works for the authorization page as well as API calls.
-Please also note that provided <code>[CODE]</code> expires within 30 minutes and is one time use only.</em></p>
+<p><em>On mobiles apps you should not use <code>WebView</code> components to show the authorization page to the users because they are not secure and will not allow users to log in to TransferWise with Google, which is an option used by some of our users. Your app should instead open the device&#39;s full browser app.</em></p>
+
+<p><em>Please also note that provided <code>[CODE]</code> expires within 30 minutes and is one time use only.</em></p>
 <h3 id='bank-integrations-guide-get-user-authorization-for-existing-accounts-2-the-user-logs-in-to-transferwise'>2. The user logs in to TransferWise</h3>
 <p>Our usual log in screens are presented to the user if they are not already logged in on the browser being used. If enabled for a user they will also be prompted to go through our two-factor authentication procedure.</p>
 <h3 id='bank-integrations-guide-get-user-authorization-for-existing-accounts-3-the-user-agrees-to-grant-access-and-we-forward-them-to-your-redirect_url'>3. The user agrees to grant access and we forward them to your <em>redirect_url</em></h3>
@@ -3406,20 +3423,36 @@ We also need <em>redirect_url</em> from your technical team so that we can limit
 
 <p>Sandbox:<br>
 <code>
-https://sandbox.transferwise.tech/oauth/authorize/?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourapp.com
+https://sandbox.transferwise.tech/oauth/authorize/?client_id={clientId}&amp;redirect_uri={redirectUri}
 </code> <br/>
 Live:<br>
 <code>
-https://transferwise.com/oauth/authorize/?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourapp.com
+https://transferwise.com/oauth/authorize/?client_id={clientId}&amp;redirect_uri={redirectUri}
 </code></p>
 
-<p>Replace <em>your-api-client-id</em> and <em>redirect-uri</em> with your specific values. 
-The redirect URL should be the address you want the user to return to after the authorization flow, which will have been preconfigured when you requested your API access tokens. This can be different across the sandbox and production environments and we can update it for you upon request.</p>
+<p>List of available parameters:</p>
 
-<p>On mobiles apps you should not use <code>WebView</code> components to show the authorization page to the users because they are not secure and will not allow users to log in to TransferWise with Google, which is an option used by some of our users. Your app should instead open the device&#39;s full browser app.</p>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>client_id (required)</td>
+<td>The client ID you received from us.</td>
+</tr>
+<tr>
+<td>redirect_uri (required)</td>
+<td>The preconfigured URL in your application where users will be sent after authorization.</td>
+</tr>
+<tr>
+<td>state</td>
+<td>An opaque value, used for security purposes. If this parameter is set in the request, then it is returned to the application as part of the redirect_uri. <a href="https://auth0.com/docs/protocols/oauth2/oauth-state" target="_blank" rel="noopener noreferrer">More about state parameter</a>.</td>
+</tr>
+</tbody></table>
 
-<p><em>Please note that the URL for the authorization page in sandbox is different than URL for API calls.<br>
-In the live environment the api.transferwise.com URL works for the authorization page as well as API calls.</em></p>
+<p><em>On mobiles apps you should not use <code>WebView</code> components to show the authorization page to the users because they are not secure and will not allow users to log in to TransferWise with Google, which is an option used by some of our users. Your app should instead open the device&#39;s full browser app.</em></p>
 <h3 id='connected-apps-guide-get-user-authorization-2-the-user-logs-in-to-transferwise'>2. The user logs in to TransferWise</h3>
 <p>Our usual log in screens are presented to the user if they are not already logged in on the browser being used. If enabled for a user they will also be prompted to go through our two-factor authentication procedure.</p>
 <h3 id='connected-apps-guide-get-user-authorization-3-the-user-agrees-to-grant-access-and-we-forward-them-to-your-redirect_url'>3. The user agrees to grant access and we forward them to your <em>redirect_url</em></h3>
