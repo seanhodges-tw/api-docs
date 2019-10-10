@@ -2815,7 +2815,7 @@ Please read through regular Payouts Guide first.  </p>
 <p>Once our partnership begins, we’ll send you API access credentials for the sandbox environment consisting of a Client ID and a Client Secret.
 The credentials are needed to complete the authorisation_code grant type of OAuth 2.0 through which the customer will allow your application to be able to act on their behalf.
 We also need <em>redirect_url</em> from your technical team so that we can limit our callbacks to only that URL, this is URL that we will forward users to after successfully granting your application access to their TransferWise account. Specifying this explicitly makes the integration more secure.
-<a href="https://auth0.com/blog/oauth2-the-complete-guide/">OAuth 2.0: The Complete Guide</a> is a great way to refresh your knowledge about the protocol itself.</p>
+<a href="https://auth0.com/docs/protocols/oauth2" target="_blank" rel="noopener noreferrer">This article about OAuth 2.0 framework</a> is a great way to refresh your knowledge about the protocol itself.</p>
 <h3 id='bank-integrations-guide-api-access-sandbox-and-live-environments'>SANDBOX and LIVE environments</h3>
 <ul>
 <li>Sandbox API is located at https://api.sandbox.transferwise.tech</li>
@@ -2885,11 +2885,11 @@ You need to go through this flow only once for each customer before they can set
 
 <p>Sandbox:<br>
 <code>
-https://sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
+https://sandbox.transferwise.tech/oauth/authorize/?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
 </code> <br/>
 Live:<br>
 <code>
-https://transferwise.com/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
+https://transferwise.com/oauth/authorize/?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourbank.com
 </code></p>
 
 <p>Replace <em>your-api-client-id</em> and <em>redirect-uri</em> with your specific values. 
@@ -3381,7 +3381,7 @@ This endpoint allows you to find out the estimated delivery time for each curren
 <p>Once our partnership begins, we’ll send you API access credentials for the sandbox environment consisting of a Client ID and a Client Secret.
 The credentials are needed to complete the authorisation_code grant type of OAuth 2.0 through which the customer will allow your application to be able to act on their behalf.
 We also need <em>redirect_url</em> from your technical team so that we can limit our callbacks to only that URL, this is URL that we will forward users to after successfully granting your application access to their TransferWise account. Specifying this explicitly makes the integration more secure.
-<a href="https://auth0.com/blog/oauth2-the-complete-guide/">OAuth 2.0: The Complete Guide</a> is a great way to refresh your knowledge about the protocol itself.</p>
+<a href="https://auth0.com/docs/protocols/oauth2" target="_blank" rel="noopener noreferrer">This article about OAuth 2.0 framework</a> is a great way to refresh your knowledge about the protocol itself.</p>
 <h3 id='connected-apps-guide-api-access-sandbox-and-live-environments'>SANDBOX and LIVE environments</h3>
 <ul>
 <li>Sandbox API is located at https://api.sandbox.transferwise.tech</li>
@@ -3406,11 +3406,11 @@ We also need <em>redirect_url</em> from your technical team so that we can limit
 
 <p>Sandbox:<br>
 <code>
-https://sandbox.transferwise.tech/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourapp.com
+https://sandbox.transferwise.tech/oauth/authorize/?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourapp.com
 </code> <br/>
 Live:<br>
 <code>
-https://transferwise.com/oauth/authorize?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourapp.com
+https://transferwise.com/oauth/authorize/?response_type=code&amp;client_id=&lt;your api client id&gt;&amp;redirect_uri=https://www.yourapp.com
 </code></p>
 
 <p>Replace <em>your-api-client-id</em> and <em>redirect-uri</em> with your specific values. 
