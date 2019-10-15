@@ -2200,7 +2200,7 @@ For example &quot;Completed&quot; on our website means &quot;outgoing_payment_se
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/borderless-accounts/<span class="o">{</span>borderlessAccountId<span class="o">}</span>/statement.json?
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v3/profiles/<span class="o">{</span>profileId<span class="o">}</span>/borderless-accounts/<span class="o">{</span>borderlessAccountId<span class="o">}</span>/statement.json?
 <span class="nv">currency</span><span class="o">=</span>EUR&amp;intervalStart<span class="o">=</span>2018-03-01T00:00:00.000Z&amp;intervalEnd<span class="o">=</span>2018-03-15T23:59:59.999Z <span class="se">\</span>
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
 </code></pre>
@@ -2348,7 +2348,7 @@ For example &quot;Completed&quot; on our website means &quot;outgoing_payment_se
 <p>Get borderless account statement for one currency and for specified time range. 
 The period between intervalStart and intervalEnd cannot exceed 469 days (around 1 year 3 month).</p>
 <h3 id='payouts-guide-get-account-statement-request'>Request</h3>
-<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/borderless-accounts/{borderlessAccountId}/statement.json?</code></strong></p>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/borderless-accounts/{borderlessAccountId}/statement.json?</code></strong></p>
 
 <p><strong><code>currency=EUR&amp;intervalStart=2018-03-01T00:00:00.000Z&amp;intervalEnd=2018-03-15T23:59:59.999Z</code></strong></p>
 
@@ -4279,7 +4279,7 @@ For example this is a valid request to create address in US Arizona:
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/borderless-accounts/<span class="o">{</span>borderlessAccountId<span class="o">}</span>/statement.json?
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v3/profiles/<span class="o">{</span>profileId<span class="o">}</span>/borderless-accounts/<span class="o">{</span>borderlessAccountId<span class="o">}</span>/statement.json?
 <span class="nv">currency</span><span class="o">=</span>EUR&amp;intervalStart<span class="o">=</span>2018-03-01T00:00:00.000Z&amp;intervalEnd<span class="o">=</span>2018-03-15T23:59:59.999Z <span class="se">\</span>
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
 </code></pre>
@@ -4427,7 +4427,7 @@ For example this is a valid request to create address in US Arizona:
 <p>Get borderless account statement for one currency and for specified time range. 
 The period between intervalStart and intervalEnd cannot exceed 469 days (around 1 year 3 month).</p>
 <h3 id='borderless-accounts-get-account-statement-request'>Request</h3>
-<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/borderless-accounts/{borderlessAccountId}/statement.json?</code></strong></p>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/borderless-accounts/{borderlessAccountId}/statement.json?</code></strong></p>
 
 <p><strong><code>currency=EUR&amp;intervalStart=2018-03-01T00:00:00.000Z&amp;intervalEnd=2018-03-15T23:59:59.999Z</code></strong></p>
 
