@@ -780,9 +780,6 @@
               <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
                 <ul class="toc-list-h2">
                     <li>
-                      <a href="#webhooks-create" class="toc-h2 toc-link" data-title="Create">Create</a>
-                    </li>
-                    <li>
                       <a href="#webhooks-list" class="toc-h2 toc-link" data-title="List">List</a>
                     </li>
                     <li>
@@ -11880,6 +11877,8 @@ Returns the list of all ultimate beneficial owners associated with the business 
 
 <p>If you request an unsupported language then British English will be returned by default.</p>
 <h1 id='webhooks'>Webhooks</h1>
+<p><strong>NB! Please note this version of webhooks is now **<em>deprecated</em></strong>. You can use (profile webhooks) or (application webhooks) instead.</p>
+
 <p>There&#39;s two ways you can manage webhooks:</p>
 
 <ul>
@@ -11888,145 +11887,6 @@ Returns the list of all ultimate beneficial owners associated with the business 
 </ul>
 
 <p>For the data that will be sent to your server see <a href="#webhooks-events">events section.</a></p>
-<h2 id='webhooks-create'>Create</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST https://api.transferwise.com/v1/subscriptions/ <span class="se">\</span>
-  -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
-  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-  -d <span class="s1">'{
-       "name": "Webhook Subscription #1",
-       "channel_id": "WEBHOOK",
-       "callback_url": "&lt;URL of your server&gt;",
-       "profile_id": &lt;ID of the profile you want to receive notifications from&gt;,
-       "enabled_notifications": ["transfers", "balance"]
-      }'</span>
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abcde123-abcd-abcd-abcd-abcde1234567"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook Subscription #1"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"channel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WEBHOOK"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TW::&lt;your user ID&gt;"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ENABLED"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-03-10T09:32:15.663Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;URL of your server&gt;"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;ID</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">profile</span><span class="w"> </span><span class="err">you</span><span class="w"> </span><span class="err">want</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">receive</span><span class="w"> </span><span class="err">notifications</span><span class="w"> </span><span class="err">from&gt;</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"enabled_notifications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"transfers"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Webhook subscription is a mechanism that will allow you to receive notifications to your servers whenever your transfers and/or balance gets topped up.</p>
-
-<p>Before proceeding, make sure the endpoint where you intend to receive webhooks satisfies the following requirements:</p>
-
-<ul>
-<li>Has a valid domain name (IP-s are not allowed)</li>
-<li>Listens to HTTPS requests on port <code>443</code></li>
-<li>Has a valid HTTPS certificate signed by a trusted CA (self-signed or expired certificates are not accepted)</li>
-<li>Does not include any query arguments in the URI</li>
-</ul>
-
-<p><code>https://webhooks.example.com/balance-change</code> is a valid URL; <code>http://webhooks.example.com:8080/hook.php?type=balance</code> is not.</p>
-
-<p>Currently we are delivering all notifications and <code>enabled_notifications</code> criteria will not be taken into account.</p>
-
-<p><strong>NB! Please note this feature is not available in sandbox environment.</strong></p>
-<h3 id='webhooks-create-request'>Request</h3>
-<p><strong><code>POST https://api.transferwise.com/v1/subscriptions</code></strong></p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>Custom name of your webhook</td>
-<td>String</td>
-</tr>
-<tr>
-<td>channel_id</td>
-<td>ID of the channel through which you&#39;re receiving notifications, always equal to <code>WEBHOOK</code></td>
-<td>String</td>
-</tr>
-<tr>
-<td>callback_url</td>
-<td>URL of your server</td>
-<td>String</td>
-</tr>
-<tr>
-<td>profile_id</td>
-<td>ID of the profile you want to receive notifications from</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>enabled_notifications</td>
-<td>List of resources you would like to receive notifications about</td>
-<td>[String]</td>
-</tr>
-</tbody></table>
-<h3 id='webhooks-create-response'>Response</h3>
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-<th>Format</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>Subscription ID</td>
-<td>UUID</td>
-</tr>
-<tr>
-<td>name</td>
-<td>Custom name of your webhook</td>
-<td>String</td>
-</tr>
-<tr>
-<td>channel_id</td>
-<td>ID of the channel through which you&#39;re receiving notifications, always equal to <code>WEBHOOK</code></td>
-<td>String</td>
-</tr>
-<tr>
-<td>user_id</td>
-<td>Your user ID</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>status</td>
-<td>Status of the subscription</td>
-<td>String</td>
-</tr>
-<tr>
-<td>created_on</td>
-<td>Timestamp when subscription was created</td>
-<td>Timestamp</td>
-</tr>
-<tr>
-<td>url</td>
-<td>URL of your server</td>
-<td>String</td>
-</tr>
-<tr>
-<td>profile_id</td>
-<td>ID of the profile you want to receive notifications from</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>enabled_notifications</td>
-<td>List of resources you would like to receive notifications about</td>
-<td>[String]</td>
-</tr>
-</tbody></table>
 <h2 id='webhooks-list'>List</h2>
 <blockquote>
 <p>Example Request:</p>
