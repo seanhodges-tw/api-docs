@@ -777,28 +777,85 @@
               <a href="#language-support" class="toc-h1 toc-link" data-title="Language Support">Language Support</a>
             </li>
             <li>
-              <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
+              <a href="#application-webhooks" class="toc-h1 toc-link" data-title="Application Webhooks">Application Webhooks</a>
                 <ul class="toc-list-h2">
                     <li>
-                      <a href="#webhooks-list" class="toc-h2 toc-link" data-title="List">List</a>
+                      <a href="#application-webhooks-client-token" class="toc-h2 toc-link" data-title="Client token">Client token</a>
                     </li>
                     <li>
-                      <a href="#webhooks-get-by-id" class="toc-h2 toc-link" data-title="Get by ID">Get by ID</a>
+                      <a href="#application-webhooks-create" class="toc-h2 toc-link" data-title="Create">Create</a>
                     </li>
                     <li>
-                      <a href="#webhooks-delete" class="toc-h2 toc-link" data-title="Delete">Delete</a>
+                      <a href="#application-webhooks-delete" class="toc-h2 toc-link" data-title="Delete">Delete</a>
                     </li>
                     <li>
-                      <a href="#webhooks-events" class="toc-h2 toc-link" data-title="Events">Events</a>
+                      <a href="#application-webhooks-get-by-id" class="toc-h2 toc-link" data-title="Get by id">Get by id</a>
                     </li>
                     <li>
-                      <a href="#webhooks-test-event" class="toc-h2 toc-link" data-title="Test event">Test event</a>
+                      <a href="#application-webhooks-list" class="toc-h2 toc-link" data-title="List">List</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+              <a href="#profile-webhooks" class="toc-h1 toc-link" data-title="Profile Webhooks">Profile Webhooks</a>
+                <ul class="toc-list-h2">
+                    <li>
+                      <a href="#profile-webhooks-create" class="toc-h2 toc-link" data-title="Create">Create</a>
                     </li>
                     <li>
-                      <a href="#webhooks-transfer-status-change-event" class="toc-h2 toc-link" data-title="Transfer status change event">Transfer status change event</a>
+                      <a href="#profile-webhooks-delete" class="toc-h2 toc-link" data-title="Delete">Delete</a>
                     </li>
                     <li>
-                      <a href="#webhooks-balance-deposit-event" class="toc-h2 toc-link" data-title="Balance deposit event">Balance deposit event</a>
+                      <a href="#profile-webhooks-get-by-id" class="toc-h2 toc-link" data-title="Get by id">Get by id</a>
+                    </li>
+                    <li>
+                      <a href="#profile-webhooks-list" class="toc-h2 toc-link" data-title="List">List</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+              <a href="#webhook-events" class="toc-h1 toc-link" data-title="Webhook events">Webhook events</a>
+                <ul class="toc-list-h2">
+                    <li>
+                      <a href="#webhook-events-list-signature-header" class="toc-h2 toc-link" data-title="Signature header">Signature header</a>
+                    </li>
+                    <li>
+                      <a href="#webhook-events-event-payload" class="toc-h2 toc-link" data-title="Event payload">Event payload</a>
+                    </li>
+                    <li>
+                      <a href="#webhook-events-transfer-status-change-event" class="toc-h2 toc-link" data-title="Transfer status change event">Transfer status change event</a>
+                    </li>
+                    <li>
+                      <a href="#webhook-events-transfer-issue-event" class="toc-h2 toc-link" data-title="Transfer issue event">Transfer issue event</a>
+                    </li>
+                    <li>
+                      <a href="#webhook-events-balance-deposit-event" class="toc-h2 toc-link" data-title="Balance deposit event">Balance deposit event</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+              <a href="#webhooks-v1" class="toc-h1 toc-link" data-title="Webhooks (v1)">Webhooks (v1)</a>
+                <ul class="toc-list-h2">
+                    <li>
+                      <a href="#webhooks-v1-list" class="toc-h2 toc-link" data-title="List">List</a>
+                    </li>
+                    <li>
+                      <a href="#webhooks-v1-get-by-id" class="toc-h2 toc-link" data-title="Get by ID">Get by ID</a>
+                    </li>
+                    <li>
+                      <a href="#webhooks-v1-delete" class="toc-h2 toc-link" data-title="Delete">Delete</a>
+                    </li>
+                    <li>
+                      <a href="#webhooks-v1-events" class="toc-h2 toc-link" data-title="Events">Events</a>
+                    </li>
+                    <li>
+                      <a href="#webhooks-v1-test-event" class="toc-h2 toc-link" data-title="Test event">Test event</a>
+                    </li>
+                    <li>
+                      <a href="#webhooks-v1-transfer-status-change-event" class="toc-h2 toc-link" data-title="Transfer status change event">Transfer status change event</a>
+                    </li>
+                    <li>
+                      <a href="#webhooks-v1-balance-deposit-event" class="toc-h2 toc-link" data-title="Balance deposit event">Balance deposit event</a>
                     </li>
                 </ul>
             </li>
@@ -11876,18 +11933,827 @@ Returns the list of all ultimate beneficial owners associated with the business 
 </tbody></table>
 
 <p>If you request an unsupported language then British English will be returned by default.</p>
-<h1 id='webhooks'>Webhooks</h1>
-<p><strong>NB! Please note this version of webhooks is now **<em>deprecated</em></strong>. You can use (profile webhooks) or (application webhooks) instead.</p>
+<h1 id='application-webhooks'>Application Webhooks</h1>
+<p>Application webhook subscription is a mechanism that will allow you to receive notifications to your servers whenever various events happen in relation to different resources created by an <strong><em>application</em></strong>.</p>
 
-<p>There&#39;s two ways you can manage webhooks:</p>
+<p>Before proceeding, make sure the endpoint where you intend to receive webhooks satisfies the following requirements:</p>
 
 <ul>
-<li>via API (read more below)</li>
-<li>via user interface (go to your <a href="https://transferwise.com/user/settings#webhooks" target="_blank">settings page</a>)</li>
+<li>Has a valid domain name (IP addresses are disallowed)</li>
+<li>Listens to HTTPS requests on port <code>443</code></li>
+<li>Has a valid HTTPS certificate signed by a trusted Certificate Authority - CA (self-signed or expired certificates are not accepted)</li>
+<li>Does not include any query arguments in the URL</li>
 </ul>
 
-<p>For the data that will be sent to your server see <a href="#webhooks-events">events section.</a></p>
-<h2 id='webhooks-list'>List</h2>
+<p><code>https://webhooks.example.com/balance-change</code> is a valid URL; <code>http://webhooks.example.com:8080/hook.php?type=balance</code> is not.</p>
+
+<p>You can have multiple subscriptions per event type though be mindful you will receive duplicate callbacks, one for each subscription. Find out more about webhook events <a href="#webhook-events">here</a>.</p>
+
+<aside class="notice">
+Please note that you have to use a client level token to access application subscription resources.
+</aside>
+<h2 id='application-webhooks-client-token'>Client token</h2><h3 id='application-webhooks-client-token-request'>Request</h3>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/oauth/token</code></strong></p>
+
+<p>Use Basic Authentication with your api-client-id/api-client-secret as username/pwd and also use the header <code>Content-Type: application/x-www-form-urlencoded</code>.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>grant_type</td>
+<td>&quot;client_credentials&quot;</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='application-webhooks-client-token-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>Access token to be used when creating an application subscription. Valid for 12 hours.</td>
+<td>uuid</td>
+</tr>
+<tr>
+<td>token_type</td>
+<td>&quot;bearer&quot;</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>Expiry time in seconds</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>scope</td>
+<td></td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h2 id='application-webhooks-create'>Create</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.transferwise.com/v3/applications/{clientKey}/subscriptions"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer &lt;your client level token&gt;"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+       "name": "Webhook Subscription #1",
+       "trigger_on": "transfers#state-change",
+       "delivery": {
+         "version": "2.0.0",
+         "url": "https://your.webhook.url/12345"
+         }
+      }'</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72195556-e5cb-495e-a010-b37a4f2a3043"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook Subscription #1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your.webhook.url/12345"</span><span class="w"> 
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"trigger_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfers#state-change"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your client key&gt;"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your client ID&gt;"</span><span class="p">,</span><span class="w"> </span><span class="err">//clientId</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">key</span><span class="w"> </span><span class="err">are</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">always</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">same</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-10T13:55:57Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='application-webhooks-create-request'>Request</h3>
+<p><strong><code>POST https://api.transferwise.com/v3/applications/{clientKey}/subscriptions</code></strong></p>
+
+<p><code>{clientKey}</code> can be received upon obtaining client credentials from our tech support.</p>
+
+<p>All fields listed below are required for creating a webhook subscription.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>A custom name for your webhook to ease with identification</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>trigger_on</td>
+<td><a href="#webhook-events">Choose from a list of available events</a></td>
+<td>Text</td>
+</tr>
+<tr>
+<td>delivery.version</td>
+<td>The event representation semantic version</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>delivery.url</td>
+<td>Required. The URL where your server will be listening for events.</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='application-webhooks-create-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>UUID that uniquely identifies the subscription</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>name</td>
+<td>A custom name for your webhook to ease with identification</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>trigger_on</td>
+<td><code>transfers#state-change</code>, <code>transfers#active-cases</code> or <code>balances#credit</code></td>
+<td>Text</td>
+</tr>
+<tr>
+<td>delivery.version</td>
+<td>The event representation semantic version</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>delivery.url</td>
+<td>The URL where your server will be listening for events.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>scope.domain</td>
+<td>Scope of this subscription, always &quot;application&quot; in this case</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>scope.id</td>
+<td>Client key used to create this subscription</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>created_by.type</td>
+<td>Creator type. Always application in this case</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>created_by.id</td>
+<td>Client ID of the creator. Not always the same as the client key</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Timestamp of when the subscription was created</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h2 id='application-webhooks-delete'>Delete</h2>
+<p>Deletes a subscription by its identifier.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer &lt;your client level token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span></code></pre><h3 id='application-webhooks-delete-request'>Request</h3>
+<p><strong><code>DELETE https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}</code></strong></p>
+<h2 id='application-webhooks-get-by-id'>Get by id</h2>
+<p>Retrieves a subscription by its identifier.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer &lt;your client level token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f215f353-35fd-405b-b27f-4fd603c905ed"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook Subscription #1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your.webhook.url/12345"</span><span class="w"> 
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"trigger_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balances#credit"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your client key&gt;"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your client ID&gt;"</span><span class="p">,</span><span class="w"> </span><span class="err">//clientId</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">key</span><span class="w"> </span><span class="err">are</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">always</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">same</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-09-15T15:53:00+00:00Z"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='application-webhooks-get-by-id-request'>Request</h3>
+<p><strong><code>GET https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}</code></strong></p>
+<h2 id='application-webhooks-list'>List</h2>
+<p>List all your subscriptions</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.transferwise.com/v3/applications/{clientKey}/subscriptions"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer &lt;your client level token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e889e085-3677-4110-be26-3e9160ac9f25"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#1 subscription"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your.webhook.url/12345"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"trigger_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfers#state-change"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your client ID&gt;"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your client key&gt;"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eabeb3f5-c134-4a1c-99e2-86a1163daf1b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2 subscription"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your.webhook.url/12345"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"trigger_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfers#state-change"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your client ID&gt;"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your client key&gt;"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre><h3 id='application-webhooks-list-request'>Request</h3>
+<p><strong><code>GET https://api.transferwise.com/v3/applications/{clientKey}/subscriptions</code></strong></p>
+<h1 id='profile-webhooks'>Profile Webhooks</h1>
+<p>Profile webhook subscription is a mechanism that will allow you to receive notifications to your servers whenever various events happen in relation to different resources created under a specific <strong><em>profile</em></strong>.</p>
+
+<p>Before proceeding, make sure the endpoint where you intend to receive webhooks satisfies the following requirements:</p>
+
+<ul>
+<li>Has a valid domain name (IPs are disallowed)</li>
+<li>Listens to HTTPS requests on port <code>443</code></li>
+<li>Has a valid HTTPS certificate signed by a trusted Certificate Authority - CA (self-signed or expired certificates are not accepted)</li>
+<li>Does not include any query arguments in the URL</li>
+</ul>
+
+<p><code>https://webhooks.example.com/balance-change</code> is a valid URL; <code>http://webhooks.example.com:8080/hook.php?type=balance</code> is not.</p>
+
+<p>You can have multiple subscriptions per event type though be mindful you will receive duplicate callbacks, one for each subscription. Find out more about webhook events <a href="#webhook-events">here</a>.</p>
+
+<p>If you will be dealing with multiple profiles in your integration, check out <a href="#application-webhooks"><strong><em>application webhooks</em></strong></a>. You will have to subscribe only once and you will receive updates concerning all resources that were created in your application.</p>
+<h2 id='profile-webhooks-create'>Create</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.transferwise.com/v3/profiles/{profileId}/subscriptions"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer &lt;your user token&gt;"</span> <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+       "name": "Webhook Subscription #1",
+       "trigger_on": "transfers#state-change",
+       "delivery": {
+         "version": "2.0.0",
+         "url": "https://your.webhook.url/12345"
+         }
+      }'</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72195556-e5cb-495e-a010-b37a4f2a3043"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook Subscription #1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your.webhook.url/12345"</span><span class="w"> 
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"trigger_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfers#state-change"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"profile"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;profile ID&gt;"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your user ID&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-09-15T15:53:00+00:00Z"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='profile-webhooks-create-request'>Request</h3>
+<p><strong><code>POST https://api.transferwise.com/v3/profiles/{profileId}/subscriptions</code></strong></p>
+
+<p><code>profileId</code> - ID of the profile you are subscribing to. </p>
+
+<p>All fields listed below are required for creating a webhook subscription.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>A custom name for your webhook to ease with identification</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>trigger_on</td>
+<td><a href="#webhook-events">Choose from a list of available events</a></td>
+<td>Text</td>
+</tr>
+<tr>
+<td>delivery.version</td>
+<td>The event representation semantic</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>delivery.url</td>
+<td>Required. The URL where your server will be listening for events.</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='profile-webhooks-create-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>UUID that uniquely identifies the subscription</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>name</td>
+<td>A custom name for your webhook to ease with identification</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>trigger_on</td>
+<td><code>transfers#state-change</code>, <code>transfers#active-cases</code> or <code>balances#credit</code></td>
+<td>Text</td>
+</tr>
+<tr>
+<td>delivery.version</td>
+<td>The event representation semantic</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>delivery.url</td>
+<td>Required. The URL where your server will be listening for events.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>scope.domain</td>
+<td>Scope of this subscription, always &quot;profile&quot; in this case</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>scope.id</td>
+<td>Profile ID used to create this subscription</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>created_by.type</td>
+<td>Creator type. Always user in this case</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>created_by.id</td>
+<td>User id of the creator</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Timestamp of when the subscription was created</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h2 id='profile-webhooks-delete'>Delete</h2>
+<p>Deletes a subscription by its identifier.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://api.transferwise.com/v3/profiles/{profileId}/subscriptions/{id}"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer &lt;your user token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span></code></pre><h3 id='profile-webhooks-delete-request'>Request</h3>
+<p><strong><code>DELETE https://api.transferwise.com/v3/profiles/{profileId}/subscriptions/{id}</code></strong></p>
+<h2 id='profile-webhooks-get-by-id'>Get by id</h2>
+<p>Retrieves a subscription by its identifier.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.transferwise.com/v3/profiles/{profileId}/subscriptions/{id}"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer &lt;your user token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f215f353-35fd-405b-b27f-4fd603c905ed"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Webhook Subscription #1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your.webhook.url/12345"</span><span class="w"> 
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"trigger_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balances#credit"</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"profile"</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;profile ID&gt;"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your user ID&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-09-15T15:53:00+00:00Z"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='profile-webhooks-get-by-id-request'>Request</h3>
+<p><strong><code>GET https://api.transferwise.com/v3/profiles/{profileId}/subscriptions/{id}</code></strong></p>
+<h2 id='profile-webhooks-list'>List</h2>
+<p>List all your subscriptions</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.transferwise.com/v3/profiles/{profileId}/subscriptions"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer &lt;your user token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e889e085-3677-4110-be26-3e9160ac9f25"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#1 subscription"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your.webhook.url/12345"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"trigger_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfers#state-change"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your user ID&gt;"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"profile"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;profile ID&gt;"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eabeb3f5-c134-4a1c-99e2-86a1163daf1b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#2 subscription"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your.webhook.url/12345"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"trigger_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfers#state-change"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_by"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;your user ID&gt;"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"profile"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;profile ID&gt;"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre><h3 id='profile-webhooks-list-request'>Request</h3>
+<p><strong><code>GET https://api.transferwise.com/v3/profiles/{profileId}/subscriptions</code></strong></p>
+<h1 id='webhook-events'>Webhook events</h1>
+<p>Events are messages that will be sent to your server as HTTP <code>POST</code> requests once you create a webhook subscription (and a resource you have access to is updated).
+They will not contain any personally identifiable information.</p>
+
+<p>To acknowledge that you have successfully processed an event, make sure your server answers with the HTTP status code <code>200</code>
+within 5s. Otherwise, we will consider the delivery attempt as having failed and will later try to resend the message.</p>
+
+<p>We will attempt to redeliver messages at increasing intervals over a two week period. We will try at most 25 times to do this.</p>
+<h3 id='webhook-events-list-signature-header'>Signature header</h3>
+<blockquote>
+<p>TransferWise public key for production environment:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvO8vXV+JksBzZAY6GhSO
+XdoTCfhXaaiZ+qAbtaDBiu2AGkGVpmEygFmWP4Li9m5+Ni85BhVvZOodM9epgW3F
+bA5Q1SexvAF1PPjX4JpMstak/QhAgl1qMSqEevL8cmUeTgcMuVWCJmlge9h7B1CS
+D4rtlimGZozG39rUBDg6Qt2K+P4wBfLblL0k4C4YUdLnpGYEDIth+i8XsRpFlogx
+CAFyH9+knYsDbR43UJ9shtc42Ybd40Afihj8KnYKXzchyQ42aC8aZ/h5hyZ28yVy
+Oj3Vos0VdBIs/gAyJ/4yyQFCXYte64I7ssrlbGRaco4nKF3HmaNhxwyKyJafz19e
+HwIDAQAB
+</code></pre>
+<blockquote>
+<p>How to verify signatures (in Java):</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verifySignature</span><span class="o">(</span><span class="n">String</span> <span class="n">encodedPublicKey</span><span class="o">,</span> <span class="n">String</span> <span class="n">signature</span><span class="o">,</span> <span class="n">String</span> <span class="n">payload</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">X509EncodedKeySpec</span> <span class="n">publicKeySpec</span> <span class="o">=</span> <span class="k">new</span> <span class="n">X509EncodedKeySpec</span><span class="o">(</span><span class="n">Base64</span><span class="o">.</span><span class="na">getMimeDecoder</span><span class="o">().</span><span class="na">decode</span><span class="o">(</span><span class="n">encodedPublicKey</span><span class="o">));</span>
+  <span class="n">KeyFactory</span> <span class="n">keyFactory</span> <span class="o">=</span> <span class="n">KeyFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"RSA"</span><span class="o">);</span>
+  <span class="n">PublicKey</span> <span class="n">publicKey</span> <span class="o">=</span> <span class="n">keyFactory</span><span class="o">.</span><span class="na">generatePublic</span><span class="o">(</span><span class="n">publicKeySpec</span><span class="o">);</span>
+
+  <span class="n">Signature</span> <span class="n">sign</span> <span class="o">=</span> <span class="n">Signature</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"SHA1WithRSA"</span><span class="o">);</span>
+  <span class="n">sign</span><span class="o">.</span><span class="na">initVerify</span><span class="o">(</span><span class="n">publicKey</span><span class="o">);</span>
+  <span class="n">sign</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">payload</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
+
+  <span class="kt">byte</span><span class="o">[]</span> <span class="n">signatureBytes</span> <span class="o">=</span> <span class="n">Base64</span><span class="o">.</span><span class="na">getDecoder</span><span class="o">().</span><span class="na">decode</span><span class="o">(</span><span class="n">signature</span><span class="o">);</span>
+
+  <span class="k">return</span> <span class="n">sign</span><span class="o">.</span><span class="na">verify</span><span class="o">(</span><span class="n">signatureBytes</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+<p>Each outgoing webhook request is signed. Whilst event payloads do not contain any sensitive information, you may want to
+verify if the request is coming from TransferWise (however this is optional).
+We advise you not to process any requests where signature appears to be forged.</p>
+
+<p>Each <code>POST</code> request includes <code>X-Signature</code> header, which contains a signature.</p>
+<h2 id='webhook-events-event-payload'>Event payload</h2>
+<blockquote>
+<p>Basic event payload:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db463333-3333-3333-3333-185d1ee81585"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='webhook-events-event-payload-event-payload'>Event payload</h3>
+<p>All events share same payload structure. Depending on the <code>event_type</code> the only object that will change is <code>data</code>.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>Object with information about updated resource</td>
+<td>Object</td>
+</tr>
+<tr>
+<td>subscription_id</td>
+<td>ID of the subscription that triggered the event</td>
+<td>UUID</td>
+</tr>
+<tr>
+<td>event_type</td>
+<td>Type of event, which defines <code>data</code> object</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>schema_version</td>
+<td>The event representation semantic version</td>
+<td>String</td>
+</tr>
+<tr>
+<td>sent_at</td>
+<td>Timestamp when update happened</td>
+<td>Timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='webhook-events-transfer-status-change-event'>Transfer status change event</h2>
+<blockquote>
+<p>Example event:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">99330022</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11121314</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1514131211</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"current_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"previous_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incoming_payment_waiting"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"occurred_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db463333-3333-3333-3333-185d1ee81585"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfers#state-change"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='webhook-events-transfer-status-change-event-event'>Event</h3>
+<p>Event will be triggered every time transfer status is updated. Each event contains a timestamp. As we do not guarantee the order of events, please use <code>eventTime</code> to reconcile the order. </p>
+
+<p>If you would like to subscribe to transfer state change events, please use <code>transfers#state-change</code> when creating your subscription.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data.resource.id</td>
+<td>ID of the transfer that got updated</td>
+<td>String</td>
+</tr>
+<tr>
+<td>data.resource.profile_id</td>
+<td>ID of the profile that owns the transfer</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>data.resourceI.account_id</td>
+<td>ID of transfer&#39;s recipient</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>data.resource.type</td>
+<td>Type of the resource that was updated</td>
+<td>String</td>
+</tr>
+<tr>
+<td>data.current_state</td>
+<td>Newly acquired state of the resource, possible values are same as <a href="#payouts-guide-track-transfer-status">transfer statuses</a></td>
+<td>String</td>
+</tr>
+<tr>
+<td>data.previous_state</td>
+<td>Previous state of the resource, possible values are same as <a href="#payouts-guide-track-transfer-status">transfer statuses</a></td>
+<td>String</td>
+</tr>
+<tr>
+<td>data.occured_at</td>
+<td>Timestamp when the update happened</td>
+<td>Timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='webhook-events-transfer-issue-event'>Transfer issue event</h2>
+<blockquote>
+<p>Example event:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">99330022</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11121314</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1514131211</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"active_cases"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"deposit_amount_less_invoice"</span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db463333-3333-3333-3333-185d1ee81585"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfers#active-cases"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='webhook-events-transfer-issue-event-event'>Event</h3>
+<p>Event will be triggered every time transfer status is updated. Each event contains a timestamp. As we do not guarantee the order of events, please use that <code>eventTime</code> to reconcile the order. </p>
+
+<p>If you would like to subscribe to transfer active issue events, please use <code>transfers#active-cases</code> when creating your subscription.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data.resource.id</td>
+<td>ID of the transfer that got updated</td>
+<td>String</td>
+</tr>
+<tr>
+<td>data.resource.profile_id</td>
+<td>ID of the profile that owns the transfer</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>data.resourceI.account_id</td>
+<td>ID of transfer&#39;s recipient</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>data.resource.type</td>
+<td>Type of the resource that was updated</td>
+<td>String</td>
+</tr>
+<tr>
+<td>data.active_cases</td>
+<td>List of ongoing issues related to the transfer</td>
+<td>String</td>
+</tr>
+</tbody></table>
+<h2 id='webhook-events-balance-deposit-event'>Balance deposit event</h2>
+<blockquote>
+<p>Example event:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">99887766</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance-account"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11121314</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.00</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"post_transaction_balance_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"occurred_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db463333-3333-3333-3333-185d1ee81585"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balances#credit"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='webhook-events-balance-deposit-event-event'>Event</h3>
+<p>Event will be triggered every time balance is credited. This event will not be delivered to application subscriptions.</p>
+
+<p>If you would like to subscribe to balance credit events, please use <code>balances#credit</code> when creating your subscription.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subscriptionId</td>
+<td>ID of subscription that triggers this notification</td>
+<td>String</td>
+</tr>
+<tr>
+<td>profileId</td>
+<td>ID of the profile that owns the balance</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Deposit amount</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>Currency of the balance that got updated</td>
+<td>String</td>
+</tr>
+<tr>
+<td>eventType</td>
+<td>Type of update</td>
+<td>String</td>
+</tr>
+</tbody></table>
+<h1 id='webhooks-v1'>Webhooks (v1)</h1>
+<aside class="warning">
+Please note this version of webhooks is now DEPRECATED.
+</aside>
+
+<p>You can use <a href="#profile-webhooks">profile webhooks</a> or <a href="#app-webhooks">application webhooks</a> instead.</p>
+<h2 id='webhooks-v1-list'>List</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -11927,7 +12793,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>List all created webhook subscriptions.</p>
-<h3 id='webhooks-list-response'>Response</h3>
+<h3 id='webhooks-v1-list-response'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -11981,7 +12847,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 <td>[String]</td>
 </tr>
 </tbody></table>
-<h2 id='webhooks-get-by-id'>Get by ID</h2>
+<h2 id='webhooks-v1-get-by-id'>Get by ID</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -12007,7 +12873,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Get subscription information by ID.</p>
-<h3 id='webhooks-get-by-id-response'>Response</h3>
+<h3 id='webhooks-v1-get-by-id-response'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -12061,7 +12927,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 <td>[String]</td>
 </tr>
 </tbody></table>
-<h2 id='webhooks-delete'>Delete</h2>
+<h2 id='webhooks-v1-delete'>Delete</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -12075,7 +12941,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 <span class="o">}</span>
 </code></pre>
 <p>Delete a subscription.</p>
-<h2 id='webhooks-events'>Events</h2>
+<h2 id='webhooks-v1-events'>Events</h2>
 <p>Events are messages that will be sent to your server as HTTP <code>POST</code> requests.
 They will not contain any personally identifiable information.</p>
 
@@ -12083,7 +12949,7 @@ They will not contain any personally identifiable information.</p>
 within 5s. Otherwise, we will consider the delivery attempt as having failed and will later try to resend the message.</p>
 
 <p>We will attempt to redeliver messages at increasing intervals over a two week period. We will try at most 25 times to do this.</p>
-<h3 id='webhooks-events-signature-header'>Signature header</h3>
+<h3 id='webhooks-v1-events-signature-header'>Signature header</h3>
 <blockquote>
 <p>TransferWise public key for production environment:</p>
 </blockquote>
@@ -12117,7 +12983,7 @@ verify if the request is coming from TransferWise (however this is optional).
 We advise you not to process any requests where signature appears to be forged.</p>
 
 <p>Each <code>POST</code> request includes <code>X-Signature</code> header, which contains a signature.</p>
-<h2 id='webhooks-test-event'>Test event</h2>
+<h2 id='webhooks-v1-test-event'>Test event</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -12138,7 +13004,7 @@ We advise you not to process any requests where signature appears to be forged.<
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>You can trigger a test event to be delivered to your server to check the connection between systems.</p>
-<h3 id='webhooks-test-event-request'>Request</h3>
+<h3 id='webhooks-v1-test-event-request'>Request</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -12152,7 +13018,7 @@ We advise you not to process any requests where signature appears to be forged.<
 <td>String</td>
 </tr>
 </tbody></table>
-<h3 id='webhooks-test-event-response'>Response</h3>
+<h3 id='webhooks-v1-test-event-response'>Response</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -12176,7 +13042,7 @@ We advise you not to process any requests where signature appears to be forged.<
 <td>Integer</td>
 </tr>
 </tbody></table>
-<h2 id='webhooks-transfer-status-change-event'>Transfer status change event</h2>
+<h2 id='webhooks-v1-transfer-status-change-event'>Transfer status change event</h2>
 <blockquote>
 <p>Example event:</p>
 </blockquote>
@@ -12187,7 +13053,7 @@ We advise you not to process any requests where signature appears to be forged.<
   </span><span class="s2">"newState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"outgoing_payment_sent"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"eventTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1481713589566</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='webhooks-transfer-status-change-event-event'>Event</h3>
+</span></code></pre><h3 id='webhooks-v1-transfer-status-change-event-event'>Event</h3>
 <p>Event will be triggered every time transfer status is updated. Each event contains a timestamp. As we do not guarantee the order of events, please use that <code>eventTime</code> to reconcile the order. </p>
 
 <table><thead>
@@ -12223,7 +13089,7 @@ We advise you not to process any requests where signature appears to be forged.<
 <td>Timestamp</td>
 </tr>
 </tbody></table>
-<h2 id='webhooks-balance-deposit-event'>Balance deposit event</h2>
+<h2 id='webhooks-v1-balance-deposit-event'>Balance deposit event</h2>
 <blockquote>
 <p>Example event:</p>
 </blockquote>
@@ -12234,7 +13100,7 @@ We advise you not to process any requests where signature appears to be forged.<
   </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance-deposit-received"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='webhooks-balance-deposit-event-event'>Event</h3>
+</span></code></pre><h3 id='webhooks-v1-balance-deposit-event-event'>Event</h3>
 <p>Event will be triggered every time balance is credited.</p>
 
 <table><thead>
