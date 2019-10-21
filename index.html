@@ -12583,7 +12583,7 @@ We advise you not to process any requests where signature appears to be forged.<
   </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='webhook-events-transfer-status-change-event-event'>Event</h3>
-<p>Event will be triggered every time transfer status is updated. Each event contains a timestamp. As we do not guarantee the order of events, please use <code>eventTime</code> to reconcile the order. </p>
+<p>Event will be triggered every time transfer status is updated. Each event contains a timestamp. As we do not guarantee the order of events, please use <code>data.occured_at</code> to reconcile the order. </p>
 
 <p>If you would like to subscribe to transfer state change events, please use <code>transfers#state-change</code> when creating your subscription.</p>
 
