@@ -1930,7 +1930,7 @@ This way we can treat subsequent retry messages as <strong>repeat messages</stro
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST https://api.sandbox.transferwise.tech/v1/transfers/<span class="o">{</span>transferId<span class="o">}</span>/payments <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST https://api.sandbox.transferwise.tech/v3/profiles/<span class="o">{</span>profileId<span class="o">}</span>/transfers/<span class="o">{</span>transferId<span class="o">}</span>/payments <span class="se">\</span>
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
      -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
      -d <span class="s1">'{ 
@@ -1965,7 +1965,7 @@ You can add new currencies to your account via the user interface: <a href="http
 
 <p>You can then top up your new currencies by converting funds from other currencies.</p>
 <h3 id='payouts-guide-fund-transfer-request'>Request</h3>
-<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/transfers/{transferId}/payments</code></strong></p>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/transfers/{transferId}/payments</code></strong></p>
 
 <p>Use transfer id that you obtained in previous step. </p>
 
@@ -8886,7 +8886,7 @@ This way we can treat subsequent retry messages as <strong>repeat messages</stro
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST https://api.sandbox.transferwise.tech/v1/transfers/<span class="o">{</span>transferId<span class="o">}</span>/payments <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST https://api.sandbox.transferwise.tech/v3/profiles/<span class="o">{</span>profileId<span class="o">}</span>/transfers/<span class="o">{</span>transferId<span class="o">}</span>/payments <span class="se">\</span>
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
      -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
      -d <span class="s1">'{ 
@@ -8905,7 +8905,7 @@ This way we can treat subsequent retry messages as <strong>repeat messages</stro
 <p>This API call is the final step for executing payouts. TransferWise will now debit funds from your borderless balance and start processing your transfer. 
 If your borderless balance is short of funds then this call will fail with &quot;insufficient funds&quot; error.</p>
 <h3 id='transfers-fund-request'>Request</h3>
-<p><strong><code>POST https://api.sandbox.transferwise.tech/v1/transfers/{transferId}/payments</code></strong></p>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/transfers/{transferId}/payments</code></strong></p>
 
 <p>Use transfer id that you obtained in previous step. </p>
 
