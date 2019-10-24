@@ -458,6 +458,14 @@
                 </ul>
             </li>
             <li>
+              <a href="#comparison" class="toc-h1 toc-link" data-title="Comparison">Comparison</a>
+                <ul class="toc-list-h2">
+                    <li>
+                      <a href="#comparison-request-comparison-quotes" class="toc-h2 toc-link" data-title="Request comparison quotes">Request comparison quotes</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
               <a href="#exchange-rates" class="toc-h1 toc-link" data-title="Exchange Rates">Exchange Rates</a>
                 <ul class="toc-list-h2">
                     <li>
@@ -5082,6 +5090,297 @@ Quote which is used in this call must have type &quot;BALANCE_CONVERSION&quot;.<
 <p><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/></p>
+<h1 id='comparison'>Comparison</h1><h2 id='comparison-request-comparison-quotes'>Request comparison quotes</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.transferwise.com/v3/comparisons/?sourceCurrency<span class="o">=</span>GBP&amp;targetCurrency<span class="o">=</span>EUR&amp;sendAmount<span class="o">=</span>10000
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"sourceCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sourceCountry"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"targetCountry"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"providerCountry"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"providerType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sendAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">10000.0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"providers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"alias"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transferwise"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TransferWise"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dq8dwmysp7hk1.cloudfront.net/logos/transferwise.svg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"moneyTransferProvider"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"partner"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"quotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.15989</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">37.12</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"receivedAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">11555.84</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"dateCollected"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-22T14:36:43Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"sourceCountry"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"targetCountry"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"markup"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"deliveryEstimation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"duration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PT20H8M16.305111S"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PT20H8M16.305111S"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"providerGivesEstimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"alias"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barclays"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barclays"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"logo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dq8dwmysp7hk1.cloudfront.net/logos/barclays.svg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bank"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"partner"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"quotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.12792426</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"receivedAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">11279.24</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"dateCollected"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-22T14:00:04Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"sourceCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"targetCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"markup"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.75592858</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"deliveryEstimation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"duration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PT24H"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PT24H"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"providerGivesEstimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.12792426</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"receivedAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">11279.24</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"dateCollected"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-22T14:00:04Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"sourceCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"targetCountry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FI"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"markup"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.75592858</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"deliveryEstimation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"duration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PT24H"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"max"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PT24H"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"providerGivesEstimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The comparison API can be used to request price and speed information about various money transfer providers. This
+includes not only TransferWise but other providers in the market.</p>
+<h3 id='comparison-request-comparison-quotes-price-estimation'>Price Estimation</h3>
+<p>The quotes (price / speed) provided by this API are based off of real quotes collected from 3rd party websites. We collect both
+the advertised exchange rate and fee for each provider for various amounts. When a comparison is requested we calculate the markup %
+on the collected exchange rate on the mid-market rate at the time of collection, we then apply this markup % on the current 
+mid-market rate to provide a realistic estimate of what each provider offers. We collect data for all providers ~ once per hour to 
+ensure we provide as accurate and up to date information as possible.</p>
+
+<p>Note: Today, we only provide estimations for FX transactions with a Bank Transfer pay-in / pay-out option. This is important to stress
+as many providers offer significantly different fees / exchange rates when used debit / credit card, cash etc.</p>
+
+<p>For more details on the data collection process please see the following page:</p>
+
+<p><a href="https://transferwise.com/gb/compare/disclaimer">https://transferwise.com/gb/compare/disclaimer</a></p>
+
+<p>If you have questions or suspect any data to be inaccurate or incomplete please contact us at:</p>
+
+<p><a href="mailto:comparison@transferwise.com">comparison@transferwise.com</a></p>
+<h3 id='comparison-request-comparison-quotes-delivery-estimation'>Delivery Estimation</h3>
+<p>Similar to price, we collect speed data for most (if not all) providers which we have price information for. Many providers
+display speed estimates to their customers in a number of different ways. </p>
+
+<p>Some examples:</p>
+
+<ul>
+<li>&quot;The transfer should be complete within 2-5 days&quot;</li>
+<li>&quot;The money should arrive in your account within 48 hours&quot;</li>
+<li>&quot;Should arrive by 26th Aug&quot;</li>
+<li>&quot;Could take up to 4 working days&quot;</li>
+</ul>
+
+<p>The below API intends to model these in a consistent format by providing a min / max range for all delivery estimations.
+An estimate that states &quot;up to X&quot; will have &quot;max&quot; set to a duration but &quot;min&quot; as null, a &quot;from X&quot; will have &quot;min&quot; set to a
+duration and &quot;max&quot; as null. Finally for those providers who offer a specific, point in time estimation (like TransferWise), 
+the API will surface a duration where min/max are equal. </p>
+<h3 id='comparison-request-comparison-quotes-quotes-structure'>Quotes structure</h3>
+<p>In order to provide the most flexible and accurate data for clients, we surface a denormalised list of quotes per provider 
+where each quote represents a unique collection of comparison &quot;dimensions&quot;. </p>
+
+<p>A single given provider may expose multiple quotes for the same currency route. The most common example is where a provider 
+offers different pricing for one country vs another country which uses the same currency. e.g:</p>
+
+<p>Provider X:</p>
+
+<ul>
+<li>GBP EUR 1000 [GB -&gt; ES] fee: 10, rate: 1.5</li>
+<li>GBP EUR 1000 [GB -&gt; DE] fee: 8, rate: 1.5</li>
+<li>GBP EUR 1000 [GB -&gt; FR] fee: 10, rate: 1.35</li>
+</ul>
+
+<p>The same principle applies for speed. I.e a provider may have different speed estimates for different target countries and hence
+we expose these as discrete quotes - where a quote is a unique combination of route / country / speed / price factors.</p>
+
+<p>A client may choose to reduce this set of quotes down to a single or several quotes in order to display a relevant quote to a 
+given user. An example where we take the cheapest quote for a given currency route (and also surface the target country) can be seen
+at the below link:</p>
+
+<p><a href="https://transferwise.com/gb/compare/?sourceCurrency=GBP&amp;targetCurrency=EUR&amp;sendAmount=1000">https://transferwise.com/gb/compare/?sourceCurrency=GBP&amp;targetCurrency=EUR&amp;sendAmount=1000</a></p>
+<h3 id='comparison-request-comparison-quotes-request'>Request</h3>
+<p><strong><code>GET https://api.transferwise.com/v3/comparisons/?sourceCurrency=GBP&amp;targetCurrency=EUR&amp;sendAmount=10000</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field (Query Param)</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sourceCurrency</td>
+<td>ISO 4217 source currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>targetCurrency</td>
+<td>ISO 4217 target currency code</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>sendAmount</td>
+<td>Amount in source currency</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>sourceCountry</td>
+<td>(Optional) Filter by source country (ISO 3166-1 Alpha-2 code)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>targetCountry</td>
+<td>(Optional) Filter by target country (ISO 3166-1 Alpha-2 code)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>providerType</td>
+<td>(Optional) Filter by provider type</td>
+<td>One of &quot;bank&quot;,&quot;moneyTransferProvider&quot;</td>
+</tr>
+</tbody></table>
+<h3 id='comparison-request-comparison-quotes-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Provider id</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>alias</td>
+<td>Provider alias (lowercase slug name)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Provider name (presentational / formal name)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>logo</td>
+<td>URL pointing to provider logo (default svg format)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Provider type</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>partner</td>
+<td>Whether a partner of TransferWise or not</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>quotes</td>
+<td>An array of estimated quotes per provider</td>
+<td>Array</td>
+</tr>
+<tr>
+<td>quotes.rate</td>
+<td>The live estimated exchange for the provider for this quote</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>quotes.fee</td>
+<td>The estimated fee for the provider for this quote</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>quotes.receivedAmount</td>
+<td>The total estimated receive amount for the provider for this quote</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>quotes.dateCollected</td>
+<td>The date of collection for the original quote</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>quotes.sourceCountry</td>
+<td>source country (ISO 3166-1 Alpha-2 code)</td>
+<td>Timestamp</td>
+</tr>
+<tr>
+<td>quotes.targetCountry</td>
+<td>target country (ISO 3166-1 Alpha-2 code)</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>quotes.deliveryEstimation</td>
+<td>Delivery estimation details - i.e a speed estimate</td>
+<td>Object</td>
+</tr>
+<tr>
+<td>quotes.deliveryEstimation.duration</td>
+<td>Duration range</td>
+<td>Object</td>
+</tr>
+<tr>
+<td>quotes.deliveryEstimation.duration.min</td>
+<td>Minimum quoted time for transaction delivery</td>
+<td>ISO 8601 duration format</td>
+</tr>
+<tr>
+<td>quotes.deliveryEstimation.duration.max</td>
+<td>Maximum quoted time for transaction delivery</td>
+<td>ISO 8601 duration format</td>
+</tr>
+<tr>
+<td>quotes.deliveryEstimation.providerGivesEstimate</td>
+<td>Whether a provider publicly surfaces / exposes a speed estimate</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
 <h1 id='exchange-rates'>Exchange Rates</h1><h2 id='exchange-rates-list'>List</h2>
 <blockquote>
 <p>Example Request (Bearer token):</p>
