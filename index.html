@@ -255,6 +255,9 @@
                     <li>
                       <a href="#transferwise-api-checkout-flows" class="toc-h2 toc-link" data-title="Checkout flows">Checkout flows</a>
                     </li>
+                    <li>
+                      <a href="#transferwise-api-open-banking-api" class="toc-h2 toc-link" data-title="Open Banking API">Open Banking API</a>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -417,6 +420,38 @@
                     </li>
                     <li>
                       <a href="#connected-apps-guide-token-expiry" class="toc-h2 toc-link" data-title="Token Expiry">Token Expiry</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+              <a href="#open-banking-api" class="toc-h1 toc-link" data-title="Open Banking API">Open Banking API</a>
+                <ul class="toc-list-h2">
+                    <li>
+                      <a href="#open-banking-api-prerequisites" class="toc-h2 toc-link" data-title="Prerequisites">Prerequisites</a>
+                    </li>
+                    <li>
+                      <a href="#open-banking-api-sandbox-access" class="toc-h2 toc-link" data-title="Sandbox Access">Sandbox Access</a>
+                    </li>
+                    <li>
+                      <a href="#open-banking-api-sandbox-test-user" class="toc-h2 toc-link" data-title="Sandbox Test User">Sandbox Test User</a>
+                    </li>
+                    <li>
+                      <a href="#open-banking-api-sandbox-test-flow" class="toc-h2 toc-link" data-title="Sandbox Test Flow">Sandbox Test Flow</a>
+                    </li>
+                    <li>
+                      <a href="#open-banking-api-1-create-an-access-token" class="toc-h2 toc-link" data-title="1. Create an Access Token">1. Create an Access Token</a>
+                    </li>
+                    <li>
+                      <a href="#open-banking-api-2-create-a-consent" class="toc-h2 toc-link" data-title="2. Create a Consent">2. Create a Consent</a>
+                    </li>
+                    <li>
+                      <a href="#open-banking-api-3-user-flow" class="toc-h2 toc-link" data-title="3. User Flow">3. User Flow</a>
+                    </li>
+                    <li>
+                      <a href="#open-banking-api-4-exchange-authorization-code-for-access-token" class="toc-h2 toc-link" data-title="4. Exchange Authorization Code for Access Token">4. Exchange Authorization Code for Access Token</a>
+                    </li>
+                    <li>
+                      <a href="#open-banking-api-5-query-the-api" class="toc-h2 toc-link" data-title="5. Query the API">5. Query the API</a>
                     </li>
                 </ul>
             </li>
@@ -915,6 +950,7 @@
 <li><a href="#transferwise-api-affiliates">Affiliates</a></li>
 <li><a href="#transferwise-api-connected-applications">Connected Applications</a></li>
 <li><a href="#transferwise-api-receive-money">Receive Money</a></li>
+<li><a href="#open-banking-api">Open Banking API</a></li>
 </ul>
 <h2 id='transferwise-api-payouts-and-account-automation'>Payouts and Account Automation</h2>
 <p>This lets you to automate how you use your TransferWise account. You can automate payments, connect your business tools, and create ways to manage your finances.</p>
@@ -1010,6 +1046,8 @@ Please contact <a href="mailto:bdsupport@transferwise.com">bdsupport@transferwis
 <p>You can receive money to the local bank details that come with your TransferWise account (AUD, EUR, GBP, NZD and USD) and reconcile these incoming payments via the API.</p>
 <h2 id='transferwise-api-checkout-flows'>Checkout flows</h2>
 <p>We currently don’t offer the option to build TransferWise into your checkout flow as a payment option to receive money. Note though that TransferWise can be added as a payout option on your site for beneficiaries to choose to receive their payout through to an email address, directly to a bank account or any other mechanism we support in our standard product.</p>
+<h2 id='transferwise-api-open-banking-api'>Open Banking API</h2>
+<p>Under the Second Payment Services Directive (PDS2) we are opening up the standardized version of our API to the rest of the world. Find out more about our <a href="#open-banking-api">Open Banking API</a>    </p>
 <h1 id='payouts-guide'>Payouts Guide</h1>
 <p>Welcome to the TransferWise payouts API documentation. 
 Before you start coding, please take few moments to review some important information about TransferWise and our API.</p>
@@ -3729,6 +3767,484 @@ There is no need to wait for the actual expiration to happen first. </p>
 </ul>
 
 <p>Due to this possibility your application should handle a failing refresh token scenario by sending the user through the authorization code flow as you initially did.</p>
+<h1 id='open-banking-api'>Open Banking API</h1>
+<blockquote>
+<p>Base Open Banking URL in Sandbox</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>https://openbanking.sandbox.transferwise.tech
+</code></pre>
+<blockquote>
+<p>Base Open Banking URL in Production</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>https://openbanking.transferwise.com
+</code></pre>
+<p>The TransferWise Open Banking API is a collection of RESTful APIs that enable Third Party Providers (TPPs) to access account information, initiate payments and confirm availability of funds on behalf of TransferWise customers. The API implementation follows the <a href="https://standards.openbanking.org.uk/api-specifications/">Open Banking UK standard</a>, and TransferWise is a registered member of the <a href="https://www.openbanking.org.uk/providers/directory/">Open Banking Directory</a>.</p>
+
+<p>Through this API you can either query account information, if you&#39;re an Account Information Service Provider (<strong>AISP</strong>), initiate payments, if you&#39;re a Payment Initiation Service Provider (<strong>PISP</strong>), or confirm the availability of funds, if you&#39;re a Card Based Payment Instrument Issuer (<strong>CBPII</strong>). We are currently supporting version <a href="https://standards.openbanking.org.uk/api-specifications/read-write-specs/v3-1-1/">3.1.1</a> of the Open Banking API.</p>
+<h2 id='open-banking-api-prerequisites'>Prerequisites</h2>
+<blockquote>
+<p>Well-Known Open Banking URL</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>https://sandbox.transferwise.tech/openbanking/.well-known/openid-configuration
+</code></pre>
+<p>There&#39;s a couple of things you should be aware of in order to connect to the TransferWise Open Banking API:</p>
+
+<ul>
+<li>Being a registered TPP under the Open Banking Directory will ease the integration process.</li>
+<li>We are using <a href="https://en.wikipedia.org/wiki/Mutual_authentication">mutualTLS</a> as the means for authentication. Moreover, the <code>CN</code> of your client certificate is expected to match the <code>clientId</code> under which you are registered. </li>
+<li>You need to register your client, before you&#39;ll be able to call any of the APIs. Check out the <a href="#open-banking-api-sandbox-access">Sandbox Access</a> first.</li>
+</ul>
+
+<p>For a detailed description of requirements and supported algorithms please check out the Well-Known Open Banking URL.</p>
+<h2 id='open-banking-api-sandbox-access'>Sandbox Access</h2>
+<p>We highly recommend that you get started with connecting to our sandbox first, before moving on to production. To get started with the registration process drop us an email to <a href="mailto:openbanking@transferwise.com">openbanking@transferwise.com</a>.</p>
+<h3 id='open-banking-api-sandbox-access-open-banking-directory'>Open Banking Directory</h3>
+<p>If you&#39;re a registered TPP in the Open Banking Directory and you are using Signing and Transport certificates issued by
+Open Banking, you can easily onboard by providing either of the following things:</p>
+
+<ul>
+<li>You can generate and send us a Software Statement Assertion (SSA) from the Open Banking Directory.<br></li>
+<li>Alternatively, you can also just send us your Open Banking Organization ID together with the Software Statement ID that you wish to use.</li>
+</ul>
+
+<p>In either case, please make sure to have your list of <strong>Redirect Uri</strong>-s correctly configured in your Software Statement, otherwise you&#39;ll not be able to go through the whole flow.</p>
+<h3 id='open-banking-api-sandbox-access-eidas-certificates'>eIDAS Certificates</h3>
+<p>In case you&#39;re using an eIDAS certificates instead of the ones issued by the Open Banking Directory just contact us at <a href="mailto:openbanking@transferwise.com">openbanking@transferwise.com</a> to 
+see how we can move forward. </p>
+<h2 id='open-banking-api-sandbox-test-user'>Sandbox Test User</h2>
+<p>You can sign up for a test user account here <a href="https://sandbox.transferwise.tech/register">https://sandbox.transferwise.tech/register</a>. The 2FA code used for any subsequent logins to the sandbox will alway be <code>111111</code>.</p>
+
+<p>You&#39;ll be asked to set up a developer account by filling in your profile information. Once this is done, you&#39;ll see that your newly created profile comes with a couple of test accounts opened and some test funds in them.</p>
+
+<p>You do <strong>NOT</strong> need to create an API Token via the web interface in case you&#39;re intention is to use this test user for the Open Banking flow.</p>
+<h2 id='open-banking-api-sandbox-test-flow'>Sandbox Test Flow</h2>
+<p>After you&#39;ve successfully applied for the <a href="#open-banking-api-sandbox-access">Sandbox Access</a> and you&#39;ve set up a <a href="#open-banking-api-sandbox-test-user">Sandbox Test User</a> you are ready to test the Open Banking flow.
+For the purpose of this test flow let&#39;s assume that your TPP is an AISP and it&#39;s registered with the following details</p>
+
+<table><thead>
+<tr>
+<th>Client ID</th>
+<th>Redirect URI</th>
+<th>Authorized Scopes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ob-dummy-tpp</td>
+<td>https://ob-dummy-tpp/redirect</td>
+<td>accounts</td>
+</tr>
+</tbody></table>
+<h2 id='open-banking-api-1-create-an-access-token'>1. Create an Access Token</h2>
+<blockquote>
+<p>Example Token Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  https://openbanking.sandbox.transferwise.tech/open-banking/auth/token <span class="se">\</span>
+  --cacert CA.pem --cert client.pem --key client.key <span class="se">\</span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -d <span class="s1">'grant_type=client_credentials&amp;scope=accounts'</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abcd1234-abcd-1234-abcd-abcdef123456"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">6000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts openbanking"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>As a first step you&#39;ll need to request an access token from the Token Endpoint.  </p>
+<h3 id='open-banking-api-1-create-an-access-token-request'>Request</h3>
+<p><strong><code>POST https://openbanking.sandbox.transferwise.tech/open-banking/auth/token</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>grant_type</td>
+<td>OAuth Grant Type</td>
+<td><code>client_credentials</code></td>
+</tr>
+<tr>
+<td>scope</td>
+<td>The requested scopes</td>
+<td>Space separated list</td>
+</tr>
+</tbody></table>
+
+<p>You must include the requested scope in your token request. As an AISP your requested scope will be <code>accounts</code>.</p>
+<h3 id='open-banking-api-1-create-an-access-token-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>The access token</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>Expiration time in seconds</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>The scopes you have been given access to</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h2 id='open-banking-api-2-create-a-consent'>2. Create a Consent</h2>
+<blockquote>
+<p>Example Create Consent Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  https://openbanking.sandbox.transferwise.tech/open-banking/v3.1/aisp/account-access-consents <span class="se">\</span>
+  --cacert CA.pem --cert client.pem --key client.key <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer abcd1234-abcd-1234-abcd-abcdef123456'</span> <span class="se">\</span>
+  -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+  "Data": {
+    "Permissions": [
+      "ReadAccountsBasic", "ReadTransactionsBasic", "ReadTransactionsDebits"
+    ]}}'</span>
+</code></pre>
+<blockquote>
+<p>Example Response </p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AwaitingAuthorisation"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ConsentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='open-banking-api-2-create-a-consent-request'>Request</h3>
+<p><strong><code>POST https://openbanking.sandbox.transferwise.tech/open-banking/v3.1/aisp/account-access-consents</code></strong></p>
+
+<p>Using the <code>access-token</code> returned from <a href="#open-banking-api-1-create-an-access-token">Creating an Access Token</a> you can create a new consent object. Use the authorization header:</p>
+
+<p><code>Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx</code> </p>
+
+<p>The payload of this request will look different depending on whether you&#39;re an AISP, PISP or CBPII. For an AISP you&#39;ll need to specify a set of permissions describing the access that you wish to gain on behalf of the end user.</p>
+<h3 id='open-banking-api-2-create-a-consent-response'>Response</h3>
+<p>The response will be JSON data reflecting the newly created consent object. There are two important return values to highlight here.</p>
+
+<ul>
+<li><code>Data.Status</code> will contain <code>AwaitingAuthorisation</code> because this consent has not been authorized by the user yet.<br></li>
+<li><code>Data.ConsentId</code> will contain the unique identifier assigned to your consent object. Save this, as you&#39;ll need it later.</li>
+</ul>
+<h2 id='open-banking-api-3-user-flow'>3. User Flow</h2>
+<blockquote>
+<p>Example Authorization Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>https://sandbox.transferwise.tech/openbanking/authorize?
+  <span class="nv">response_type</span><span class="o">=</span>code%20id_token&amp;
+  <span class="nv">redirect_uri</span><span class="o">=</span>https://ob-dummy-tpp/redirect&amp;
+  <span class="nv">scope</span><span class="o">=</span>openid%20accounts&amp;
+  <span class="nv">client_id</span><span class="o">=</span>ob-dummy-tpp&amp;
+  <span class="nv">state</span><span class="o">=</span>state123&amp;
+  <span class="nv">nonce</span><span class="o">=</span>nonce123&amp;
+  <span class="nv">request</span><span class="o">=</span>eyJ0...sYjmjJg
+</code></pre>
+<blockquote>
+<p>Example Authorization JWT Request</p>
+
+<p>HEADER</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"kid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"er84c2cYa6dAe57BV3278Pf"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"alg"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"PS256"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"typ"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"JWT"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>PAYLOAD</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"scope"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"openid accounts"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"response_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"code id_token"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"sub"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"user_id"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"claims"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id_token"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"openbanking_intent_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"essential"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="s2">"acr"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"values"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+               </span><span class="s2">"urn:openbanking:psd2:sca"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"urn:openbanking:psd2:ca"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"essential"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"userinfo"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"openbanking_intent_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"value"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"essential"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="s2">"iss"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ob-dummy-tpp"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"client_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ob-dummy-tpp"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"aud"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://openbanking.sandbox.transferwise.tech"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"exp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2499287201</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"iat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2499283601</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"max_age"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">86400</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"redirect_uri"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ob-dummy-tpp/redirect"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>At the moment we are only supporting the browser redirect flow (<a href="https://openbanking.atlassian.net/wiki/spaces/DZ/pages/83919096/Open+Banking+Security+Profile+-+Implementer+s+Draft+v1.1.2#OpenBankingSecurityProfile-Implementer'sDraftv1.1.2-HybridFlowRequestwithIntentId">Hybrid Flow</a>) for authorizing the created consent.</p>
+
+<p>The customer journey will start from the TPPs website from where a user action will trigger a redirect to the TransferWise Open Banking Authorization Endpoint</p>
+
+<p><strong><code>GET https://sandbox.transferwise.tech/openbanking/authorize</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>response_type</td>
+<td>Mandatory</td>
+<td>code id_token</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>Mandatory</td>
+<td>One of the pre-registered redirect URIs</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>Mandatory</td>
+<td>Must include <code>openid</code> plus any requested scope</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>Mandatory</td>
+<td>Pre-registered clientId of the TPP</td>
+</tr>
+<tr>
+<td>request</td>
+<td>Mandatory</td>
+<td>JWT Request Object</td>
+</tr>
+<tr>
+<td>state</td>
+<td>Optional</td>
+<td>If present, it must also be present in the JWT</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>Optional</td>
+<td>If present, it must also be present in the JWT</td>
+</tr>
+</tbody></table>
+
+<p>You can take a look at the example JWT request object on the right. Please note that:</p>
+
+<ul>
+<li>Every request parameter sent in the URL <strong>must</strong> also be present in the signed JWT.</li>
+<li>The <code>aud</code> claim should be correctly filled as <code>https://openbanking.sandbox.transferwise.tech</code></li>
+<li>The <code>openbanking_intent_id</code> <strong>must</strong> be filled with a valid <code>ConsentId</code> issued to the TPP.</li>
+<li>The JWT <strong>must</strong> be signed with a valid signing certificate.</li>
+</ul>
+
+<p>Once the TPP redirects the user browser to the Authorization Endpoint the following things will happen in order:</p>
+
+<ol>
+<li>User Login (use the username and password from the <a href="#open-banking-api-sandbox-test-user">Test User Registration</a>)</li>
+<li>Pass 2FA challenge (User the code <code>111111</code> in sandbox)</li>
+<li>Select profile you wish to give access to (Business or Personal)</li>
+<li>Review and Authorize Consent </li>
+<li>Redirect back to TPP</li>
+</ol>
+
+<p>As part of the last step, the user browser is redirected to the TPP with the following parameters</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>Mandatory</td>
+<td>The <code>authorization_code</code> issued as the request of the request</td>
+</tr>
+<tr>
+<td>id_token</td>
+<td>Mandatory</td>
+<td>Signed JWT containing details about the authorization</td>
+</tr>
+<tr>
+<td>state</td>
+<td>Optional</td>
+<td>In case it was provided with the request</td>
+</tr>
+</tbody></table>
+
+<p>Note that in case the authorization request fails either because of a validation error on the request, or because the enduser drops off, we still redirect the user browser to the TPP with an error response of the following format:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error</td>
+<td>Error code according to <a href="https://tools.ietf.org/html/rfc6749#section-4.1.2.1">RFC6749</a></td>
+<td>Text</td>
+</tr>
+<tr>
+<td>error_description</td>
+<td>Detailed explanation of error</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h2 id='open-banking-api-4-exchange-authorization-code-for-access-token'>4. Exchange Authorization Code for Access Token</h2>
+<blockquote>
+<p>Example Token Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  https://openbanking.sandbox.transferwise.tech/open-banking/auth/token <span class="se">\</span>
+  --cacert CA.pem --cert client.pem --key client.key <span class="se">\</span>
+  -H <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  -d <span class="s1">'grant_type=authorization_code&amp;redirect_uri=https%3A%2F%2Fob-dummy-tpp%2Fredirect&amp;code=abcdauthcode'</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zzzzzzzz-1111-2222-3333-zzzzzzzzzzzz"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refreshr-efre-shre-fres-hrefreshrefr"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">6000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts consent-id:123 openbanking openid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Once you get the authorization <code>code</code> after the browser redirect, you&#39;ll have to call the Token Endpoint to exchange this for a valid access token.</p>
+<h3 id='open-banking-api-4-exchange-authorization-code-for-access-token-request'>Request</h3>
+<p><strong><code>POST https://openbanking.sandbox.transferwise.tech/open-banking/auth/token</code></strong></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>grant_type</td>
+<td>OAuth Grant Type</td>
+<td><code>authorization_code</code></td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>Pre-registered redirect Uri</td>
+<td>URI</td>
+</tr>
+<tr>
+<td>code</td>
+<td>Authorization Code</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h3 id='open-banking-api-4-exchange-authorization-code-for-access-token-response'>Response</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>The access token</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>Expiration time in seconds</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>The scopes you have been given access to</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>Refresh Token for refreshing access token</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<h2 id='open-banking-api-5-query-the-api'>5. Query the API</h2>
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://openbanking.sandbox.transferwise.tech/open-banking/v3.1/aisp/accounts <span class="se">\</span>
+  --cacert CA.pem --cert client.pem --key client.key <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer zzzzzzzz-1111-2222-3333-zzzzzzzzzzzz'</span> <span class="se">\</span>
+</code></pre>
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Account"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"AccountId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"504"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"AccountType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Personal"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"AccountSubType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EMoney"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Account"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"SchemeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK.OBIE.SortCodeAccountNumber"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Identification"</span><span class="p">:</span><span class="w"> </span><span class="s2">"230xxx1000xxxx"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Smith (GBP)"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"Servicer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"SchemeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UK.OBIE.BICFI"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Identification"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRWIGB22"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>With the <code>access-token</code> from <a href="#open-banking-api-4-exchange-authorization-code-for-access-token">Authorization Code Flow</a> used in the Authorization header, you&#39;ll be able to query the data endpoints.</p>
+
+<p><code>Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx</code></p>
+
+<p>As an AISP you&#39;ll be able to call the following endpoints</p>
+<h3 id='open-banking-api-5-query-the-api-accounts'>Accounts</h3>
+<p><strong><code>GET https://openbanking.sandbox.transferwise.tech/open-banking/v3.1/aisp/accounts</code></strong></p>
+
+<p><strong><code>GET https://openbanking.sandbox.transferwise.tech/open-banking/v3.1/aisp/accounts/{id}</code></strong></p>
+<h3 id='open-banking-api-5-query-the-api-balances'>Balances</h3>
+<p><strong><code>GET https://openbanking.sandbox.transferwise.tech/open-banking/v3.1/aisp/accounts/{id}/balances</code></strong></p>
+<h3 id='open-banking-api-5-query-the-api-transactions'>Transactions</h3>
+<p><strong><code>GET https://openbanking.sandbox.transferwise.tech/open-banking/v3.1/aisp/accounts/{id}/transactions</code></strong></p>
+
+<p><br /><br /><br /><br /><br /><br /></p>
 <h1 id='contact-us'>Contact Us</h1>
 <p><strong>Having issues while calling our API endpoints?</strong></br>
 Check our API status at <a href="https://status.transferwise.com/">https://status.transferwise.com/</a>
