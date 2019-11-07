@@ -13284,9 +13284,8 @@ Please note that you have to use a client level token to access application subs
 <p>Events are messages that will be sent to your server as HTTP <code>POST</code> requests once you create a webhook subscription (and a resource you have access to is updated).
 They will not contain any personally identifiable information.</p>
 
-<p>To acknowledge that you have successfully processed an event, make sure your server answers with a <code>2xx</code>-series HTTP status
-code within 5 seconds. Otherwise, we will consider the delivery attempt as having failed and will later try to resend the
-message.</p>
+<p>To acknowledge that you have successfully processed an event, make sure your server answers with the HTTP status code <code>200</code>
+within 5s. Otherwise, we will consider the delivery attempt as having failed and will later try to resend the message.</p>
 
 <p>We will attempt to redeliver messages at increasing intervals over a two week period. We will try at most 25 times to do this.</p>
 <h3 id='webhook-events-list-signature-header'>Signature header</h3>
