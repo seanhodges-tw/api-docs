@@ -872,13 +872,7 @@
                       <a href="#webhook-events-event-payload" class="toc-h2 toc-link" data-title="Event payload">Event payload</a>
                     </li>
                     <li>
-                      <a href="#webhook-events-transfer-status-change-event" class="toc-h2 toc-link" data-title="Transfer status change event">Transfer status change event</a>
-                    </li>
-                    <li>
-                      <a href="#webhook-events-transfer-issue-event" class="toc-h2 toc-link" data-title="Transfer issue event">Transfer issue event</a>
-                    </li>
-                    <li>
-                      <a href="#webhook-events-balance-deposit-event" class="toc-h2 toc-link" data-title="Balance deposit event">Balance deposit event</a>
+                      <a href="#webhook-events-event-types" class="toc-h2 toc-link" data-title="Event types">Event types</a>
                     </li>
                 </ul>
             </li>
@@ -13281,11 +13275,12 @@ Please note that you have to use a client level token to access application subs
 </span></code></pre><h3 id='profile-webhooks-list-request'>Request</h3>
 <p><strong><code>GET https://api.transferwise.com/v3/profiles/{profileId}/subscriptions</code></strong></p>
 <h1 id='webhook-events'>Webhook events</h1>
-<p>Events are messages that will be sent to your server as HTTP <code>POST</code> requests once you create a webhook subscription (and a resource you have access to is updated).
-They will not contain any personally identifiable information.</p>
+<p>Events are messages that will be sent to your server as HTTP <code>POST</code> requests once you create a webhook subscription
+(and a resource you have access to is updated). They will not contain any personally identifiable information.</p>
 
-<p>To acknowledge that you have successfully processed an event, make sure your server answers with the HTTP status code <code>200</code>
-within 5s. Otherwise, we will consider the delivery attempt as having failed and will later try to resend the message.</p>
+<p>To acknowledge that you have successfully processed an event, make sure your server answers with a <code>2xx</code>-series HTTP status
+code within 5 seconds. Otherwise, we will consider the delivery attempt as having failed and will later try to resend the
+message.</p>
 
 <p>We will attempt to redeliver messages at increasing intervals over a two week period. We will try at most 25 times to do this.</p>
 <h3 id='webhook-events-list-signature-header'>Signature header</h3>
@@ -13333,7 +13328,7 @@ We advise you not to process any requests where signature appears to be forged.<
   </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='webhook-events-event-payload-event-payload'>Event payload</h3>
+</span></code></pre>
 <p>All events share same payload structure. Depending on the <code>event_type</code> the only object that will change is <code>data</code>.</p>
 
 <table><thead>
@@ -13369,7 +13364,7 @@ We advise you not to process any requests where signature appears to be forged.<
 <td>Timestamp</td>
 </tr>
 </tbody></table>
-<h2 id='webhook-events-transfer-status-change-event'>Transfer status change event</h2>
+<h2 id='webhook-events-event-types'>Event types</h2><h3 id='webhook-events-event-types-transfer-status-change-event-transfers-state-change'>Transfer status change event  (<code>transfers#state-change</code>)</h3>
 <blockquote>
 <p>Example event:</p>
 </blockquote>
@@ -13390,11 +13385,13 @@ We advise you not to process any requests where signature appears to be forged.<
   </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='webhook-events-transfer-status-change-event-event'>Event</h3>
-<p>Event will be triggered every time transfer status is updated. Each event contains a timestamp. As we do not guarantee the order of events, please use <code>data.occured_at</code> to reconcile the order. </p>
+</span></code></pre>
+<p>This event will be triggered every time a transfer&#39;s status is updated. Each event contains a timestamp.
+As we do not guarantee the order of events, please use <code>data.occured_at</code> to reconcile the order. </p>
 
-<p>If you would like to subscribe to transfer state change events, please use <code>transfers#state-change</code> when creating your subscription.</p>
-
+<p>If you would like to subscribe to transfer state change events, please use <code>transfers#state-change</code>
+when creating your subscription.</p>
+<h4 id='webhook-events-event-types-transfer-status-change-event-code-transfers-state-change-code-schema-version-2-0-0-latest'>Schema version <code>2.0.0</code> (latest)</h4>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -13438,7 +13435,7 @@ We advise you not to process any requests where signature appears to be forged.<
 <td>Timestamp</td>
 </tr>
 </tbody></table>
-<h2 id='webhook-events-transfer-issue-event'>Transfer issue event</h2>
+<h3 id='webhook-events-event-types-transfer-issue-event-transfers-active-cases'>Transfer issue event (<code>transfers#active-cases</code>)</h3>
 <blockquote>
 <p>Example event:</p>
 </blockquote>
@@ -13457,11 +13454,11 @@ We advise you not to process any requests where signature appears to be forged.<
   </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='webhook-events-transfer-issue-event-event'>Event</h3>
-<p>Event will be triggered every time transfer&#39;s list of active issues is updated.</p>
+</span></code></pre>
+<p>This event will be triggered every time a transfer&#39;s list of active issues is updated.</p>
 
 <p>If you would like to subscribe to transfer active issue events, please use <code>transfers#active-cases</code> when creating your subscription.</p>
-
+<h4 id='webhook-events-event-types-transfer-issue-event-code-transfers-active-cases-code-schema-version-2-0-0-latest'>Schema version <code>2.0.0</code> (latest)</h4>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -13495,7 +13492,7 @@ We advise you not to process any requests where signature appears to be forged.<
 <td>String</td>
 </tr>
 </tbody></table>
-<h2 id='webhook-events-balance-deposit-event'>Balance deposit event</h2>
+<h3 id='webhook-events-event-types-balance-deposit-event-balances-credit'>Balance deposit event (<code>balances#credit</code>)</h3>
 <blockquote>
 <p>Example event:</p>
 </blockquote>
@@ -13517,11 +13514,13 @@ We advise you not to process any requests where signature appears to be forged.<
   </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='webhook-events-balance-deposit-event-event'>Event</h3>
-<p>Event will be triggered every time balance is credited. This event will not be delivered to application subscriptions.</p>
+</span></code></pre>
+<p>This event will be triggered every time a balance account is credited.</p>
+
+<p>Please note: This event is not currently delivered to application subscriptions.</p>
 
 <p>If you would like to subscribe to balance credit events, please use <code>balances#credit</code> when creating your subscription.</p>
-
+<h4 id='webhook-events-event-types-balance-deposit-event-code-balances-credit-code-schema-version-2-0-0-latest'>Schema version <code>2.0.0</code> (latest)</h4>
 <table><thead>
 <tr>
 <th>Field</th>
