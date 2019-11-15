@@ -3788,7 +3788,7 @@ There is no need to wait for the actual expiration to happen first. </p>
 
 <ul>
 <li>Being a registered TPP under the Open Banking Directory will ease the integration process.</li>
-<li>We are using <a href="https://en.wikipedia.org/wiki/Mutual_authentication">mutualTLS</a> as the means for authentication. Moreover, the <code>CN</code> of your client certificate is expected to match the <code>clientId</code> under which you are registered. </li>
+<li>We are using <a href="https://tools.ietf.org/html/draft-ietf-oauth-mtls-17">mutualTLS</a> as the means for authentication. Moreover, the <code>CN</code> of your client certificate is expected to match the <code>clientId</code> under which you are registered. </li>
 <li>You need to register your client, before you&#39;ll be able to call any of the APIs. Check out the <a href="#open-banking-api-sandbox-access">Sandbox Access</a> first.</li>
 </ul>
 
@@ -3797,7 +3797,8 @@ There is no need to wait for the actual expiration to happen first. </p>
 <p>We highly recommend that you get started with connecting to our sandbox first, before moving on to production. To get started with the registration process drop us an email to <a href="mailto:openbanking@transferwise.com">openbanking@transferwise.com</a>.</p>
 <h3 id='open-banking-api-sandbox-access-open-banking-directory'>Open Banking Directory</h3>
 <p>If you&#39;re a registered TPP in the Open Banking Directory and you are using Signing and Transport certificates issued by
-Open Banking, you can easily onboard by providing either of the following things:</p>
+Open Banking. At the moment we accept both the old style OB Transport and OB Signing, as well as the eIDAS-like OBWAC and OBSeal certificates. 
+You can easily onboard by providing either of the following things:</p>
 
 <ul>
 <li>You can generate and send us a Software Statement Assertion (SSA) from the Open Banking Directory.<br></li>
