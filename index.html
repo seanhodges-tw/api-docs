@@ -3935,6 +3935,18 @@ For the purpose of this test flow let&#39;s assume that your TPP is an AISP and 
 <p><code>Authorization: Bearer xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx</code> </p>
 
 <p>The payload of this request will look different depending on whether you&#39;re an AISP, PISP or CBPII. For an AISP you&#39;ll need to specify a set of permissions describing the access that you wish to gain on behalf of the end user.</p>
+<h3 id='open-banking-api-2-create-a-consent-permissions'>Permissions</h3>
+<p>For AISPs the list of supported permissions is:</p>
+
+<ul>
+<li>ReadAccountsBasic</li>
+<li>ReadAccountsDetail</li>
+<li>ReadBalances</li>
+<li>ReadTransactionsBasic</li>
+<li>ReadTransactionsCredits</li>
+<li>ReadTransactionsDebits</li>
+<li>ReadTransactionsDetail</li>
+</ul>
 <h3 id='open-banking-api-2-create-a-consent-response'>Response</h3>
 <p>The response will be JSON data reflecting the newly created consent object. There are two important return values to highlight here.</p>
 
