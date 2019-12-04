@@ -841,6 +841,9 @@
                       <a href="#application-webhooks-get-by-id" class="toc-h2 toc-link" data-title="Get by ID">Get by ID</a>
                     </li>
                     <li>
+                      <a href="#application-webhooks-test-notifications" class="toc-h2 toc-link" data-title="Test notifications">Test notifications</a>
+                    </li>
+                    <li>
                       <a href="#application-webhooks-list" class="toc-h2 toc-link" data-title="List">List</a>
                     </li>
                 </ul>
@@ -12998,6 +13001,90 @@ Please note that you have to use a client level token to access application subs
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='application-webhooks-get-by-id-request'>Request</h3>
 <p><strong><code>GET https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}</code></strong></p>
+<h2 id='application-webhooks-test-notifications'>Test notifications</h2>
+<p>Test notifications can be generated for existing application subscriptions using the API.</p>
+
+<p>Test notifications will have the correct structure for their source subscription&#39;s event type and version,
+and will contain &quot;dummy&quot; data. These data include random UUIDs, entity IDs of zero, current dates and times,
+and hard-coded status codes.</p>
+
+<p>Test notifications are delivered with the usual notification HTTP request headers, including a unique delivery ID for the 
+notification, and a &quot;test notification&quot; flag set to true. You can check for the presence of this test flag to
+determine that an incoming notification is a test notification which should not be processed as real data.
+See the section <a href="#webhook-events-event-http-requests">Event HTTP requests</a> for more information on request headers.</p>
+
+<p>When test notifications are created with the API, they are queued for sending in the same way as non-test notifications.
+This means that there may be some delay in notification delivery, and delivery failures will result in attempts to 
+redeliver the notification later.
+The API returns the delivery IDs of the notifications that have been successfully queued for sending, which can 
+be correlated with the delivery ID header values for notifications you later receive.</p>
+
+<p>Please note that this test notification API is only available for application-based subscriptions.
+Profile-based subscriptions do not currently support this testing feature. </p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{subscriptionId}/test-notifications"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: Bearer &lt;your client level token&gt;"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"delivery_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4a6b9810-4279-4de5-8d8d-1a6cf3b92a75"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-03-28T11:22:33Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example Test Notification:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>x-signature: bnho0q9JhjR6IPJIOZqWVP...
+x-delivery-id: 4a6b9810-4279-4de5-8d8d-1a6cf3b92a75
+x-test-notification: true
+
+{
+  "data": {
+    "resource": {
+      "id": 0,
+      "profile_id": 0,
+      "account_id": 0,
+      "type": "transfer"
+    },
+    "current_state": "processing",
+    "previous_state": "incoming_payment_waiting",
+    "occurred_at": "2019-03-28T11:22:33Z"
+  },
+  "subscription_id": "39f241b7-293d-439e-beb3-4bf947bd4ff8",
+  "event_type": "transfers#state-change",
+  "schema_version": "2.0.0",
+  "sent_at": "2019-03-28T11:22:33Z"
+}
+</code></pre><h3 id='application-webhooks-test-notifications-request'>Request</h3>
+<p><strong><code>POST https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{subscriptionId}/test-notifications</code></strong></p>
+<h3 id='application-webhooks-test-notifications-response'>Response</h3>
+<p>List of test notifications that were scheduled for delivery.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>delivery_id</td>
+<td>UUID that uniquely identifies the notification</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Time the notification was created</td>
+<td>Text</td>
+</tr>
+</tbody></table>
 <h2 id='application-webhooks-list'>List</h2>
 <p>List all your subscriptions.</p>
 
