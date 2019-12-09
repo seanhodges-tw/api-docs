@@ -643,6 +643,9 @@
                       <a href="#recipient-accounts-create-kes-recipient" class="toc-h2 toc-link" data-title="Create KES Recipient">Create KES Recipient</a>
                     </li>
                     <li>
+                      <a href="#recipient-accounts-create-krw-recipient" class="toc-h2 toc-link" data-title="Create KRW Recipient">Create KRW Recipient</a>
+                    </li>
+                    <li>
                       <a href="#recipient-accounts-create-lkr-recipient" class="toc-h2 toc-link" data-title="Create LKR Recipient">Create LKR Recipient</a>
                     </li>
                     <li>
@@ -8667,6 +8670,68 @@ Business recipient: 1,5 mln INR per day (~ 17 800 GBP)</b>
 <p>Recipient type = <em>&#39;kenya_mobile&#39;</em></p>
 
 <p>Required details: accountNumber - mobile number</p>
+<h2 id='recipient-accounts-create-krw-recipient'>Create KRW Recipient</h2>
+<blockquote>
+<p>Example Request (KRW PayGate):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipients name&gt;",
+          "currency": "KRW",
+          "type": "south_korean_paygate",
+          "details": {
+           "legalType": "PRIVATE",
+           "bankCode": "BUSAN_032",
+           "accountNumber": "1254693521232",
+           "dateOfBirth" : "yyyy-mm-dd",
+           "email": "&lt;recipients email&gt;"
+           }
+        }'</span>
+</code></pre>
+<blockquote>
+<p>Example Request (KRW PayGate to Business):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{ 
+          "profile": &lt;your profile id&gt;,
+          "accountHolderName": "&lt;recipient business name&gt;",
+          "currency": "KRW",
+          "type": "south_korean_paygate_business",
+          "details": {
+           "legalType": "BUSINESS",
+           "bankCode" : "BUSAN_032",
+           "accountNumber": "1254693521232"
+           }
+        }'</span>
+</code></pre>
+<p>Send payments to South Korea. </p>
+
+<p>Private and business recipients are supported. </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;south_korean_paygate&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber, dateOfBirth, email</p>
+
+<p>Lists of banks and branches can be obtained from <a href="#recipient-accounts-banks-and-branches">Banks and Branches</a> endpoints.</p>
+
+<p>You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.</p>
+
+<p><br/></p>
+
+<p>OR </p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;south_korean_paygate_business&#39;</em></p>
+
+<p>Required details: bankCode, accountNumber</p>
 <h2 id='recipient-accounts-create-lkr-recipient'>Create LKR Recipient</h2>
 <blockquote>
 <p>Example Request (LKR):</p>
