@@ -13084,8 +13084,10 @@ redeliver the notification later.
 The API returns the delivery IDs of the notifications that have been successfully queued for sending, which can 
 be correlated with the delivery ID header values for notifications you later receive.</p>
 
-<p>Please note that this test notification API is only available for application-based subscriptions.
-Profile-based subscriptions do not currently support this testing feature. </p>
+<aside class="notice">
+Please note that this test notification API is only available for application-based subscriptions.
+Profile-based subscriptions do not currently support this testing feature. 
+</aside>
 
 <blockquote>
 <p>Example Request:</p>
@@ -13225,6 +13227,17 @@ x-test-notification: true
 <li>via user interface (go to your <a href="https://transferwise.com/user/settings#webhooks" target="_blank">settings page</a>)</li>
 </ul>
 <h2 id='profile-webhooks-create'>Create</h2>
+<p>Create a profile subscription.</p>
+<h3 id='profile-webhooks-create-url-validation'>URL validation</h3>
+<p><strong>Our system will validate the requested delivery URL before creating a subscription.</strong></p>
+
+<p>A test notification will be sent to the URL and if a <code>2xx</code>-series HTTP response is not received then the creation 
+request will be rejected with error code <code>INVALID_CALLBACK_URL</code>.</p>
+
+<p>Your notification endpoint must be ready to respond to the test notification.
+Test notifications can be distinguished by the presence of an HTTP request header.
+See the section <a href="#webhook-events-event-http-requests">Event HTTP requests</a> for more information on request headers.</p>
+
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
