@@ -2904,10 +2904,10 @@ You need to go through this flow only once for each customer before they can set
   <li>Your app redirects the user to TransferWise authorization webpage, which prompts them to login if necessary.<br/>
   </li>
   <li>The user logs in to TransferWise.</li>
-  <li> The user agrees to provide access, the TransferWise authorization page then redirects user back to your pre-configured url, including a code you can use to generate user tokens. e.g.</p>
-
-<p><code>
-  https://www.yourbank.com/?code=[CODE]
+  <li>The user agrees to provide access.</li>
+  <li>The user is redirected back to your preconfigured callback URL; including a code you can use to generate user tokens, and the profile(s) that the user token can be used with, e.g.
+  <code>
+  https://www.yourbank.com/?code=[CODE]&amp;profileId=[PROFILE ID]
 </code>
   </li>
 </ol></p>
@@ -2955,9 +2955,11 @@ https://transferwise.com/oauth/authorize/?client_id={clientId}&amp;redirect_uri=
 <h3 id='bank-integrations-guide-legacy-get-user-authorization-for-existing-accounts-3-the-user-agrees-to-grant-access-and-we-forward-them-to-your-redirect_url'>3. The user agrees to grant access and we forward them to your <em>redirect_url</em></h3>
 <p>Once a user gives your banking app authorization to connect to TransferWise and access their data, the user is redirected back to your <em>redirect_url</em> with a generated code query string value. For example</p>
 
-<p><code>https://www.yourbank.com/?code=[CODE]</code></p>
+<p><code>https://www.yourbank.com/?code=[CODE]&amp;profileId=[PROFILE ID]</code></p>
 
 <p>Your website or service can then use this code to obtain the access token to act on behalf of the user account described in the <a href="#bank-integrations-guide-legacy-get-user-tokens">get user tokens</a> section.</p>
+
+<p>The profileId parameter specifies which profiles this access token can be used with.</p>
 
 <p>If you are building your TransferWise integration as a native mobile phone app then the redirect URL should be able to handle returning the user to the correct place in the app.</p>
 
@@ -3231,7 +3233,7 @@ you should debit the exact source amount from your customer&#39;s bank account
 and send the funds to TransferWise’s local bank account via domestic payment. You should send the amount provided in the quote object you created in the first step of the process. The details of this bank account will be shared with you by the TransferWise team helping your integration.</p>
 
 <p>In order for us to link this incoming domestic payment with a corresponding transfer order, we need you to use specific text in the &quot;payment reference&quot; field.
-Calling endpoint <a href="#quotes-get-pay-in-methods">Get pay-in methods</a> with quoteId returns you the correct reference text. e.g. <code>quote-1456477 P5472304</code>. We currently drive this behaviour using the second part of this string, starting with <em>P</em>, you should use a regular expression to extract this string to send as the reference, e.g. <code>.*(P\d+)</code>, taking the second group.</p>
+Calling endpoint <a href="#quotes-get-pay-in-methods">Get pay-in methods</a> with quoteId returns you the correct reference text, e.g. <code>quote-1456477 P5472304</code>. We currently drive this behaviour using the second part of this string, starting with <em>P</em>, you should use a regular expression to extract this string to send as the reference, e.g. <code>.*(P\d+)</code>, taking the second group.</p>
 <h2 id='bank-integrations-guide-legacy-track-transfer-status'>Track transfer status</h2>
 <p>Please look at <a href="#payouts-guide-track-transfer-status">Track transfer status</a> under TransferWise Payouts Guide.</p>
 <h2 id='bank-integrations-guide-legacy-get-updated-transfer-delivery-time-estimate'>Get updated transfer delivery time estimate</h2>
