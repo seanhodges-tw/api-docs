@@ -3422,6 +3422,8 @@ This can vary quite a lot for different currency routes. For example transfers o
 This endpoint allows you to find out the estimated delivery time for each currency route.</p>
 
 <p>See more at <a href="#quotes-get-temporary-quote">Get Temporary Quote</a></p>
+
+<p><br /><br /><br /><br /><br /><br /><br /><br /></p>
 <h1 id='open-banking-api'>Open Banking API</h1>
 <blockquote>
 <p>Base Open Banking URL in Sandbox</p>
@@ -3438,9 +3440,14 @@ This endpoint allows you to find out the estimated delivery time for each curren
 <p>Through this API you can either query account information, if you&#39;re an Account Information Service Provider (<strong>AISP</strong>), initiate payments, if you&#39;re a Payment Initiation Service Provider (<strong>PISP</strong>), or confirm the availability of funds, if you&#39;re a Card Based Payment Instrument Issuer (<strong>CBPII</strong>). We are currently supporting version <a href="https://standards.openbanking.org.uk/api-specifications/read-write-specs/v3-1-1/">3.1.1</a> of the Open Banking API.</p>
 <h2 id='open-banking-api-prerequisites'>Prerequisites</h2>
 <blockquote>
-<p>Well-Known Open Banking URL</p>
+<p>Well-Known Open Banking URL in Sandbox</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>https://sandbox.transferwise.tech/openbanking/.well-known/openid-configuration
+</code></pre>
+<blockquote>
+<p>Well-Known Open Banking URL in Production</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>https://transferwise.com/openbanking/.well-known/openid-configuration
 </code></pre>
 <p>There&#39;s a couple of things you should be aware of in order to connect to the TransferWise Open Banking API:</p>
 
