@@ -10635,7 +10635,8 @@ For example this is a valid request to create a transfer.
      -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
      -d <span class="s1">'{ 
           "email": &lt;user email&gt;,
-          "registrationCode": &lt;registration code&gt;
+          "registrationCode": &lt;registration code&gt;,
+          "language":"PT"
         }'</span>
 </code></pre>
 <blockquote>
@@ -10787,6 +10788,11 @@ If email is new (there is no active user already) then new user will be created.
 <td>registrationCode</td>
 <td>Randomly generated registration code that is unique to this user. At least 32 characters long. <br/>You need to store registration code to obtain access token on behalf of this <br/>newly created user in next step. <br/>Please apply the same security standards to handling registration code as if it was a password.</td>
 <td>Text, min length is 32 chars</td>
+</tr>
+<tr>
+<td>language (Optional)</td>
+<td>User default language for UI and email communication. <br/>Allowed values EN, US, PT, ES, FR, DE, IT, JA, RU, PL, HU, TR, RO, NL, HK. Default value EN.</td>
+<td>Text, 2 chars</td>
 </tr>
 </tbody></table>
 <h3 id='users-sign-up-with-registration-code-response'>Response</h3>
