@@ -935,7 +935,7 @@
 <ul> 
   <li>Power your cross-border and domestic payouts with a single API integration.</li>
   <li>Pay out directly to bank accounts or email recipients.</li>
-  <li>Monitor payments received to your TransferWise local bank details (AUD, EUR, GBP, NZD, USD).</li> 
+  <li>Monitor payments received to your TransferWise local bank details (AUD, EUR, GBP, NZD, USD, PLN).</li> 
   <li>Get statements for balance reconciliation and accounting purposes.</li>
   <li>Fully automate transfer creation and track statuses.</li>
   <li>Always get the mid-market exchange and our low cost transparent fees.</li>
@@ -999,7 +999,13 @@
 
 <p>The <a href="#affiliates-integration-guide">Affiliates Integration Guide</a> helps you get started with the technical integration.</p>
 <h2 id='transferwise-api-receive-money'>Receive Money</h2>
-<p>You can receive money to the local bank details that come with your TransferWise account (AUD, EUR, GBP, NZD and USD) and reconcile these incoming payments via the API.</p>
+<p>You can receive money to the local bank details that come with your TransferWise account (USD, EUR, GBP, AUD, NZD and PLN) and reconcile these incoming payments via the API.</p>
+
+<p>You’re also able to create a webhook subscription to receive event callbacks to your server when payments are received. Here’s more information about the <a href="#webhook-events">webhooks</a>.</p>
+
+<p>Please note that we don&#39;t send any information over webhook calls that might contain personally identifiable information (PII) about the sender (including the payment reference).</p>
+
+<p>To reconcile incoming payments you might also need to match the information received via webhooks with the information that can be obtained from the <a href="#borderless-accounts-get-account-statement">statements</a>. </p>
 <h2 id='transferwise-api-checkout-flows'>Checkout flows</h2>
 <p>We currently don’t offer the option to build TransferWise into your checkout flow as a payment option to receive money. Note though that TransferWise can be added as a payout option on your site for beneficiaries to choose to receive their payout through to an email address, directly to a bank account or any other mechanism we support in our standard product.</p>
 <h2 id='transferwise-api-open-banking'>Open Banking</h2>
