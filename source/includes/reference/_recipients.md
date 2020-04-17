@@ -857,6 +857,10 @@ For example this is a valid request to create a recipient with address in US Ari
 We do not require the recipient's address for most receiving currencies and as such do not return these form elements by default. In some cases it may be desirable for you to collect this from users and store it as part of the recipient object in the TransferWise platform. If you wish to do this you can include the parameter `&addressRequired=true` in your call to `GET /v1/quotes/{quoteId}/account-requirements`, if this is present we will return address fields as part of the form.
 
 ###Building a user interface
+Account requirements help us understand how to create a valid account given a certain context. As a tool to help explore this API, please visit https://sandbox.transferwise.tech/dynamic-forms-ui/.
+This app allows specifying different requests and calls our sandbox environment for account requirements. It then displays the response in JSON along with an example 
+of the rendered form from the said response.
+
 When requesting the form data from the account-requirements several the first level of the response defines different types of recipient you can create, the first thing to do is present the user a choice of which recipient type they wish to create, e.g. to GBP this could be local details or IBAN format. Each recipient type then has mutiple `fields` describing the form elements required to be shown to collect information from the user. Each field will have a `type` value, these tell you the field type that your front end needs to render to be able to collect the data. A number of field types are permitted, these are:
 
 type            | UI element
