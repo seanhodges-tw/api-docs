@@ -7193,7 +7193,7 @@ For example posting US as country will also add &quot;state&quot; to list of fie
 </code></pre>
 <p>We do not require the recipient&#39;s address for most receiving currencies and as such do not return these form elements by default. In some cases it may be desirable for you to collect this from users and store it as part of the recipient object in the TransferWise platform. If you wish to do this you can include the parameter <code>&amp;addressRequired=true</code> in your call to <code>GET /v1/quotes/{quoteId}/account-requirements</code>, if this is present we will return address fields as part of the form.</p>
 <h3 id='recipient-accounts-using-account-requirements-building-a-user-interface'>Building a user interface</h3>
-<p>Account requirements help us understand how to create a valid account given a certain context. As a tool to help explore this API, please visit https://sandbox.transferwise.tech/dynamic-forms-ui/.
+<p>Account requirements help us understand how to create a valid account given a certain context. As a tool to help explore this API, please visit <a href="https://sandbox.transferwise.tech/dynamic-forms-ui/">Dynamic Forms UI</a>.
 This app allows specifying different requests and calls our sandbox environment for account requirements. It then displays the response in JSON along with an example 
 of the rendered form from the said response.</p>
 
