@@ -376,6 +376,8 @@ requests with the same token signature will be rejected.
 By default in our [sandbox environment](https://api.sandbox.transferwise.tech) strong customer authentication is 
 disabled. You can enable it for your account on the [public keys management page](https://api.sandbox.transferwise.tech/public-keys).
 
+The option for toggling the check yourself will be available in production as well as long as it is optional.
+
 ### TEST and LIVE environments
 
 * You can access the Sandbox API at [https://api.sandbox.transferwise.tech](https://api.sandbox.transferwise.tech)
