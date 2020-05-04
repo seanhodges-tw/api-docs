@@ -5978,27 +5978,27 @@ Quote also calculates transfer fee and estimates delivery time. </p>
 </thead><tbody>
 <tr>
 <td>profile</td>
-<td>Personal or business profile id</td>
+<td>Personal or business profile id.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>source</td>
-<td>Source(send) currency code</td>
+<td>Source(send) currency code.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>target</td>
-<td>Target(receive) currency code</td>
+<td>Target(receive) currency code.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>rateType</td>
-<td>Always use constant &#39;FIXED&#39;</td>
+<td>Always use constant &#39;FIXED&#39;.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>targetAmount</td>
-<td>Amount in target currency</td>
+<td>Amount in target currency.</td>
 <td>Decimal</td>
 </tr>
 <tr>
@@ -6008,7 +6008,7 @@ Quote also calculates transfer fee and estimates delivery time. </p>
 </tr>
 <tr>
 <td>type</td>
-<td>&#39;BALANCE_PAYOUT&#39; for payments funded from borderless account  <br/> &#39;BALANCE_CONVERSION&#39; for conversion between balances  <br/> &#39;REGULAR&#39; for payments funded via bank transfers</td>
+<td>&#39;BALANCE_PAYOUT&#39; for payments funded from borderless account.  <br/> &#39;BALANCE_CONVERSION&#39; for conversion between balances.  <br/> &#39;REGULAR&#39; for payments funded via bank transfers.</td>
 <td>Text</td>
 </tr>
 </tbody></table>
@@ -6022,57 +6022,57 @@ Quote also calculates transfer fee and estimates delivery time. </p>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>quoteId</td>
+<td>quoteId.</td>
 <td>Integer</td>
 </tr>
 <tr>
 <td>source</td>
-<td>Source(send) currency code</td>
+<td>Source(send) currency code.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>target</td>
-<td>Target(receive) currency code</td>
+<td>Target(receive) currency code.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>sourceAmount</td>
-<td>Amount in source currency</td>
+<td>Amount in source currency.</td>
 <td>Decimal</td>
 </tr>
 <tr>
 <td>targetAmount</td>
-<td>Amount in target currency</td>
+<td>Amount in target currency.</td>
 <td>Decimal</td>
 </tr>
 <tr>
 <td>type</td>
-<td>Quote type</td>
+<td>Quote type.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>rate</td>
-<td>Exchange rate value</td>
+<td>Exchange rate value.</td>
 <td>Decimal</td>
 </tr>
 <tr>
 <td>createdTime</td>
-<td>Quote created timestamp</td>
+<td>Quote created timestamp.</td>
 <td>Timestamp</td>
 </tr>
 <tr>
 <td>createdByUserId</td>
-<td>Your used id</td>
+<td>Your used id.</td>
 <td>Integer</td>
 </tr>
 <tr>
 <td>profile</td>
-<td>Personal or business profile id</td>
+<td>Personal or business profile id.</td>
 <td>Integer</td>
 </tr>
 <tr>
 <td>rateType</td>
-<td>Always &#39;FIXED&#39;</td>
+<td>Always &#39;FIXED&#39;.</td>
 <td>Text</td>
 </tr>
 <tr>
@@ -6235,22 +6235,22 @@ Reference text includes &quot;P-REF&quot; number of user which we need in order 
 </thead><tbody>
 <tr>
 <td>source</td>
-<td>Source(send) currency code</td>
+<td>Source(send) currency code.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>target</td>
-<td>Target(receive) currency code</td>
+<td>Target(receive) currency code.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>rateType</td>
-<td>Always use constant &#39;FIXED&#39;</td>
+<td>Always use constant &#39;FIXED&#39;.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>targetAmount</td>
-<td>Amount in target currency</td>
+<td>Amount in target currency.</td>
 <td>Decimal</td>
 </tr>
 <tr>
@@ -7225,7 +7225,7 @@ of the rendered form from the said response.</p>
 </tr>
 </tbody></table>
 
-<p>Example data is also included in each field which should be shown to the user, along with a regex or min and mex length constraints that should be applied as field level validations. You can optionally implement the dynamic validation using the <code>validationAsync</code> field, however these checks wil also be done when a completed recipient is submitted to <code>POST /v1/accounts</code>.</p>
+<p>Example data is also included in each field which should be shown to the user, along with a regex or min and max length constraints that should be applied as field level validations. You can optionally implement the dynamic validation using the <code>validationAsync</code> field, however these checks wil also be done when a completed recipient is submitted to <code>POST /v1/accounts</code>.</p>
 <h3 id='recipient-accounts-using-account-requirements-response'>Response</h3>
 <table><thead>
 <tr>
@@ -12206,7 +12206,7 @@ Returns the list of all ultimate beneficial owners associated with the business 
 </tr>
 </tbody></table>
 
-<p>When calling these endpoints if you include an <code>Accept-Language</code> header with a supported language code as the value then stings will be returned in the requested language. The languages supported by TransferWise are:</p>
+<p>When calling these endpoints if you include an <code>Accept-Language</code> header with a supported language code as the value then strings will be returned in the requested language. The languages supported by TransferWise are:</p>
 
 <table><thead>
 <tr>
