@@ -9,7 +9,7 @@ Endpoint                                    |
 `/v1/transfers`                             |
 
 
-When calling these endpoints if you include an `Accept-Language` header with a supported language code as the value then stings will be returned in the requested language. The languages supported by TransferWise are:
+When calling these endpoints if you include an `Accept-Language` header with a supported language code as the value then strings will be returned in the requested language. The languages supported by TransferWise are:
 
 Language            |   Code
 ---------           |---------  
