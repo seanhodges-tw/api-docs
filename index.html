@@ -7109,10 +7109,11 @@ This list does not currently support pagination, therefore if you have many reci
 
 </span></code></pre><h3 id='recipient-accounts-requirements-request'>Request</h3>
 <p><strong><code>GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements</code></strong><br/>
-<strong><code>POST https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements</code></strong><br/></p>
+<strong><code>POST https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements</code></strong><br/>
+<strong><code>GET https://api.sandbox.transferwise.tech/v1/account-requirements?source=EUR&amp;target=USD&amp;sourceAmount=1000</code></strong><br/></p>
 
 <p>The <code>GET</code> and <code>POST</code> account-requirements endpoints help you to figure out which fields are required to create a valid recipient for different currencies.
-You can use this data to build a dynamic user interface on top of these endpoints. 
+You can use this data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account-requirements for a specific currency route without creating a quote but with amount, source and target currencies passed as URL parameters.
 This is a step-by-step guide on how these endpoints work.</p>
 <h2 id='recipient-accounts-using-account-requirements'>Using account requirements</h2>
 <p>1.First create a quote to specify currencies and transfer amounts. See <a href="#quotes-create">Create.Quote</a>.</p>
