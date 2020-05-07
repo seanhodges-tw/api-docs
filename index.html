@@ -7950,6 +7950,23 @@ BD, BR, CZ, CL, EG, GH, HK, ID, IL, IN, JP, KE, LK, MA, NG, NP, PE, PH, RU, SG, 
            }
         }'</span>
 </code></pre>
+<blockquote>
+<p>Example Request (CNY Alipay id):</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+     -d <span class="s1">'{
+             "profile": &lt;your profile id&gt;,
+             "accountHolderName": &lt;recipient name&gt;,
+             "currency": "CNY",
+             "type": "chinese_alipay",
+             "details": {
+              "legalType": "PRIVATE",
+              "accountNumber": "email@example.com"
+             }
+         }'</span>
+</code></pre>
 <aside class="warning">
 <b>Only sending payments to private recipients. It is not allowed to send funds to business recipients.</b>
 </aside>
@@ -7959,6 +7976,16 @@ BD, BR, CZ, CL, EG, GH, HK, ID, IL, IN, JP, KE, LK, MA, NG, NP, PE, PH, RU, SG, 
 <p>Recipient type = <em>&#39;chinese_card&#39;</em></p>
 
 <p>Required details: cardNumber</p>
+
+<p><br/></p>
+
+<p>OR</p>
+
+<p><br/></p>
+
+<p>Recipient type = <em>&#39;chinese_alipay&#39;</em></p>
+
+<p>Required details: accountNumber - Chinese mobile number or email</p>
 <h2 id='recipient-accounts-create-czk-recipient'>Create CZK Recipient</h2>
 <blockquote>
 <p>Example Request (CZK Local):</p>
