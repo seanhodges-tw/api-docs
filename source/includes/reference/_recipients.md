@@ -1592,6 +1592,25 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
+
+> Example Request (CNY Alipay id):
+
+```shell
+curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
+     -H "Authorization: Bearer <your api token>" \
+     -H "Content-Type: application/json" \
+     -d '{
+             "profile": <your profile id>,
+             "accountHolderName": <recipient name>,
+             "currency": "CNY",
+             "type": "chinese_alipay",
+             "details": {
+              "legalType": "PRIVATE",
+              "accountNumber": "email@example.com"
+             }
+         }'
+```
+
 <aside class="warning">
 <b>Only sending payments to private recipients. It is not allowed to send funds to business recipients.</b>
 </aside>
@@ -1601,6 +1620,16 @@ Send payments to China Unionpay cardholder.
 Recipient type = *'chinese_card'*
 
 Required details: cardNumber
+
+<br/>
+
+OR
+
+<br/>
+
+Recipient type = *'chinese_alipay'*
+
+Required details: accountNumber - Chinese mobile number or email
 
 ## Create CZK Recipient
 
