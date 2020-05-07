@@ -763,9 +763,10 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-re
 ### Request
 **` GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements`**<br/>
 **` POST https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements`**<br/>
+**` GET https://api.sandbox.transferwise.tech/v1/account-requirements?source=EUR&target=USD&sourceAmount=1000`**<br/>
 
 The `GET` and `POST` account-requirements endpoints help you to figure out which fields are required to create a valid recipient for different currencies.
-You can use this data to build a dynamic user interface on top of these endpoints. 
+You can use this data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account-requirements for a specific currency route without creating a quote but with amount, source and target currencies passed as URL parameters.
 This is a step-by-step guide on how these endpoints work.
 
 ##Using account requirements
