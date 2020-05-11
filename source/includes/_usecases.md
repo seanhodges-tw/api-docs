@@ -116,7 +116,7 @@ With Connected Applications, you can let your customers connect their TransferWi
 
 We need to take a deeper look into your application use case and the added value it will bring to our joint customers in order to authorise such an integration. So before starting the technical work please contact our [sales team](https://transferwise.com/gb/business/contact) for more info on how to get started.
 
-Our [Connected Apps Guide](#connected-apps-guide) gives you an overview of required technical integration work.
+Our [Connected Apps Guide](#connected-apps-integration-guide) gives you an overview of required technical integration work.
 
 ## Receive Money
 
