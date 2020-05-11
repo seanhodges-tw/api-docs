@@ -260,3 +260,118 @@ It is possible that a user's refresh token will become invalid. This could happe
 
 Your application should handle a failing refresh token scenario by sending the user through the authorization code flow
 as you initially did.
+
+
+## Getting started with TransferWise profiles
+
+Once a TransferWise user has connected their profile to your application, your system can start interacting with
+that profile's TransferWise API resources.
+The TransferWise API can be used to generate quotes for money transfers, set up recipients for payments, set up
+money transfers, and so on as described in our full API documentation.
+
+Once you acquire an API access token for a profile you can immediately start using the API on the customer's behalf. 
+However, there are some considerations that are important to avoid problems when working with TransferWise profiles.
+
+
+### Verification status
+
+TransferWise is obliged to verify the identity of personal and business profiles as part of our *Know Your Customer*
+policy. We must be satisfied that we know our customers well enough before conducting financial transactions with them.
+
+*Verification* involves the TransferWise customer submitting various forms of evidence to us for our consideration.
+*Evidence* can include official documents, for example.
+We may accept or reject such evidence, or consider some evidence as being superior to other forms of evidence.
+
+What evidence we have verified for a profile can affect how successful or how quickly money transfers can be made.
+For certain values of transfer, or certain currency routes, we may require a certain level of verification.
+If we do not consider that a profile has been sufficient verified for a particular money transfer, we might delay
+the processing of the transfer while we seek further information from the customer.
+
+If you intend to use the TransferWise API to set up money transfers, then it is desirable for you to know whether such
+verification issues might delay or prevent transfers from succeeding.
+This is particularly relevant for profiles that have just been created as part of linking your application to
+TransferWise: new profiles may not yet be verified, and money transfers may be delayed while this process happens,
+leading to a bad experience for our customers.
+
+TransferWise exposes the *verification status* of a profile to help connected applications understand when money
+transfers are able to be created without such verification issues (but see below for an important caveat).
+
+*Verification status* is a simple indicator of the current level of verification that has been made for a profile to
+some particular level of confidence: a level that is likely to allow money transfers to occur without being delayed
+by verification-related issues.
+
+*Verification status* is exposed as a property of a profile: i.e. a profile is *verified* or *not verified*.
+It is useful to have such a property as a "gate" in the connected application's system that prevents transfers
+from being created before they are likely to processed without delays.
+
+Connected applications can query the verification status of a profile using the TransferWise API.
+TransferWise can also asynchronously notify connected applications about the change in a profile's verification status
+using a webhook notification.
+
+<aside class="notice">
+Although we expose verification status as a profile-level property, there are implicit limits to which any "verified"
+status applies. A "verified" status applies to some reasonable limits that customers should not normally reach.
+However, it is possible for individual transfers to require additional verification to be performed, even after we
+have given the profile a verification status of "verified".
+Therefore, connected applications should be prepared for verification issues to affect money transfers regardless of
+the reported "verification status", although this is not generally expected.
+</aside>
+
+
+### Verification status integration strategy
+
+The following strategy may be useful for your integration with respect to profile verification:
+
+1. At some point before going live to your customers, you set up an "application" webhook subscription for verification status change events. This is a single subscription that will allow you to receive verification status events related to any profile that links to your application in the future. (See [here](#application-webhooks) for more information.)
+1. After going live, a user connects their profile to your application using the OAuth authorization flow. (Note that the profile might be an existing, verified profile, or a brand new, unverified profile).
+2. During the authorization flow, your system receives an authorization code and TransferWise profile ID in a request to your callback endpoint (see [User authorization](#connected-apps-integration-guide-user-authorization)). Once API tokens have been acquired using the authorization code, you now have API tokens and the related profile ID: you can now access the profile's API resources.
+4. The verification status of the profile is queried using the TransferWise API. If the response indicates the profile is "verified", you can proceed with transfer operations. If the response indicates "not verified", then transfers are likely to be delayed: you should wait to receive a webhook notification for the customer.
+5. If a profile is unverified, the verification process takes place. Later, when it becomes verified, you will receive a webhook notification informing you that the profile has become verified: you may then proceed to allow transfer creation. (Alternatively, you can continue to poll the API again, but this is not recommended.)
+
+
+### Checking verification status using the API
+
+You can check the verification status of a profile using the following API.
+This is a profile-specific API resource which should be accessed using an access token acquired for the profile.
+
+> Example Request:
+
+```shell
+    curl 'https://api.sandbox.transferwise.tech/v3/profiles/12345/verification-status' \
+        -H "Authorization: Bearer <profile's access token>"
+```
+
+### Request
+
+**`GET https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/verification-status`**
+
+Field           | Description       | Format
+-----           | -----------       | ------
+profileId       | Profile ID        | Integer
+
+> Example Response:
+
+```json
+{
+  "profileId": 12345,
+  "currentStatus": "verified"
+}
+```
+
+### Response
+
+Field           | Description                   | Format
+-----           | -----------                   | ------
+profileId       | Profile ID                    | Integer
+currentStatus   | Current verification status   | Verification status code (see below)
+
+Verification status code    | Description
+------------------------    | -----------
+`verified`                  | Profile is sufficiently verified
+`not_verified`              | Profile is not sufficiently verified
+
+Please note that we do not expose any finer details of customer verification.
+
+
+
+
