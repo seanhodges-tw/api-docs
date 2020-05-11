@@ -337,7 +337,7 @@ This is a profile-specific API resource which should be accessed using an access
 > Example Request:
 
 ```shell
-    curl 'https://api.sandbox.transferwise.tech/v3/profiles/12345/verification-status' \
+    curl -X GET 'https://api.sandbox.transferwise.tech/v3/profiles/12345/verification-status' \
         -H "Authorization: Bearer <profile's access token>"
 ```
 
