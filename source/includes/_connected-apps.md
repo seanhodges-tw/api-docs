@@ -302,7 +302,7 @@ by verification-related issues.
 
 *Verification status* is exposed as a property of a profile: i.e. a profile is *verified* or *not verified*.
 It is useful to have such a property as a "gate" in the connected application's system that prevents transfers
-from being created before they are likely to processed without delays.
+from being created before they are likely to be processed without delays.
 
 Connected applications can query the verification status of a profile using the TransferWise API.
 TransferWise can also asynchronously notify connected applications about the change in a profile's verification status
@@ -326,7 +326,7 @@ The following strategy may be useful for your integration with respect to profil
 1. After going live, a user connects their profile to your application using the OAuth authorization flow. (Note that the profile might be an existing, verified profile, or a brand new, unverified profile).
 2. During the authorization flow, your system receives an authorization code and TransferWise profile ID in a request to your callback endpoint (see [User authorization](#connected-apps-integration-guide-user-authorization)). Once API tokens have been acquired using the authorization code, you now have API tokens and the related profile ID: you can now access the profile's API resources.
 4. The verification status of the profile is queried using the TransferWise API. If the response indicates the profile is "verified", you can proceed with transfer operations. If the response indicates "not verified", then transfers are likely to be delayed: you should wait to receive a webhook notification for the customer.
-5. If a profile is unverified, the verification process takes place. Later, when it becomes verified, you will receive a webhook notification informing you that the profile has become verified: you may then proceed to allow transfer creation. (Alternatively, you can continue to poll the API again, but this is not recommended.)
+5. If a profile is unverified, the verification process takes place. Later, when verification completes successfully, you will receive a webhook notification informing you that the profile has become verified: you may then allow transfer creation. (Alternatively, you can continue to poll the API again, but this is not recommended.)
 
 
 ### Checking verification status using the API
