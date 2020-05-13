@@ -503,6 +503,7 @@ html, body {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
     background: $aside-notice-bg;
+    color: $aside-text;
     line-height: 1.6;
 
     &.warning {
@@ -714,7 +715,7 @@ input.search:-moz-placeholder { /* Firefox 18- */
 
 //hack for inline code blocks: https://github.com/lord/slate/issues/855#issuecomment-337706179
 .content {
-  .center-column + pre {    
+  .center-column + pre {
     position: static;
     float: none;
     clear: none;
