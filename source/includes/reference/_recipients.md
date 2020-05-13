@@ -137,6 +137,7 @@ When creating recipient, the following general rules should be applied to "accou
 * Full names for personal recipients.  They must include more than one name, and both first and last name must have more than one character.
 * Business names must be in full, but can be just a single name. The full name cannot be just a single character but can be made up of a set of single characters. e.g. "A" is not permitted but "A 1" or "A1" is permitted.
 * Digits are not allowed, except in business names.
+* Special characters _()'*,. are allowed for personal and business names
 
 These requirements may vary depending of recipient type.
 A GBP example is provided here. You can find other currency examples below.<br/>
@@ -762,9 +763,10 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-re
 ### Request
 **` GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements`**<br/>
 **` POST https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements`**<br/>
+**` GET https://api.sandbox.transferwise.tech/v1/account-requirements?source=EUR&target=USD&sourceAmount=1000`**<br/>
 
 The `GET` and `POST` account-requirements endpoints help you to figure out which fields are required to create a valid recipient for different currencies.
-You can use this data to build a dynamic user interface on top of these endpoints. 
+You can use this data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account-requirements for a specific currency route without creating a quote but with amount, source and target currencies passed as URL parameters.
 This is a step-by-step guide on how these endpoints work.
 
 ##Using account requirements
@@ -855,7 +857,12 @@ For example this is a valid request to create a recipient with address in US Ari
 
 We do not require the recipient's address for most receiving currencies and as such do not return these form elements by default. In some cases it may be desirable for you to collect this from users and store it as part of the recipient object in the TransferWise platform. If you wish to do this you can include the parameter `&addressRequired=true` in your call to `GET /v1/quotes/{quoteId}/account-requirements`, if this is present we will return address fields as part of the form.
 
-###Building a user interface
+### Building a user interface
+
+Account requirements help us understand how to create a valid account given a certain context. As a tool to help explore this API, please visit [Dynamic Forms UI](https://sandbox.transferwise.tech/dynamic-forms-ui/).
+This app allows specifying different requests and calls our sandbox environment for account requirements. It then displays the response in JSON along with an example 
+of the rendered form from the said response.
+
 When requesting the form data from the account-requirements several the first level of the response defines different types of recipient you can create, the first thing to do is present the user a choice of which recipient type they wish to create, e.g. to GBP this could be local details or IBAN format. Each recipient type then has mutiple `fields` describing the form elements required to be shown to collect information from the user. Each field will have a `type` value, these tell you the field type that your front end needs to render to be able to collect the data. A number of field types are permitted, these are:
 
 type            | UI element
@@ -865,10 +872,11 @@ select          | A selection box/dialog
 radio           | A radio button choice between options
 date            | A text box with a date picker
 
-Example data is also included in each field which should be shown to the user, along with a regex or min and mex length constraints that should be applied as field level validations. You can optionally implement the dynamic validation using the `validationAsync` field, however these checks wil also be done when a completed recipient is submitted to `POST /v1/accounts`.
+Example data is also included in each field which should be shown to the user, along with a regex or min and max length constraints that should be applied as field level validations. You can optionally implement the dynamic validation using the `validationAsync` field, however these checks wil also be done when a completed recipient is submitted to `POST /v1/accounts`.
 
 
 ### Response
+
 Field                                       | Description                                                     | Format
 ---------                                   | -------                                                         | -----------
 type                                        | "address"                                                       | Text
@@ -885,8 +893,6 @@ fields[n].group[n].validationRegexp         | Regexp validation pattern.        
 fields[n].group[n].validationAsync          | Validator URL and parameter name you should use when submitting the value for validation | Text
 fields[n].group[n].valuesAllowed[n].key     | List of allowed values. Value key                               | Text
 fields[n].group[n].valuesAllowed[n].name    | List of allowed values. Value name.                             | Text
-
-
 
 ## Validate Recipient Fields
 
@@ -919,8 +925,6 @@ or
 }
 
 ```
-
-
 
 There are several validation URLs that make creating correct recipient accounts easier. 
 These URLs are also included in fields provided by [Recipient Accounts.Requirements](#recipient-accounts-requirements) endpoint.
@@ -1042,10 +1046,6 @@ Validate Thailand bank account number
 
 [https://api.transferwise.com/v1/validators/thailand-account-number?bankCode=002&accountNumber=9517384260](https://api.transferwise.com/v1/validators/thailand-account-number?bankCode=002&accountNumber=9517384260)
 
-
-
-
-
 ## Banks and Branches
 
 > Example Request (Get list of banks for Hong Kong):
@@ -1133,8 +1133,6 @@ List of bank branches is available for these countries: BD, GH, HK, IL, IN, JP, 
 
 **` GET https://api.sandbox.transferwise.tech/v1/bank-branches?country=HK&bankCode=<bankCode>`**<br/>
 
-
-
 ## Countries and States
 
 > Example Request (Get list of allowed countries):
@@ -1213,9 +1211,6 @@ List of allowed countries to be used in recipient or user-profile addresses.
 List of states is available for these countries: US, CA, BR, AU.
 
 **` GET https://api.sandbox.transferwise.tech/v1/countries/{countryCode}/states`**<br/>
-
-
-
 
 ## Create AED Recipient
 
@@ -1452,7 +1447,6 @@ Lists of banks and branches can be obtained from [Banks and Branches](#recipient
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
 
-
 ## Create CAD Recipient
 
 > Example Request (CAD):
@@ -1515,7 +1509,6 @@ Recipient type = *'interac'*
 
 Required details: interacAccount
 
-
 ## Create CHF Recipient
 
 > Example Request (CHF):
@@ -1543,7 +1536,6 @@ Private and business recipients are supported.
 Recipient type = *'iban'*
 
 Required details: IBAN
-
 
 ## Create CLP Recipient
 
@@ -1601,6 +1593,25 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
+
+> Example Request (CNY Alipay id):
+
+```shell
+curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
+     -H "Authorization: Bearer <your api token>" \
+     -H "Content-Type: application/json" \
+     -d '{
+             "profile": <your profile id>,
+             "accountHolderName": <recipient name>,
+             "currency": "CNY",
+             "type": "chinese_alipay",
+             "details": {
+              "legalType": "PRIVATE",
+              "accountNumber": "email@example.com"
+             }
+         }'
+```
+
 <aside class="warning">
 <b>Only sending payments to private recipients. It is not allowed to send funds to business recipients.</b>
 </aside>
@@ -1610,6 +1621,16 @@ Send payments to China Unionpay cardholder.
 Recipient type = *'chinese_card'*
 
 Required details: cardNumber
+
+<br/>
+
+OR
+
+<br/>
+
+Recipient type = *'chinese_alipay'*
+
+Required details: accountNumber - Chinese mobile number or email
 
 ## Create CZK Recipient
 
@@ -1651,9 +1672,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
-
-
 Send payments to Czech Republic. 
 
 Private and business recipients are supported. 
@@ -1670,16 +1688,13 @@ You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/acc
 
 <br/>
 
-
 OR 
 
 <br/>
 
-
 Recipient type = *'iban'*
 
 Required details: IBAN
-
 
 ## Create DKK Recipient
 
@@ -1708,9 +1723,6 @@ Private and business recipients are supported.
 Recipient type = *'iban'*
 
 Required details: IBAN
-
-
-
 
 ## Create EGP Recipient
 
@@ -1745,7 +1757,6 @@ Lists of banks and branches can be obtained from [Banks and Branches](#recipient
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
 
-
 ## Create EUR Recipient
 
 > Example Request (EUR):
@@ -1773,7 +1784,6 @@ Private and business recipients are supported.
 Recipient type = *'iban'*
 
 Required details: IBAN
-
 
 ## Create GBP Recipient
 
@@ -1814,7 +1824,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
 Send payments to United Kingdom. 
 
 Private and business recipients are supported. 
@@ -1827,7 +1836,6 @@ Required details: sortCode, accountNumber
 
 <br/>
 
-
 OR 
 
 <br/>
@@ -1836,7 +1844,6 @@ OR
 Recipient type = *'iban'*
 
 Required details: IBAN
-
 
 ## Create GEL Recipient
 
@@ -1865,7 +1872,6 @@ Private and business recipients are supported.
 Recipient type = *'iban'*
 
 Required details: IBAN
-
 
 ## Create GHS Recipient
 
@@ -1900,8 +1906,6 @@ Lists of banks and branches can be obtained from [Banks and Branches](#recipient
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
 
-
-
 ## Create HKD Recipient
 
 > Example Request (HKD):
@@ -1934,8 +1938,6 @@ Lists of banks and branches can be obtained from [Banks and Branches](#recipient
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
 
-
-
 ## Create HRK Recipient
 
 > Example Request:
@@ -1963,7 +1965,6 @@ Private and business recipients are supported.
 Recipient type = *'iban'*
 
 Required details: IBAN
-
 
 ## Create HUF Recipient
 
@@ -2003,9 +2004,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
-
-
 Send payments to Hungary. 
 
 Private and business recipients are supported. 
@@ -2018,7 +2016,6 @@ Required details: accountNumber
 
 <br/>
 
-
 OR 
 
 <br/>
@@ -2027,7 +2024,6 @@ OR
 Recipient type = *'iban'*
 
 Required details: IBAN
-
 
 ## Create IDR Recipient
 
@@ -2050,7 +2046,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
 Send payments to Indonesia.
 
 Private and business recipients are supported. 
@@ -2062,7 +2057,6 @@ Required details: bankCode, accountNumber
 Lists of banks and branches can be obtained from [Banks and Branches](#recipient-accounts-banks-and-branches) endpoints.
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
-
 
 ## Create ILS Recipient
 
@@ -2084,29 +2078,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
       }'
 ```
 
-> Example Request (ILS Local Bank Code):
-
-```shell
-curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
-     -H "Authorization: Bearer <your api token>" \
-     -H "Content-Type: application/json" \
-     -d '{ 
-          "profile": <your profile id>,
-          "accountHolderName": "<recipient name>",
-          "currency": "ILS",
-          "type": "israeli_bank_code",
-          "details": {
-           "legalType": "PRIVATE",
-           "bankCode": "054",
-           "branchCode": "001",
-           "accountNumber": "123456789"
-           }
-        }'
-```
-
-
-
-
 Send payments to Israel. 
 
 Private and business recipients are supported. 
@@ -2116,24 +2087,6 @@ Private and business recipients are supported.
 Recipient type = *'israeli_local'*
 
 Required details: IBAN
-
-<br/>
-
-
-OR 
-
-<br/>
-
-
-Recipient type = *'israeli_bank_code'*
-
-Required details: bankCode, branchCode, accountNumber
-
-Lists of banks and branches can be obtained from [Banks and Branches](#recipient-accounts-banks-and-branches) endpoints.
-
-You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
-
-
 
 ## Create INR Recipient
 
@@ -2156,7 +2109,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
 <aside class="warning">
 <b>Private recipient: 1 mln GBP per payment (~ 88 mln INR)<br/>
 Business recipient: 1,5 mln INR per day (~ 17 800 GBP)</b>
@@ -2166,7 +2118,6 @@ Send payments to India.
 
 Private and business recipients are supported. 
 
-
 Recipient type = *'indian'*
 
 Required details: ifscCode, accountNumber
@@ -2174,7 +2125,6 @@ Required details: ifscCode, accountNumber
 Lists of banks and branches can be obtained from [Banks and Branches](#recipient-accounts-banks-and-branches) endpoints.
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
-
 
 ## Create JPY Recipient
 
@@ -2210,7 +2160,6 @@ Required details: bankCode, branchCode accountNumber, accountType (CURRENT, SAVI
 Lists of banks and branches can be obtained from [Banks and Branches](#recipient-accounts-banks-and-branches) endpoints.
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
-
 
 ## Create KES Recipient
 
@@ -2251,8 +2200,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
-
 Send payments to Kenya. 
 
 Private and business recipients are supported. However please note that only individuals can hold MPESA accounts.
@@ -2269,7 +2216,6 @@ You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/acc
 
 <br/>
 
-
 OR 
 
 <br/>
@@ -2278,7 +2224,6 @@ OR
 Recipient type = *'kenya_mobile'*
 
 Required details: accountNumber - mobile number
-
 
 ## Create KRW Recipient
 
@@ -2322,8 +2267,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
-
 Send payments to South Korea. 
 
 Private and business recipients are supported. 
@@ -2340,7 +2283,6 @@ You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/acc
 
 <br/>
 
-
 OR 
 
 <br/>
@@ -2349,9 +2291,6 @@ OR
 Recipient type = *'south_korean_paygate_business'*
 
 Required details: bankCode, accountNumber
-
-
-
 
 ## Create LKR Recipient
 
@@ -2425,8 +2364,6 @@ Lists of banks and branches can be obtained from [Banks and Branches](#recipient
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
 
-
-
 ## Create MXN Recipient
 
 > Example Request (MXN):
@@ -2454,9 +2391,6 @@ Private and business recipients are supported.
 Recipient type = *'mexican'*
 
 Required details: clabe
-
-
-
 
 ## Create MYR Recipient
 
@@ -2487,7 +2421,6 @@ Recipient type = *'malaysian'*
 
 Required details: swiftCode, accountNumber
 
-
 ## Create NGN Recipient
 
 > Example Request (NGN):
@@ -2513,7 +2446,6 @@ Send payments to Nigeria.
 
 Private and business recipients are supported. Maximum amount is 2,000,000 NGN per payment.
 
-
 Recipient type = *'nigeria'*
 
 Required details: bankCode, accountNumber
@@ -2521,8 +2453,6 @@ Required details: bankCode, accountNumber
 Lists of banks and branches can be obtained from [Banks and Branches](#recipient-accounts-banks-and-branches) endpoints.
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
-
-
 
 ## Create NOK Recipient
 
@@ -2551,9 +2481,6 @@ Private and business recipients are supported.
 Recipient type = *'iban'*
 
 Required details: IBAN
-
-
-
 
 ## Create NPR Recipient
 
@@ -2593,7 +2520,6 @@ Lists of banks and branches can be obtained from [Banks and Branches](#recipient
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
 
-
 ## Create NZD Recipient
 
 > Example Request (NZD):
@@ -2619,9 +2545,6 @@ Send payments to New Zealand.
 Recipient type = *'newzealand'*
 
 Required details: accountNumber
-
-
-
 
 ## Create PEN Recipient
 
@@ -2660,11 +2583,6 @@ Lists of banks and branches can be obtained from [Banks and Branches](#recipient
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
 
-
-
-
-
-
 ## Create PHP Recipient
 
 > Example Request (PHP):
@@ -2692,7 +2610,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
 Send payments to Philippines. 
 
 Private and business recipients are supported. 480,000 PHP per payment.
@@ -2704,10 +2621,6 @@ Required details: bankCode, accountNumber, recipient address
 Lists of banks and branches can be obtained from [Banks and Branches](#recipient-accounts-banks-and-branches) endpoints.
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
-
-
-
-
 
 ## Create PKR Recipient
 
@@ -2738,9 +2651,6 @@ Send payments to Pakistan. Max 1 million PKR per payment.
 Recipient type = *'iban'*
 
 Required details: IBAN
-
-
-
 
 ## Create PLN Recipient
 
@@ -2801,9 +2711,6 @@ Recipient type = *'polish'*
 
 Required details: accountNumber
 
- 
- 
-
 ## Create RON Recipient
 
 > Example Request (RON):
@@ -2831,11 +2738,6 @@ Private and business recipients are supported.
 Recipient type = *'iban'*
 
 Required details: IBAN
-
-
-
-
-
 
 ## Create RUB Recipient
 
@@ -2865,7 +2767,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
 <aside class="warning">
 <b>Only payments to private recipients. Businesses recipients are not supported yet.</b>
 </aside>
@@ -2876,14 +2777,12 @@ Recipient type = *'russiarapida'*
 
 Required details: bankCode, accountNumber, region, recipient address.
 
-You have to provide first, last and patronymic names, in order for your transfer to be accepted by the recipient bank.
+You have to provide first, last and patronymic names in Cyrillic, in order for your transfer to be accepted by the recipient bank.
 (unless the recipient is registered at the bank with no patronymic)
 
 You can get list of bank, region and country codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
 
 Lists of banks and branches can be obtained from [Banks and Branches](#recipient-accounts-banks-and-branches) endpoints.
-
-
 
 ## Create SEK Recipient
 
@@ -2942,9 +2841,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
-
-
 Send payments to Sweden. 
 
 Private and business recipients are supported. 
@@ -2977,9 +2873,6 @@ Recipient type = *'bankgiro'*
 
 Required details: bankgiroNumber
 
-
-
-
 ## Create SGD Recipient
 
 > Example Request (SGD):
@@ -3001,7 +2894,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
 Send payments to Singapore. 
 
 Private and business recipients are supported. 
@@ -3013,9 +2905,6 @@ Required details: bankCode, accountNumber
 Lists of banks and branches can be obtained from [Banks and Branches](#recipient-accounts-banks-and-branches) endpoints.
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
-
-
-
 
 ## Create THB Recipient
 
@@ -3056,9 +2945,6 @@ Lists of banks and branches can be obtained from [Banks and Branches](#recipient
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
 
-
-
-
 ## Create TRY Recipient
 
 > Example Request (TRY):
@@ -3087,7 +2973,6 @@ Recipient type = *'turkish_earthport'*
 
 Required details: IBAN
 
-
 ## Create UAH Recipient
 
 > Example Request (UAH):
@@ -3109,7 +2994,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
 <aside class="warning">
 <b>Only sending payments to private recipients. Businesses recipients are not supported yet.</b>
 </aside>
@@ -3122,11 +3006,6 @@ Required details:
 
 * phoneNumber   = Use phone number registered in Privat Bank
 * accountNumber = Last 4 digits of UAH PrivatBank card
-
-
-
-
-
 
 ## Create USD Recipient
 
@@ -3156,11 +3035,9 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
 Send payments to USA. 
 
 Private and business recipients are supported. Max 1 Million USD per payment.
-
 
 Recipient type = *'aba'*
 
@@ -3170,10 +3047,6 @@ Required details:
 * accountNumber = Recipient bank account number
 * accountType   = CHECKING or SAVINGS
 * address       = Recipient address
-
-
-
-
 
 ## Create VND Recipient
 
@@ -3209,11 +3082,6 @@ Lists of banks and branches can be obtained from [Banks and Branches](#recipient
 
 You can also get list of bank and branch codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
 
-
-
-
-
-
 ## Create ZAR Recipient
 
 > Example Request (ZAR):
@@ -3235,7 +3103,6 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-
 Send payments to South African Republic. 
 
 Private and business recipients are supported. 
@@ -3247,8 +3114,3 @@ Required details: swiftCode, accountNumber
 You can get list of bank codes by using /v1/quotes/{quoteId}/account-requirements endpoint.
 
 Lists of banks and branches can be obtained from [Banks and Branches](#recipient-accounts-banks-and-branches) endpoints.
-
-
-
-
-
