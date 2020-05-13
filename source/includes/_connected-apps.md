@@ -377,11 +377,7 @@ currentStatus   | Current verification status   | Verification status code (see 
 
 Verification status code    | Description
 ------------------------    | -----------
-`verified`                  | Profile is sufficiently verified
-`not_verified`              | Profile is not sufficiently verified
+`verified`                  | The profile is sufficiently verified to start making payments (note that some regional limits may still apply)
+`not_verified`              | The profile is currently awaiting verification or there are pending issues with the verification process
 
 Please note that we do not expose any finer details of customer verification.
-
-
-
-
