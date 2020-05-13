@@ -1,5 +1,15 @@
 # Connected Apps Integration Guide
 
+With Connected Applications, you can let your customers connect their TransferWise accounts to your product.
+Say you’re an accounting software – doing this could let your customers automate reconciliation.
+If you’re a payroll company, you could push customer payments right into TransferWise.
+You could even push TransferWise notifications through your app. Whatever you want to build, you likely could!
+
+We need to take a deeper look into your application use case and the added value it will bring to our joint customers
+in order to authorise such an integration.
+So before starting the technical work please contact our [sales team](https://transferwise.com/gb/business/contact) for
+more info on how to get started.
+
 This guide describes how your application can connect to TransferWise customer accounts.
 It also describes some common operations that are useful for application integrations. 
 
@@ -107,14 +117,14 @@ An example, given the redirect URL `https://www.yourapp.com`:
 
     `https://www.yourapp.com/?code=ABCDEF&state=f6027a42-344d-4a4d-9f8a-39e42acf9887&profileId=12345`
 
+If you are building your TransferWise integration as a native mobile phone app then the redirect URL should be able to
+handle returning the user to the correct place in the app.
+
 
 ### 5. Your application exchanges the authorization code for API tokens
 
 Your website or service can then use the authorization code to obtain API tokens to act on behalf of the user
 account as described in the [get user tokens](#connected-apps-integration-guide-get-user-tokens) section.
-
-If you are building your TransferWise integration as a native mobile phone app then the redirect URL should be able to
-handle returning the user to the correct place in the app.
 
 *Please note that authorization codes expire after 30 minutes and are one time use only.*
 
