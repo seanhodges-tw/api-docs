@@ -7889,7 +7889,9 @@ BD, BR, CZ, CL, EG, GH, HK, ID, IL, IN, JP, KE, LK, MA, NG, NP, PE, PH, RU, SG, 
           "type": "iban",
           "details": {
            "legalType": "PRIVATE",
-           "IBAN": "CH89370400440532013000"
+           "IBAN": "CH89370400440532013000",
+           "town": "Zürich",
+           "postCode": 8037
            }
         }'</span>
 </code></pre>
@@ -7900,6 +7902,18 @@ BD, BR, CZ, CL, EG, GH, HK, ID, IL, IN, JP, KE, LK, MA, NG, NP, PE, PH, RU, SG, 
 <p>Recipient type = <em>&#39;iban&#39;</em></p>
 
 <p>Required details: IBAN</p>
+
+<p><br/></p>
+
+<aside class="warning">
+<b>From 15th of Jun, 2020, requirements will change to the following:</b>
+</aside>
+
+<p>Required details: IBAN, town, postcode</p>
+
+<p>Where town and postcode are the recipient&#39;s home town and postcode.</p>
+
+<p>If the recpient&#39;s country does not use a postcode, then please fill it with 0 (zero).</p>
 <h2 id='recipient-accounts-create-clp-recipient'>Create CLP Recipient</h2>
 <blockquote>
 <p>Example Request (CLP):</p>
