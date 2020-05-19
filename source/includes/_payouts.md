@@ -373,8 +373,8 @@ Note: as the name implies, a one-time token can be used only once. If it was suc
 requests with the same token signature will be rejected.
 
 ### Testing ###
-By default in our [sandbox environment](https://api.sandbox.transferwise.tech) strong customer authentication is 
-disabled. You can enable it for your account on the [public keys management page](https://api.sandbox.transferwise.tech/public-keys).
+By default in our [sandbox environment](https://sandbox.transferwise.tech) strong customer authentication is 
+disabled. You can enable it for your account on the [public keys management page](https://sandbox.transferwise.tech/public-keys).
 
 The option for toggling the check yourself will also be available in production as long as it is optional.
 
