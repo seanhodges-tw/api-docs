@@ -47,7 +47,7 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/transfers \
 }
 ```
 
-Transfer is a payout order to recipient account based on a quote. Once created then a transfer needs to be funded during next 5 working days. 
+A transfer is a payout order to a recipient account based on a quote. Once created, a transfer needs to be funded during the next 10 working days (based on the source currency). 
 In case not it will get automatically cancelled.  
 
 
