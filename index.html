@@ -9490,7 +9490,7 @@ This endpoint is applicable for bank integrations and third party application in
     </span><span class="s2">"customerTransactionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bd244a95-dcf8-4c31-aac8-bf5e2f3e54c0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Transfer is a payout order to recipient account based on a quote. Once created then a transfer needs to be funded during next 5 working days. 
+<p>A transfer is a payout order to a recipient account based on a quote. Once created, a transfer needs to be funded during the next 10 working days (based on the source currency). 
 In case not it will get automatically cancelled.  </p>
 <h3 id='transfers-create-request'>Request</h3>
 <p><strong><code>POST https://api.sandbox.transferwise.tech/v1/transfers</code></strong></p>
