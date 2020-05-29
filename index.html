@@ -856,10 +856,10 @@
                       <a href="#webhook-events-transfer-status-change-event" class="toc-h2 toc-link" data-title="Transfer status change event">Transfer status change event</a>
                     </li>
                     <li>
-                      <a href="#webhook-events-transfer-issue-event" class="toc-h2 toc-link" data-title="Transfer issue event">Transfer issue event</a>
+                      <a href="#webhook-events-transfer-active-cases-event" class="toc-h2 toc-link" data-title="Transfer active cases event">Transfer active cases event</a>
                     </li>
                     <li>
-                      <a href="#webhook-events-balance-deposit-event" class="toc-h2 toc-link" data-title="Balance deposit event">Balance deposit event</a>
+                      <a href="#webhook-events-balance-credit-event" class="toc-h2 toc-link" data-title="Balance credit event">Balance credit event</a>
                     </li>
                 </ul>
             </li>
@@ -13029,20 +13029,22 @@ We advise you not to process any requests where signature appears to be forged.<
 
 <p>Test messages can be sent to verify callback URLs when subscriptions are being set up.</p>
 <h2 id='webhook-events-event-payload'>Event payload</h2>
+<p>All event notification payloads have the same high-level structure.
+Top-level properties are common to all events.
+The <code>data</code> property is an object that can contain various properties.
+The exact properties that the <code>data</code> object contains depends on the event type and schema version of the event.  </p>
+
 <blockquote>
 <p>Basic event payload:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="s2">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db463333-3333-3333-3333-185d1ee81585"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01234567-89ab-cdef-0123-456789abcdef"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event#type"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
+  </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-01T12:34:56Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>All events share same high-level payload structure.
-Depending on the <code>event_type</code>, the only object that differs between events is <code>data</code>.</p>
-
+</span></code></pre><h3 id='webhook-events-event-payload-common-properties'>Common properties</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -13052,60 +13054,60 @@ Depending on the <code>event_type</code>, the only object that differs between e
 </thead><tbody>
 <tr>
 <td>data</td>
-<td>Object with information about updated resource</td>
+<td>Event type- and schema version-specific details</td>
 <td>Object</td>
 </tr>
 <tr>
 <td>subscription_id</td>
-<td>ID of the subscription that triggered the event</td>
+<td>ID of the webhook subscription that triggered the event notification</td>
 <td>UUID</td>
 </tr>
 <tr>
 <td>event_type</td>
-<td>Type of event, which defines <code>data</code> object</td>
-<td>Integer</td>
+<td>Event type (what event happened in our system)</td>
+<td>String</td>
 </tr>
 <tr>
 <td>schema_version</td>
-<td>The event representation semantic version</td>
+<td>Schema version (what notification structure is being used to model the event)</td>
 <td>String</td>
 </tr>
 <tr>
 <td>sent_at</td>
-<td>Timestamp when update happened</td>
-<td>Timestamp</td>
+<td>When the event notification was sent from our system</td>
+<td>Datetime</td>
 </tr>
 </tbody></table>
 <h2 id='webhook-events-transfer-status-change-event'>Transfer status change event</h2>
+<p>Event type: <code>transfers#state-change</code></p>
+
+<p>This event will be triggered every time a transfer&#39;s status is updated. Each event contains a timestamp.
+As we do not guarantee the order of events, please use <code>data.occurred_at</code> to reconcile the order. </p>
+
+<p>If you would like to subscribe to transfer state change events, please use <code>transfers#state-change</code>
+when creating your subscription.</p>
+
 <blockquote>
-<p>Example event:</p>
+<p>Example v2.0.0 <code>transfers#state-change</code> event:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">99330022</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11121314</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1514131211</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer"</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">111</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">222</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">333</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"current_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processing"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"previous_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incoming_payment_waiting"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"occurred_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
+    </span><span class="s2">"occurred_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-01T12:34:56Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db463333-3333-3333-3333-185d1ee81585"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01234567-89ab-cdef-0123-456789abcdef"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfers#state-change"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
+  </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-01T12:34:56Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Event type: <code>transfers#state-change</code></p>
-
-<p>This event will be triggered every time a transfer&#39;s status is updated. Each event contains a timestamp.
-As we do not guarantee the order of events, please use <code>data.occured_at</code> to reconcile the order. </p>
-
-<p>If you would like to subscribe to transfer state change events, please use <code>transfers#state-change</code>
-when creating your subscription.</p>
-<h3 id='webhook-events-transfer-status-change-event-schema-version-2-0-0-latest'>Schema version <code>2.0.0</code> (latest)</h3>
+</span></code></pre><h3 id='webhook-events-transfer-status-change-event-schema-version-2-0-0-latest'>Schema version <code>2.0.0</code> (latest)</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -13114,9 +13116,14 @@ when creating your subscription.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>data.resource.id</td>
-<td>ID of the transfer that got updated</td>
+<td>data.resource.type</td>
+<td>Transfer resource type (always <code>transfer</code>)</td>
 <td>String</td>
+</tr>
+<tr>
+<td>data.resource.id</td>
+<td>ID of the transfer</td>
+<td>Integer</td>
 </tr>
 <tr>
 <td>data.resource.profile_id</td>
@@ -13124,59 +13131,54 @@ when creating your subscription.</p>
 <td>Integer</td>
 </tr>
 <tr>
-<td>data.resourceI.account_id</td>
-<td>ID of transfer&#39;s recipient</td>
+<td>data.resource.account_id</td>
+<td>ID of transfer&#39;s recipient account</td>
 <td>Integer</td>
 </tr>
 <tr>
-<td>data.resource.type</td>
-<td>Type of the resource that was updated</td>
-<td>String</td>
-</tr>
-<tr>
 <td>data.current_state</td>
-<td>Newly acquired state of the resource, possible values are same as <a href="#payouts-guide-track-transfer-status">transfer statuses</a></td>
+<td>Current transfer state (see <a href="#payouts-guide-track-transfer-status">transfer statuses</a>)</td>
 <td>String</td>
 </tr>
 <tr>
 <td>data.previous_state</td>
-<td>Previous state of the resource, possible values are same as <a href="#payouts-guide-track-transfer-status">transfer statuses</a></td>
+<td>Previous transfer state (see <a href="#payouts-guide-track-transfer-status">transfer statuses</a>)</td>
 <td>String</td>
 </tr>
 <tr>
-<td>data.occured_at</td>
-<td>Timestamp when the update happened</td>
-<td>Timestamp</td>
+<td>data.occurred_at</td>
+<td>When the state change occurred</td>
+<td>Datetime</td>
 </tr>
 </tbody></table>
-<h2 id='webhook-events-transfer-issue-event'>Transfer issue event</h2>
+<h2 id='webhook-events-transfer-active-cases-event'>Transfer active cases event</h2>
+<p>Event type: <code>transfers#active-cases</code></p>
+
+<p>This event will be triggered every time a transfer&#39;s list of active cases is updated.
+Active cases indicate potential problems with transfer processing. </p>
+
+<p>If you would like to subscribe to transfer active cases events, please use <code>transfers#active-cases</code> when creating
+your subscription.</p>
+
 <blockquote>
-<p>Example event:</p>
+<p>Example v2.0.0 <code>transfers#active-cases</code> event:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">99330022</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11121314</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1514131211</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer"</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfer"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">111</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">222</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">333</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"active_cases"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"deposit_amount_less_invoice"</span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db463333-3333-3333-3333-185d1ee81585"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01234567-89ab-cdef-0123-456789abcdef"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transfers#active-cases"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
+  </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-01T12:34:56Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Event type: <code>transfers#active-cases</code></p>
-
-<p>This event will be triggered every time a transfer&#39;s list of active issues is updated.
-Issues indicate potential problems with transfer processing. </p>
-
-<p>If you would like to subscribe to transfer active issue events, please use <code>transfers#active-cases</code> when creating
-your subscription.</p>
-<h3 id='webhook-events-transfer-issue-event-schema-version-2-0-0-latest'>Schema version <code>2.0.0</code> (latest)</h3>
+</span></code></pre><h3 id='webhook-events-transfer-active-cases-event-schema-version-2-0-0-latest'>Schema version <code>2.0.0</code> (latest)</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -13185,9 +13187,14 @@ your subscription.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>data.resource.id</td>
-<td>ID of the transfer that got updated</td>
+<td>data.resource.type</td>
+<td>Transfer resource type (always <code>transfer</code>)</td>
 <td>String</td>
+</tr>
+<tr>
+<td>data.resource.id</td>
+<td>ID of the transfer</td>
+<td>Integer</td>
 </tr>
 <tr>
 <td>data.resource.profile_id</td>
@@ -13195,52 +13202,47 @@ your subscription.</p>
 <td>Integer</td>
 </tr>
 <tr>
-<td>data.resourceI.account_id</td>
-<td>ID of transfer&#39;s recipient</td>
+<td>data.resource.account_id</td>
+<td>ID of transfer&#39;s recipient account</td>
 <td>Integer</td>
 </tr>
 <tr>
-<td>data.resource.type</td>
-<td>Type of the resource that was updated</td>
-<td>String</td>
-</tr>
-<tr>
 <td>data.active_cases</td>
-<td>List of ongoing issues related to the transfer</td>
-<td>String</td>
+<td>Ongoing issues related to the transfer</td>
+<td>List of strings</td>
 </tr>
 </tbody></table>
-<h2 id='webhook-events-balance-deposit-event'>Balance deposit event</h2>
-<blockquote>
-<p>Example event:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">99887766</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance-account"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11121314</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.00</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"post_transaction_balance_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"occurred_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db463333-3333-3333-3333-185d1ee81585"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balances#credit"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-14T12:43:37Z"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<h2 id='webhook-events-balance-credit-event'>Balance credit event</h2>
 <p>Event type: <code>balances#credit</code></p>
 
 <p>This event will be triggered every time a balance account is credited.</p>
 
-<p>Please note: This event is not currently delivered to application subscriptions.</p>
-
 <p>If you would like to subscribe to balance credit events, please use <code>balances#credit</code> when creating your subscription.</p>
 
+<p>Please note: This event is not currently delivered to application subscriptions.</p>
+
+<blockquote>
+<p>Example v2.0.0 <code>balances#credit</code> event:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance-account"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">111</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">222</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.23</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"post_transaction_balance_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.34</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"occurred_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-01T12:34:56Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01234567-89ab-cdef-0123-456789abcdef"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"event_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balances#credit"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sent_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-01T12:34:56Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <p><strong>Schema version <code>2.0.0</code> (latest)</strong></p>
 
 <table><thead>
@@ -13251,29 +13253,44 @@ your subscription.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>subscriptionId</td>
-<td>ID of subscription that triggers this notification</td>
+<td>data.resource.type</td>
+<td>Balance account resource type (always <code>balance-account</code>)</td>
 <td>String</td>
 </tr>
 <tr>
-<td>profileId</td>
-<td>ID of the profile that owns the balance</td>
+<td>data.resource.id</td>
+<td>ID of the balance account</td>
 <td>Integer</td>
 </tr>
 <tr>
-<td>amount</td>
-<td>Deposit amount</td>
+<td>data.resource.profile_id</td>
+<td>ID of the profile that owns the balance account</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>data.transaction_type</td>
+<td>Always <code>credit</code></td>
+<td>String</td>
+</tr>
+<tr>
+<td>data.amount</td>
+<td>Deposited amount</td>
 <td>Decimal</td>
 </tr>
 <tr>
-<td>currency</td>
-<td>Currency of the balance that got updated</td>
+<td>data.currency</td>
+<td>Currency code</td>
 <td>String</td>
 </tr>
 <tr>
-<td>eventType</td>
-<td>Type of update</td>
-<td>String</td>
+<td>data.post_transaction_balance_amount</td>
+<td>Balance amount after the credit was applied</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>data.occurred_at</td>
+<td>When the balance credit occurred</td>
+<td>Datetime</td>
 </tr>
 </tbody></table>
 <h1 id='webhooks-version-1-deprecated'>Webhooks version 1 (deprecated)</h1>
