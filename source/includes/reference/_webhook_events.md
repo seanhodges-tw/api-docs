@@ -87,155 +87,166 @@ Test messages can be sent to verify callback URLs when subscriptions are being s
 
 ## Event payload
 
+All event notification payloads have the same high-level structure.
+Top-level properties are common to all events.
+The `data` property is an object that can contain various properties.
+The exact properties that the `data` object contains depends on the event type and schema version of the event.  
+
+
 > Basic event payload:
 
 ```json
 {
   "data": {},
-  "subscription_id": "db463333-3333-3333-3333-185d1ee81585",
-  "event_type": "...",
+  "subscription_id": "01234567-89ab-cdef-0123-456789abcdef",
+  "event_type": "event#type",
   "schema_version": "2.0.0",
-  "sent_at": "2019-10-14T12:43:37Z"
+  "sent_at": "2020-01-01T12:34:56Z"
 }
 ```
 
-All events share same high-level payload structure.
-Depending on the `event_type`, the only object that differs between events is `data`.
+### Common properties
 
-Field           | Description                                     | Format
----------       | -------                                         | -----------
-data            | Object with information about updated resource  | Object
-subscription_id | ID of the subscription that triggered the event | UUID
-event_type      | Type of event, which defines `data` object      | Integer
-schema_version  | The event representation semantic version       | String
-sent_at         | Timestamp when update happened                  | Timestamp
+Field           | Description                                                                   | Format
+---------       | -------                                                                       | -----------
+data            | Event type- and schema version-specific details                               | Object
+subscription_id | ID of the webhook subscription that triggered the event notification          | UUID
+event_type      | Event type (what event happened in our system)                                | String
+schema_version  | Schema version (what notification structure is being used to model the event) | String
+sent_at         | When the event notification was sent from our system                          | Datetime
 
 
 ## Transfer status change event
 
-> Example event:
-
-```json
-{
-  "data": {
-    "resource": {
-      "id": 99330022,
-      "profile_id": 11121314,
-      "account_id": 1514131211,
-      "type": "transfer"
-    },
-    "current_state": "processing",
-    "previous_state": "incoming_payment_waiting",
-    "occurred_at": "2019-10-14T12:43:37Z"
-  },
-  "subscription_id": "db463333-3333-3333-3333-185d1ee81585",
-  "event_type": "transfers#state-change",
-  "schema_version": "2.0.0",
-  "sent_at": "2019-10-14T12:43:37Z"
-}
-```
-
 Event type: `transfers#state-change`
 
 This event will be triggered every time a transfer's status is updated. Each event contains a timestamp.
-As we do not guarantee the order of events, please use `data.occured_at` to reconcile the order. 
+As we do not guarantee the order of events, please use `data.occurred_at` to reconcile the order. 
 
 If you would like to subscribe to transfer state change events, please use `transfers#state-change`
 when creating your subscription.
 
-### Schema version `2.0.0` (latest)
 
-Field                       | Description                                   | Format
----------                   | -------                                       | -----------
-data.resource.id            | ID of the transfer that got updated           | String
-data.resource.profile_id    | ID of the profile that owns the transfer      | Integer
-data.resourceI.account_id   | ID of transfer's recipient                    | Integer
-data.resource.type          | Type of the resource that was updated         | String
-data.current_state          | Newly acquired state of the resource, possible values are same as [transfer statuses](#payouts-guide-track-transfer-status) | String
-data.previous_state         | Previous state of the resource, possible values are same as [transfer statuses](#payouts-guide-track-transfer-status) | String
-data.occured_at             | Timestamp when the update happened            | Timestamp
-
-
-## Transfer issue event
-
-> Example event:
+> Example v2.0.0 `transfers#state-change` event:
 
 ```json
 {
   "data": {
     "resource": {
-      "id": 99330022,
-      "profile_id": 11121314,
-      "account_id": 1514131211,
-      "type": "transfer"
+      "type": "transfer",
+      "id": 111,
+      "profile_id": 222,
+      "account_id": 333
     },
-    "active_cases": ["deposit_amount_less_invoice"]
+    "current_state": "processing",
+    "previous_state": "incoming_payment_waiting",
+    "occurred_at": "2020-01-01T12:34:56Z"
   },
-  "subscription_id": "db463333-3333-3333-3333-185d1ee81585",
-  "event_type": "transfers#active-cases",
+  "subscription_id": "01234567-89ab-cdef-0123-456789abcdef",
+  "event_type": "transfers#state-change",
   "schema_version": "2.0.0",
-  "sent_at": "2019-10-14T12:43:37Z"
+  "sent_at": "2020-01-01T12:34:56Z"
 }
 ```
+
+### Schema version `2.0.0` (latest)
+
+Field                       | Description                                   | Format
+---------                   | -------                                       | -----------
+data.resource.type          | Transfer resource type (always `transfer`)    | String
+data.resource.id            | ID of the transfer                            | Integer
+data.resource.profile_id    | ID of the profile that owns the transfer      | Integer
+data.resource.account_id    | ID of transfer's recipient account            | Integer
+data.current_state          | Current transfer state (see [transfer statuses](#payouts-guide-track-transfer-status)) | String
+data.previous_state         | Previous transfer state (see [transfer statuses](#payouts-guide-track-transfer-status)) | String
+data.occurred_at            | When the state change occurred                | Datetime
+
+
+## Transfer active cases event
 
 Event type: `transfers#active-cases`
 
-This event will be triggered every time a transfer's list of active issues is updated.
-Issues indicate potential problems with transfer processing. 
+This event will be triggered every time a transfer's list of active cases is updated.
+Active cases indicate potential problems with transfer processing. 
 
-If you would like to subscribe to transfer active issue events, please use `transfers#active-cases` when creating
+If you would like to subscribe to transfer active cases events, please use `transfers#active-cases` when creating
 your subscription.
 
-### Schema version `2.0.0` (latest)
 
-Field                       | Description                                   | Format
----------                   | -------                                       | -----------
-data.resource.id            | ID of the transfer that got updated           | String
-data.resource.profile_id    | ID of the profile that owns the transfer      | Integer
-data.resourceI.account_id   | ID of transfer's recipient                    | Integer
-data.resource.type          | Type of the resource that was updated         | String
-data.active_cases           | List of ongoing issues related to the transfer| String
-
-
-## Balance deposit event
-
-> Example event:
+> Example v2.0.0 `transfers#active-cases` event:
 
 ```json
 {
   "data": {
     "resource": {
-      "id": 99887766,
-      "type": "balance-account",
-      "profile_id": 11121314
+      "type": "transfer",
+      "id": 111,
+      "profile_id": 222,
+      "account_id": 333
     },
-    "amount": 50.00,
-    "currency": "EUR",
-    "transaction_type": "credit",
-    "post_transaction_balance_amount": 150,
-    "occurred_at": "2019-10-14T12:43:37Z"
+    "active_cases": ["deposit_amount_less_invoice"]
   },
-  "subscription_id": "db463333-3333-3333-3333-185d1ee81585",
-  "event_type": "balances#credit",
+  "subscription_id": "01234567-89ab-cdef-0123-456789abcdef",
+  "event_type": "transfers#active-cases",
   "schema_version": "2.0.0",
-  "sent_at": "2019-10-14T12:43:37Z"
+  "sent_at": "2020-01-01T12:34:56Z"
 }
 ```
+
+### Schema version `2.0.0` (latest)
+
+Field                       | Description                                   | Format
+---------                   | -------                                       | -----------
+data.resource.type          | Transfer resource type (always `transfer`)    | String
+data.resource.id            | ID of the transfer                            | Integer
+data.resource.profile_id    | ID of the profile that owns the transfer      | Integer
+data.resource.account_id    | ID of transfer's recipient account            | Integer
+data.active_cases           | Ongoing issues related to the transfer        | List of strings
+
+
+## Balance credit event
 
 Event type: `balances#credit`
 
 This event will be triggered every time a balance account is credited.
 
+If you would like to subscribe to balance credit events, please use `balances#credit` when creating your subscription.
+
 Please note: This event is not currently delivered to application subscriptions.
 
-If you would like to subscribe to balance credit events, please use `balances#credit` when creating your subscription.
+
+> Example v2.0.0 `balances#credit` event:
+
+```json
+{
+  "data": {
+    "resource": {
+      "type": "balance-account",
+      "id": 111,
+      "profile_id": 222
+    },
+    "transaction_type": "credit",
+    "amount": 1.23,
+    "currency": "EUR",
+    "post_transaction_balance_amount": 2.34,
+    "occurred_at": "2020-01-01T12:34:56Z"
+  },
+  "subscription_id": "01234567-89ab-cdef-0123-456789abcdef",
+  "event_type": "balances#credit",
+  "schema_version": "2.0.0",
+  "sent_at": "2020-01-01T12:34:56Z"
+}
+```
 
 **Schema version `2.0.0` (latest)**
 
-Field                     | Description                                         | Format
----------                 | -------                                             | -----------
-subscriptionId            | ID of subscription that triggers this notification  | String
-profileId                 | ID of the profile that owns the balance             | Integer
-amount                    | Deposit amount                                      | Decimal
-currency                  | Currency of the balance that got updated            | String
-eventType                 | Type of update                                      | String
+Field                       | Description                                                   | Format
+---------                   | -------                                                       | -----------
+data.resource.type          | Balance account resource type (always `balance-account`)      | String
+data.resource.id            | ID of the balance account                                     | Integer
+data.resource.profile_id    | ID of the profile that owns the balance account               | Integer
+data.transaction_type       | Always `credit`                                               | String
+data.amount                 | Deposited amount                                              | Decimal
+data.currency               | Currency code                                                 | String
+data.post_transaction_balance_amount | Balance amount after the credit was applied          | Decimal
+data.occurred_at            | When the balance credit occurred                              | Datetime
