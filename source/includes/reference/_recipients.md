@@ -556,6 +556,159 @@ Requesting to delete recipient that is already inactive will return an http stat
 ### Request
 **`DELETE https://api.sandbox.transferwise.tech/v1/accounts/{accountId}`**
 
+## Requirements version 1.1
+> Example Request:
+
+```shell
+curl -X GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements \
+     -H "Authorization: Bearer <your api token>" 
+     -H "Accept-Minor-Version: 1"
+```
+
+> Example Response:
+
+```json
+[
+    {
+        "type": "south_korean_paygate",
+        "title": "PayGate",
+        "usageInfo": null,
+        "fields": [
+            {
+                "name": "E-mail",
+                "group": [
+                    {
+                        "key": "email",
+                        "name": "E-mail",
+                        "type": "text",
+                        "refreshRequirementsOnChange": false,
+                        "required": true,
+                        "displayFormat": null,
+                        "example": "example@example.ex",
+                        "minLength": null,
+                        "maxLength": null,
+                        "validationRegexp": "^[^\\s]+@[^\\s]+\\.[^\\s]{2,}$",
+                        "validationAsync": null,
+                        "valuesAllowed": null
+                    }
+                ]
+            },
+            {
+                "name": "Recipient type",
+                "group": [
+                    {
+                        "key": "legalType",
+                        "name": "Recipient type",
+                        "type": "select",
+                        "refreshRequirementsOnChange": false,
+                        "required": true,
+                        "displayFormat": null,
+                        "example": "",
+                        "minLength": null,
+                        "maxLength": null,
+                        "validationRegexp": null,
+                        "validationAsync": null,
+                        "valuesAllowed": [
+                            {
+                                "key": "PRIVATE",
+                                "name": "Person"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Full Name",
+                "group": [
+                    {
+                        "key": "accountHolderName",
+                        "name": "Full Name",
+                        "type": "text",
+                        "refreshRequirementsOnChange": false,
+                        "required": true,
+                        "displayFormat": null,
+                        "example": "",
+                        "minLength": 2,
+                        "maxLength": 70,
+                        "validationRegexp": null,
+                        "validationAsync": null,
+                        "valuesAllowed": null
+                    }
+                ]
+            },
+            {
+                "name": "Recipient's Date of Birth",
+                "group": [
+                    {
+                        "key": "dateOfBirth",
+                        "name": "Recipient's Date of Birth",
+                        "type": "date",
+                        "refreshRequirementsOnChange": false,
+                        "required": true,
+                        "displayFormat": null,
+                        "example": "",
+                        "minLength": null,
+                        "maxLength": null,
+                        "validationRegexp": "^\\d{4}\\-\\d{2}\\-\\d{2}$",
+                        "validationAsync": null,
+                        "valuesAllowed": null
+                    }
+                ]
+            },
+            {
+                "name": "Recipient Bank Name",
+                "group": [
+                    {
+                        "key": "bankCode",
+                        "name": "Recipient Bank Name",
+                        "type": "select",
+                        "refreshRequirementsOnChange": false,
+                        "required": true,
+                        "displayFormat": null,
+                        "example": "Choose recipient bank",
+                        "minLength": null,
+                        "maxLength": null,
+                        "validationRegexp": null,
+                        "validationAsync": null,
+                        "valuesAllowed": [
+                            {
+                                "key": "",
+                                "name": "Choose recipient bank"
+                            },
+                            ...
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Account number (KRW accounts only)",
+                "group": [
+                    {
+                        "key": "accountNumber",
+                        "name": "Account number (KRW accounts only)",
+                        "type": "text",
+                        "refreshRequirementsOnChange": false,
+                        "required": true,
+                        "displayFormat": null,
+                        "example": "1254693521232",
+                        "minLength": 10,
+                        "maxLength": 16,
+                        "validationRegexp": null,
+                        "validationAsync": null,
+                        "valuesAllowed": null
+                    }
+                ]
+            }
+        ]
+    },
+```
+### Request
+**` GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements`**<br/>
+**` POST https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements`**<br/>
+**` GET https://api.sandbox.transferwise.tech/v1/account-requirements?source=EUR&target=USD&sourceAmount=1000`**<br/>
+
+This incremental version of `GET` and `POST` account-requirements enables you to fetch requirements which include both recipient name and email fields in the dynamic form. This is needed for appropriate requirements addressing of recipients for currencies like KRW, JPY and RUB, and simplifies the implementation of the dynamic form as it removes the need for manual name validation. To address the  incremental 1.1 version of the endpoint you’ll be required to add the `Accept-Minor-Version` header.
+You can use this data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account-requirements for a specific currency route without creating a quote but with the amount, source and target currencies passed as URL parameters.
 
 ## Requirements
 > Example Request:
@@ -766,7 +919,7 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-re
 **` GET https://api.sandbox.transferwise.tech/v1/account-requirements?source=EUR&target=USD&sourceAmount=1000`**<br/>
 
 The `GET` and `POST` account-requirements endpoints help you to figure out which fields are required to create a valid recipient for different currencies.
-You can use this data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account-requirements for a specific currency route without creating a quote but with amount, source and target currencies passed as URL parameters.
+You can use this data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account-requirements for a specific currency route without creating a quote but with the amount, source and target currencies passed as URL parameters.
 This is a step-by-step guide on how these endpoints work.
 
 ##Using account requirements
