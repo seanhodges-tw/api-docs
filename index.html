@@ -528,6 +528,9 @@
                       <a href="#recipient-accounts-delete" class="toc-h2 toc-link" data-title="Delete">Delete</a>
                     </li>
                     <li>
+                      <a href="#recipient-accounts-requirements-version-1-1" class="toc-h2 toc-link" data-title="Requirements version 1.1">Requirements version 1.1</a>
+                    </li>
+                    <li>
                       <a href="#recipient-accounts-requirements" class="toc-h2 toc-link" data-title="Requirements">Requirements</a>
                     </li>
                     <li>
@@ -6906,6 +6909,157 @@ This list does not currently support pagination, therefore if you have many reci
 <p>Requesting to delete recipient that is already inactive will return an http status 403 (forbidden).</p>
 <h3 id='recipient-accounts-delete-request'>Request</h3>
 <p><strong><code>DELETE https://api.sandbox.transferwise.tech/v1/accounts/{accountId}</code></strong></p>
+<h2 id='recipient-accounts-requirements-version-1-1'>Requirements version 1.1</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v1/quotes/<span class="o">{</span>quoteId<span class="o">}</span>/account-requirements <span class="se">\</span>
+     -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
+     -H <span class="s2">"Accept-Minor-Version: 1"</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"south_korean_paygate"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PayGate"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"usageInfo"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E-mail"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E-mail"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"refreshRequirementsOnChange"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"displayFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@example.ex"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"validationRegexp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^[^</span><span class="se">\\</span><span class="s2">s]+@[^</span><span class="se">\\</span><span class="s2">s]+</span><span class="se">\\</span><span class="s2">.[^</span><span class="se">\\</span><span class="s2">s]{2,}$"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"validationAsync"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"valuesAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipient type"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"legalType"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipient type"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"refreshRequirementsOnChange"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"displayFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"validationRegexp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"validationAsync"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"valuesAllowed"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="p">{</span><span class="w">
+                                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRIVATE"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="w">
+                            </span><span class="p">}</span><span class="w">
+                        </span><span class="p">]</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Full Name"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accountHolderName"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Full Name"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"refreshRequirementsOnChange"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"displayFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"validationRegexp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"validationAsync"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"valuesAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipient's Date of Birth"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dateOfBirth"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipient's Date of Birth"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"date"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"refreshRequirementsOnChange"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"displayFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"validationRegexp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^</span><span class="se">\\</span><span class="s2">d{4}</span><span class="se">\\</span><span class="s2">-</span><span class="se">\\</span><span class="s2">d{2}</span><span class="se">\\</span><span class="s2">-</span><span class="se">\\</span><span class="s2">d{2}$"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"validationAsync"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"valuesAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipient Bank Name"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bankCode"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipient Bank Name"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"select"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"refreshRequirementsOnChange"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"displayFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Choose recipient bank"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"validationRegexp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"validationAsync"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"valuesAllowed"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                            </span><span class="p">{</span><span class="w">
+                                </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Choose recipient bank"</span><span class="w">
+                            </span><span class="p">},</span><span class="w">
+                            </span><span class="err">...</span><span class="w">
+                        </span><span class="p">]</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Account number (KRW accounts only)"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accountNumber"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Account number (KRW accounts only)"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"refreshRequirementsOnChange"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"displayFormat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1254693521232"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"validationRegexp"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"validationAsync"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"valuesAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+</span></code></pre><h3 id='recipient-accounts-requirements-version-1-1-request'>Request</h3>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements</code></strong><br/>
+<strong><code>POST https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements</code></strong><br/>
+<strong><code>GET https://api.sandbox.transferwise.tech/v1/account-requirements?source=EUR&amp;target=USD&amp;sourceAmount=1000</code></strong><br/></p>
+
+<p>This incremental version of <code>GET</code> and <code>POST</code> account requirements enables you to fetch requirements which include both recipient name and email fields in the dynamic form. These values are required to support currencies such as KRW, JPY and RUB, and also simplify the use of dynamic forms by removing the need for manual name validation. Set the request header <code>Accept-Minor-Version</code> to <code>1</code> to use this version.
+You can use these data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account requirements for a specific currency route without referring to a particular quote but with the amount, source and target currencies passed as URL parameters.</p>
 <h2 id='recipient-accounts-requirements'>Requirements</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -7113,7 +7267,7 @@ This list does not currently support pagination, therefore if you have many reci
 <strong><code>GET https://api.sandbox.transferwise.tech/v1/account-requirements?source=EUR&amp;target=USD&amp;sourceAmount=1000</code></strong><br/></p>
 
 <p>The <code>GET</code> and <code>POST</code> account-requirements endpoints help you to figure out which fields are required to create a valid recipient for different currencies.
-You can use this data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account-requirements for a specific currency route without creating a quote but with amount, source and target currencies passed as URL parameters.
+You can use these data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account requirements for a specific currency route without referring to a particular quote but with the amount, source and target currencies passed as URL parameters.
 This is a step-by-step guide on how these endpoints work.</p>
 <h2 id='recipient-accounts-using-account-requirements'>Using account requirements</h2>
 <p>1.First create a quote to specify currencies and transfer amounts. See <a href="#quotes-create">Create.Quote</a>.</p>
