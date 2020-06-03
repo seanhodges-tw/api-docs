@@ -707,8 +707,8 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-re
 **` POST https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-requirements`**<br/>
 **` GET https://api.sandbox.transferwise.tech/v1/account-requirements?source=EUR&target=USD&sourceAmount=1000`**<br/>
 
-This incremental version of `GET` and `POST` account-requirements enables you to fetch requirements which include both recipient name and email fields in the dynamic form. This is needed for appropriate requirements addressing of recipients for currencies like KRW, JPY and RUB, and simplifies the implementation of the dynamic form as it removes the need for manual name validation. To address the  incremental 1.1 version of the endpoint you’ll be required to add the `Accept-Minor-Version` header.
-You can use this data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account-requirements for a specific currency route without creating a quote but with the amount, source and target currencies passed as URL parameters.
+This incremental version of `GET` and `POST` account requirements enables you to fetch requirements which include both recipient name and email fields in the dynamic form. These values are required to support currencies such as KRW, JPY and RUB, and also simplify the use of dynamic forms by removing the need for manual name validation. Set the request header `Accept-Minor-Version` to `1` to use this version.
+You can use these data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account requirements for a specific currency route without referring to a particular quote but with the amount, source and target currencies passed as URL parameters.
 
 ## Requirements
 > Example Request:
@@ -919,7 +919,7 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId}/account-re
 **` GET https://api.sandbox.transferwise.tech/v1/account-requirements?source=EUR&target=USD&sourceAmount=1000`**<br/>
 
 The `GET` and `POST` account-requirements endpoints help you to figure out which fields are required to create a valid recipient for different currencies.
-You can use this data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account-requirements for a specific currency route without creating a quote but with the amount, source and target currencies passed as URL parameters.
+You can use these data to build a dynamic user interface on top of these endpoints. The third sample shows how to get account requirements for a specific currency route without referring to a particular quote but with the amount, source and target currencies passed as URL parameters.
 This is a step-by-step guide on how these endpoints work.
 
 ##Using account requirements
