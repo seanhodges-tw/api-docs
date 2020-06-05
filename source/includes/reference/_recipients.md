@@ -926,7 +926,7 @@ This is a step-by-step guide on how these endpoints work.
 
 1.First create a quote to specify currencies and transfer amounts. See [Create.Quote](#quotes-create).
 
-2.Call `GET /v1/quotes/{quoteId}/account-requirements` to get the list of fields you need to fill with values in the "details" section for creating a valid recipient account. 
+2.Call `GET /v1/quotes/{quoteId/quoteUuid}/account-requirements` to get the list of fields you need to fill with values in the "details" section for creating a valid recipient account. 
 
 In order to create an "aba" recipient type you need these top level fields:<br/>
 <ul>
@@ -939,9 +939,9 @@ In order to create an "aba" recipient type you need these top level fields:<br/>
  <li>address.firstLine</li>
 </ul>
 
-Some fields require multiple levels of fields in the details request, for example Country followed by State. This should be handled by the client based on the `refreshRequirementsOnChange` field. In the example above 'address.country' has this field set to true, indicating that there are additional fields required depending on the selected value. To manage this you should create a request with all of the initially requested data and call the `POST account-requirements` endpoint. You will be returned a response similar the previosuly returned data from `GET account-requirements` but with additional fields.
+Some fields require multiple levels of fields in the details request, for example Country followed by State. This should be handled by the client based on the `refreshRequirementsOnChange` field. In the example above 'address.country' has this field set to true, indicating that there are additional fields required depending on the selected value. To manage this you should create a request with all of the initially requested data and call the `POST account-requirements` endpoint. You will be returned a response similar the previously returned data from `GET account-requirements` but with additional fields.
 
-3.For example, construct a recipient object with all top level fields and call POST /v1/quotes/{quoteId}/account-requirements with these value to expose sub fields.  <br/>
+3.For example, construct a recipient object with all top level fields and call `POST /v1/quotes/{quoteId/quoteuuid}/account-requirements` with these value to expose sub fields.  <br/>
 For example posting US as country will also add "state" to list of fields.<br/>
 
 <div class="center-column"></div>
@@ -978,12 +978,12 @@ However, posting GB as country will not add any new fields as GB addresses do no
 }
 ```
 
-It is possible that any new fields retuened may _also_ have `refreshRequirementsOnChange` field set to true. Therefore you must keep iterating on the partially created details object until `POST account-requirements` returns you no new fields that it previously didn't include in the response, you can do this by checking the size of the array returned.
+It is possible that any new fields returned may _also_ have `refreshRequirementsOnChange` field set to true. Therefore you must keep iterating on the partially created details object until `POST account-requirements` returns you no new fields that it previously didn't include in the response, you can do this by checking the size of the array returned.
 
-4.Once you have built your full reciepient details object you can use it to create a reciepient.
+4.Once you have built your full recipient details object you can use it to create a recipient.
 
 For example this is a valid request to create a recipient with address in US Arizona:
-<br/> `POST /v1/accounts`:<br/>
+<br/>`POST /v1/accounts`:<br/>
 
 <div class="center-column"></div>
 ```
@@ -993,30 +993,25 @@ For example this is a valid request to create a recipient with address in US Ari
     "currency": "USD",
     "type": "aba",
     "details": {
-    	"legalType": "PRIVATE",
-    	"abartn": "111000025",
-    	"accountNumber": "12345678",
-    	"accountType": "CHECKING",
-    	"address": {
-    		"country": "US",
-    		"state": "AZ"
-       	"city": "New York",
-    		"postCode": "10025",
-    		"firstLine": "45 Sunflower Ave"
-    	}
+      "legalType": "PRIVATE",
+      "abartn": "111000025",
+      "accountNumber": "12345678",
+      "accountType": "CHECKING",
+      "address": {
+            "country": "US",
+        "state": "AZ"
+        "city": "New York",
+        "postCode": "10025",
+        "firstLine": "45 Sunflower Ave"
+      }
     }
 }
 ```
 
-We do not require the recipient's address for most receiving currencies and as such do not return these form elements by default. In some cases it may be desirable for you to collect this from users and store it as part of the recipient object in the TransferWise platform. If you wish to do this you can include the parameter `&addressRequired=true` in your call to `GET /v1/quotes/{quoteId}/account-requirements`, if this is present we will return address fields as part of the form.
+We do not require the recipient's address for most receiving currencies and as such do not return these form elements by default. In some cases it may be desirable for you to collect this from users and store it as part of the recipient object in the TransferWise platform. If you wish to do this you can include the parameter `&addressRequired=true` in your call to `GET /v1/quotes/{quoteId/quoteUuid}/account-requirements`, if this is present we will return address fields as part of the form.
 
 ### Building a user interface
-
-Account requirements help us understand how to create a valid account given a certain context. As a tool to help explore this API, please visit [Dynamic Forms UI](https://sandbox.transferwise.tech/dynamic-forms-ui/).
-This app allows specifying different requests and calls our sandbox environment for account requirements. It then displays the response in JSON along with an example 
-of the rendered form from the said response.
-
-When requesting the form data from the account-requirements several the first level of the response defines different types of recipient you can create, the first thing to do is present the user a choice of which recipient type they wish to create, e.g. to GBP this could be local details or IBAN format. Each recipient type then has mutiple `fields` describing the form elements required to be shown to collect information from the user. Each field will have a `type` value, these tell you the field type that your front end needs to render to be able to collect the data. A number of field types are permitted, these are:
+When requesting the form data from the `account-requirements` endpoint, the first level of the response defines different types of recipient you can create, the first thing to do is present the user a choice of which recipient type they wish to create, e.g. to GBP this could be local details or IBAN format. Each recipient type then has multiple `fields` describing the form elements required to be shown to collect information from the user. Each field will have a `type` value, these tell you the field type that your front end needs to render to be able to collect the data. A number of field types are permitted, these are:
 
 type            | UI element
 ---------       | ------- 
@@ -1025,8 +1020,14 @@ select          | A selection box/dialog
 radio           | A radio button choice between options
 date            | A text box with a date picker
 
-Example data is also included in each field which should be shown to the user, along with a regex or min and max length constraints that should be applied as field level validations. You can optionally implement the dynamic validation using the `validationAsync` field, however these checks wil also be done when a completed recipient is submitted to `POST /v1/accounts`.
+Example data is also included in each field which should be shown to the user, along with a regex or min and max length constraints that should be applied as field level validations. You can optionally implement the dynamic validation using the `validationAsync` field, however these checks will also be done when a completed recipient is submitted to `POST /v1/accounts`.
 
+Some good recipient currencies to test are:
+
+* CAD - has several fields in a field group.
+* USD - the country field has `refreshRequirementsOnChange`.
+* JPY - the bank field has `refreshRequirementsOnChange`.
+* PEN - has a field using a date component type.
 
 ### Response
 
