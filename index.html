@@ -1252,7 +1252,7 @@ There are different ways of creating the required digital signature, for example
 <blockquote>
 <p>The shell one-liner to sign a string, encode it with Base64 and print to standard output:</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">printf</span> <span class="s1">'&lt;string to sign&gt;'</span> | openssl sha256 -sign &lt;path to private key.pem&gt; | base64 -b 0
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">printf</span> <span class="s1">'&lt;string to sign&gt;'</span> | openssl sha256 -sign &lt;path to private key.pem&gt; | base64 -w 0
 </code></pre>
 <ul>
 <li><p>OpenSSL</p>
@@ -1269,11 +1269,12 @@ send it over HTTP it should be encoded to <a href="https://en.wikipedia.org/wiki
 <p><strong>Detailed workflow</strong></p>
 
 <blockquote>
-<p>Here is a step-by-step workflow with example commands.</p>
+<p>Here is a step-by-step workflow with example commands 
+(which may vary slightly depending on the exact versions of utilities used).</p>
 
 <p>1. Client performs a request:</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -X POST <span class="s1">'https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/transfers/{transferId}/payments'</span> <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -i -X POST <span class="s1">'https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/transfers/{transferId}/payments'</span> <span class="se">\</span>
        -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
        -H <span class="s1">'Authorization: Bearer &lt;your api token&gt;'</span> <span class="se">\</span>
        -d <span class="s1">'{"type": "BALANCE"}'</span>
@@ -1286,7 +1287,7 @@ Date: Fri, 03 Jan 2020 12:34:56 GMT
 Content-Type: application/json;charset=UTF-8
 x-2fa-approval-result: REJECTED
 x-2fa-approval: be2f6579-9426-480b-9cb7-d8f1116cc8b9
-
+...
 {
     "timestamp": "2020-01-03T12:34:56.789+0000",
     "status": 403,
@@ -1298,7 +1299,7 @@ x-2fa-approval: be2f6579-9426-480b-9cb7-d8f1116cc8b9
 <blockquote>
 <p>3. Client signs the one-time token from the response using OpenSSL:</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">printf</span> <span class="s1">'be2f6579-9426-480b-9cb7-d8f1116cc8b9'</span> | openssl sha256 -sign private.pem | base64 -b 0
+<pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">printf</span> <span class="s1">'be2f6579-9426-480b-9cb7-d8f1116cc8b9'</span> | openssl sha256 -sign private.pem | base64 -w 0
 1ZCN1MIDdmonOJvNQvsCxRHMXihsqZ/xNvybhb3oYNQgRkyj2P0hCVVaWUbr313LicFGwRTW8kcxTwvpXQdeurGtcN2zGoweVTopI06dmJ8vQMfTkrqjMZG3UUX0EcU+tJaDlBemvS7gv2aNGyHDMiRPZOZRPA6TH0LPJvLdVRMsEbXrbj8HqEopczmf1jChRxftmg2XoeQUMhhlOiSjSbJmlyAIegioI40/BTii+Q7f/HWZqk6N2vmHWPomwHQMz8Hy6frLYJb5tchjg/i+RRvZjEVbUH53QfG8Tbmx4JM/wN1LYeR8rebSdGEpLOd8QRcjuDur54qHNWXvKRM8aQ<span class="o">==</span>
 </code></pre>
 <blockquote>
@@ -1335,7 +1336,7 @@ NI7wvIG9K8gFaoSiGD/OLlLRaGiAdejKBsBx2hK73M58YQsgqIpdIQ==
 <blockquote>
 <p>4. Client repeats the initial request with the addition of the one-time token and the signature headers:</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -X POST <span class="s1">'https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/transfers/{transferId}/payments'</span> <span class="se">\</span>
+<pre class="highlight shell"><code><span class="gp">$ </span>curl -i -X POST <span class="s1">'https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/transfers/{transferId}/payments'</span> <span class="se">\</span>
        -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
        -H <span class="s1">'Authorization: Bearer &lt;your api token&gt;'</span> <span class="se">\</span>
        -H <span class="s1">'x-2fa-approval: be2f6579-9426-480b-9cb7-d8f1116cc8b9'</span> <span class="se">\</span>
