@@ -250,7 +250,7 @@ There are different ways of creating the required digital signature, for example
 > The shell one-liner to sign a string, encode it with Base64 and print to standard output:
 
 ```bash
-$ printf '<string to sign>' | openssl sha256 -sign <path to private key.pem> | base64 -b 0
+$ printf '<string to sign>' | openssl sha256 -sign <path to private key.pem> | base64 -w 0
 ```
 
 * OpenSSL
@@ -266,12 +266,13 @@ $ printf '<string to sign>' | openssl sha256 -sign <path to private key.pem> | b
    
 **Detailed workflow**
 
-> Here is a step-by-step workflow with example commands.
+> Here is a step-by-step workflow with example commands 
+> (which may vary slightly depending on the exact versions of utilities used).
 
 > 1\. Client performs a request:
 
 ```bash
-$ curl -X POST 'https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/transfers/{transferId}/payments' \
+$ curl -i -X POST 'https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/transfers/{transferId}/payments' \
        -H 'Content-Type: application/json' \
        -H 'Authorization: Bearer <your api token>' \
        -d '{"type": "BALANCE"}'
@@ -285,7 +286,7 @@ Date: Fri, 03 Jan 2020 12:34:56 GMT
 Content-Type: application/json;charset=UTF-8
 x-2fa-approval-result: REJECTED
 x-2fa-approval: be2f6579-9426-480b-9cb7-d8f1116cc8b9
-
+...
 {
     "timestamp": "2020-01-03T12:34:56.789+0000",
     "status": 403,
@@ -298,7 +299,7 @@ x-2fa-approval: be2f6579-9426-480b-9cb7-d8f1116cc8b9
 > 3\. Client signs the one-time token from the response using OpenSSL:
 
 ```bash
-$ printf 'be2f6579-9426-480b-9cb7-d8f1116cc8b9' | openssl sha256 -sign private.pem | base64 -b 0
+$ printf 'be2f6579-9426-480b-9cb7-d8f1116cc8b9' | openssl sha256 -sign private.pem | base64 -w 0
 1ZCN1MIDdmonOJvNQvsCxRHMXihsqZ/xNvybhb3oYNQgRkyj2P0hCVVaWUbr313LicFGwRTW8kcxTwvpXQdeurGtcN2zGoweVTopI06dmJ8vQMfTkrqjMZG3UUX0EcU+tJaDlBemvS7gv2aNGyHDMiRPZOZRPA6TH0LPJvLdVRMsEbXrbj8HqEopczmf1jChRxftmg2XoeQUMhhlOiSjSbJmlyAIegioI40/BTii+Q7f/HWZqk6N2vmHWPomwHQMz8Hy6frLYJb5tchjg/i+RRvZjEVbUH53QfG8Tbmx4JM/wN1LYeR8rebSdGEpLOd8QRcjuDur54qHNWXvKRM8aQ==
 ```
 
@@ -337,7 +338,7 @@ NI7wvIG9K8gFaoSiGD/OLlLRaGiAdejKBsBx2hK73M58YQsgqIpdIQ==
 > 4\. Client repeats the initial request with the addition of the one-time token and the signature headers:
 
 ```bash
-$ curl -X POST 'https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/transfers/{transferId}/payments' \
+$ curl -i -X POST 'https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/transfers/{transferId}/payments' \
        -H 'Content-Type: application/json' \
        -H 'Authorization: Bearer <your api token>' \
        -H 'x-2fa-approval: be2f6579-9426-480b-9cb7-d8f1116cc8b9' \
