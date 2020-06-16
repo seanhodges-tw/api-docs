@@ -1,7 +1,29 @@
-# Bank Integrations Guide (LEGACY)
+# Bank Integrations Guide (V1 LEGACY)
 
-## New documentation available
-For any banks who are beginning their integration now please use the new version of the [TransferWise for Banks API documentation](https://transferwise.github.io/api-docs-banks/) which has been updated and improved with he latest API endpoints and use cases for banks. This documentation remains only as a reference for older integrations.
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+## **New documentation available**
+**For any banks who are beginning their integration now please use the new version of the [TransferWise for Banks API documentation](https://transferwise.github.io/api-docs-banks/) which has been updated and improved with the latest API endpoints and use cases for banks. This documentation remains only as a reference for older integrations still using deprecated endpoints.**
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 ## API access
 
@@ -66,6 +88,8 @@ To keep your users informed of the status and estimated time of arrival of their
 
 * [Transfer status](#bank-integrations-guide-legacy-track-transfer-status)
 * [Delivery estimate](#bank-integrations-guide-legacy-get-updated-transfer-delivery-time-estimate)
+
+This process should not be used - webhooks are available in the new documentation: [TransferWise for Banks API documentation](https://transferwise.github.io/api-docs-banks/#application-webhooks)
 
 ## Get user authorization for existing accounts
 

@@ -35,6 +35,12 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/quotes \
     "rateType": "FIXED",
     "deliveryEstimate": "2018-08-27T14:35:44.496Z",
     "fee": 2.34,
+    "feeDetails": {
+        "transferwise": 2.34,
+        "payIn": 0.0,
+        "discount": 0.0,
+        "partner": 0.0
+    },
     "allowedProfileTypes": [
         "PERSONAL",
         "BUSINESS"
@@ -65,24 +71,29 @@ type                  | 'BALANCE_PAYOUT' for payments funded from borderless acc
 
 ### Response
 
-Field                 | Description                                   | Format
----------             | -------                                       | -----------
-id                    | quoteId.                                      | Integer
-source                | Source(send) currency code.                    | Text
-target                | Target(receive) currency code.                 | Text
-sourceAmount          | Amount in source currency.                     | Decimal
-targetAmount          | Amount in target currency.                     | Decimal
-type                  | Quote type.                                    | Text
-rate                  | Exchange rate value.                           | Decimal
-createdTime           | Quote created timestamp.                       | Timestamp
-createdByUserId       | Your used id.                                  | Integer
-profile               | Personal or business profile id.               | Integer
-rateType              | Always 'FIXED'.                                | Text
-deliveryEstimate      | Estimated timestamp when recipient would receive funds, assuming transfer will be created now. | Timestamp
-fee                   | TransferWise fee in source currency for this payment (deducted from source amount).                   | Decimal
-allowedProfileTypes   | PERSONAL, BUSINESS or both. Specifies which legal entities can use this quote. There are few currency routes are where we dont support business customers yet. | Text
-guaranteedTargetAmount| Not relevant for fixed rate quotes. Please ignore. | Boolean
-ofSourceAmount        | Not relevant for fixed rate quotes. Please ignore. | Boolean
+Field                     | Description                                                                                           | Format
+---------                 | -------                                                                                               | -----------
+id                        | quoteId.                                                                                              | Integer
+source                    | Source(send) currency code.                                                                           | Text
+target                    | Target(receive) currency code.                                                                        | Text
+sourceAmount              | Amount in source currency.                                                                            | Decimal
+targetAmount              | Amount in target currency.                                                                            | Decimal
+type                      | Quote type.                                                                                           | Text
+rate                      | Exchange rate value.                                                                                  | Decimal
+createdTime               | Quote created timestamp.                                                                              | Timestamp
+createdByUserId           | Your used id.                                                                                         | Integer
+profile                   | Personal or business profile id.                                                                      | Integer
+rateType                  | Always 'FIXED'.                                                                                       | Text
+deliveryEstimate          | Estimated timestamp when recipient would receive funds, assuming transfer will be created now.        | Timestamp
+fee                       | Total fee amount in source currency for this payment (already deducted from source amount).           | Decimal
+feeDetails                | Detailed breakdown of the fee. Splits the fee up in to the components below.                          | Object
+feeDetails.transferwise   | The basic fee TransferWise charge for the conversion and delivery of funds                            | Decimal
+feeDetails.payIn          | The cost of the selected quote `type` payment method                                                  | Decimal
+feeDetails.discount       | The total amount of any discounts applied to the transfer, these are deducted from the final `fee`    | Decimal
+feeDetails.partner        | If your bank has agreed a custom price, it will be displayed here.                                    | Decimal
+allowedProfileTypes       | PERSONAL, BUSINESS or both. Specifies which legal entities can use this quote. There are few currency routes are where we dont support business customers yet. | Text
+guaranteedTargetAmount    | Not relevant for fixed rate quotes. Please ignore.                                                    | Boolean
+ofSourceAmount            | Not relevant for fixed rate quotes. Please ignore.                                                    | Boolean
 
 ## Get By Id
 > Example Request:
@@ -109,6 +120,12 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/quotes/{quoteId} \
     "rateType": "FIXED",
     "deliveryEstimate": "2018-08-27T14:35:44.496Z",
     "fee": 2.34,
+    "feeDetails": {
+        "transferwise": 2.34,
+        "payIn": 0.0,
+        "discount": 0.0,
+        "partner": 0.0
+    },
     "allowedProfileTypes": [
         "PERSONAL",
         "BUSINESS"
@@ -190,6 +207,12 @@ curl -X GET https://api.sandbox.transferwise.tech/v1/quotes?source=EUR&target=GB
     "rateType": "FIXED",
     "deliveryEstimate": "2018-08-27T14:35:44.496Z",
     "fee": 2.34,
+    "feeDetails": {
+        "transferwise": 2.34,
+        "payIn": 0.0,
+        "discount": 0.0,
+        "partner": 0.0
+    },
     "allowedProfileTypes": [
         "PERSONAL",
         "BUSINESS"
