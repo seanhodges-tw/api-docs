@@ -716,7 +716,7 @@ Step 2: Create a recipient account
 Step 4: Fund a transfer
 
 <br/>
-A transfer is a payout order you make to a recipient account based on a quote. Once created, a transfer will need to be funded within the next 5 working days, or it’ll automatically get cancelled.  
+A transfer is a payout order you make to a recipient account based on a quote. Once created, a transfer will need to be funded within the next 14 days (7 days for [email transfers](#recipient-accounts-create-email-recipient)) or it’ll automatically get cancelled.  
 
 ### Request
 
