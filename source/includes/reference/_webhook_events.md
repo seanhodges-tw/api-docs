@@ -1,16 +1,33 @@
 # Webhook events
 
-Events are messages that will be sent to your server as HTTP `POST` requests if you create a webhook subscription for
-the type of event and a relevant resource you have access to is updated. 
-Events will not contain any personally identifiable information.
-
+Webhook events are messages that describe certain business events that occur within TransferWise's system. 
 For example, an event may describe a change in the status of a transfer you have made.
 
-To acknowledge that you have successfully processed an event, make sure your server answers with a `2xx`-series HTTP status
-code within 5 seconds. Otherwise, we will consider the delivery attempt as having failed and will later try to resend the
-message.
+Events that are related to your TransferWise resources can be sent to your server as HTTP `POST` requests.
+You can start receiving events by creating _webhook subscriptions_ using the TransferWise API or website interface.
 
-We will attempt to redeliver messages at increasing intervals over a two week period. We will try at most 25 times to do this.
+Subscriptions specify what type of event should be sent, and what server location the event should be sent to.
+
+Events will not contain any personally identifiable information.
+
+
+## Webhook handlers
+
+To receive events, you must set up a publicly accessible HTTPS endpoint and create a subscription that uses this
+endpoint. Our system will send HTTP POST requests to this endpoint with events encoded using JSON.
+
+To acknowledge that your system has successfully processed an event, it must respond within 5 seconds
+with a `2xx`-series HTTP status code.
+If a "success" response is not received by us within this time period, we will consider the delivery attempt as having
+failed and will later try to resend the message.
+
+We will attempt to redeliver messages at increasing intervals over a two week period.
+We will try at most 25 times to do this.
+
+A recommended strategy for handling notifications is to do some basic validation and then store the notification for
+processing by a separate server process. This will avoid our delivery system from considering delivery attempts to have
+failed if your handler does not respond in time due to a long handling process.
+Basic validation could include signature verification (see below). 
 
 
 ## Event HTTP requests
@@ -22,9 +39,9 @@ Each event type is described in detail later in this section.
 Event HTTP requests also contain the following custom headers:
 
 
-### Signature header `X-Signature`
+### Signature header `X-Signature-SHA256`
 
-> TransferWise public key for production environment:
+> TransferWise's public webhook signing key for the production environment:
 
 ```
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvO8vXV+JksBzZAY6GhSO
@@ -35,7 +52,8 @@ CAFyH9+knYsDbR43UJ9shtc42Ybd40Afihj8KnYKXzchyQ42aC8aZ/h5hyZ28yVy
 Oj3Vos0VdBIs/gAyJ/4yyQFCXYte64I7ssrlbGRaco4nKF3HmaNhxwyKyJafz19e
 HwIDAQAB
 ```
-> TransferWise public key for sandbox environment:
+
+> TransferWise's public webhook signing key for the sandbox environment:
 
 ```
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwpb91cEYuyJNQepZAVfP
@@ -47,7 +65,7 @@ z7KqoKUN0oHqWLr2U1A+7kqrl6O2nx3CKs1bj1hToT1+p4kcMoHXA7kA+VBLUpEs
 VwIDAQAB
 ```
 
-> How to verify signatures (in Java):
+> How to verify SHA256 signatures in Java:
 
 ```java
 public boolean verifySignature(String encodedPublicKey, String signature, String payload) {
@@ -55,7 +73,7 @@ public boolean verifySignature(String encodedPublicKey, String signature, String
   KeyFactory keyFactory = KeyFactory.getInstance("RSA");
   PublicKey publicKey = keyFactory.generatePublic(publicKeySpec);
   
-  Signature sign = Signature.getInstance("SHA1WithRSA");
+  Signature sign = Signature.getInstance("SHA256WithRSA");
   sign.initVerify(publicKey);
   sign.update(payload.getBytes());
   
@@ -67,10 +85,14 @@ public boolean verifySignature(String encodedPublicKey, String signature, String
 
 Each outgoing webhook request is signed.
 Although event payloads do not contain any sensitive information, you may want to
-verify if the request is coming from TransferWise (however this is optional).
-We advise you not to process any requests where signature appears to be forged.
+verify if the request is coming from TransferWise and that it has not been forged or tampered with.
+You should not process any requests with signatures that fail verification.
 
-Each `POST` request includes the `X-Signature` header, which contains the message-specific signature.
+Signatures are generated using an RSA key and SHA256 digest of the message body.
+
+Signatures are transmitted using the `X-Signature-SHA256` request header. Signatures are Base64 encoded.
+
+We have provided some sample Java code that uses the `SHA256WithRSA` signing algorithm to verify a message.
 
 
 ### Delivery ID header `X-Delivery-Id`
