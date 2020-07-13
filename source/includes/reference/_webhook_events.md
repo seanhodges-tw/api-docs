@@ -84,13 +84,12 @@ public boolean verifySignature(String encodedPublicKey, String signature, String
 ```
 
 Each outgoing webhook request is signed.
-Although event payloads do not contain any sensitive information, you may want to
-verify if the request is coming from TransferWise and that it has not been forged or tampered with.
+Although event payloads do not contain any sensitive information, you should verify if the request is coming from
+TransferWise and that it has not been forged or tampered with.
 You should not process any requests with signatures that fail verification.
 
 Signatures are generated using an RSA key and SHA256 digest of the message body.
-
-Signatures are transmitted using the `X-Signature-SHA256` request header. Signatures are Base64 encoded.
+They are transmitted using the `X-Signature-SHA256` request header and are Base64 encoded.
 
 We have provided some sample Java code that uses the `SHA256WithRSA` signing algorithm to verify a message.
 
