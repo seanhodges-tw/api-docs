@@ -850,6 +850,9 @@
               <a href="#webhook-events" class="toc-h1 toc-link" data-title="Webhook events">Webhook events</a>
                 <ul class="toc-list-h2">
                     <li>
+                      <a href="#webhook-events-webhook-handlers" class="toc-h2 toc-link" data-title="Webhook handlers">Webhook handlers</a>
+                    </li>
+                    <li>
                       <a href="#webhook-events-event-http-requests" class="toc-h2 toc-link" data-title="Event HTTP requests">Event HTTP requests</a>
                     </li>
                     <li>
@@ -13190,26 +13193,40 @@ See the section <a href="#webhook-events-event-http-requests">Event HTTP request
 </span></code></pre><h3 id='profile-webhooks-list-request'>Request</h3>
 <p><strong><code>GET https://api.transferwise.com/v3/profiles/{profileId}/subscriptions</code></strong></p>
 <h1 id='webhook-events'>Webhook events</h1>
-<p>Events are messages that will be sent to your server as HTTP <code>POST</code> requests if you create a webhook subscription for
-the type of event and a relevant resource you have access to is updated. 
-Events will not contain any personally identifiable information.</p>
+<p>Webhook events are messages that describe certain business events that occur within TransferWise&#39;s system. 
+For example, an event may describe a change in the status of a transfer you have made.</p>
 
-<p>For example, an event may describe a change in the status of a transfer you have made.</p>
+<p>Events that are related to your TransferWise resources can be sent to your server as HTTP <code>POST</code> requests.
+You can start receiving events by creating <em>webhook subscriptions</em> using the TransferWise API or website interface.</p>
 
-<p>To acknowledge that you have successfully processed an event, make sure your server answers with a <code>2xx</code>-series HTTP status
-code within 5 seconds. Otherwise, we will consider the delivery attempt as having failed and will later try to resend the
-message.</p>
+<p>Subscriptions specify what type of event should be sent, and what server location the event should be sent to.</p>
 
-<p>We will attempt to redeliver messages at increasing intervals over a two week period. We will try at most 25 times to do this.</p>
+<p>Events will not contain any personally identifiable information.</p>
+<h2 id='webhook-events-webhook-handlers'>Webhook handlers</h2>
+<p>To receive events, you must set up a publicly accessible HTTPS endpoint and create a subscription that uses this
+endpoint. Our system will send HTTP POST requests to this endpoint with events encoded using JSON.</p>
+
+<p>To acknowledge that your system has successfully processed an event, it must respond within 5 seconds
+with a <code>2xx</code>-series HTTP status code.
+If a &quot;success&quot; response is not received by us within this time period, we will consider the delivery attempt as having
+failed and will later try to resend the message.</p>
+
+<p>We will attempt to redeliver messages at increasing intervals over a two week period.
+We will try at most 25 times to do this.</p>
+
+<p>A recommended strategy for handling notifications is to do some basic validation and then store the notification for
+processing by a separate server process. This will avoid our delivery system from considering delivery attempts to have
+failed if your handler does not respond in time due to a long handling process.
+Basic validation could include signature verification (see below). </p>
 <h2 id='webhook-events-event-http-requests'>Event HTTP requests</h2>
 <p>Event HTTP request bodies have a type-specific structure.
 Events using version 2 of our type schema will contain a common base structure with additional event-specific details.
 Each event type is described in detail later in this section.</p>
 
 <p>Event HTTP requests also contain the following custom headers:</p>
-<h3 id='webhook-events-event-http-requests-signature-header-x-signature'>Signature header <code>X-Signature</code></h3>
+<h3 id='webhook-events-event-http-requests-signature-header-x-signature-sha256'>Signature header <code>X-Signature-SHA256</code></h3>
 <blockquote>
-<p>TransferWise public key for production environment:</p>
+<p>TransferWise&#39;s public webhook signing key for the production environment:</p>
 </blockquote>
 <pre class="highlight plaintext"><code>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvO8vXV+JksBzZAY6GhSO
 XdoTCfhXaaiZ+qAbtaDBiu2AGkGVpmEygFmWP4Li9m5+Ni85BhVvZOodM9epgW3F
@@ -13220,7 +13237,7 @@ Oj3Vos0VdBIs/gAyJ/4yyQFCXYte64I7ssrlbGRaco4nKF3HmaNhxwyKyJafz19e
 HwIDAQAB
 </code></pre>
 <blockquote>
-<p>TransferWise public key for sandbox environment:</p>
+<p>TransferWise&#39;s public webhook signing key for the sandbox environment:</p>
 </blockquote>
 <pre class="highlight plaintext"><code>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwpb91cEYuyJNQepZAVfP
 ZIlPZfNUefH+n6w9SW3fykqKu938cR7WadQv87oF2VuT+fDt7kqeRziTmPSUhqPU
@@ -13231,14 +13248,14 @@ z7KqoKUN0oHqWLr2U1A+7kqrl6O2nx3CKs1bj1hToT1+p4kcMoHXA7kA+VBLUpEs
 VwIDAQAB
 </code></pre>
 <blockquote>
-<p>How to verify signatures (in Java):</p>
+<p>How to verify SHA256 signatures in Java:</p>
 </blockquote>
 <pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verifySignature</span><span class="o">(</span><span class="n">String</span> <span class="n">encodedPublicKey</span><span class="o">,</span> <span class="n">String</span> <span class="n">signature</span><span class="o">,</span> <span class="n">String</span> <span class="n">payload</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">X509EncodedKeySpec</span> <span class="n">publicKeySpec</span> <span class="o">=</span> <span class="k">new</span> <span class="n">X509EncodedKeySpec</span><span class="o">(</span><span class="n">Base64</span><span class="o">.</span><span class="na">getMimeDecoder</span><span class="o">().</span><span class="na">decode</span><span class="o">(</span><span class="n">encodedPublicKey</span><span class="o">));</span>
   <span class="n">KeyFactory</span> <span class="n">keyFactory</span> <span class="o">=</span> <span class="n">KeyFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"RSA"</span><span class="o">);</span>
   <span class="n">PublicKey</span> <span class="n">publicKey</span> <span class="o">=</span> <span class="n">keyFactory</span><span class="o">.</span><span class="na">generatePublic</span><span class="o">(</span><span class="n">publicKeySpec</span><span class="o">);</span>
 
-  <span class="n">Signature</span> <span class="n">sign</span> <span class="o">=</span> <span class="n">Signature</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"SHA1WithRSA"</span><span class="o">);</span>
+  <span class="n">Signature</span> <span class="n">sign</span> <span class="o">=</span> <span class="n">Signature</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"SHA256WithRSA"</span><span class="o">);</span>
   <span class="n">sign</span><span class="o">.</span><span class="na">initVerify</span><span class="o">(</span><span class="n">publicKey</span><span class="o">);</span>
   <span class="n">sign</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">payload</span><span class="o">.</span><span class="na">getBytes</span><span class="o">());</span>
 
@@ -13248,11 +13265,13 @@ VwIDAQAB
 <span class="o">}</span>
 </code></pre>
 <p>Each outgoing webhook request is signed.
-Although event payloads do not contain any sensitive information, you may want to
-verify if the request is coming from TransferWise (however this is optional).
-We advise you not to process any requests where signature appears to be forged.</p>
+You should verify that any request you handle was sent by TransferWise and has not been forged or tampered with.
+You should not process any requests with signatures that fail verification.</p>
 
-<p>Each <code>POST</code> request includes the <code>X-Signature</code> header, which contains the message-specific signature.</p>
+<p>Signatures are generated using an RSA key and SHA256 digest of the message body.
+They are transmitted using the <code>X-Signature-SHA256</code> request header and are Base64 encoded.</p>
+
+<p>We have provided some sample Java code that uses the <code>SHA256WithRSA</code> signing algorithm to verify a message.</p>
 <h3 id='webhook-events-event-http-requests-delivery-id-header-x-delivery-id'>Delivery ID header <code>X-Delivery-Id</code></h3>
 <p>Each outgoing notification is assigned a unique delivery UUID.</p>
 <h3 id='webhook-events-event-http-requests-test-notification-header-x-test-notification'>Test notification header <code>X-Test-Notification</code></h3>
