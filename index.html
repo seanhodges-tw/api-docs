@@ -13206,12 +13206,11 @@ You can start receiving events by creating <em>webhook subscriptions</em> using 
 <p>To receive events, you must set up a publicly accessible HTTPS endpoint and create a subscription that uses this
 endpoint. Our system will send HTTP POST requests to this endpoint with events encoded using JSON.</p>
 
-<p>To acknowledge that your system has successfully processed an event, it must respond within 5 seconds
-with a <code>2xx</code>-series HTTP status code.
-If a &quot;success&quot; response is not received by us within this time period, we will consider the delivery attempt as having
-failed and will later try to resend the message.</p>
-
-<p>We will attempt to redeliver messages at increasing intervals over a two week period.
+<p>Your system must respond with a <code>2xx</code>-series HTTP status code within 5 seconds of receiving a request to 
+acknowledge successful delivery of a webhook notification.
+If this &quot;success&quot; response is not received by us within this time period, we will consider the delivery attempt as
+having failed and will later try to resend the message.
+We will attempt to redeliver messages at increasing intervals over a two week period.
 We will try at most 25 times to do this.</p>
 
 <p>A recommended strategy for handling notifications is to do some basic validation and then store the notification for
