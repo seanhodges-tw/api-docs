@@ -16,11 +16,10 @@ Events will not contain any personally identifiable information.
 To receive events, you must set up a publicly accessible HTTPS endpoint and create a subscription that uses this
 endpoint. Our system will send HTTP POST requests to this endpoint with events encoded using JSON.
 
-To acknowledge that your system has successfully processed an event, it must respond within 5 seconds
-with a `2xx`-series HTTP status code.
-If a "success" response is not received by us within this time period, we will consider the delivery attempt as having
-failed and will later try to resend the message.
-
+Your system must respond with a `2xx`-series HTTP status code within 5 seconds of receiving a request to 
+acknowledge successful delivery of a webhook notification.
+If this "success" response is not received by us within this time period, we will consider the delivery attempt as
+having failed and will later try to resend the message.
 We will attempt to redeliver messages at increasing intervals over a two week period.
 We will try at most 25 times to do this.
 
