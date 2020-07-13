@@ -84,8 +84,7 @@ public boolean verifySignature(String encodedPublicKey, String signature, String
 ```
 
 Each outgoing webhook request is signed.
-Although event payloads do not contain any sensitive information, you should verify that any request you handle
-was sent by TransferWise and has not been forged or tampered with.
+You should verify that any request you handle was sent by TransferWise and has not been forged or tampered with.
 You should not process any requests with signatures that fail verification.
 
 Signatures are generated using an RSA key and SHA256 digest of the message body.
