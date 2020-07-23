@@ -2480,7 +2480,7 @@ For example &quot;Completed&quot; on our website means &quot;outgoing_payment_se
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v3/profiles/<span class="o">{</span>profileId<span class="o">}</span>/borderless-accounts/<span class="o">{</span>borderlessAccountId<span class="o">}</span>/statement.json?
-<span class="nv">currency</span><span class="o">=</span>EUR&amp;intervalStart<span class="o">=</span>2018-03-01T00:00:00.000Z&amp;intervalEnd<span class="o">=</span>2018-03-15T23:59:59.999Z <span class="se">\</span>
+<span class="nv">currency</span><span class="o">=</span>EUR&amp;intervalStart<span class="o">=</span>2018-03-01T00:00:00.000Z&amp;intervalEnd<span class="o">=</span>2018-03-15T23:59:59.999Z&amp;type<span class="o">=</span>COMPACT <span class="se">\</span>
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
 </code></pre>
 <blockquote>
@@ -2629,9 +2629,7 @@ The period between intervalStart and intervalEnd cannot exceed 469 days (around 
 <h3 id='payouts-guide-get-account-statement-request'>Request</h3>
 <p><strong><code>GET https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/borderless-accounts/{borderlessAccountId}/statement.json?</code></strong></p>
 
-<p><strong><code>currency=EUR&amp;intervalStart=2018-03-01T00:00:00.000Z&amp;intervalEnd=2018-03-15T23:59:59.999Z</code></strong></p>
-
-<p>All query parameters are mandatory.</p>
+<p><strong><code>currency=EUR&amp;intervalStart=2018-03-01T00:00:00.000Z&amp;intervalEnd=2018-03-15T23:59:59.999Z&amp;type=COMPACT</code></strong></p>
 
 <table><thead>
 <tr>
@@ -2659,6 +2657,11 @@ The period between intervalStart and intervalEnd cannot exceed 469 days (around 
 <td>intervalEnd</td>
 <td>Statement start time in UTC time</td>
 <td>Zulu time. Don&#39;t forget the &#39;Z&#39; at the end.</td>
+</tr>
+<tr>
+<td>type (optional)</td>
+<td>COMPACT (default) for a single statement line per transaction. FLAT for accounting statements where transaction fees are on a separate line.</td>
+<td>Text</td>
 </tr>
 </tbody></table>
 
@@ -4833,7 +4836,7 @@ For example this is a valid request to create address in US Arizona:
 <p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X GET https://api.sandbox.transferwise.tech/v3/profiles/<span class="o">{</span>profileId<span class="o">}</span>/borderless-accounts/<span class="o">{</span>borderlessAccountId<span class="o">}</span>/statement.json?
-<span class="nv">currency</span><span class="o">=</span>EUR&amp;intervalStart<span class="o">=</span>2018-03-01T00:00:00.000Z&amp;intervalEnd<span class="o">=</span>2018-03-15T23:59:59.999Z <span class="se">\</span>
+<span class="nv">currency</span><span class="o">=</span>EUR&amp;intervalStart<span class="o">=</span>2018-03-01T00:00:00.000Z&amp;intervalEnd<span class="o">=</span>2018-03-15T23:59:59.999Z&amp;type<span class="o">=</span>COMPACT <span class="se">\</span>
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> 
 </code></pre>
 <blockquote>
@@ -4982,9 +4985,7 @@ The period between intervalStart and intervalEnd cannot exceed 469 days (around 
 <h3 id='borderless-accounts-get-account-statement-request'>Request</h3>
 <p><strong><code>GET https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/borderless-accounts/{borderlessAccountId}/statement.json?</code></strong></p>
 
-<p><strong><code>currency=EUR&amp;intervalStart=2018-03-01T00:00:00.000Z&amp;intervalEnd=2018-03-15T23:59:59.999Z</code></strong></p>
-
-<p>All query parameters are mandatory.</p>
+<p><strong><code>currency=EUR&amp;intervalStart=2018-03-01T00:00:00.000Z&amp;intervalEnd=2018-03-15T23:59:59.999Z&amp;type=COMPACT</code></strong></p>
 
 <table><thead>
 <tr>
@@ -5012,6 +5013,11 @@ The period between intervalStart and intervalEnd cannot exceed 469 days (around 
 <td>intervalEnd</td>
 <td>Statement start time in UTC time</td>
 <td>Zulu time. Don&#39;t forget the &#39;Z&#39; at the end.</td>
+</tr>
+<tr>
+<td>type (optional)</td>
+<td>COMPACT (default) for a single statement line per transaction. FLAT for accounting statements where transaction fees are on a separate line.</td>
+<td>Text</td>
 </tr>
 </tbody></table>
 
