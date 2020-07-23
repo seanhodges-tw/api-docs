@@ -1039,7 +1039,7 @@ balances[n].bankDetails              | Your borderless account bank details     
 
 ```shell
 curl -X GET https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/borderless-accounts/{borderlessAccountId}/statement.json?
-currency=EUR&intervalStart=2018-03-01T00:00:00.000Z&intervalEnd=2018-03-15T23:59:59.999Z \
+currency=EUR&intervalStart=2018-03-01T00:00:00.000Z&intervalEnd=2018-03-15T23:59:59.999Z&type=COMPACT \
      -H "Authorization: Bearer <your api token>" 
 ```
 
@@ -1192,16 +1192,15 @@ The period between intervalStart and intervalEnd cannot exceed 469 days (around 
 
 **`GET https://api.sandbox.transferwise.tech/v3/profiles/{profileId}/borderless-accounts/{borderlessAccountId}/statement.json?`**
 
-**`currency=EUR&intervalStart=2018-03-01T00:00:00.000Z&intervalEnd=2018-03-15T23:59:59.999Z`**
-
-All query parameters are mandatory.
+**`currency=EUR&intervalStart=2018-03-01T00:00:00.000Z&intervalEnd=2018-03-15T23:59:59.999Z&type=COMPACT`**
 
 Field                             | Description                                   | Format
 ---------                         | -------                                       | -----------
 borderlessAccountId                   | Your borderlessAccountId is included in "Check account balance" response as field "id".                        | Integer
 currency                              | Currency code              | Text
 intervalStart                         | Statement start time in UTC time             | Zulu time. Don't forget the 'Z' at the end. 
-intervalEnd                           | Statement start time in UTC time             | Zulu time. Don't forget the 'Z' at the end. 
+intervalEnd                           | Statement start time in UTC time             | Zulu time. Don't forget the 'Z' at the end.
+type (optional)                       | COMPACT (default) for a single statement line per transaction. FLAT for accounting statements where transaction fees are on a separate line. | Text
 
 Note that you can also download statements in PDF and CSV formats if you replace statement.json with statement.csv or statement.pdf respectively in the above URL.
 
