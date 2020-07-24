@@ -812,7 +812,12 @@ You can then top up your new currencies by converting funds from other currencie
 bypassed, such as:
 
 * the recipient of the transfer is marked as trusted on the website
-* the profile you are sending from is in one of the countries excluded from the requirements
+* the profile you are sending from is in one of the following countries:
+  * United States
+  * Canada
+  * Australia
+  * New Zealand
+  * Singapore
 
 Unless you are sending to a small number of recipients who you trust, it is recommended to 
 implement the referenced measures for your integration.
