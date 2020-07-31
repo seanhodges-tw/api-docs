@@ -1477,13 +1477,13 @@ Send payments to Australia.
 
 Recipient type = *'australian'*
 
-Private and businessvrecipients are supported. 
+Private and business recipients are supported. 
 
 Required details: 
 
 bsbCode - 6 digits
 
-businessNumber - 9..14 digits(for business recipients only)
+businessNumber - 9..14 digits (for business recipients only)
 
 accountNumber - 4..9 digits
 
