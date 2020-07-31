@@ -7985,7 +7985,7 @@ BD, BR, CZ, CL, EG, GH, HK, ID, IL, IN, JP, KE, LK, MA, NG, NP, PE, PH, RU, SG, 
         }'</span>
 </code></pre>
 <blockquote>
-<p>Example Request (AUD australian_business):</p>
+<p>Example Request for business recipient (&quot;businessNumber&quot; field added)</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v1/accounts"</span> <span class="se">\</span>
      -H <span class="s2">"Authorization: Bearer &lt;your api token&gt;"</span> <span class="se">\</span>
@@ -7994,7 +7994,7 @@ BD, BR, CZ, CL, EG, GH, HK, ID, IL, IN, JP, KE, LK, MA, NG, NP, PE, PH, RU, SG, 
           "profile": &lt;your profile id&gt;,
           "accountHolderName": "&lt;recipient name&gt;",
           "currency": "AUD",
-          "type": "australian_business",
+          "type": "australian",
           "details": {
            "legalType": "BUSINESS",
            "bsbCode": "023604",
@@ -8007,31 +8007,17 @@ BD, BR, CZ, CL, EG, GH, HK, ID, IL, IN, JP, KE, LK, MA, NG, NP, PE, PH, RU, SG, 
 
 <p>Recipient type = <em>&#39;australian&#39;</em></p>
 
-<p>Private recipients are supported. </p>
+<p>Private and business recipients are supported. </p>
 
 <p>Required details: </p>
 
 <p>bsbCode - 6 digits</p>
 
-<p>accountNumber - 5..14 digits</p>
+<p>businessNumber - 9..14 digits (for business recipients only)</p>
+
+<p>accountNumber - 4..9 digits</p>
 
 <p><br/></p>
-
-<p>OR</p>
-
-<p><br/></p>
-
-<p>Recipient type = <em>&#39;australian_business&#39;</em></p>
-
-<p>Business recipients are supported.</p>
-
-<p>Required details:</p>
-
-<p>bsbCode - 6 digits</p>
-
-<p>businessNumber - 9..14 digits</p>
-
-<p>accountNumber - 5..14 digits</p>
 <h2 id='recipient-accounts-create-bdt-recipient'>Create BDT Recipient</h2>
 <blockquote>
 <p>Example Request (BDT):</p>
