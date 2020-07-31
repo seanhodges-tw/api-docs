@@ -1453,7 +1453,7 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
         }'
 ```
 
-> Example Request (AUD australian_business):
+> Example Request for business recipient ("businessNumber" field added)
 
 ```shell
 curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
@@ -1463,7 +1463,7 @@ curl -X POST "https://api.sandbox.transferwise.tech/v1/accounts" \
           "profile": <your profile id>,
           "accountHolderName": "<recipient name>",
           "currency": "AUD",
-          "type": "australian_business",
+          "type": "australian",
           "details": {
            "legalType": "BUSINESS",
            "bsbCode": "023604",
@@ -1477,31 +1477,17 @@ Send payments to Australia.
 
 Recipient type = *'australian'*
 
-Private recipients are supported. 
+Private and businessvrecipients are supported. 
 
 Required details: 
 
 bsbCode - 6 digits
 
-accountNumber - 5..14 digits
+businessNumber - 9..14 digits(for business recipients only)
+
+accountNumber - 4..9 digits
 
 <br/>
-
-OR
-
-<br/>
-
-Recipient type = *'australian_business'*
-
-Business recipients are supported.
-
-Required details:
-
-bsbCode - 6 digits
-
-businessNumber - 9..14 digits
-
-accountNumber - 5..14 digits
 
 ## Create BDT Recipient
 
