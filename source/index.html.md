@@ -12,6 +12,7 @@ includes:
   - banks
   - affiliates
   - openbanking
+  - versioning
   - contact-us
   - full-reference-separator
   - reference/addresses
