@@ -1,5 +1,4 @@
 # Versioning
-
 The TransferWise API is continuously evolving as we offer new features and coverage to our API customers.
 Here we explain how our API versioning is maintained so you know what to expect.
 
@@ -12,9 +11,9 @@ This policy applies to both our REST API and our webhooks (push-based event API)
 ## Breaking changes
 A breaking change refers to any change that would require a client to update their application in order to continue working with the API 
 as originally intended. If an API field or resource is removed or renamed, then a breaking change has taken place. In this case we will 
-increment the version _of the affected API endpoints_ to prevent breaking existing customer integrations. 
+increment the version of the affected API endpoints to prevent breaking existing customer integrations. 
 
-Under our current policy API endpoints are not versioned together, if API endpoint compatibility has changed due to the breaking change 
+Under our current policy all API endpoints are not versioned together, if API endpoint compatibility has changed due to the breaking change 
 we will provide clear instructions in our documentation on which API calls must be used together.
 
 ## Continuity (non-breaking) changes
