@@ -443,6 +443,20 @@
                 </ul>
             </li>
             <li>
+              <a href="#versioning" class="toc-h1 toc-link" data-title="Versioning">Versioning</a>
+                <ul class="toc-list-h2">
+                    <li>
+                      <a href="#versioning-breaking-changes" class="toc-h2 toc-link" data-title="Breaking changes">Breaking changes</a>
+                    </li>
+                    <li>
+                      <a href="#versioning-continuity-non-breaking-changes" class="toc-h2 toc-link" data-title="Continuity (non-breaking) changes">Continuity (non-breaking) changes</a>
+                    </li>
+                    <li>
+                      <a href="#versioning-removal-of-existing-api-endpoints" class="toc-h2 toc-link" data-title="Removal of existing API endpoints">Removal of existing API endpoints</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
               <a href="#contact-us" class="toc-h1 toc-link" data-title="Contact Us">Contact Us</a>
             </li>
             <div class="api-reference-separator">
@@ -4223,6 +4237,37 @@ For the purpose of this test flow let&#39;s assume that your TPP is an AISP and 
 <p><strong><code>POST /open-banking/v3.1/cbpii/funds-confirmations</code></strong></p>
 
 <p>The confirmation of funds endpoint can be used to check whether the consented user has a specific amount on any of its <a href="https://transferwise.com/gb/borderless/">opened currency accounts</a>.</p>
+<h1 id='versioning'>Versioning</h1>
+<p>The TransferWise API is continuously evolving as we offer new features and coverage to our API customers.
+Here we explain how our API versioning is maintained so you know what to expect.</p>
+
+<p>It&#39;s important to us that third-party integrations are not adversely affected by changes and we endeaver to uphold these standards
+as part of making convenience and transparency part of our company&#39;s mission. We are regularly reviewing our policies to make sure we&#39;re 
+delivering the best possible API developer experience.</p>
+
+<p>These policies apply to both our REST API and our webhooks (push-based event API). </p>
+<h2 id='versioning-breaking-changes'>Breaking changes</h2>
+<p>A breaking change refers to any change that would require a client to update their application in order to continue working with the API 
+as originally intended. If an API field or resource is removed or renamed, then a breaking change has taken place. In this case we will 
+increment the version of the affected API endpoints to prevent breaking existing customer integrations. </p>
+
+<p>Under our current policy API endpoints are all not versioned together, if API endpoint compatibility has changed in the new version as a 
+result of a breaking change we will provide clear instructions in our documentation on which API calls must be used together.</p>
+<h2 id='versioning-continuity-non-breaking-changes'>Continuity (non-breaking) changes</h2>
+<p>TransferWise reserves the right to make additive changes to our API without incrementing the version number or notifying clients. 
+We may add new resources, fields, and relationships to an existing version of the API and these will not be considered breaking changes. </p>
+
+<p>For example, if we add a new relationship to the Transfer resource for a “parent_order”, we will neither bump the API version nor 
+notify our customers before releasing the update. We will, however, update our API documentation explaining the purpose of the changes.</p>
+
+<p><strong>As such, clients should design their applications to be flexible enough to not break when new fields are added to resources.</strong></p>
+<h2 id='versioning-removal-of-existing-api-endpoints'>Removal of existing API endpoints</h2>
+<p>It is not standard policy for TransferWise to remove or disable API versions, and we will not take this action lightly. However in some 
+cases it may be necessary; for example if the affected API does not meet new regulatory requirements and there is no alternative to 
+making a breaking change and disabling an old API. </p>
+
+<p>In the extremely rare case that this is necessary we will not remove API endpoints without notice to clients who may be affected, 
+and formal warning of at least 6 months as long as this complies with our regulatory obligations.</p>
 <h1 id='contact-us'>Contact Us</h1>
 <p><strong>Having issues while calling our API endpoints?</strong></br>
 Check our API status at <a href="https://status.transferwise.com/">https://status.transferwise.com/</a>
