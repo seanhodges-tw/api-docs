@@ -926,7 +926,52 @@ Most bounce backs occur within 2-3 business days. However, to be on the safe sid
 
 **Transfer state flow**
 
-![alt text](https://i.ibb.co/rbbhz6Y/transfer-state-flow.png "Transfer state flow")
+![alt text](https://i.ibb.co/kGgwH6T/v-1-2.png "Transfer state flow")
+
+<!---
+@startuml
+hide empty description
+skinparam backgroundColor transparent
+skinparam shadowing false
+skinparam ArrowColor MidnightBlue
+skinparam StateBackgroundColor GostWhite
+skinparam StateBorderColor SlateGrey
+skinparam StateFontColor MidnightBlue
+
+state incoming_payment_waiting
+state waiting_recipient_input_to_proceed
+state processing
+state funds_converted
+state outgoing_payment_sent
+state cancelled
+state funds_refunded
+state bounced_back
+state charged_back
+state unknown
+
+incoming_payment_waiting -down-\> waiting_recipient_input_to_proceed
+incoming_payment_waiting -down-\> processing
+incoming_payment_waiting -right-\> cancelled
+
+waiting_recipient_input_to_proceed -right-\> processing
+waiting_recipient_input_to_proceed -right-\> cancelled
+
+processing -down-\> funds_converted
+processing -right-\> cancelled
+
+funds_converted -down-\> outgoing_payment_sent
+funds_converted -right-\> bounced_back
+
+outgoing_payment_sent -right-\> bounced_back
+
+bounced_back -left-\> outgoing_payment_sent
+bounced_back -up-\> funds_refunded
+
+cancelled -down-\> funds_refunded
+
+funds_refunded -down-\> bounced_back
+@enduml
+-->
 
 See below for the full list of transfer statuses and what they mean in the order of occurrence:
 
@@ -943,9 +988,13 @@ Note: Payment systems in different countries operate in different speeds and fre
 
 * **cancelled** – This status is used when the transfer you created was not funded and therefore never processed. This is a final state of the transfer.
 
-* **funds_refunded** – Transfer has been refunded. This is a final final state of the transfer.
+* **funds_refunded** – Transfer has been refunded. This is a final state of the transfer.
 
-* **bounced_back** –Transfer has bounced back but has not been cancelled nor refunded yet. This is not a final transfer state, it means the transfer will either be delivered with delay or it will turn to funds_refunded state
+* **bounced_back** – Transfer has bounced back but has not been cancelled nor refunded yet. This is not a final transfer state, it means the transfer will either be delivered with delay or it will turn to funds_refunded state.
+
+* **charged_back** - This status is used when we have problem to debit payer's account or payer requested money back. Chargeback can happen from any other state.
+
+* **unknown** - This status is used when we don’t have enough information to move the transfer into a final state. We send out an email for more information. e.g. Sender account details to refund money back.
 
 
 Keep in mind the transfer statuses in our API have different names than what you’ll see on our website or app. That’s because we use more  consumer friendly language in the front end of our products. 
