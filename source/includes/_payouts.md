@@ -926,7 +926,7 @@ Most bounce backs occur within 2-3 business days. However, to be on the safe sid
 
 **Transfer state flow**
 
-![alt text](https://i.ibb.co/kGgwH6T/v-1-2.png "Transfer state flow")
+![alt text](https://i.ibb.co/4ZrY3HB/transfer-flow.png "Transfer state flow")
 
 <!---
 @startuml
