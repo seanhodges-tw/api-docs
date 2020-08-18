@@ -6662,69 +6662,89 @@ As you can see many of the fields are <code>null</code>, in order to know which 
 </tr>
 </tbody></table>
 <h3 id='recipient-accounts-create-response'>Response</h3>
-<p>Recipient account id is needed for creating transfers in step 3.</p>
+<p>Recipient account id is needed for creating transfers in step 3.
+The profile ID you provided when creating your recipient will appear in the response.  However, some 
+older recipients may not have a profile ID specified.</p>
 
 <table><thead>
 <tr>
 <th>Field</th>
 <th>Description</th>
 <th>Format</th>
+<th>Nullable</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
 <td>accountId</td>
 <td>Integer</td>
+<td>false</td>
 </tr>
 <tr>
 <td>profile</td>
 <td>Personal or business profile id</td>
 <td>Integer</td>
+<td>true</td>
+</tr>
+<tr>
+<td>user</td>
+<td>User that created or owns this recipient</td>
+<td>Integer</td>
+<td>false</td>
 </tr>
 <tr>
 <td>acccountHolderName</td>
 <td>Recipient full name</td>
 <td>Text</td>
+<td>false</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>3 character country code</td>
 <td>Text</td>
+<td>false</td>
 </tr>
 <tr>
 <td>country</td>
 <td>2 character currency code</td>
 <td>Text</td>
+<td>false</td>
 </tr>
 <tr>
 <td>type</td>
 <td>Recipient type</td>
 <td>Text</td>
+<td>false</td>
 </tr>
 <tr>
 <td>ownedByCustomer</td>
 <td>Whether this account is owned by the sending user</td>
 <td>Text</td>
+<td>true</td>
 </tr>
 <tr>
 <td>details</td>
 <td>Currency specific fields</td>
 <td>Object</td>
+<td>false</td>
 </tr>
 <tr>
 <td>details.legalType</td>
 <td>Recipient legal type</td>
 <td>Text</td>
+<td>true</td>
 </tr>
 <tr>
 <td>details.sortCode</td>
 <td>Recipient bank sort code (GBP example)</td>
 <td>Text</td>
+<td>Currency Dependent</td>
 </tr>
 <tr>
 <td>details.accountNumber</td>
 <td>Recipient bank account no (GBP example)</td>
 <td>Text</td>
+<td>Currency Dependent</td>
 </tr>
 </tbody></table>
 <h2 id='recipient-accounts-create-email-recipient'>Create Email Recipient</h2>
