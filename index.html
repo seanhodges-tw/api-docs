@@ -2338,7 +2338,52 @@ This is not a guaranteed time, but we’re working hard to make these estimates 
 
 <p><strong>Transfer state flow</strong></p>
 
-<p><img src="https://i.ibb.co/rbbhz6Y/transfer-state-flow.png" title="Transfer state flow" alt="alt text" /></p>
+<p><img src="https://i.ibb.co/4ZrY3HB/transfer-flow.png" title="Transfer state flow" alt="alt text" /></p>
+
+<!---
+@startuml
+hide empty description
+skinparam backgroundColor transparent
+skinparam shadowing false
+skinparam ArrowColor MidnightBlue
+skinparam StateBackgroundColor GostWhite
+skinparam StateBorderColor SlateGrey
+skinparam StateFontColor MidnightBlue
+
+state incoming_payment_waiting
+state waiting_recipient_input_to_proceed
+state processing
+state funds_converted
+state outgoing_payment_sent
+state cancelled
+state funds_refunded
+state bounced_back
+state charged_back
+state unknown
+
+incoming_payment_waiting -down-\> waiting_recipient_input_to_proceed
+incoming_payment_waiting -down-\> processing
+incoming_payment_waiting -right-\> cancelled
+
+waiting_recipient_input_to_proceed -right-\> processing
+waiting_recipient_input_to_proceed -right-\> cancelled
+
+processing -down-\> funds_converted
+processing -right-\> cancelled
+
+funds_converted -down-\> outgoing_payment_sent
+funds_converted -right-\> bounced_back
+
+outgoing_payment_sent -right-\> bounced_back
+
+bounced_back -left-\> outgoing_payment_sent
+bounced_back -up-\> funds_refunded
+
+cancelled -down-\> funds_refunded
+
+funds_refunded -down-\> bounced_back
+@enduml
+-->
 
 <p>See below for the full list of transfer statuses and what they mean in the order of occurrence:</p>
 
@@ -2350,8 +2395,10 @@ This is not a guaranteed time, but we’re working hard to make these estimates 
 <li><p><strong>outgoing_payment_sent</strong> – This means TransferWise has paid out funds to your recipient. This is the final state of the transfer, assuming funds will not be returned. When a transfer has this state it doesn’t mean the money has arrived in your recipient’s bank account. 
 Note: Payment systems in different countries operate in different speeds and frequency. For example, in the UK, the payment will reach your recipient bank account within few minutes after we have sent the outgoing payment. However, in Eurozone and US, it usually takes a day until funds are available.</p></li>
 <li><p><strong>cancelled</strong> – This status is used when the transfer you created was not funded and therefore never processed. This is a final state of the transfer.</p></li>
-<li><p><strong>funds_refunded</strong> – Transfer has been refunded. This is a final final state of the transfer.</p></li>
-<li><p><strong>bounced_back</strong> –Transfer has bounced back but has not been cancelled nor refunded yet. This is not a final transfer state, it means the transfer will either be delivered with delay or it will turn to funds_refunded state</p></li>
+<li><p><strong>funds_refunded</strong> – Transfer has been refunded. This is a final state of the transfer.</p></li>
+<li><p><strong>bounced_back</strong> – Transfer has bounced back but has not been cancelled nor refunded yet. This is not a final transfer state, it means the transfer will either be delivered with delay or it will turn to funds_refunded state.</p></li>
+<li><p><strong>charged_back</strong> - This status is used when we have problem to debit payer&#39;s account or payer requested money back. Chargeback can happen from any other state.</p></li>
+<li><p><strong>unknown</strong> - This status is used when we don’t have enough information to move the transfer into a final state. We send out an email for more information. e.g. Sender account details to refund money back.</p></li>
 </ul>
 
 <p>Keep in mind the transfer statuses in our API have different names than what you’ll see on our website or app. That’s because we use more  consumer friendly language in the front end of our products. 
