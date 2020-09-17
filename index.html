@@ -12146,43 +12146,73 @@ Returns empty result if successful. </p>
 </thead><tbody>
 <tr>
 <td>firstName</td>
-<td>Person first name in document</td>
+<td>Person first name in document.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>lastName</td>
-<td>Person last name in document</td>
+<td>Person last name in document.</td>
 <td>Text</td>
 </tr>
 <tr>
-<td>type</td>
-<td>Document type. Allowed Values: <ul><li>DRIVERS_LICENCE</li><li>IDENTITY_CARD</li><li>GREEN_CARD</li><li>MY_NUMBER</li><li>PASSPORT</li><li>SSN</li><li>OTHER</ul></td>
+<td>type (conditional)</td>
+<td>Document type. Allowed Values: <ul><li>DRIVERS_LICENCE</li><li>IDENTITY_CARD</li><li>GREEN_CARD</li><li>MY_NUMBER</li><li>PASSPORT</li><li>SSN</li><li>EMPLOYER</li<li>OTHER</li></ul></td>
 <td>Text</td>
 </tr>
 <tr>
-<td>uniqueIdentifier</td>
+<td>uniqueIdentifier (required)</td>
 <td>Document number. Only digits when SSN.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>issueDate</td>
-<td>Document issue date</td>
+<td>Document issue date.</td>
 <td>YYYY-MM-DD</td>
 </tr>
 <tr>
 <td>issuerCountry</td>
-<td>Issued by country code. For example &quot;US&quot;</td>
+<td>Issued by country code. For example &quot;US&quot;.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>issuerState</td>
-<td>Issued by state code. For example &quot;NY&quot;</td>
+<td>Issued by state code. For example &quot;NY&quot;.</td>
 <td>Text</td>
 </tr>
 <tr>
 <td>expiryDate</td>
-<td>Document expiry date. (optional)</td>
+<td>Document expiry date.</td>
 <td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>employerName</td>
+<td>The name of the employer.  Type must be EMPLOYER.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>employerCity</td>
+<td>The city of the employer. Type must be EMPLOYER.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>employerCountry</td>
+<td>2 characters ISO country code. Type must be EMPLOYER.</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>nationality</td>
+<td>2 characters ISO country code. Type must be OTHER</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>birthCity</td>
+<td>The city of birth of the customer. Type must be OTHER</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>birthCountry</td>
+<td>2 characters ISO country code. Type must be OTHER</td>
+<td>Text</td>
 </tr>
 </tbody></table>
 <h2 id='user-profiles-get-business-directors'>Get business directors</h2>
