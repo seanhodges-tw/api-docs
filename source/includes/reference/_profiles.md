@@ -470,16 +470,22 @@ When sending a social security number (SSN) only `type` and `uniqueIdentifier` (
 
 **`POST https://api.sandbox.transferwise.tech/v1/profiles/{profileId}/verification-documents`**
 
-Field                    | Description                                 | Format
----------                | -------                                     |-----------
-firstName                | Person first name in document               | Text
-lastName                 | Person last name in document                | Text
-type                     | Document type. Allowed Values: <ul><li>DRIVERS_LICENCE</li><li>IDENTITY_CARD</li><li>GREEN_CARD</li><li>MY_NUMBER</li><li>PASSPORT</li><li>SSN</li><li>OTHER</ul>   | Text
-uniqueIdentifier         | Document number. Only digits when SSN.      | Text
-issueDate                | Document issue date                         | YYYY-MM-DD
-issuerCountry            | Issued by country code. For example "US"    | Text
-issuerState              | Issued by state code. For example "NY"      | Text
-expiryDate               | Document expiry date. (optional)            | YYYY-MM-DD
+Field                           | Description                                 | Format
+---------                       | -------                                     |-----------
+firstName                       | Person first name in document.              | Text
+lastName                        | Person last name in document.               | Text
+type (conditional)              | Document type. Allowed Values: <ul><li>DRIVERS_LICENCE</li><li>IDENTITY_CARD</li><li>GREEN_CARD</li><li>MY_NUMBER</li><li>PASSPORT</li><li>SSN</li><li>EMPLOYER</li<li>OTHER</li></ul>   | Text
+uniqueIdentifier (required)     | Document number. Only digits when SSN.      | Text
+issueDate                       | Document issue date.                        | YYYY-MM-DD
+issuerCountry                   | Issued by country code. For example "US".   | Text
+issuerState                     | Issued by state code. For example "NY".     | Text
+expiryDate                      | Document expiry date.                       | YYYY-MM-DD
+employerName                    | The name of the employer.  Type must be EMPLOYER. | Text
+employerCity                    | The city of the employer. Type must be EMPLOYER. | Text
+employerCountry                 | 2 characters ISO country code. Type must be EMPLOYER. | Text
+nationality                     | 2 characters ISO country code. Type must be OTHER | Text
+birthCity                       | The city of birth of the customer. Type must be OTHER | Text
+birthCountry                    | 2 characters ISO country code. Type must be OTHER | Text
 
 
 ## Get business directors
