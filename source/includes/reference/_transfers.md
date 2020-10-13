@@ -11,7 +11,7 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/transfers \
      -d '{ 
           "targetAccount": <recipient account id>,   
           "quote": <quote id>,
-          "customerTransactionId": "<the UUID you generated for the transfer attempt>",
+          "customerTransactionId": "<the unique identifier you generated for the transfer attempt>",
           "details" : {
               "reference" : "to my friend",
               "transferPurpose": "verification.transfers.purpose.pay.bills",
@@ -59,7 +59,7 @@ Field                          | Description                                   |
 ---------                      | -------                                       | -----------
 targetAccount                  | Recipient account id. You can create multiple transfers to same recipient account.   | Integer
 quote                          | Quote id. You can only create one transfer per one quote. <br/>You cannot use same quote ID to create multiple transfers. | Integer
-customerTransactionId     | This is required to perform idempotency check to avoid duplicate transfers in case of network failures or timeouts.                          | UUID
+customerTransactionId     | This is required to perform idempotency check to avoid duplicate transfers in case of network failures or timeouts.                          | Text
 details.reference (optional)    | Recipient will see this reference text in their bank statement. Maximum allowed characters depends on the currency route. [Business Payments Tips](https://transferwise.com/help/article/2348295/business/business-payment-tips) article has a full list. | Text
 details.transferPurpose (conditionally required)| For example when target currency is THB. See more about conditions at [Transfers.Requirements](#transfers-requirements)  | Text
 details.sourceOfFunds (conditionally required) | For example when target currency is USD and transfer amount exceeds 80k. See more about conditions at [Transfers.Requirements](#transfers-requirements) | Text
@@ -95,7 +95,7 @@ sourceCurrency            | Source currency code   | Text
 sourceValue               | Transfer amount in source currency   |  Decimal
 targetCurrency            | Target currency code  | Text
 targetValue               | Transfer amount in target currency   | Decimal
-customerTransactionId     | UUID format unique identifier assinged by customer. Used for idempotency check purposes.  | UUID 
+customerTransactionId     | Unique identifier assigned by customer. Used for idempotency check purposes.  | Text 
 
 
 ### Avoiding duplicate transfers
@@ -220,7 +220,7 @@ sourceCurrency            | Source currency code   | Text
 sourceValue               | Transfer amount in source currency   |  Decimal
 targetCurrency            | Target currency code  | Text
 targetValue               | Transfer amount in target currency   | Decimal
-customerTransactionId     | UUID format unique identifier assinged by customer. Used for idempotency check purposes.  | UUID 
+customerTransactionId     | Unique identifier assigned by customer. Used for idempotency check purposes.  | Text 
 
 
 
@@ -285,7 +285,7 @@ sourceCurrency            | Source currency code   | Text
 sourceValue               | Transfer amount in source currency   |  Decimal
 targetCurrency            | Target currency code  | Text
 targetValue               | Transfer amount in target currency   | Decimal
-customerTransactionId     | UUID format unique identifier assinged by customer. Used for idempotency check purposes.  | UUID 
+customerTransactionId     | Unique identifier assigned by customer. Used for idempotency check purposes.  | Text 
 
 
 
@@ -495,7 +495,7 @@ sourceCurrency            | Source currency code   | Text
 sourceValue               | Transfer amount in source currency   |  Decimal
 targetCurrency            | Target currency code  | Text
 targetValue               | Transfer amount in target currency   | Decimal
-customerTransactionId     | UUID format unique identifier assinged by customer. Used for idempotency check purposes.  | UUID 
+customerTransactionId     | Unique identifier assigned by customer. Used for idempotency check purposes.  | Text 
 
 
 ## Requirements

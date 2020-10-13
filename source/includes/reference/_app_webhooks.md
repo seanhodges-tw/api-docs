@@ -34,7 +34,7 @@ grant_type            | "client_credentials"                          | Text
 
 Field                 | Description                                   | Format
 ---------             | -------                                       | -----------
-access_token          | Access token to be used when creating an application subscription. Valid for 12 hours. | uuid
+access_token          | Access token to be used when creating an application subscription. Valid for 12 hours. | Text
 token_type            | "bearer"                                      | Text
 expires_in            | Expiry time in seconds                        | Integer
 scope                 |                                               | Text

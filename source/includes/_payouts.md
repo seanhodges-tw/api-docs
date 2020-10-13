@@ -669,7 +669,7 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/transfers \
      -d '{ 
           "targetAccount": <recipient account id>,   
           "quote": <quote id>,
-          "customerTransactionId": "<the UUID you generated for the transfer attempt>",
+          "customerTransactionId": "<the unique identifier you generated for the transfer attempt>",
           "details" : {
               "reference" : "to my friend",
               "transferPurpose": "verification.transfers.purpose.pay.bills",
@@ -726,7 +726,7 @@ Field                          | Description                                   |
 ---------                      | -------                                       | -----------
 targetAccount                  | Recipient account id. You can create multiple transfers to same recipient account.   | Integer
 quote                          | Quote id. You can only create one transfer per one quote. <br/>You cannot use same quote ID to create multiple transfers. | Integer
-customerTransactionId     | This is required to perform idempotency check to avoid duplicate transfers in case of network failures or timeouts.                          | UUID
+customerTransactionId     | This is required to perform idempotency check to avoid duplicate transfers in case of network failures or timeouts.                          | Text
 details.reference (optional)    | Recipient will see this reference text in their bank statement. Maximum allowed characters depends on the currency route. Read the [Business Payments Tips](https://transferwise.com/help/article/2348295/business/business-payment-tips) article for more information. | Text
 details.transferPurpose (conditionally required)| For example when target currency is THB. See more about conditions at [Transfers.Requirements](#transfers-requirements)  | Text
 details.sourceOfFunds (conditionally required) | For example when target currency is USD and transfer amount exceeds 10k. See more about conditions at [Transfers.Requirements](#transfers-requirements) | Text
@@ -759,7 +759,7 @@ sourceCurrency            | Source currency code   | Text
 sourceValue               | Transfer amount in source currency   |  Decimal
 targetCurrency            | Target currency code  | Text
 targetValue               | Transfer amount in target currency   | Decimal
-customerTransactionId     | UUID format unique identifier assigned by customer. Used for idempotency check purposes.  | UUID 
+customerTransactionId     | Unique identifier assigned by customer. Used for idempotency check purposes.  | Text 
 
 ### Avoiding duplicate transfers
 We use **customerTransactionId** field to avoid duplicate transfer requests. 
@@ -1371,7 +1371,7 @@ curl -X POST https://api.sandbox.transferwise.tech/v1/transfers \
      -d '{ 
           "targetAccount": <recipient account id fetched in step 2>,   
           "quote": <quote id from step 1>,
-          "customerTransactionId": "<the UUID you generated for the transfer attempt>",
+          "customerTransactionId": "<the unique identifier you generated for the transfer attempt>",
           "details" : {
               "reference" : "optional text to identify your topup order"
             } 
@@ -1427,7 +1427,7 @@ All done.
 
 ### 1. Make your integration bulletproof
   * Implement basic retry mechanism to handle potential failures or network interruptions 
-  * Implement duplicate prevention mechanism to avoid duplicate payments. Verify that UUID is uniquely generated for each individual payment and that its value is kept the same in case of retrying.
+  * Implement duplicate prevention mechanism to avoid duplicate payments. Verify that  unique identifier is generated for each individual payment and that its value is kept the same in case of retrying.
   * Implement basic logging to help out in debugging and problem solving, if needed.
   * Check that you can handle all possible transfer states during polling of transfer info.
   * Automatically check available balance before submitting requests to fund your transfers. This avoids rejections due to insufficient balance.

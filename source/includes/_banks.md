@@ -216,9 +216,9 @@ redirect_uri          | Redirect page associated with your api client credential
 
 Field                 | Description                                   | Format
 ---------             | -------                                       | -----------
-access_token          | Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours. | uuid
+access_token          | Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours. | Text
 token_type            | "bearer"                                      | Text
-refresh_token         | Refresh token which you need to use in order to request new access_token. The lifetime of refresh tokens is 10 years. | uuid
+refresh_token         | Refresh token which you need to use in order to request new access_token. The lifetime of refresh tokens is 10 years. | Text
 expires_in            | Expiry time in seconds                        | Integer
 scope                 | "transfers"                                   | Text
 
@@ -260,15 +260,15 @@ Use Basic Authentication with your api-client-id/api-client-secret as username/p
 Field                 | Description                                   | Format
 ---------             | -------                                       | -----------
 grant_type            | "refresh_token"                               | Text
-refresh_token         | User's refresh_token obtained in [Get user tokens](#bank-integrations-guide-legacy-get-user-tokens) step. | uuid
+refresh_token         | User's refresh_token obtained in [Get user tokens](#bank-integrations-guide-legacy-get-user-tokens) step. | Text
 
 ### Response
 
 Field                 | Description                                   | Format
 ---------             | -------                                       | -----------
-access_token          | Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours. | uuid
+access_token          | Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours. | Text
 token_type            | "bearer"                                      | Text
-refresh_token         | Refresh token which you need to use in order to request new access_token once the existing one expires | uuid
+refresh_token         | Refresh token which you need to use in order to request new access_token once the existing one expires | Text
 expires_in            | Expiry time in seconds                        | Integer
 scope                 | "transfers"                                   | Text
 
@@ -430,7 +430,7 @@ In the event a user is not happy at losing access to their older data or having 
 ## Going live checklist
 ### 1. Make your integration bulletproof
   * Implement basic retry mechanism to handle potential failures or network interruptions 
-  * Implement duplicate prevention mechanism to avoid duplicate payments. Verify that UUID is uniquely generated for each individual payment and its value is kept same in case of retrying.
+  * Implement duplicate prevention mechanism to avoid duplicate payments. Verify that a unique identifier is generated for each individual payment and its value is kept same in case of retrying.
   * Implement basic logging to help out in debugging and problem solving, if needed.
   * Check that you can handle all possible transfer states during polling of transfer info.
   * Handle the potential issues described in [edge case handling](#bank-integrations-guide-legacy-edge-case-handling).

@@ -437,7 +437,7 @@ Note that this call needs an extra field in header called "X-idempotence-uuid".
 Field                             | Description                                   | Format
 ---------                         | -------                                       | -----------
 borderlessAccountId               | Your borderlessAccountId is included in [Get Account Balance](#borderless-accounts-get-account-balance) response as field "id".                        | Integer
-X-idempotence-uuid                | Unique identifier assinged by you. Used for idempotency check purposes. Should your call fail for technical reasons then you can use the same value again for making retry call. | UUID
+X-idempotence-uuid                | Unique identifier assinged by you. Used for idempotency check purposes. Should your call fail for technical reasons then you can use the same value again for making retry call. | Text
 
 
 

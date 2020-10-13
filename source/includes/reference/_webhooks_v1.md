@@ -54,7 +54,7 @@ List all created webhook subscriptions.
 
 Field                     | Description                                   | Format
 ---------                 | -------                                       | -----------
-id                        | Subscription ID                               | UUID
+id                        | Subscription ID                               | Text
 name                      | Custom name of your webhook                   | String
 channel_id                | ID of the channel through which you're receiving notifications, always equal to `WEBHOOK`                                  | String
 user_id                   | Your user ID                                  | Integer
@@ -98,7 +98,7 @@ Get subscription information by ID.
 
 Field                     | Description                                   | Format
 ---------                 | -------                                       | -----------
-id                        | Subscription ID                               | UUID
+id                        | Subscription ID                               | Text
 name                      | Custom name of your webhook                   | String
 channel_id                | ID of the channel through which you're receiving notifications, always equal to `WEBHOOK`                                  | String
 user_id                   | Your user ID                                  | Integer
