@@ -276,7 +276,7 @@ grant_type            | "client_credentials"                          | Text
 
 Field                 | Description                                   | Format
 ---------             | -------                                       | -----------
-access_token          | Access token to be used when calling "create user" endpoint. Valid for 12 hours. | uuid
+access_token          | Access token to be used when calling "create user" endpoint. Valid for 12 hours. | Text
 token_type            | "bearer"                                      | Text
 expires_in            | Expiry time in seconds                        | Integer
 scope                 | "transfers"                                   | Text
@@ -332,8 +332,8 @@ registration_code     | registrationCode from step 2                | Text
 
 Field                 | Description                                   | Format
 ---------             | -------                                       | -----------
-access_token          | Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours. | uuid
+access_token          | Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours. | Text
 token_type            | "bearer"                                      | Text
-refresh_token         | Refresh token which you need to use in order to request new access_token. The lifetime of refresh tokens is 10 years. | uuid
+refresh_token         | Refresh token which you need to use in order to request new access_token. The lifetime of refresh tokens is 10 years. | Text
 expires_in            | Expiry time in seconds                        | Integer
 scope                 | "transfers"                                   | Text

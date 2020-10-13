@@ -95,7 +95,7 @@ sourceCurrency            | Source currency code   | Text
 sourceValue               | Transfer amount in source currency   |  Decimal
 targetCurrency            | Target currency code  | Text
 targetValue               | Transfer amount in target currency   | Decimal
-customerTransactionId     | UUID format unique identifier assinged by customer. Used for idempotency check purposes.  | UUID 
+customerTransactionId     | Unique identifier assigned by customer. Used for idempotency check purposes.  | UUID 
 
 
 ### Avoiding duplicate transfers
@@ -220,7 +220,7 @@ sourceCurrency            | Source currency code   | Text
 sourceValue               | Transfer amount in source currency   |  Decimal
 targetCurrency            | Target currency code  | Text
 targetValue               | Transfer amount in target currency   | Decimal
-customerTransactionId     | UUID format unique identifier assinged by customer. Used for idempotency check purposes.  | UUID 
+customerTransactionId     | Unique identifier assigned by customer. Used for idempotency check purposes.  | UUID 
 
 
 
@@ -285,7 +285,7 @@ sourceCurrency            | Source currency code   | Text
 sourceValue               | Transfer amount in source currency   |  Decimal
 targetCurrency            | Target currency code  | Text
 targetValue               | Transfer amount in target currency   | Decimal
-customerTransactionId     | UUID format unique identifier assinged by customer. Used for idempotency check purposes.  | UUID 
+customerTransactionId     | Unique identifier assigned by customer. Used for idempotency check purposes.  | UUID 
 
 
 
@@ -495,7 +495,7 @@ sourceCurrency            | Source currency code   | Text
 sourceValue               | Transfer amount in source currency   |  Decimal
 targetCurrency            | Target currency code  | Text
 targetValue               | Transfer amount in target currency   | Decimal
-customerTransactionId     | UUID format unique identifier assinged by customer. Used for idempotency check purposes.  | UUID 
+customerTransactionId     | Unique identifier assigned by customer. Used for idempotency check purposes.  | UUID 
 
 
 ## Requirements

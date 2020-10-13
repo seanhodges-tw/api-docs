@@ -199,9 +199,9 @@ redirect_uri          | Redirect URL associated with your API client credentials
 
 Field                 | Description                                   | Format
 ---------             | -------                                       | -----------
-access_token          | Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours. | uuid
+access_token          | Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours. | Text
 token_type            | "bearer"                                      | Text
-refresh_token         | Refresh token which you need to use in order to request new access_token. The lifetime of refresh tokens is 10 years. | uuid
+refresh_token         | Refresh token which you need to use in order to request new access_token. The lifetime of refresh tokens is 10 years. | Text
 expires_in            | Expiry time in seconds                        | Integer
 scope                 | "transfers"                                   | Text
 
@@ -247,15 +247,15 @@ Use Basic Authentication with your api-client-id/api-client-secret as username/p
 Field                 | Description                                   | Format
 ---------             | -------                                       | -----------
 grant_type            | "refresh_token"                               | Text
-refresh_token         | User's refresh token obtained in [Get user tokens](#connected-apps-integration-guide-get-user-tokens) step. | uuid
+refresh_token         | User's refresh token obtained in [Get user tokens](#connected-apps-integration-guide-get-user-tokens) step. | Text
 
 ### Response
 
 Field                 | Description                                   | Format
 ---------             | -------                                       | -----------
-access_token          | Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours. | uuid
+access_token          | Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours. | Text
 token_type            | "bearer"                                      | Text
-refresh_token         | Refresh token which you need to use in order to request new access token once the existing one expires | uuid
+refresh_token         | Refresh token which you need to use in order to request new access token once the existing one expires | Text
 expires_in            | Expiry time in seconds                        | Integer
 scope                 | "transfers"                                   | Text
 
