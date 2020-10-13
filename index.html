@@ -1956,7 +1956,7 @@ Once your recipient provides their bank account details to us, we’re able to c
      -d <span class="s1">'{ 
           "targetAccount": &lt;recipient account id&gt;,   
           "quote": &lt;quote id&gt;,
-          "customerTransactionId": "&lt;the UUID you generated for the transfer attempt&gt;",
+          "customerTransactionId": "&lt;the unique identifier you generated for the transfer attempt&gt;",
           "details" : {
               "reference" : "to my friend",
               "transferPurpose": "verification.transfers.purpose.pay.bills",
@@ -2025,7 +2025,7 @@ A transfer is a payout order you make to a recipient account based on a quote. O
 <tr>
 <td>customerTransactionId</td>
 <td>This is required to perform idempotency check to avoid duplicate transfers in case of network failures or timeouts.</td>
-<td>UUID</td>
+<td>Text</td>
 </tr>
 <tr>
 <td>details.reference (optional)</td>
@@ -2146,8 +2146,8 @@ A transfer is a payout order you make to a recipient account based on a quote. O
 </tr>
 <tr>
 <td>customerTransactionId</td>
-<td>UUID format unique identifier assigned by customer. Used for idempotency check purposes.</td>
-<td>UUID</td>
+<td>Unique identifier assigned by customer. Used for idempotency check purposes.</td>
+<td>Text</td>
 </tr>
 </tbody></table>
 <h3 id='payouts-guide-create-transfer-avoiding-duplicate-transfers'>Avoiding duplicate transfers</h3>
@@ -3065,7 +3065,7 @@ only required once every 90 days, viewing the statement on the website or in the
      -d <span class="s1">'{ 
           "targetAccount": &lt;recipient account id fetched in step 2&gt;,   
           "quote": &lt;quote id from step 1&gt;,
-          "customerTransactionId": "&lt;the UUID you generated for the transfer attempt&gt;",
+          "customerTransactionId": "&lt;the unique identifier you generated for the transfer attempt&gt;",
           "details" : {
               "reference" : "optional text to identify your topup order"
             } 
@@ -3103,7 +3103,7 @@ only required once every 90 days, viewing the statement on the website or in the
 <h2 id='payouts-guide-going-live-checklist'>Going live checklist</h2><h3 id='payouts-guide-going-live-checklist-1-make-your-integration-bulletproof'>1. Make your integration bulletproof</h3>
 <ul>
 <li>Implement basic retry mechanism to handle potential failures or network interruptions </li>
-<li>Implement duplicate prevention mechanism to avoid duplicate payments. Verify that UUID is uniquely generated for each individual payment and that its value is kept the same in case of retrying.</li>
+<li>Implement duplicate prevention mechanism to avoid duplicate payments. Verify that  unique identifier is generated for each individual payment and that its value is kept the same in case of retrying.</li>
 <li>Implement basic logging to help out in debugging and problem solving, if needed.</li>
 <li>Check that you can handle all possible transfer states during polling of transfer info.</li>
 <li>Automatically check available balance before submitting requests to fund your transfers. This avoids rejections due to insufficient balance.</li>
@@ -3362,7 +3362,7 @@ Access tokens are short lived for security reasons, they are only valid for 12 h
 <tr>
 <td>access_token</td>
 <td>Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours.</td>
-<td>uuid</td>
+<td>Text</td>
 </tr>
 <tr>
 <td>token_type</td>
@@ -3372,7 +3372,7 @@ Access tokens are short lived for security reasons, they are only valid for 12 h
 <tr>
 <td>refresh_token</td>
 <td>Refresh token which you need to use in order to request new access_token. The lifetime of refresh tokens is 10 years.</td>
-<td>uuid</td>
+<td>Text</td>
 </tr>
 <tr>
 <td>expires_in</td>
@@ -3430,7 +3430,7 @@ There is no need to wait for the actual expiration to happen first. </p>
 <tr>
 <td>refresh_token</td>
 <td>User&#39;s refresh_token obtained in <a href="#bank-integrations-guide-legacy-get-user-tokens">Get user tokens</a> step.</td>
-<td>uuid</td>
+<td>Text</td>
 </tr>
 </tbody></table>
 <h3 id='bank-integrations-guide-v1-legacy-refresh-user-access-token-response'>Response</h3>
@@ -3444,7 +3444,7 @@ There is no need to wait for the actual expiration to happen first. </p>
 <tr>
 <td>access_token</td>
 <td>Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours.</td>
-<td>uuid</td>
+<td>Text</td>
 </tr>
 <tr>
 <td>token_type</td>
@@ -3454,7 +3454,7 @@ There is no need to wait for the actual expiration to happen first. </p>
 <tr>
 <td>refresh_token</td>
 <td>Refresh token which you need to use in order to request new access_token once the existing one expires</td>
-<td>uuid</td>
+<td>Text</td>
 </tr>
 <tr>
 <td>expires_in</td>
@@ -3600,7 +3600,7 @@ Calling endpoint <a href="#quotes-get-pay-in-methods">Get pay-in methods</a> wit
 <h2 id='bank-integrations-guide-v1-legacy-going-live-checklist'>Going live checklist</h2><h3 id='bank-integrations-guide-v1-legacy-going-live-checklist-1-make-your-integration-bulletproof'>1. Make your integration bulletproof</h3>
 <ul>
 <li>Implement basic retry mechanism to handle potential failures or network interruptions </li>
-<li>Implement duplicate prevention mechanism to avoid duplicate payments. Verify that UUID is uniquely generated for each individual payment and its value is kept same in case of retrying.</li>
+<li>Implement duplicate prevention mechanism to avoid duplicate payments. Verify that a unique identifier is generated for each individual payment and its value is kept same in case of retrying.</li>
 <li>Implement basic logging to help out in debugging and problem solving, if needed.</li>
 <li>Check that you can handle all possible transfer states during polling of transfer info.</li>
 <li>Handle the potential issues described in <a href="#bank-integrations-guide-legacy-edge-case-handling">edge case handling</a>.</li>
@@ -10041,7 +10041,7 @@ In case not it will get automatically cancelled.  </p>
 </tr>
 <tr>
 <td>customerTransactionId</td>
-<td>UUID format unique identifier assinged by customer. Used for idempotency check purposes.</td>
+<td>Unique identifier assigned by customer. Used for idempotency check purposes.</td>
 <td>UUID</td>
 </tr>
 </tbody></table>
@@ -10248,7 +10248,7 @@ If your borderless balance is short of funds then this call will fail with &quot
 </tr>
 <tr>
 <td>customerTransactionId</td>
-<td>UUID format unique identifier assinged by customer. Used for idempotency check purposes.</td>
+<td>Unique identifier assigned by customer. Used for idempotency check purposes.</td>
 <td>UUID</td>
 </tr>
 </tbody></table>
@@ -10383,7 +10383,7 @@ If your borderless balance is short of funds then this call will fail with &quot
 </tr>
 <tr>
 <td>customerTransactionId</td>
-<td>UUID format unique identifier assinged by customer. Used for idempotency check purposes.</td>
+<td>Unique identifier assigned by customer. Used for idempotency check purposes.</td>
 <td>UUID</td>
 </tr>
 </tbody></table>
@@ -10697,7 +10697,7 @@ This is not a guaranteed time but we are working hard to make these estimates as
 </tr>
 <tr>
 <td>customerTransactionId</td>
-<td>UUID format unique identifier assinged by customer. Used for idempotency check purposes.</td>
+<td>Unique identifier assigned by customer. Used for idempotency check purposes.</td>
 <td>UUID</td>
 </tr>
 </tbody></table>
@@ -11364,7 +11364,7 @@ To get authorization from Transferwise existing users you still need to redirect
 <tr>
 <td>access_token</td>
 <td>Access token to be used when calling &quot;create user&quot; endpoint. Valid for 12 hours.</td>
-<td>uuid</td>
+<td>Text</td>
 </tr>
 <tr>
 <td>token_type</td>
@@ -11500,7 +11500,7 @@ If user has reclaimed the account, then redirect to <a href="#bank-integrations-
 <tr>
 <td>access_token</td>
 <td>Access token to be used when calling API endpoints on behalf of user. Valid for 12 hours.</td>
-<td>uuid</td>
+<td>Text</td>
 </tr>
 <tr>
 <td>token_type</td>
@@ -11510,7 +11510,7 @@ If user has reclaimed the account, then redirect to <a href="#bank-integrations-
 <tr>
 <td>refresh_token</td>
 <td>Refresh token which you need to use in order to request new access_token. The lifetime of refresh tokens is 10 years.</td>
-<td>uuid</td>
+<td>Text</td>
 </tr>
 <tr>
 <td>expires_in</td>
@@ -12798,7 +12798,7 @@ Please note that you have to use a client level token to access application subs
 <tr>
 <td>access_token</td>
 <td>Access token to be used when creating an application subscription. Valid for 12 hours.</td>
-<td>uuid</td>
+<td>Text</td>
 </tr>
 <tr>
 <td>token_type</td>
@@ -13800,7 +13800,7 @@ Please note this version of webhooks is now DEPRECATED.
 <tr>
 <td>id</td>
 <td>Subscription ID</td>
-<td>UUID</td>
+<td>Text</td>
 </tr>
 <tr>
 <td>name</td>
@@ -13880,7 +13880,7 @@ Please note this version of webhooks is now DEPRECATED.
 <tr>
 <td>id</td>
 <td>Subscription ID</td>
-<td>UUID</td>
+<td>Text</td>
 </tr>
 <tr>
 <td>name</td>
