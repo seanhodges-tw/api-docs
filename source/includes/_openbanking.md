@@ -411,6 +411,8 @@ Every consent object created for initiating payments will have a **`CutOffDateTi
 
 We are supporting both **`UK.OBIE.SortCodeAccountNumber`** as well as **`UK.OBIE.IBAN`** for account identification.  
 
+The accepted size of the **`EndToEndIdentification`** field varies based on the currency of the transfer. For EUR transfers you'll be able to leverage the full length of **35** characters of this field, however for GBP transfers this field length is restricted to a maximum of **18** characters. The reason for this restriction is also detailed in [OB Payment Message Format Mapping](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/999819767/Domestic+Payment+Message+Formats+-+v3.1.1#DomesticPaymentMessageFormats-v3.1.1-Mapping). In case of FPS, this field gets mapped to both ISO8583 Field 62 as well as Field 120.   
+
 ### Domestic Payments
 
 **`POST /open-banking/v3.1/pisp/domestic-payments`**
