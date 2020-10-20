@@ -4251,6 +4251,8 @@ For the purpose of this test flow let&#39;s assume that your TPP is an AISP and 
 <p>Every consent object created for initiating payments will have a <strong><code>CutOffDateTime</code></strong> attached which is set to be <strong>30 minutes</strong> after the creation of the consent. After the 30 minutes have lapsed, the Payment Order creation will be rejected. </p>
 
 <p>We are supporting both <strong><code>UK.OBIE.SortCodeAccountNumber</code></strong> as well as <strong><code>UK.OBIE.IBAN</code></strong> for account identification.  </p>
+
+<p>The accepted size of the <strong><code>EndToEndIdentification</code></strong> field varies based on the currency of the transfer. For EUR transfers you&#39;ll be able to leverage the full length of <strong>35</strong> characters of this field, however for GBP transfers this field length is restricted to a maximum of <strong>18</strong> characters. The reason for this restriction is also detailed in <a href="https://openbanking.atlassian.net/wiki/spaces/DZ/pages/999819767/Domestic+Payment+Message+Formats+-+v3.1.1#DomesticPaymentMessageFormats-v3.1.1-Mapping">OB Payment Message Format Mapping</a>. In case of FPS, this field gets mapped to both ISO8583 Field 62 as well as Field 120.   </p>
 <h3 id='open-banking-pisp-interfaces-domestic-payments'>Domestic Payments</h3>
 <p><strong><code>POST /open-banking/v3.1/pisp/domestic-payments</code></strong></p>
 
