@@ -45,7 +45,7 @@ scope                 |                                               | Text
 > Example Request:
 
 ```shell
-curl -X POST "https://api.transferwise.com/v3/applications/{clientKey}/subscriptions" \
+curl -X POST "https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions" \
   -H "Authorization: Bearer <your client level token>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -83,7 +83,7 @@ curl -X POST "https://api.transferwise.com/v3/applications/{clientKey}/subscript
 
 ### Request
 
-**`POST https://api.transferwise.com/v3/applications/{clientKey}/subscriptions`**
+**`POST https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions`**
 
 `{clientKey}` can be received upon obtaining client credentials from our tech support.
 
@@ -119,7 +119,7 @@ Deletes a subscription by its identifier.
 > Example Request:
 
 ```shell
-curl -X DELETE "https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}" \
+curl -X DELETE "https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions/{id}" \
   -H "Authorization: Bearer <your client level token>"
 ```
 
@@ -131,7 +131,7 @@ curl -X DELETE "https://api.transferwise.com/v3/applications/{clientKey}/subscri
 
 ### Request
 
-**`DELETE https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}`**
+**`DELETE https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions/{id}`**
 
 
 ## Get by ID
@@ -141,7 +141,7 @@ Retrieves a subscription by its identifier.
 > Example Request:
 
 ```shell
-curl -X GET "https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}" \
+curl -X GET "https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions/{id}" \
   -H "Authorization: Bearer <your client level token>"
 ```
 
@@ -170,7 +170,7 @@ curl -X GET "https://api.transferwise.com/v3/applications/{clientKey}/subscripti
 
 ### Request
 
-**`GET https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}`**
+**`GET https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions/{id}`**
 
 
 ## Test notifications
@@ -200,7 +200,7 @@ Profile-based subscriptions do not currently support this testing feature.
 > Example Request:
 
 ```shell
-curl -X POST "https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{subscriptionId}/test-notifications" \
+curl -X POST "https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions/{subscriptionId}/test-notifications" \
   -H "Authorization: Bearer <your client level token>"
 ```
 
@@ -244,7 +244,7 @@ x-test-notification: true
 
 ### Request
 
-**`POST https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{subscriptionId}/test-notifications`**
+**`POST https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions/{subscriptionId}/test-notifications`**
 
 
 ### Response
@@ -264,7 +264,7 @@ List all your subscriptions.
 > Example Request:
 
 ```shell
-curl -X GET "https://api.transferwise.com/v3/applications/{clientKey}/subscriptions" \
+curl -X GET "https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions" \
   -H "Authorization: Bearer <your client level token>"
 ```
 
@@ -311,4 +311,4 @@ curl -X GET "https://api.transferwise.com/v3/applications/{clientKey}/subscripti
 
 ### Request
 
-**`GET https://api.transferwise.com/v3/applications/{clientKey}/subscriptions`**
+**`GET https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions`**
