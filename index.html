@@ -12822,7 +12822,7 @@ Please note that you have to use a client level token to access application subs
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.transferwise.com/v3/applications/{clientKey}/subscriptions"</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Bearer &lt;your client level token&gt;"</span> <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -d <span class="s1">'{
@@ -12856,7 +12856,7 @@ Please note that you have to use a client level token to access application subs
     </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-10T13:55:57Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='application-webhooks-create-request'>Request</h3>
-<p><strong><code>POST https://api.transferwise.com/v3/applications/{clientKey}/subscriptions</code></strong></p>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions</code></strong></p>
 
 <p><code>{clientKey}</code> can be received upon obtaining client credentials from our tech support.</p>
 
@@ -12955,7 +12955,7 @@ Please note that you have to use a client level token to access application subs
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}"</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X DELETE <span class="s2">"https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions/{id}"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Bearer &lt;your client level token&gt;"</span>
 </code></pre>
 <blockquote>
@@ -12963,14 +12963,14 @@ Please note that you have to use a client level token to access application subs
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w">
 </span></code></pre><h3 id='application-webhooks-delete-request'>Request</h3>
-<p><strong><code>DELETE https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}</code></strong></p>
+<p><strong><code>DELETE https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions/{id}</code></strong></p>
 <h2 id='application-webhooks-get-by-id'>Get by ID</h2>
 <p>Retrieves a subscription by its identifier.</p>
 
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}"</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions/{id}"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Bearer &lt;your client level token&gt;"</span>
 </code></pre>
 <blockquote>
@@ -12995,7 +12995,7 @@ Please note that you have to use a client level token to access application subs
     </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-09-15T15:53:00Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='application-webhooks-get-by-id-request'>Request</h3>
-<p><strong><code>GET https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{id}</code></strong></p>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions/{id}</code></strong></p>
 <h2 id='application-webhooks-test-notifications'>Test notifications</h2>
 <p>Test notifications can be generated for existing application subscriptions using the API.</p>
 
@@ -13022,7 +13022,7 @@ Profile-based subscriptions do not currently support this testing feature.
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{subscriptionId}/test-notifications"</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST <span class="s2">"https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions/{subscriptionId}/test-notifications"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Bearer &lt;your client level token&gt;"</span>
 </code></pre>
 <blockquote>
@@ -13060,7 +13060,7 @@ x-test-notification: true
   "sent_at": "2019-03-28T11:22:33Z"
 }
 </code></pre><h3 id='application-webhooks-test-notifications-request'>Request</h3>
-<p><strong><code>POST https://api.transferwise.com/v3/applications/{clientKey}/subscriptions/{subscriptionId}/test-notifications</code></strong></p>
+<p><strong><code>POST https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions/{subscriptionId}/test-notifications</code></strong></p>
 <h3 id='application-webhooks-test-notifications-response'>Response</h3>
 <p>List of test notifications that were scheduled for delivery.</p>
 
@@ -13088,7 +13088,7 @@ x-test-notification: true
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.transferwise.com/v3/applications/{clientKey}/subscriptions"</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X GET <span class="s2">"https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: Bearer &lt;your client level token&gt;"</span>
 </code></pre>
 <blockquote>
@@ -13131,7 +13131,7 @@ x-test-notification: true
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre><h3 id='application-webhooks-list-request'>Request</h3>
-<p><strong><code>GET https://api.transferwise.com/v3/applications/{clientKey}/subscriptions</code></strong></p>
+<p><strong><code>GET https://api.sandbox.transferwise.tech/v3/applications/{clientKey}/subscriptions</code></strong></p>
 <h1 id='profile-webhooks'>Profile Webhooks</h1>
 <p>Profile webhook subscription is a mechanism that will allow you to receive notifications to your servers whenever various events happen in relation to different resources created under a specific <strong><em>profile</em></strong>.</p>
 
