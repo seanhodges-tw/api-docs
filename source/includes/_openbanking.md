@@ -167,6 +167,7 @@ For AISPs the list of supported permissions is:
 * ReadTransactionsCredits
 * ReadTransactionsDebits
 * ReadTransactionsDetail
+* ReadDirectDebits
 
 ### Response
 
@@ -404,6 +405,12 @@ We are fully transparent about our transaction charges, so you will find fees at
 
 * **Embedded** *[DEFAULT]*: Using the `OBReadTransaction5/Data/Transaction/ChargeAmount` object. Fees represented this way will be embedded into the transactions amount. This might make sense for most AISPs.
 * **Fee Split** : Showing fees as separate DEBIT transactions with an attached reference to the original transaction. Fees represented this way will not be embedded in the original transaction amount. This might make sense for some AISPs, like account software providers.    
+
+### Direct Debits
+
+Querying the direct debits endpoint will return the list of set up direct debits on a specific account
+
+**`GET /open-banking/v3.1/aisp/accounts/{id}/direct-debits`**
 
 ## PISP Interfaces
 
