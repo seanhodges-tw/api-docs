@@ -3922,6 +3922,7 @@ For the purpose of this test flow let&#39;s assume that your TPP is an AISP and 
 <li>ReadTransactionsCredits</li>
 <li>ReadTransactionsDebits</li>
 <li>ReadTransactionsDetail</li>
+<li>ReadDirectDebits</li>
 </ul>
 <h3 id='open-banking-2-create-a-consent-response'>Response</h3>
 <p>The response will be JSON data reflecting the newly created consent object. There are two important return values to highlight here.</p>
@@ -4247,6 +4248,10 @@ For the purpose of this test flow let&#39;s assume that your TPP is an AISP and 
 <li><strong>Embedded</strong> <em>[DEFAULT]</em>: Using the <code>OBReadTransaction5/Data/Transaction/ChargeAmount</code> object. Fees represented this way will be embedded into the transactions amount. This might make sense for most AISPs.</li>
 <li><strong>Fee Split</strong> : Showing fees as separate DEBIT transactions with an attached reference to the original transaction. Fees represented this way will not be embedded in the original transaction amount. This might make sense for some AISPs, like account software providers.<br></li>
 </ul>
+<h3 id='open-banking-aisp-interfaces-direct-debits'>Direct Debits</h3>
+<p>Querying the direct debits endpoint will return the list of set up direct debits on a specific account</p>
+
+<p><strong><code>GET /open-banking/v3.1/aisp/accounts/{id}/direct-debits</code></strong></p>
 <h2 id='open-banking-pisp-interfaces'>PISP Interfaces</h2>
 <p>Every consent object created for initiating payments will have a <strong><code>CutOffDateTime</code></strong> attached which is set to be <strong>30 minutes</strong> after the creation of the consent. After the 30 minutes have lapsed, the Payment Order creation will be rejected. </p>
 
